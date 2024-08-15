@@ -1,0 +1,1 @@
+export type Icons = 'globe' | 'dashboard' | 'shopping-cart' | 'package' | 'circle' | 'check' | 'chevron-right' | 'chevron-left' | 'search' | 'chevron-up' | 'chevron-down' | 'calendar' | 'menu' | 'arrow-expand' | 'arrow-shrink' | 'close' | 'vertical-dots'

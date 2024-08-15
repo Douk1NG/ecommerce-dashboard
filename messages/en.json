@@ -1,0 +1,78 @@
+{
+    "login": {
+        "title": "Log In",
+        "description": "Enter your credentials to access the platform"
+    },
+    "home": {
+        "metadata": {
+            "title": "Home",
+            "description": "Welcome to the platform"
+        },
+        "navbar": {
+            "dashboard": "Dashboard",
+            "orders": "Orders",
+            "products": "Products",
+            "categories": "Categories"
+        },
+        "header": {
+            "langs": {
+                "es": "Spanish",
+                "en": "English"
+            },
+            "lang": "Switch language",
+            "logout": "Log out",
+            "profile": "Profile",
+            "toggle": "Toggle navigation"
+        },
+        "sidebar": {
+            "close": "Close",
+            "accept": "Accept"
+        },
+        "dialog": {
+            "cancel": "Cancel",
+            "accept": "Accept",
+            "title": "Are you sure you want to close the form?",
+            "description": "Any changes made will be lost."
+        }
+    },
+    "orders": {
+        "metadata": {
+            "title": "Orders",
+            "description": "Check the orders placed in the store"
+        },
+        "content": {
+            "title": "Orders",
+            "pending": "Pending",
+            "all": "All"
+        }
+    },
+    "products": {
+        "metadata": {
+            "title": "Products",
+            "description": "Check the products available in the store"
+        },
+        "content": {
+            "title": "Products",
+            "add": "Add product"
+        }
+    },
+    "categories": {
+        "metadata": {
+            "title": "Categories",
+            "description": "Check the categories of products available in the store"
+        },
+        "content": {
+            "title": "Categories",
+            "add": "Add category"
+        }
+    },
+    "dashboard": {
+        "metadata": {
+            "title": "Dashboard",
+            "description": "Check the store statistics"
+        },
+        "content": {
+            "title": "Dashboard"
+        }
+    }
+}

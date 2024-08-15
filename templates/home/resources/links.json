@@ -1,0 +1,30 @@
+[
+    {
+        "title": "dashboard",
+        "icon": "dashboard",
+        "href": "/dashboard",
+        "index": 1
+    },
+    {
+        "title": "orders",
+        "label": "1",
+        "icon": "shopping-cart",
+        "href": "/orders",
+        "index": 2
+    },
+    {
+        "title": "products",
+        "label": "2",
+        "icon": "package",
+        "href": "/products",
+        "index": 3,
+        "children": [
+            {
+                "title": "categories",
+                "href": "/categories",
+                "icon": "tag",
+                "index": 4
+            }
+        ]
+    }
+]

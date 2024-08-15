@@ -1,0 +1,68 @@
+[
+    {
+        "id:": 1,
+        "title": "Tenis SL 72 OG",
+        "price": 549.950,
+        "description": "Tempor qui officia excepteur laboris sint labore. Pariatur qui ad quis magna adipisicing duis irure ex veniam cupidatat deserunt. Ut in fugiat enim non in ex duis.",
+        "categories": [
+            "Mujer",
+            "Tennis"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ca2836aabbc04495bf734aa2db3295f6_9366/Tenis_SL_72_OG_Azul_IH0290_04_standard.jpg"
+    },
+    {
+        "id:": 2,
+        "title": "Shorts Run It",
+        "price": 129.950,
+        "description": "Ea minim consectetur laboris anim culpa. Occaecat ex aliqua proident sunt. Fugiat duis eu enim veniam eu consequat laboris officia proident excepteur. Enim veniam nisi anim do commodo. Ea excepteur in consequat quis occaecat irure. Aute velit laborum sit ex occaecat fugiat culpa laborum commodo non.",
+        "categories": [
+            "Shorts",
+            "Running"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2019ab59f62f4c66ab9c96a633ac9e2a_9366/Shorts_Run_It_Multicolor_IL7232_HM5.jpg"
+    },
+    {
+        "id:": 3,
+        "title": "Medias de Running x 4D HEAT.RDY",
+        "price": 89.950,
+        "description": "Labore esse cillum minim voluptate ut culpa aute adipisicing ipsum elit. Anim nulla laborum id veniam cupidatat anim. Ad laborum non amet veniam occaecat est esse occaecat fugiat. Voluptate consectetur do Lorem nisi eu ea ea commodo pariatur. Ad nulla eiusmod ad minim ipsum exercitation in aliqua.",
+        "categories": [
+            "Medias",
+            "Running"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/889243c958d94591a1ed684d8c03d1bf_9366/Medias_de_Running_x_4D_HEAT.RDY_Multicolor_IP3575_03_standard.jpg"
+    },
+    {
+        "id:": 4,
+        "title": "Tenis SL 72 OG",
+        "price": 549.950,
+        "description": "Tempor qui officia excepteur laboris sint labore. Pariatur qui ad quis magna adipisicing duis irure ex veniam cupidatat deserunt. Ut in fugiat enim non in ex duis.",
+        "categories": [
+            "Mujer",
+            "Tennis"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ca2836aabbc04495bf734aa2db3295f6_9366/Tenis_SL_72_OG_Azul_IH0290_04_standard.jpg"
+    },
+    {
+        "id:": 5,
+        "title": "Shorts Run It",
+        "price": 129.950,
+        "description": "Ea minim consectetur laboris anim culpa. Occaecat ex aliqua proident sunt. Fugiat duis eu enim veniam eu consequat laboris officia proident excepteur. Enim veniam nisi anim do commodo. Ea excepteur in consequat quis occaecat irure. Aute velit laborum sit ex occaecat fugiat culpa laborum commodo non.",
+        "categories": [
+            "Shorts",
+            "Running"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2019ab59f62f4c66ab9c96a633ac9e2a_9366/Shorts_Run_It_Multicolor_IL7232_HM5.jpg"
+    },
+    {
+        "id:": 6,
+        "title": "Medias de Running x 4D HEAT.RDY",
+        "price": 89.950,
+        "description": "Labore esse cillum minim voluptate ut culpa aute adipisicing ipsum elit. Anim nulla laborum id veniam cupidatat anim. Ad laborum non amet veniam occaecat est esse occaecat fugiat. Voluptate consectetur do Lorem nisi eu ea ea commodo pariatur. Ad nulla eiusmod ad minim ipsum exercitation in aliqua.",
+        "categories": [
+            "Medias",
+            "Running"
+        ],
+        "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/889243c958d94591a1ed684d8c03d1bf_9366/Medias_de_Running_x_4D_HEAT.RDY_Multicolor_IP3575_03_standard.jpg"
+    }
+]
