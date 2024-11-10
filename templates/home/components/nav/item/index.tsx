@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import Icon from "@/components/icon"
 import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-
 import { cn } from '@/lib/utils';
 
 import type { ItemProps } from '@/types/home/nav';
@@ -16,10 +14,9 @@ const Item = ({
     href,
     icon,
     locale,
-    badge,
     isActive,
     isChild,
-    expansibleIcon,
+    expansible,
     onClick
 }: ItemProps) => {
 
@@ -44,15 +41,10 @@ const Item = ({
         >
             <Icon name={icon} color='currentColor' />
             {title}
-            {badge && !isActive && (
-                <Badge className="ml-auto">
-                    {badge}
-                </Badge>
-            )}
-            {expansibleIcon && (
+            {expansible && (
                 <Icon
                     className={cn("ml-auto")}
-                    name={expansibleIcon}
+                    name={expansible}
                     color='currentColor'
                 />
             )}

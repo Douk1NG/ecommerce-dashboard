@@ -20,7 +20,7 @@ export default function Nav({ links, translations, navRef }: NavProps) {
         toggle
     } = useToggle();
 
-    const visible = isVisible ? 'block' : 'hidden';
+    const visible = isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0';
 
     useImperativeHandle(navRef, () => {
         return {
@@ -31,7 +31,13 @@ export default function Nav({ links, translations, navRef }: NavProps) {
     return (
         <nav
             aria-label='navigation'
-            className={`fixed md:relative top-20 md:top-0 h-full w-full md:w-60 bg-gray-100 border-r space-y-1 px-3 py-2 z-10 ${visible} md:block`}
+            className={`
+                fixed md:relative top-20 md:top-0 h-full w-full md:w-60
+                bg-gray-100 border-r space-y-1 px-3 py-2 z-10
+                transition-all duration-300 ease-in-out
+                transform md:transform-none
+                ${visible} md:translate-x-0 md:opacity-100
+            `}
         >
             <ol className='flex flex-col gap-1'>
                 {links.map((link, index) => {
@@ -42,13 +48,12 @@ export default function Nav({ links, translations, navRef }: NavProps) {
                         <li key={index} className='flex flex-col gap-1'>
                             <Item
                                 title={t(link.title)}
-                                badge={link.badge}
                                 href={link.href}
                                 icon={link.icon}
                                 locale={locale}
                                 isActive={active}
                                 onClick={toggle}
-                                expansibleIcon={expansibleIcon}
+                                expansible={expansibleIcon}
                             />
                             {active && link.children && (
                                 <ul className="pl-4">
@@ -59,7 +64,6 @@ export default function Nav({ links, translations, navRef }: NavProps) {
                                                 title={t(child.title)}
                                                 href={child.href}
                                                 icon={child.icon}
-                                                badge={child.badge}
                                                 locale={locale}
                                                 isActive={isActive(pathname, child)}
                                                 isChild={true}

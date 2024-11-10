@@ -2,7 +2,6 @@ import { Icons } from "../icon";
 
 export type NavItem = {
     title: string;
-    badge?: string;
     icon: Icons;
     href: string;
     children?: NavItem[];
@@ -24,9 +23,8 @@ export type ItemProps = {
     href: string;
     icon: Icons;
     locale?: string;
-    badge?: string;
     isChild?: boolean;
     isActive?: boolean;
     onClick?: () => void;
-    expansibleIcon?: Icons;
+    expansible?: Icons;
 }
