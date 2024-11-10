@@ -1,4 +1,4 @@
-import Layout from "@/templates/dashboard/"
+import Layout from "@/features/dashboard"
 
 export default function Page() {
     return <Layout/>

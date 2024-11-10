@@ -13,7 +13,7 @@ const nextConfig = {
             {
                 ...fileLoaderRule,
                 test: /\.svg$/i,
-                resourceQuery: /url/, // *.svg?url
+                resourceQuery: /url/
             },
             {
                 test: /\.svg$/i,

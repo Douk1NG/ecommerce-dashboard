@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next/types";
-import Layout from "@/templates/products/"
+import Layout from "@/features/products"
 
 export async function generateMetadata({
     params: { locale },

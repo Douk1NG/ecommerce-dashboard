@@ -2,7 +2,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import type { Metadata } from "next";
 import { type Locale } from "@/i18n";
-import Layout from "@/templates/home/"
+import Layout from "@/features/home"
 import './globals.css'
 
 type Props = {
