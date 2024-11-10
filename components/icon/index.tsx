@@ -1,4 +1,4 @@
-import { Icons } from "@/lib/types/icon";
+import { Icons } from "@/types/icon";
 
 // prettier-ignore
 import {

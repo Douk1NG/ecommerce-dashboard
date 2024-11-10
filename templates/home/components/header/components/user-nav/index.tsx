@@ -20,9 +20,10 @@ import {
 } from "@/components/ui/avatar"
 
 import { translations } from "@/i18n";
-import user from "@/features/home/resources/user.json"
 
-const UserNav = () => {
+import type { UserNavProps } from "@/types/home/header";
+
+const UserNav = ({ user }: UserNavProps) => {
     const t = useTranslations(translations.header);
     return (
         <DropdownMenu>

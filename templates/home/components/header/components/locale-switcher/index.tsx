@@ -36,7 +36,7 @@ const LocaleSwitcher = () => {
 
         startTransition(() => {
             router.replace(
-                // @ts-ignore
+                // @ts-expect-error
                 { pathname, params },
                 { locale: newLocale }
             );

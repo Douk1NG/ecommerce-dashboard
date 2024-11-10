@@ -12,15 +12,10 @@ const useOpen = (defaultValue = false) => {
         setValue(false);
     }, []);
 
-    const onToggle = useCallback(() => {
-        setValue((previous) => !previous);
-    }, []);
-
     return {
         value,
         onOpen,
-        onClose,
-        onToggle
+        onClose
     };
 };
 

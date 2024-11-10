@@ -14,6 +14,6 @@ fs.readdir(directoryPath, (err, files) => {
 
     const typeDefinition = `export type Icons = ${svgFiles.map(file => `'${file}'`).join(' | ')};`;
 
-    fs.writeFileSync(path.join(__dirname, '../lib/types/icon.ts'), typeDefinition);
+    fs.writeFileSync(path.join(__dirname, '../types/icon.ts'), typeDefinition);
     console.log('Type definition generated successfully.');
 });

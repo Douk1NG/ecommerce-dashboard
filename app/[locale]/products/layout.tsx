@@ -1,13 +1,13 @@
-import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
-import { Metadata } from "next/types";
+
 import Layout from "@/features/products"
 
+import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
+import type { Metadata } from "next/types";
+
 export async function generateMetadata({
-    params: { locale },
-}: {
-    params: { locale: Locale };
-}): Promise<Metadata> {
+    params: { locale }
+}: GenerateMetadataProps): Promise<Metadata> {
     const t = await getTranslations({ locale, namespace: "products" });
 
     return {
@@ -18,9 +18,7 @@ export async function generateMetadata({
 
 export default function ProductsLayout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+}: LayoutProps) {
     return (
         <Layout>
             {children}

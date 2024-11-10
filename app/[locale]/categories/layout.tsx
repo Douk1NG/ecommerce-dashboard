@@ -1,13 +1,15 @@
-import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
-import { Metadata } from "next/types";
+
+import type { Metadata } from "next/types";
+import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 
 export async function generateMetadata({
-    params: { locale },
-}: {
-    params: { locale: Locale };
-}): Promise<Metadata> {
-    const t = await getTranslations({ locale, namespace: "categories" });
+    params: { locale }
+}: GenerateMetadataProps): Promise<Metadata> {
+    const t = await getTranslations({
+        locale,
+        namespace: "categories"
+    });
 
     return {
         title: t("metadata.title"),
@@ -17,8 +19,6 @@ export async function generateMetadata({
 
 export default function CategoriesLayout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+}: LayoutProps) {
     return <>{children}</>
 }

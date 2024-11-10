@@ -3,11 +3,9 @@ import { Button } from '@/components/ui/button';
 import { translations } from '@/i18n';
 import { useTranslations } from 'next-intl';
 
-interface PropTypes {
-    onClick: () => void;
-}
+import type { HamburgerProps } from '@/types/home/header';
 
-const Index = ({onClick}:PropTypes) => {
+const Index = ({onClick}:HamburgerProps) => {
     const t = useTranslations(translations.header);
     return (
         <Button
