@@ -1,6 +1,7 @@
 import { Fields } from '@/types/form';
+import type { FormValues } from '@/types/products';
 
-const fields: Fields = [
+const fields: Fields<FormValues> = [
     {
         "label": "Title",
         "name": "title",
@@ -22,8 +23,15 @@ const fields: Fields = [
     {
         "label": "Categories",
         "name": "categories",
-        "type": "tagbox",
-        "description": "Set the product categories."
+        "type": "multiselect",
+        "description": "Set the product categories.",
+        "options": [
+            { "value": "Mujer", "label": "Mujer" },
+            { "value": "Tennis", "label": "Tennis" },
+            { "value": "Short", "label": "Short" },
+            { "value": "Running", "label": "Running" }
+        ],
+        "placeholder": "Select categories"
     },
     {
         "label": "Image",

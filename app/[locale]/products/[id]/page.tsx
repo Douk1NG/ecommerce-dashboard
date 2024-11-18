@@ -5,11 +5,16 @@ import Sidebar from "@/components/sidebar";
 
 export default function Page() {
     const t = useTranslations(translations.products);
+    const form = 'product-form';
+
     return (
         <Sidebar
+            form={form}
             title={t('add')}
         >
-            <Form />
+            <Form
+                id={form}
+            />
         </Sidebar>
     )
 }

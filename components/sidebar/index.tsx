@@ -8,18 +8,15 @@ import Dialog from '@/components/dialog';
 type PropTypes = {
     title: string;
     children: React.ReactNode;
+    form: string;
 };
 
-const Index = ({ title, children }: PropTypes) => {
+const Index = ({ title, children, form }: PropTypes) => {
     const t = useTranslations(translations.sidebar);
     const router = useRouter();
 
     function onClose() {
         router.back();
-    }
-
-    function onClick() {
-
     }
 
     return (
@@ -46,7 +43,7 @@ const Index = ({ title, children }: PropTypes) => {
                 </div>
                 <div className='flex justify-end gap-4'>
                     <Dialog onConfirm={onClose} />
-                    <Button onClick={onClick}>{t('accept')}</Button>
+                    <Button type='submit' form={form}>{t('accept')}</Button>
                 </div>
             </aside>
         </section>

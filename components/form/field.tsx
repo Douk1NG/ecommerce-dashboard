@@ -1,10 +1,8 @@
-import { Field } from "@/types/form"
-
 import {
     Text,
     Textarea,
     Currency,
-    Tagbox,
+    MultiSelect,
     File,
     Switch
 } from "./components";
@@ -13,24 +11,25 @@ const Components = {
     text: Text,
     textarea: Textarea,
     currency: Currency,
-    tagbox: Tagbox,
+    multiselect: MultiSelect,
     file: File,
     switch: Switch,
 }
 
-const Component = ({
-    type,
-    ...props
-}: Field) => {
+const Component = (props: Record<string, unknown>) => {
 
-    const Component = Components[type];
+    const Component = Components[props.type as keyof typeof Components];
+
     if (!Component) {
-        console.warn(`Unknown field type: ${type}`);
-        return null;
+        return (
+            <>Unknown field type: {props.type}</>
+        );
     }
 
     return (
-        <Component {...props} />
+        <Component
+            {...props as unknown as Record<string, unknown>}
+        />
     )
 }
 

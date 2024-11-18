@@ -1,18 +1,13 @@
 'use client'
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { productSchema } from '@/features/products/schemas/product';
 import fields from '@/features/products/resources/fields';
 import FormBuilder from '@/components/form';
+import { FormValues, ProductFormProps } from '@/types/products';
 
-type FormValues = z.infer<typeof productSchema>;
-type ProductFormProps = {
-    onSuccess?: () => void;
-    product?: FormValues;
-};
-export default function ProductForm({ product }: ProductFormProps) {
+export default function ProductForm({ product, id }: ProductFormProps) {
+
     const form = useForm<FormValues>({
         defaultValues: product
             ? {
@@ -44,6 +39,7 @@ export default function ProductForm({ product }: ProductFormProps) {
 
     return (
         <FormBuilder
+            id={id}
             fields={fields}
             form={form}
             onSubmit={onSubmit}

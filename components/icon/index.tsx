@@ -19,9 +19,8 @@ const loadIcon = (name: Icons) => {
         cachedIcons[name] = lazy(() =>
             import(`@/public/icons/${name}.svg`)
                 .catch(() => {
-                    console.error(`Failed to load icon: ${name}`);
                     return {
-                        default: () => <span>⚠️</span>
+                        default: () => <span title={`Icon ${name} not found`}>⚠️</span>
                     };
                 })
         );
