@@ -8,7 +8,7 @@ import {
 
 import type { HeaderProps } from "@/types/home/header";
 
-export default function Header({ navRef, user }: HeaderProps) {
+export default function Header({ navRef, user }: HeaderProps){
 
     const onToggleNav = () => {
         navRef.current?.toggleVisibility();
@@ -20,7 +20,7 @@ export default function Header({ navRef, user }: HeaderProps) {
             <Logo />
             <LocaleSwitcher />
             <div className="flex items-center space-x-4 ml-8">
-                <UserNav  user={user}/>
+                <UserNav user={user}/>
             </div>
         </header>
     )
