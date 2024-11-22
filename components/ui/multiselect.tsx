@@ -287,7 +287,7 @@ export const MultiSelect = React.forwardRef<
                         <CommandList>
                             <CommandEmpty>
                                 {creatable ? (
-                                    <>press enter to create "{inputValue}"</>
+                                    <>press enter to create {inputValue}</>
                                 ) : (
                                     "No results found."
                                 )}
