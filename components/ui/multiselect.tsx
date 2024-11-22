@@ -104,15 +104,22 @@ export interface MultiSelectProps
      * Optional, can be used to add custom styles.
      */
     className?: string;
+
+    /**
+     * If true, allows the user to create new options.
+     * Optional, defaults to false.
+     */
+    creatable?: boolean;
 }
 
+// todo: add intl to the component
 export const MultiSelect = React.forwardRef<
     HTMLButtonElement,
     MultiSelectProps
 >(
     (
         {
-            options,
+            options: initialOptions,
             onValueChange,
             variant,
             defaultValue = [],
@@ -121,20 +128,36 @@ export const MultiSelect = React.forwardRef<
             modalPopover = false,
             asChild = false,
             className,
+            creatable = false,
             ...props
         },
         ref
     ) => {
-        const [selectedValues, setSelectedValues] =
-            React.useState<string[]>(defaultValue);
+        const [options, setOptions] = React.useState(initialOptions);
+        const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue);
+        const [inputValue, setInputValue] = React.useState("");
         const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+
+        const handleCreateOption = (value: string) => {
+            const newOption = { label: value, value: value.toLowerCase() };
+            setOptions(prev => [...prev, newOption]);
+            toggleOption(newOption.value);
+            setInputValue("");
+        };
 
         const handleInputKeyDown = (
             event: React.KeyboardEvent<HTMLInputElement>
         ) => {
-            if (event.key === "Enter") {
-                setIsPopoverOpen(true);
-            } else if (event.key === "Backspace" && !event.currentTarget.value) {
+            if (event.key === "Enter" && creatable && inputValue) {
+                event.preventDefault();
+                const existingOption = options.find(
+                    (option) => option.label.toLowerCase() === inputValue.toLowerCase()
+                );
+
+                if (!existingOption) {
+                    handleCreateOption(inputValue);
+                }
+            } else if (event.key === "Backspace" && !inputValue) {
                 const newSelectedValues = [...selectedValues];
                 newSelectedValues.pop();
                 setSelectedValues(newSelectedValues);
@@ -258,9 +281,17 @@ export const MultiSelect = React.forwardRef<
                         <CommandInput
                             placeholder="Search..."
                             onKeyDown={handleInputKeyDown}
+                            value={inputValue}
+                            onValueChange={setInputValue}
                         />
                         <CommandList>
-                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandEmpty>
+                                {creatable ? (
+                                    <>press enter to create "{inputValue}"</>
+                                ) : (
+                                    "No results found."
+                                )}
+                            </CommandEmpty>
                             <CommandGroup>
                                 <CommandItem
                                     key="all"

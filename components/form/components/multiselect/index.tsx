@@ -9,6 +9,7 @@ export default function Component(props: Record<string, unknown>) {
             placeholder={props.placeholder as string}
             variant="inverted"
             maxCount={3}
+            creatable={props.creatable as boolean}
         />
     )
 }

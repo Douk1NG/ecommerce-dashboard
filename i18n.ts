@@ -28,6 +28,7 @@ export const translations = {
     'orders': 'orders.content',
     'products': 'products.content',
     'categories': 'categories.content',
+    'filters': 'filters.content',
     'dashboard': 'dashboard.content',
     'sidebar': 'home.sidebar',
     'dialog': 'home.dialog'

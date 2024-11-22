@@ -28,11 +28,11 @@ export async function generateMetadata({
 
 const RootLayout: React.FC<Props> = async ({
     children,
-    form,
     params: { locale }
 }: Props) => {
     const messages = await getMessages();
 
+    // todo: desde aca se puede obtener el form, de esa manera reutilizarlo en las paginas
     return (
         <html lang={locale}>
             <body className="layout">

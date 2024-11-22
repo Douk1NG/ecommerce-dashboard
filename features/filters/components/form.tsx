@@ -1,22 +1,21 @@
 'use client'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categorySchema } from '@/features/categories/schemas/category';
-import fields from '@/features/categories/resources/fields';
+import { filterSchema } from '@/features/filters/schemas/filters';
+import fields from '@/features/filters/resources/fields';
 import FormBuilder from '@/components/form';
-import { FormValues, CategoryFormProps } from '@/types/categories';
+import { FormValues, FilterFormProps } from '@/types/filters';
 
-export default function CategoryForm({ category, id }: CategoryFormProps) {
+export default function FilterForm({ filter, id }: FilterFormProps) {
 
     const form = useForm<FormValues>({
-        defaultValues: category
+        defaultValues: filter
             ? {
-                name: category.name,
-                subcategories: category.subcategories,
-                filters: category.filters,
+                name: filter.name,
+                filters: filter.filters,
             }
             : undefined,
-        resolver: zodResolver(categorySchema),
+        resolver: zodResolver(filterSchema),
     });
 
     async function onSubmit(data: FormValues) {

@@ -12,7 +12,8 @@
             "dashboard": "Panel de control",
             "orders": "Pedidos",
             "products": "Productos",
-            "categories": "Categorías"
+            "categories": "Categorías",
+            "filters": "Filtros"
         },
         "header": {
             "langs": {
@@ -64,6 +65,16 @@
         "content": {
             "title": "Categorías",
             "add": "Añadir categoría"
+        }
+    },
+    "filters": {
+        "metadata": {
+            "title": "Filtros",
+            "description": "Consulta los filtros disponibles en la tienda"
+        },
+        "content": {
+            "title": "Filtros",
+            "add": "Añadir filtro"
         }
     },
     "dashboard": {

@@ -12,7 +12,8 @@
             "dashboard": "Dashboard",
             "orders": "Orders",
             "products": "Products",
-            "categories": "Categories"
+            "categories": "Categories",
+            "filters": "Filters"
         },
         "header": {
             "langs": {
@@ -53,7 +54,7 @@
         },
         "content": {
             "title": "Products",
-            "add": "Add product"
+            "add": "Add aproduct"
         }
     },
     "categories": {
@@ -64,6 +65,16 @@
         "content": {
             "title": "Categories",
             "add": "Add category"
+        }
+    },
+    "filters": {
+        "metadata": {
+            "title": "Filters",
+            "description": "Check the filters available in the store"
+        },
+        "content": {
+            "title": "Filters",
+            "add": "Add filter"
         }
     },
     "dashboard": {

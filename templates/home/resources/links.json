@@ -25,5 +25,11 @@
                 "index": 4
             }
         ]
+    },
+    {
+        "title": "filters",
+        "icon": "filter",
+        "href": "/filters",
+        "index": 4
     }
 ]
