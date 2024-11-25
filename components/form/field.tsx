@@ -22,7 +22,7 @@ const Component = (props: Record<string, unknown>) => {
 
     if (!Component) {
         return (
-            <>Unknown field type: {props.type}</>
+            null
         );
     }
 

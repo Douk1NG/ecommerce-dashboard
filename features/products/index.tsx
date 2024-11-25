@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { translations } from "@/i18n";
+import { translations } from '@/i18n/request';
 import Layout from "@/components/layout";
 import List from "@/components/list";
 import products from "./resources/products.json";

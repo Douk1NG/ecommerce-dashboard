@@ -1,4 +1,4 @@
-import { Locale } from "@/i18n";
+import { Locale } from "@/i18n/routing";
 
 export type GenerateMetadataProps = {
     params: { locale: Locale };

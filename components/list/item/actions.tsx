@@ -7,17 +7,16 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
 import Icon from '@/components/icon';
 
 interface PropTypes {
-    
+
 }
 
-export function Actions({}: PropTypes) {
+export function Actions({ }: PropTypes) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -31,7 +30,6 @@ export function Actions({}: PropTypes) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Make a copy</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem> Delete </DropdownMenuItem>
             </DropdownMenuContent>

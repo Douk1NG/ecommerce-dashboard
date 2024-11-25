@@ -1,4 +1,4 @@
-import { translations } from "@/i18n";
+import { translations } from '@/i18n/request';
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button"

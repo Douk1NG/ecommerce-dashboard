@@ -21,8 +21,10 @@ This project is licensed under the [MIT License](LICENSE).
 
 # Dependencies
 - next-intl : for internationalization
-- emblor: for tagboxes component
 - shadcn: for almost all the components
 - zod: for form validation
 - react-hook-form: for form validation
+
+# Issues
+-
 
