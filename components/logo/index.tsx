@@ -11,8 +11,8 @@ const Logo = () => {
                 objectFit: "cover",
                 aspectRatio: 2
             }}
-            height={120}
-            width={500}
+            height={500}
+            width={140}
         />
     )
 }

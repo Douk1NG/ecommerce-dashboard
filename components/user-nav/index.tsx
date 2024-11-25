@@ -22,17 +22,12 @@ import { translations } from '@/i18n/request';
 
 import type { UserNavProps } from "@/types/home/header";
 
-const UserNav = ({ user }: UserNavProps) => {
+const user = {
+    "username": "Dibey Valencia",
+    "email": "dialexanderx@gmail.com"
+}
 
-    const defaultUser = {
-        "username": "Dibey Valencia",
-        "email": "dialexanderx@gmail.com"
-    }
-
-    const {
-        username,
-        email
-    } = user || defaultUser
+const UserNav = (props: UserNavProps) => {
 
     const t = useTranslations(translations.header);
     return (
@@ -53,9 +48,9 @@ const UserNav = ({ user }: UserNavProps) => {
                         </Avatar>
                     </Button>
                     <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{username}</p>
+                        <p className="text-sm font-medium leading-none">{user.username}</p>
                         <p className="text-xs leading-none text-muted-foreground">
-                            {email}
+                            {user.email}
                         </p>
                     </div>
                 </div>
