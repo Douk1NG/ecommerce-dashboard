@@ -3,9 +3,13 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next/types";
 import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 
-export async function generateMetadata({
-    params: { locale }
-}: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
+    const params = await props.params;
+
+    const {
+        locale
+    } = params;
+
     const t = await getTranslations({
         locale,
         namespace: "filters"

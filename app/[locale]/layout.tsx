@@ -14,14 +14,18 @@ import { Locale } from '@/i18n/routing';
 type Props = {
     children: React.ReactNode;
     form: React.ReactNode;
-    params: {
+    params: Promise<{
         locale: Locale;
-    };
+    }>;
 };
 
-export async function generateMetadata({
-    params: { locale },
-}: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
+    const params = await props.params;
+
+    const {
+        locale
+    } = params;
+
     const t = await getTranslations({ locale, namespace: "home" });
 
     return {
@@ -30,10 +34,17 @@ export async function generateMetadata({
     };
 }
 
-const RootLayout: React.FC<Props> = async ({
-    children,
-    params: { locale }
-}: Props) => {
+const RootLayout: React.FC<Props> = async (props: Props) => {
+    const params = await props.params;
+
+    const {
+        locale
+    } = params;
+
+    const {
+        children
+    } = props;
+
     const messages = await getMessages();
 
     // todo: desde aca se puede obtener el form, de esa manera reutilizarlo en las paginas
