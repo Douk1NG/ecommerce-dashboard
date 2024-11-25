@@ -26,5 +26,8 @@ This project is licensed under the [MIT License](LICENSE).
 - react-hook-form: for form validation
 
 # Issues
--
+- Component form tira error de ref, sugiere usar forward pero según, está próximo a ser deprecado el forward
+
+# Todo
+- Root layout puede obtener el form, de esa manera reutilizarlo en las paginas ( creo, no recuerdo como)
 

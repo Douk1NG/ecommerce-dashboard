@@ -6,4 +6,5 @@ export type GenerateMetadataProps = {
 
 export type LayoutProps = {
     children: React.ReactNode;
+    params?: { locale: Locale }
 }
