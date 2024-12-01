@@ -1,28 +1,29 @@
 'use client'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { productSchema } from '@/features/products/schemas/product';
+import productSchema from '@/features/products/schemas/product';
 import fields from '@/features/products/resources/fields';
 import FormBuilder from '@/components/form';
-import { FormValues, ProductFormProps } from '@/types/products';
+import type { Product, ProductFormProps } from '@/types/products';
+import { translations } from '@/i18n/request';
 
 export default function ProductForm({ product, id }: ProductFormProps) {
 
-    const form = useForm<FormValues>({
+    const form = useForm<Product>({
         defaultValues: product
             ? {
-                title: product.title,
+                name: product.name,
                 description: product.description,
                 price: product.price,
                 categories: product.categories,
-                image: product.image,
+                images: product.images,
                 active: product.active,
             }
             : undefined,
         resolver: zodResolver(productSchema),
     });
 
-    async function onSubmit(data: FormValues) {
+    async function onSubmit(data: Product) {
         console.log(data);
         // if (product) {
         //     await fetch(`/api/users/${product.id}`, {
@@ -43,6 +44,7 @@ export default function ProductForm({ product, id }: ProductFormProps) {
             fields={fields}
             form={form}
             onSubmit={onSubmit}
+            translations={translations.products}
         />
     );
 }

@@ -5,6 +5,7 @@ import { categorySchema } from '@/features/categories/schemas/category';
 import fields from '@/features/categories/resources/fields';
 import FormBuilder from '@/components/form';
 import { FormValues, CategoryFormProps } from '@/types/categories';
+import { translations } from '@/i18n/request';
 
 export default function CategoryForm({ category, id }: CategoryFormProps) {
 
@@ -40,6 +41,7 @@ export default function CategoryForm({ category, id }: CategoryFormProps) {
             fields={fields}
             form={form}
             onSubmit={onSubmit}
+            translations={translations.products}
         />
     );
 }

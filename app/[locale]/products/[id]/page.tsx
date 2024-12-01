@@ -10,7 +10,7 @@ export default function Page() {
     return (
         <Sidebar
             form={form}
-            title={t('add')}
+            title={t('layout.add')}
         >
             <Form
                 id={form}

@@ -27,7 +27,7 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
         locale
     } = params;
 
-    const t = await getTranslations({ locale, namespace: "home" });
+    const t = await getTranslations({ locale, namespace: "layout" });
 
     return {
         title: t("metadata.title"),
@@ -52,19 +52,15 @@ const RootLayout: React.FC<Props> = async (props: Props) => {
     // todo: desde aca se puede obtener el form, de esa manera reutilizarlo en las paginas
     return (
         <html lang={locale}>
-            <body>
-                <NextIntlClientProvider messages={messages}>
-                    <SidebarProvider defaultOpen={defaultOpen}>
-                        <Nav />
-                        <SidebarInset>
-                            <Header />
-                            <main className="col-span-full md:col-[2] row-[2] overflow-auto h-full px-4 py-6 lg:px-8">
-                                {children}
-                            </main>
-                        </SidebarInset>
-                    </SidebarProvider>
-                </NextIntlClientProvider>
-            </body>
+            <NextIntlClientProvider messages={messages}>
+                <SidebarProvider defaultOpen={defaultOpen}>
+                    <Nav />
+                    <SidebarInset>
+                        <Header />
+                        {children}
+                    </SidebarInset>
+                </SidebarProvider>
+            </NextIntlClientProvider>
         </html>
     );
 };

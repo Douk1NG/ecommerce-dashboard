@@ -51,4 +51,5 @@ export type FormProps<T extends FieldValues> = {
     form: UseFormReturn<T>;
     id: string;
     onSubmit: (data: T) => void;
+    translations: string;
 }

@@ -5,10 +5,24 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/**
+ * @desc helps to omit type checking and parse errors
+**/
 export function safeParseFloat(value?: any) {
   if(typeof value === 'string') {
     return parseFloat(value);
   }
 
   return value;
+}
+
+/**
+ * @desc returns a splitted string cleaning empty values
+**/
+export function cleanSplit({value, criteria}: { value: string , criteria: string}) {
+  if(typeof value === 'string') {
+    return value.split(criteria).filter(it => it)
+  }
+
+  return value
 }

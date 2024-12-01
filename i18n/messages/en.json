@@ -1,12 +1,8 @@
 {
-    "login": {
-        "title": "Log In",
-        "description": "Enter your credentials to access the platform"
-    },
-    "home": {
+    "layout": {
         "metadata": {
             "title": "Home",
-            "description": "Welcome to the platform"
+            "description": "Platform that allows you to manage your e-commerce"
         },
         "navbar": {
             "dashboard": "Dashboard",
@@ -26,8 +22,7 @@
             },
             "lang": "Switch language",
             "logout": "Log out",
-            "profile": "Profile",
-            "toggle": "Toggle navigation"
+            "profile": "Profile"
         },
         "sidebar": {
             "close": "Close",
@@ -37,7 +32,8 @@
             "cancel": "Cancel",
             "accept": "Accept",
             "title": "Are you sure you want to close the form?",
-            "description": "Any changes made will be lost."
+            "description": "Any changes made will be lost.",
+            "close": "Close"
         }
     },
     "orders": {
@@ -45,20 +41,39 @@
             "title": "Orders",
             "description": "Check the orders placed in the store"
         },
-        "content": {
-            "title": "Orders",
-            "pending": "Pending",
-            "all": "All"
-        }
+        "title": "Orders",
+        "pending": "Pending",
+        "all": "All"
     },
     "products": {
         "metadata": {
             "title": "Products",
             "description": "Check the products available in the store"
         },
-        "content": {
+        "layout": {
             "title": "Products",
-            "add": "Add aproduct"
+            "add": "Add aproduct",
+            "description": ""
+        },
+        "scheme": {
+            "name": "Name",
+            "description": "Description",
+            "price": "Price",
+            "categories": "Categories",
+            "images": "Images",
+            "active": "Active"
+        },
+        "description": {
+            "name": "Set the product name.",
+            "description": "Set the product description.",
+            "price": "Set the product price.",
+            "categories": "Set the product categories.",
+            "images": "Set the product images",
+            "active": "Set the product status"
+        },
+        "table": {
+            "empty": "No products found, to get started, press the add product button.",
+            "info": "Click to view its details"
         }
     },
     "categories": {
@@ -66,28 +81,15 @@
             "title": "Categories",
             "description": "Check the categories of products available in the store"
         },
-        "content": {
-            "title": "Categories",
-            "add": "Add category"
-        }
+        "title": "Categories",
+        "add": "Add category"
     },
     "filters": {
         "metadata": {
             "title": "Filters",
             "description": "Check the filters available in the store"
         },
-        "content": {
-            "title": "Filters",
-            "add": "Add filter"
-        }
-    },
-    "dashboard": {
-        "metadata": {
-            "title": "Dashboard",
-            "description": "Check the store statistics"
-        },
-        "content": {
-            "title": "Dashboard"
-        }
+        "title": "Filters",
+        "add": "Add filter"
     }
 }

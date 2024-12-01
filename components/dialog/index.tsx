@@ -15,14 +15,22 @@ import {
 
 type PropTypes = {
     onConfirm: () => void;
+    title: string
 };
 
-export default function Index({ onConfirm }: PropTypes) {
+export default function Index({ onConfirm, title }: PropTypes) {
     const t = useTranslations(translations.dialog);
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">{t('cancel')}</Button>
+                <Button
+                    variant="outline"
+                    type='button'
+                    title={t(title)}
+                >
+
+                    {t(title)}
+                </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>

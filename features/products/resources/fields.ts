@@ -1,30 +1,30 @@
 import { Fields } from '@/types/form';
-import type { FormValues } from '@/types/products';
+import type { Product } from '@/types/products';
 
-const fields: Fields<FormValues> = [
+const fields: Fields<Product> = [
     {
-        "label": "Title",
-        "name": "title",
+        "label": "scheme.name",
+        "name": "name",
         "type": "text",
-        "description": "Set the product title."
+        "description": "description.name"
     },
     {
-        "label": "Description",
+        "label": "scheme.description",
         "name": "description",
         "type": "textarea",
-        "description": "Set the product description."
+        "description": "description.description"
     },
     {
-        "label": "Price",
+        "label": "scheme.price",
         "name": "price",
         "type": "currency",
-        "description": "Set the product price."
+        "description": "description.price"
     },
     {
-        "label": "Categories",
+        "label": "scheme.categories",
         "name": "categories",
         "type": "multiselect",
-        "description": "Set the product categories.",
+        "description": "description.categories",
         "options": [
             { "value": "Mujer", "label": "Mujer" },
             { "value": "Tennis", "label": "Tennis" },
@@ -34,16 +34,16 @@ const fields: Fields<FormValues> = [
         "placeholder": "Select categories"
     },
     {
-        "label": "Image",
-        "name": "image",
+        "label": "scheme.images",
+        "name": "images",
         "type": "file",
-        "description": "Set the product image."
+        "description": "description.images"
     },
     {
-        "label": "Active",
+        "label": "scheme.active",
         "name": "active",
         "type": "switch",
-        "description": "Set the product status."
+        "description": "description.active"
     }
 ]
 

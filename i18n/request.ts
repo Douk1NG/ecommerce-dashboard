@@ -19,13 +19,12 @@ export function localize(key: string, locale: string) {
 }
 
 export const translations = {
-    'navbar': 'home.navbar',
-    'header': 'home.header',
-    'orders': 'orders.content',
-    'products': 'products.content',
-    'categories': 'categories.content',
-    'filters': 'filters.content',
-    'dashboard': 'dashboard.content',
-    'sidebar': 'home.sidebar',
-    'dialog': 'home.dialog'
+    'navbar': 'layout.navbar',
+    'header': 'layout.header',
+    'sidebar': 'layout.sidebar',
+    'dialog': 'layout.dialog',
+    'orders': 'orders',
+    'categories': 'categories',
+    'filters': 'filters',
+    'products': 'products'
 }

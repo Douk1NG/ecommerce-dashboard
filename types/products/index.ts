@@ -1,10 +1,14 @@
 import { z } from "zod";
-import { productSchema } from "@/features/products/schemas/product";
+import productSchema from "@/features/products/schemas/product";
 
-export type FormValues = z.infer<typeof productSchema>;
+export type Product = z.infer<typeof productSchema>;
 
 export type ProductFormProps = {
     id: string;
     onSuccess?: () => void;
-    product?: FormValues;
+    product?: Product;
 };
+
+export type ProductTableProps = {
+    dataSource: Product[];
+}

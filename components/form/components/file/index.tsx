@@ -10,6 +10,7 @@ const Component = (props: Record<string, unknown>) => {
             id={props.id as string}
             onBlur={props.onBlur as () => void}
             onChange={props.onChange as (event: React.ChangeEvent<HTMLInputElement>) => void}
+            multiple={true}
         />
     )
 }

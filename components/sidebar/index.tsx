@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { translations } from '@/i18n/request';
 import { Button } from '@/components/ui/button';
 import Dialog from '@/components/dialog';
+import { usePathname } from '@/i18n/routing';
+import { cleanSplit } from '@/lib/utils';
 
 type PropTypes = {
     title: string;
@@ -14,9 +16,15 @@ type PropTypes = {
 const Index = ({ title, children, form }: PropTypes) => {
     const t = useTranslations(translations.sidebar);
     const router = useRouter();
+    const pathname = usePathname();
 
     function onClose() {
-        router.back();
+        const base = cleanSplit({
+            value: pathname,
+            criteria: '/'
+        }).slice(0, -1)
+
+        router.push(`/${base}`)
     }
 
     return (
@@ -29,20 +37,16 @@ const Index = ({ title, children, form }: PropTypes) => {
                     <h2 className='text-2xl font-medium leading-7 text-gray-900 sm:truncate  sm:tracking-tight'>
                         {title}
                     </h2>
-                    <Button
-                        onClick={onClose}
-                        variant='outline'
-                        title={t('close')}
-                        type='button'
-                    >
-                        {t('close')}
-                    </Button>
+                    <Dialog
+                        onConfirm={onClose}
+                        title='close'
+                    />
                 </div>
                 <div className='mt-4 mb-4 overflow-y-auto overflow-x-hidden'>
                     {children}
                 </div>
                 <div className='flex justify-end gap-4'>
-                    <Dialog onConfirm={onClose} />
+                    <Dialog title='cancel' onConfirm={onClose} />
                     <Button type='submit' form={form}>{t('accept')}</Button>
                 </div>
             </aside>

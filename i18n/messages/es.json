@@ -1,12 +1,8 @@
 {
-    "login": {
-        "title": "Iniciar sesión",
-        "description": "Introduce tus credenciales para acceder a la plataforma"
-    },
-    "home": {
+    "layout": {
         "metadata": {
             "title": "Inicio",
-            "description": "Bienvenido a la plataforma"
+            "description": "Plataforma que permite gestionar tu tienda virtual"
         },
         "navbar": {
             "dashboard": "Panel de control",
@@ -37,7 +33,8 @@
             "cancel": "Cancelar",
             "accept": "Aceptar",
             "title": "¿Está seguro que desea cerrar el formulario?",
-            "description": "Cualquier cambio realizado se perderá."
+            "description": "Cualquier cambio realizado se perderá.",
+            "close": "Cerrar"
         }
     },
     "orders": {
@@ -45,20 +42,39 @@
             "title": "Pedidos",
             "description": "Consulta los pedidos realizados en la tienda"
         },
-        "content": {
-            "title": "Pedidos",
-            "pending": "Pendientes",
-            "all": "Todos"
-        }
+        "title": "Pedidos",
+        "pending": "Pendientes",
+        "all": "Todos"
     },
     "products": {
         "metadata": {
             "title": "Productos",
             "description": "Consulta los productos disponibles en la tienda"
         },
-        "content": {
+        "layout": {
             "title": "Productos",
-            "add": "Añadir producto"
+            "add": "Añadir producto",
+            "description": ""
+        },
+        "scheme": {
+            "name": "Nombre",
+            "description": "Descripción",
+            "price": "Precio",
+            "categories": "Categorías",
+            "images": "Imagenes",
+            "active": "Activo"
+        },
+        "description": {
+            "name": "Establece el nombre del producto",
+            "description": "Establece la descripción del producto",
+            "price": "Establece el precio del producto",
+            "categories": "Establece las categorías",
+            "images": "images",
+            "active": "Establece si el producto está activo"
+        },
+        "table": {
+            "empty": "No se han encontrado productos, para comenzar, presiona el botón agregar producto",
+            "info": "Click para ver su detalle"
         }
     },
     "categories": {
@@ -66,28 +82,15 @@
             "title": "Categorías",
             "description": "Consulta las categorías de productos disponibles en la tienda"
         },
-        "content": {
-            "title": "Categorías",
-            "add": "Añadir categoría"
-        }
+        "title": "Categorías",
+        "add": "Añadir categoría"
     },
     "filters": {
         "metadata": {
             "title": "Filtros",
             "description": "Consulta los filtros disponibles en la tienda"
         },
-        "content": {
-            "title": "Filtros",
-            "add": "Añadir filtro"
-        }
-    },
-    "dashboard": {
-        "metadata": {
-            "title": "Panel de control",
-            "description": "Consulta las estadísticas de la tienda"
-        },
-        "content": {
-            "title": "Panel de control"
-        }
+        "title": "Filtros",
+        "add": "Añadir filtro"
     }
 }

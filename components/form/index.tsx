@@ -12,8 +12,10 @@ import Field from '@/components/form/field';
 
 import type { FormProps } from '@/types/form';
 import type { FieldValues } from 'react-hook-form';
+import { useTranslations } from 'use-intl';
 
-const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, id }: FormProps<T>) => {
+const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, id, translations }: FormProps<T>) => {
+    const t = useTranslations(translations)
     return (
         <Form {...form}>
             <form
@@ -28,7 +30,7 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, id }: Form
                         key={item.name}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>{item.label}</FormLabel>
+                                <FormLabel>{t(item.label)}</FormLabel>
                                 <FormControl>
                                     <Field
                                         {...field}
@@ -36,7 +38,7 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, id }: Form
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                    {item.description}
+                                    {t(item.description)}
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
