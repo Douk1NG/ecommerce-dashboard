@@ -14,7 +14,7 @@ interface PropsType {
 const Index = ({ title, description, action, children }: PropsType) => {
     return (
         <>
-            <div className="flex items-center justify-between space-y-2 mb-4 px-4 py-6 lg:px-8">
+            <div className="flex items-center justify-between space-y-2 mb-4 px-1 md:px-4 py-6 lg:px-8">
                 <div>
                     <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
                     <small>{description}</small>
@@ -31,7 +31,7 @@ const Index = ({ title, description, action, children }: PropsType) => {
                     </div>
                 )}
             </div>
-            <div className="px-4 lg:px-8">
+            <div className="px-1 md:px-4 py-6 lg:px-8">
                 {children}
             </div>
         </>

@@ -7,10 +7,6 @@ export type UserNavProps = {
     user?: User;
 }
 
-export type HamburgerProps = {
-    onClick: () => void;
-}
-
 export type NavItem = {
     title: string;
     url: string;

@@ -30,4 +30,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 # Todo
 - Root layout puede obtener el form, de esa manera reutilizarlo en las paginas ( creo, no recuerdo como)
+- Reemplazar las translations por constantes
 

@@ -10,7 +10,7 @@
             "products": "Productos",
             "categories": "Categorías",
             "filters": "Filtros",
-            "inventary": "Inventario",
+            "inventory": "Inventario",
             "outflow": "Salidas",
             "inflow": "Entradas",
             "settings": "Configuraciones"
@@ -24,10 +24,6 @@
             "logout": "Cerrar sesión",
             "profile": "Perfil",
             "toggle": "Alternar navegación"
-        },
-        "sidebar": {
-            "close": "Cerrar",
-            "accept": "Aceptar"
         },
         "dialog": {
             "cancel": "Cancelar",
@@ -54,14 +50,15 @@
         "layout": {
             "title": "Productos",
             "add": "Añadir producto",
-            "description": ""
+            "description": "",
+            "save": "Guardar producto"
         },
         "scheme": {
             "name": "Nombre",
             "description": "Descripción",
             "price": "Precio",
             "categories": "Categorías",
-            "images": "Imagenes",
+            "images": "Imágenes",
             "active": "Activo"
         },
         "description": {
@@ -69,7 +66,7 @@
             "description": "Establece la descripción del producto",
             "price": "Establece el precio del producto",
             "categories": "Establece las categorías",
-            "images": "images",
+            "images": "Establece las imágenes",
             "active": "Establece si el producto está activo"
         },
         "table": {
@@ -82,15 +79,67 @@
             "title": "Categorías",
             "description": "Consulta las categorías de productos disponibles en la tienda"
         },
-        "title": "Categorías",
-        "add": "Añadir categoría"
+        "layout": {
+            "title": "Categorías",
+            "add": "Agregar categoría",
+            "description": "",
+            "save": "Guardar categoría"
+        },
+        "scheme": {
+            "name": "Nombre",
+            "subcategories": "Subcategorías",
+            "filters": "Filtros"
+        },
+        "description": {
+            "name": "Establece el nombre del categorías",
+            "subcategories": "Las subcategorías seleccionadas heredarán los filtros de la categoría.",
+            "filters": "Establece los filtros"
+        },
+        "table": {
+            "empty": "No se encontraron categorías, para comenzar, presiona el botón agregar categoría",
+            "info": "Click para ver su detalle"
+        }
     },
     "filters": {
         "metadata": {
             "title": "Filtros",
             "description": "Consulta los filtros disponibles en la tienda"
         },
-        "title": "Filtros",
-        "add": "Añadir filtro"
+        "layout": {
+            "title": "Filtros",
+            "add": "Añadir filtro",
+            "description": "",
+            "save": "Guardar filtro"
+        },
+        "scheme": {
+            "name": "Nombre",
+            "filters": "Filtros"
+        },
+        "description": {
+            "name": "Establece el nombre del filtro",
+            "filters": "Establece los filtros"
+        },
+        "table": {
+            "empty": "No se han encontrado filtros, para empezar, presiona el botón añadir filtro",
+            "info": "Click para ver su detalle"
+        }
+    },
+    "inventory": {
+        "metadata": {
+            "title": "Inventario",
+            "description": "Consulta el inventario registrado en la tienda"
+        },
+        "layout": {
+            "title": "Inventario",
+            "description": ""
+        },
+        "scheme": {
+            "product": "Producto",
+            "quantity": "Cantidad"
+        },
+        "table": {
+            "empty": "No se han encontrado productos en el inventario, para iniciar, presiona el botón entradas",
+            "info": "Click para ver su detalle"
+        }
     }
 }

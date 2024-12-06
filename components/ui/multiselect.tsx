@@ -62,7 +62,7 @@ export interface MultiSelectProps
         /** The text to display for the option. */
         label: string;
         /** The unique value associated with the option. */
-        value: string;
+        value: string|number;
     }[];
 
     /**
@@ -186,7 +186,7 @@ export const MultiSelect = React.forwardRef<
             if (selectedValues.length === options.length) {
                 handleClear();
             } else {
-                const allValues = options.map((option) => option.value);
+                const allValues = options.map((option) => option.value.toString());
                 setSelectedValues(allValues);
                 onValueChange?.(allValues);
             }
@@ -212,7 +212,7 @@ export const MultiSelect = React.forwardRef<
                             <div className="flex justify-between items-center w-full">
                                 <div className="flex flex-wrap items-center">
                                     {selectedValues.slice(0, maxCount).map((value) => {
-                                        const option = options.find((o) => o.value === value);
+                                        const option = options.find((o) => o.value.toString() === value);
                                         return (
                                             <Badge
                                                 key={value}
@@ -311,11 +311,11 @@ export const MultiSelect = React.forwardRef<
                                     <span>(Select All)</span>
                                 </CommandItem>
                                 {options.map((option) => {
-                                    const isSelected = selectedValues.includes(option.value);
+                                    const isSelected = selectedValues.includes(option.value.toString());
                                     return (
                                         <CommandItem
                                             key={option.value}
-                                            onSelect={() => toggleOption(option.value)}
+                                            onSelect={() => toggleOption(option.value.toString())}
                                             className="cursor-pointer"
                                         >
                                             <div

@@ -22,8 +22,8 @@ const navItems = [
         ]
     },
     {
-        "title": "inventary",
-        "url": "/inventary",
+        "title": "inventory",
+        "url": "/inventory",
         "icon": "book-open-text",
         "items": [
             {

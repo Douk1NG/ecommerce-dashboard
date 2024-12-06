@@ -1,24 +1,19 @@
 import { Fields } from '@/types/form';
-import type { FormValues } from '@/types/filters';
+import type { Filter } from '@/features/filters/types';
 
-const fields: Fields<FormValues> = [
+const fields: Fields<Filter> = [
     {
-        "label": "Name",
+        "label": "scheme.name",
         "name": "name",
         "type": "text",
-        "description": "Set the category name."
+        "description": "description.name"
     },
     {
-        "label": "Filters",
+        "label": "scheme.filters",
         "name": "filters",
-        "type": "multiselect",
-        "creatable": true,
-        "description": "Set the category filters.",
-        "placeholder": "Select filters",
-        "options": [
-            { "value": "Numeric sizes", "label": "Mujer" },
-            { "value": "Alpabetic sizes", "label": "Tennis" },
-        ]
+        "type": "tagbox",
+        "description": "description.filters",
+        // "placeholder": "Select filters"
     }
 ]
 

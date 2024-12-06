@@ -4,7 +4,8 @@ import {
     Currency,
     MultiSelect,
     File,
-    Switch
+    Switch,
+    Tagbox
 } from "./components";
 
 const Components = {
@@ -14,6 +15,7 @@ const Components = {
     multiselect: MultiSelect,
     file: File,
     switch: Switch,
+    tagbox: Tagbox
 }
 
 const Component = (props: Record<string, unknown>) => {

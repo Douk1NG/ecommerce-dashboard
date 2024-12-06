@@ -2,28 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .layout {
+.sidebar {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 80px 1fr;
-  height: 100vh;
-  overflow: hidden;
-} */
-
-/* .sidebar {
-  display: grid;
-  grid-template-rows: 40px 1fr 40px;
-} */
-
-/* @media (max-width: 600px) {
-  .layout {
-    overflow: auto;
-  }
-} */
-
-.card {
-  display: grid;
-  grid-template-rows: 100px 1fr 40px;
+  grid-template-rows: 40px 1fr;
 }
 
 @layer base {

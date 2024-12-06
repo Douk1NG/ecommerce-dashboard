@@ -1,5 +1,5 @@
 import { Fields } from '@/types/form';
-import type { Product } from '@/types/products';
+import type { Product } from '@/features/products/types';
 
 const fields: Fields<Product> = [
     {
@@ -26,10 +26,38 @@ const fields: Fields<Product> = [
         "type": "multiselect",
         "description": "description.categories",
         "options": [
-            { "value": "Mujer", "label": "Mujer" },
-            { "value": "Tennis", "label": "Tennis" },
-            { "value": "Short", "label": "Short" },
-            { "value": "Running", "label": "Running" }
+            {
+                "label": "Electronics",
+                "value": 1
+            },
+            {
+                "label": "Clothing",
+                "value": 2
+            },
+            {
+                "label": "Books",
+                "value": 3
+            },
+            {
+                "label": "Home & Kitchen",
+                "value": 4
+            },
+            {
+                "label": "Beauty1",
+                "value": 5
+            },
+            {
+                "label": "Beauty2",
+                "value": 6
+            },
+            {
+                "label": "Beauty3",
+                "value": 7
+            },
+            {
+                "label": "Beauty4",
+                "value": 8
+            }
         ],
         "placeholder": "Select categories"
     },

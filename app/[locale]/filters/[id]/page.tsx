@@ -5,16 +5,12 @@ import Sidebar from "@/components/sidebar";
 
 export default function Page() {
     const t = useTranslations(translations.filters);
-    const form = 'filters-form';
 
     return (
         <Sidebar
-            form={form}
-            title={t('add')}
+            title={t('layout.add')}
         >
-            <Form
-                id={form}
-            />
+            <Form/>
         </Sidebar>
     )
 }

@@ -10,7 +10,7 @@
             "products": "Products",
             "categories": "Categories",
             "filters": "Filters",
-            "inventary": "Inventary",
+            "inventory": "Inventory",
             "outflow": "Outflow",
             "inflow": "Inflow",
             "settings": "Settings"
@@ -23,10 +23,6 @@
             "lang": "Switch language",
             "logout": "Log out",
             "profile": "Profile"
-        },
-        "sidebar": {
-            "close": "Close",
-            "accept": "Accept"
         },
         "dialog": {
             "cancel": "Cancel",
@@ -52,8 +48,9 @@
         },
         "layout": {
             "title": "Products",
-            "add": "Add aproduct",
-            "description": ""
+            "add": "Add product",
+            "description": "",
+            "save": "Save product"
         },
         "scheme": {
             "name": "Name",
@@ -81,15 +78,67 @@
             "title": "Categories",
             "description": "Check the categories of products available in the store"
         },
-        "title": "Categories",
-        "add": "Add category"
+        "layout": {
+            "title": "Categories",
+            "add": "Add category",
+            "description": "",
+            "save": "Save category"
+        },
+        "scheme": {
+            "name": "Name",
+            "subcategories": "Subcategories",
+            "filters": "Filters"
+        },
+        "description": {
+            "name": "Set the category name",
+            "subcategories": "Set the subcategories",
+            "filters": "Set the filter"
+        },
+        "table": {
+            "empty": "No categories found, to get started, press the add category button.",
+            "info": "Click to view its details"
+        }
     },
     "filters": {
         "metadata": {
             "title": "Filters",
             "description": "Check the filters available in the store"
         },
-        "title": "Filters",
-        "add": "Add filter"
+        "layout": {
+            "title": "Filters",
+            "add": "Add filter",
+            "description": "",
+            "save": "Save filter"
+        },
+        "scheme": {
+            "name": "Name",
+            "filters": "Filters"
+        },
+        "description": {
+            "name": "Set the filter name",
+            "filters": "Set the filters"
+        },
+        "table": {
+            "empty": "No filters found, to get started, press the add filter button.",
+            "info": "Click to view its details"
+        }
+    },
+    "inventory": {
+        "metadata": {
+            "title": "Inventory",
+            "description": "Check the inventory available in the store"
+        },
+        "layout": {
+            "title": "Inventory",
+            "description": ""
+        },
+        "scheme": {
+            "product": "Product",
+            "quantity": "Quantity"
+        },
+        "table": {
+            "empty": "No products found, to get started, press the add an inflow",
+            "info": "Click to view its details"
+        }
     }
 }

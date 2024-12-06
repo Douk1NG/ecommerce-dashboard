@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next/types";
 import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 
+import Layout from "@/features/filters"
+
 export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
     const params = await props.params;
 
@@ -24,5 +26,9 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
 export default function FiltersLayout({
     children,
 }: LayoutProps) {
-    return <>{children}</>
+    return (
+        <Layout>
+            {children}
+        </Layout>
+    )
 }

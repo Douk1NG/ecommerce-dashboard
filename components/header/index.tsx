@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { translations } from '@/i18n/request';
 import { usePathname } from '@/i18n/routing';
 
-import type { NavItem } from '@/types/home/header';
+import type { NavItem } from '@/types/nav';
 
 const useBreadcrumbPath = (currentUrl: string) => {
     return useMemo(() => {

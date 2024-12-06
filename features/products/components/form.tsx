@@ -4,10 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import productSchema from '@/features/products/schemas/product';
 import fields from '@/features/products/resources/fields';
 import FormBuilder from '@/components/form';
-import type { Product, ProductFormProps } from '@/types/products';
+import type { Product, ProductFormProps } from '@/features/products/types';
 import { translations } from '@/i18n/request';
 
-export default function ProductForm({ product, id }: ProductFormProps) {
+export default function ProductForm({ product }: ProductFormProps) {
 
     const form = useForm<Product>({
         defaultValues: product
@@ -40,7 +40,6 @@ export default function ProductForm({ product, id }: ProductFormProps) {
 
     return (
         <FormBuilder
-            id={id}
             fields={fields}
             form={form}
             onSubmit={onSubmit}

@@ -1,18 +1,22 @@
 import { useTranslations } from "next-intl";
-import { translations } from '@/i18n/request';
 import Layout from "@/components/layout";
 
-export default function CategoriesPage() {
-    const t = useTranslations(translations.categories);
+import CategoriesTable from "./components/table";
+import CONSTANTS from './resources/constants';
+import type { CategoryPageProps } from "./types";
+
+export default function CategoriesPage({ children }: CategoryPageProps) {
+    const t = useTranslations(CONSTANTS.NAMESPACE);
     return (
         <Layout
-            title={t('title')}
+            title={t(CONSTANTS.LAYOUT.TITLE)}
             action={{
-                title: t('add'),
-                href: '/categories/add'
+                title: t(CONSTANTS.LAYOUT.ADD),
+                href: CONSTANTS.LAYOUT.LINK
             }}
         >
-            <></>
+            <CategoriesTable dataSource={[]} />
+            {children}
         </Layout>
     )
 }

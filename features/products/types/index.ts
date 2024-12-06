@@ -4,7 +4,6 @@ import productSchema from "@/features/products/schemas/product";
 export type Product = z.infer<typeof productSchema>;
 
 export type ProductFormProps = {
-    id: string;
     onSuccess?: () => void;
     product?: Product;
 };

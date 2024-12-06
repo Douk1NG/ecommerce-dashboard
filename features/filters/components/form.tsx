@@ -1,14 +1,18 @@
 'use client'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { filterSchema } from '@/features/filters/schemas/filters';
+
+import filterSchema from '@/features/filters/schemas';
 import fields from '@/features/filters/resources/fields';
 import FormBuilder from '@/components/form';
-import { FormValues, FilterFormProps } from '@/types/filters';
 
-export default function FilterForm({ filter, id }: FilterFormProps) {
+import type { Filter, FilterFormProps } from '@/features/filters/types';
 
-    const form = useForm<FormValues>({
+import { translations } from '@/i18n/request';
+
+export default function FilterForm({ filter }: FilterFormProps) {
+
+    const form = useForm<Filter>({
         defaultValues: filter
             ? {
                 name: filter.name,
@@ -18,27 +22,16 @@ export default function FilterForm({ filter, id }: FilterFormProps) {
         resolver: zodResolver(filterSchema),
     });
 
-    async function onSubmit(data: FormValues) {
+    async function onSubmit(data: Filter) {
         console.log(data);
-        // if (product) {
-        //     await fetch(`/api/users/${product.id}`, {
-        //         method: 'PATCH',
-        //         body: JSON.stringify(data),
-        //     });
-        //     return
-        // }
-        // await fetch('/api/users', {
-        //     method: 'POST',
-        //     body: JSON.stringify(data),
-        // });
     }
 
     return (
         <FormBuilder
-            id={id}
             fields={fields}
             form={form}
             onSubmit={onSubmit}
+            translations={translations.filters}
         />
     );
 }

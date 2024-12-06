@@ -22,19 +22,31 @@ import { usePathname } from "@/i18n/routing"
 import { cleanSplit } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 
+type options = {
+    selection?: 'single' | 'none'
+}
+
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
-    translations: string
+    translations: string,
+    options: options
 }
 
 export default function DataTable<TData, TValue>({
     columns,
     data,
-    translations
+    translations,
+    options
 }: DataTableProps<TData, TValue>) {
 
     const t = useTranslations(translations)
+
+    const {
+        selection = 'single'
+    } = options
+
+    const isSelectable = selection !== 'none'
 
     const table = useReactTable({
         data,
@@ -47,6 +59,9 @@ export default function DataTable<TData, TValue>({
     const params = useParams();
 
     const onRowClick = (row: Row<TData>) => {
+        if(selection === 'none'){
+            return;
+        }
         const selectedRow = row.original as Record<string, unknown>
         const rowId = selectedRow.id
 
@@ -94,8 +109,8 @@ export default function DataTable<TData, TValue>({
                             <TableRow
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
-                                className="cursor-pointer"
-                                onClick={() => onRowClick(row)}
+                                className={isSelectable ? "cursor-pointer" : ""}
+                                onClick={isSelectable ? () => onRowClick(row) : undefined}
                                 title={t('table.info')}
                             >
                                 {row.getVisibleCells().map((cell) => (
@@ -110,7 +125,7 @@ export default function DataTable<TData, TValue>({
                             <TableCell
                                 colSpan={columns.length} className="h-24 text-center"
                             >
-                                No results.
+                                {t('table.empty')}
                             </TableCell>
                         </TableRow>
                     )}

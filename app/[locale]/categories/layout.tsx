@@ -1,5 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
+import Layout from "@/features/categories"
+import CONSTANTS from "@/features/categories/resources/constants";
+
 import type { Metadata } from "next/types";
 import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 
@@ -12,17 +15,21 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
 
     const t = await getTranslations({
         locale,
-        namespace: "categories"
+        namespace: CONSTANTS.NAMESPACE
     });
 
     return {
-        title: t("metadata.title"),
-        description: t("metadata.description"),
+        title: t(CONSTANTS.METADATA.TITLE),
+        description: t(CONSTANTS.METADATA.DESCRIPTION)
     };
 }
 
 export default function CategoriesLayout({
     children,
 }: LayoutProps) {
-    return <>{children}</>
+    return (
+        <Layout>
+            {children}
+        </Layout>
+    )
 }

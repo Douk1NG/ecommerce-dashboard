@@ -20,7 +20,7 @@ import {
 
 import { translations } from '@/i18n/request';
 
-import type { UserNavProps } from "@/types/home/header";
+import type { UserNavProps } from "@/types/nav";
 
 const user = {
     "username": "Dibey Valencia",

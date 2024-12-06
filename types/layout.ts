@@ -1,10 +1,8 @@
-import { Locale } from "@/i18n/routing";
-
 export type GenerateMetadataProps = {
-    params: { locale: Locale };
+    params?: Promise<any>
 }
 
 export type LayoutProps = {
     children: React.ReactNode;
-    params?: { locale: Locale }
+    params?: Promise<any>
 }

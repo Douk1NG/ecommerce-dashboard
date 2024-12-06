@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import type { Product } from '@/types/products';
+import type { Product } from '@/features/products/types';
 import { safeParseFloat } from "@/lib/utils";
 
 const columns: ColumnDef<Product>[] = [
