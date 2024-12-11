@@ -1,20 +1,17 @@
-import { useTranslations } from "next-intl";
-import { translations } from '@/i18n/request';
-import Layout from "@/components/layout";
+import CONSTANTS from "./resources/constants";
 import FiltersTable from "@/features/filters/components/table";
+import Layout from "@/components/layout";
+import { useTranslations } from "next-intl";
+import type { FilterPageProps } from "./types";
 
-interface PropsType {
-    children: React.ReactNode;
-}
-
-export default function FiltersPage({ children }: PropsType) {
-    const t = useTranslations(translations.filters);
+export default function FiltersPage({ children }: FilterPageProps) {
+    const t = useTranslations(CONSTANTS.NAMESPACE);
     return (
         <Layout
-            title={t('layout.title')}
+            title={t(CONSTANTS.LAYOUT.TITLE)}
             action={{
-                title: t('layout.add'),
-                href: '/filters/add'
+                title: t(CONSTANTS.LAYOUT.ADD),
+                href: CONSTANTS.LAYOUT.LINK
             }}
         >
             <FiltersTable dataSource={[]}/>

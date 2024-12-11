@@ -1,19 +1,19 @@
 import { Fields } from '@/types/form';
 import type { Filter } from '@/features/filters/types';
+import CONSTANTS from './constants';
 
 const fields: Fields<Filter> = [
     {
-        "label": "scheme.name",
-        "name": "name",
-        "type": "text",
-        "description": "description.name"
+        "label": CONSTANTS.SCHEME.NAME,
+        "name": CONSTANTS.KEYS.NAME,
+        "description": CONSTANTS.DESCRIPTION.NAME,
+        "type": "text"
     },
     {
-        "label": "scheme.filters",
-        "name": "filters",
-        "type": "tagbox",
-        "description": "description.filters",
-        // "placeholder": "Select filters"
+        "label": CONSTANTS.SCHEME.FILTERS,
+        "name": CONSTANTS.KEYS.FILTERS,
+        "description": CONSTANTS.DESCRIPTION.FILTERS,
+        "type": "tagbox"
     }
 ]
 

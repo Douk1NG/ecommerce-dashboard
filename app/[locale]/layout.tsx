@@ -48,7 +48,8 @@ const RootLayout: React.FC<Props> = async (props: Props) => {
 
     const messages = await getMessages();
     const cookieStore = await cookies()
-    const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+    const cookie = cookieStore.get("sidebar:state");
+    const defaultOpen = cookie ? cookie.value === "true" : true
     // todo: desde aca se puede obtener el form, de esa manera reutilizarlo en las paginas
     return (
         <html lang={locale}>

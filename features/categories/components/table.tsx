@@ -1,6 +1,6 @@
 'use client'
-import DataTable from "@/components/datatable"
 import CONSTANTS from "../resources/constants"
+import DataTable from "@/components/datatable"
 import columns from "../resources/columns"
 import type { CategoryTableProps } from "../types"
 

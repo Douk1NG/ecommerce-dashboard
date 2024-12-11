@@ -1,16 +1,15 @@
 'use client'
-
-import columns from "@/features/filters/resources/columns"
+import CONSTANTS from "../resources/constants"
 import DataTable from "@/components/datatable"
+import columns from "@/features/filters/resources/columns"
 import type { FilterTableProps } from "@/features/filters/types"
-import { translations } from "@/i18n/request"
 
 function FiltersTable({ dataSource }: FilterTableProps) {
     return (
         <DataTable
             columns={columns}
             data={dataSource}
-            translations={translations.filters}
+            translations={CONSTANTS.NAMESPACE}
             options={{
                 selection: "single"
             }}

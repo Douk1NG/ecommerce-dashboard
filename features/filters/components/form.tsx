@@ -1,22 +1,23 @@
 'use client'
+import CONSTANTS from '../resources/constants';
+import FormBuilder from '@/components/form';
+import fields from '@/features/filters/resources/fields';
+import filterSchema from '@/features/filters/schemas';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import filterSchema from '@/features/filters/schemas';
-import fields from '@/features/filters/resources/fields';
-import FormBuilder from '@/components/form';
-
-import type { Filter, FilterFormProps } from '@/features/filters/types';
-
-import { translations } from '@/i18n/request';
+import type {
+    Filter,
+    FilterFormProps
+} from '@/features/filters/types';
 
 export default function FilterForm({ filter }: FilterFormProps) {
 
     const form = useForm<Filter>({
         defaultValues: filter
             ? {
-                name: filter.name,
-                filters: filter.filters,
+                [CONSTANTS.KEYS.NAME]: filter[CONSTANTS.KEYS.NAME],
+                [CONSTANTS.KEYS.FILTERS]: filter[CONSTANTS.KEYS.FILTERS],
             }
             : undefined,
         resolver: zodResolver(filterSchema),
@@ -31,7 +32,7 @@ export default function FilterForm({ filter }: FilterFormProps) {
             fields={fields}
             form={form}
             onSubmit={onSubmit}
-            translations={translations.filters}
+            translations={CONSTANTS.NAMESPACE}
         />
     );
 }

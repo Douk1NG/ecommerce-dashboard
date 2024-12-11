@@ -31,6 +31,22 @@
             "title": "¿Está seguro que desea cerrar el formulario?",
             "description": "Cualquier cambio realizado se perderá.",
             "close": "Cerrar"
+        },
+        "upload" : {
+            "title": "Cargar"
+        },
+        "tagbox": {
+            "update": "Actualizar",
+            "add": "Agregar",
+            "remove": "Eliminar",
+            "titles": {
+                "action": "Agregar / Actualizar",
+                "tag": "Click para actualizar el valor",
+                "remove": "Click para eliminar"
+            },
+            "msg": {
+                "exists": "La etiqueta ya existe"
+            }
         }
     },
     "orders": {

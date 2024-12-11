@@ -3,12 +3,13 @@
 import Icon from '@/components/icon'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import { useEffect, useRef, useState } from 'react'
 
 export default function ImageUploader(props: Record<string, any>) {
-
+    const t = useTranslations()
     const [images, setImages] = useState<{
         file: File;
         preview: string;

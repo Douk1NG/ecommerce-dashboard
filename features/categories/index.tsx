@@ -1,8 +1,8 @@
-import { useTranslations } from "next-intl";
-import Layout from "@/components/layout";
 
-import CategoriesTable from "./components/table";
 import CONSTANTS from './resources/constants';
+import CategoriesTable from "./components/table";
+import Layout from "@/components/layout";
+import { useTranslations } from "next-intl";
 import type { CategoryPageProps } from "./types";
 
 export default function CategoriesPage({ children }: CategoryPageProps) {

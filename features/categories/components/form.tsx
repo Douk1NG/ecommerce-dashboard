@@ -1,17 +1,15 @@
 'use client'
+import CONSTANTS from '../resources/constants';
+import FormBuilder from '@/components/form';
+import categorySchema from '../schemas';
+import fields from '../resources/fields';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import FormBuilder from '@/components/form';
-
-import categorySchema from '../schemas';
 
 import type {
     Category,
     CategoryFormProps
 } from '../types';
-
-import CONSTANTS from '../resources/constants';
-import fields from '../resources/fields';
 
 export default function CategoryForm({ category }: CategoryFormProps) {
 

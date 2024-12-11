@@ -1,6 +1,6 @@
 import { Fields } from '@/types/form';
 import type { Category } from '../types';
-import CONSTANTS from "../resources/constants";
+import CONSTANTS from "./constants";
 
 const fields: Fields<Category> = [
     {

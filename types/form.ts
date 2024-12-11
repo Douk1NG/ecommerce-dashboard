@@ -11,6 +11,7 @@ export interface BaseField<T> {
     label: string;
     name: Path<T>;
     description?: string;
+    placeholder?: string;
 }
 
 export type TextField<T> = BaseField<T> & Omit<InputProps, 'type'> & {

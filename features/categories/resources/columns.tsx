@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Category } from '../types';
 
-import CONSTANTS from "../resources/constants";
+import CONSTANTS from "./constants";
 
 const columns: ColumnDef<Category>[] = [
     {

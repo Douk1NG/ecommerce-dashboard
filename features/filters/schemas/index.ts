@@ -1,9 +1,10 @@
 import { z } from "zod";
+import CONSTANTS from '../resources/constants';
 
 const filterSchema = z.object({
-    id: z.number().optional(),
-    name: z.string(),
-    filters: z.array(z.string())
+    [CONSTANTS.KEYS.ID]: z.number().optional(),
+    [CONSTANTS.KEYS.NAME]: z.string(),
+    [CONSTANTS.KEYS.FILTERS]: z.array(z.string())
 });
 
 export default filterSchema

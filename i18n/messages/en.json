@@ -30,6 +30,22 @@
             "title": "Are you sure you want to close the form?",
             "description": "Any changes made will be lost.",
             "close": "Close"
+        },
+        "upload" : {
+            "title": "Upload"
+        },
+        "tagbox": {
+            "update": "Update",
+            "add": "Add",
+            "remove": "Remove",
+            "titles": {
+                "action": "Add / Update",
+                "tag": "Click to update the value",
+                "remove": "Click to remove"
+            },
+            "msg": {
+                "exists": "Tag already exists"
+            }
         }
     },
     "orders": {
