@@ -5,3 +5,4 @@ export { default as MultiSelect } from './multiselect';
 export { default as Textarea } from './textarea';
 export { default as Text } from './text';
 export { default as Tagbox } from './tagbox';
+export { default as Hidden } from './hidden';

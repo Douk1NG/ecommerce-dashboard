@@ -1,6 +1,5 @@
-import { translations } from '@/i18n/request';
 import { useTranslations } from "next-intl";
-
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -13,13 +12,17 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-type PropTypes = {
-    onConfirm: () => void;
-    title: string
-};
+import { translations } from '@/i18n/request';
 
-export default function Index({ onConfirm, title }: PropTypes) {
+export default function Index() {
     const t = useTranslations(translations.dialog);
+    const router = useRouter();
+    const title = 'close'
+
+    const onConfirm = () => {
+        router.back()
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -41,12 +44,21 @@ export default function Index({ onConfirm, title }: PropTypes) {
                 </DialogHeader>
                 <DialogFooter className="sm:justify-end gap-4 md:gap-1">
                     <DialogClose asChild>
-                        <Button type="button" variant="secondary">
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            title={t('cancel')}
+                        >
                             {t('cancel')}
                         </Button>
                     </DialogClose>
                     <DialogClose asChild>
-                        <Button onClick={onConfirm}>
+                        <Button
+                            onClick={onConfirm}
+                            type='button'
+                            variant='default'
+                            title={t('accept')}
+                        >
                             {t('accept')}
                         </Button>
                     </DialogClose>

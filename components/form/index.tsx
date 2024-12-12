@@ -30,7 +30,7 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, translatio
                         key={item.name}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>{t(item.label)}</FormLabel>
+                                <FormLabel>{item.label &&t(item.label)}</FormLabel>
                                 <FormControl>
                                     <Field
                                         {...field}
@@ -38,7 +38,7 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, translatio
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                    {t(item.description)}
+                                    {item.description && t(item.description)}
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>

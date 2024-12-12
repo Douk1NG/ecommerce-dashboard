@@ -10,12 +10,14 @@ import type {
     Filter,
     FilterFormProps
 } from '@/features/filters/types';
+import { createFilter, updateFilter } from '../services';
 
 export default function FilterForm({ filter }: FilterFormProps) {
 
     const form = useForm<Filter>({
         defaultValues: filter
             ? {
+                [CONSTANTS.KEYS.ID]: filter[CONSTANTS.KEYS.ID],
                 [CONSTANTS.KEYS.NAME]: filter[CONSTANTS.KEYS.NAME],
                 [CONSTANTS.KEYS.FILTERS]: filter[CONSTANTS.KEYS.FILTERS],
             }
@@ -24,7 +26,13 @@ export default function FilterForm({ filter }: FilterFormProps) {
     });
 
     async function onSubmit(data: Filter) {
-        console.log(data);
+        if (filter) {
+            const response = await updateFilter(data)
+            console.log(response)
+            return
+        }
+        const response = await createFilter(data)
+        console.log(response)
     }
 
     return (

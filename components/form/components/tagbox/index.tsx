@@ -15,8 +15,7 @@ export type TagProps = {
 export default function TagInput(props: Record<string, any>) {
     const t = useTranslations(CONSTANTS.TAGBOX.NAMESPACE)
     const inputRef = useRef<HTMLInputElement>(null)
-
-    const [tags, setTags] = useState<string[]>(props.tags || [])
+    const [tags, setTags] = useState<string[]>(props.value || [])
     const [inputValue, setInputValue] = useState({
         value: '',
         update: false
@@ -75,7 +74,12 @@ export default function TagInput(props: Record<string, any>) {
     }
 
     const handleRemoveTag = (value: string) => {
-        setTags(tags.filter(tag => tag !== value))
+        const newTags = tags.filter(tag => tag !== value)
+        setTags(newTags)
+
+        if (props.onChange) {
+            props.onChange(newTags)
+        }
 
         if (inputValue.value === value) {
             clearInput()

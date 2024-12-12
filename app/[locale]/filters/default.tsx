@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { PageProps } from "@/types/layout";
 import { getFilters } from "@/features/filters/services";
 
-export default async function Page(props: PageProps) {
+export default async function Default(props: PageProps) {
     const { locale } = await props.params
 
     const datasource = await getFilters()

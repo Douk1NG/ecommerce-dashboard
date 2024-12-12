@@ -4,5 +4,16 @@ export type GenerateMetadataProps = {
 
 export type LayoutProps = {
     children: React.ReactNode;
-    params?: Promise<any>
+    params?: Promise<{
+        id: string
+        locale: string
+    }>
+    sidebar?: React.ReactNode
+}
+
+export type PageProps = {
+    params: Promise<{
+        id: string
+        locale: string
+    }>
 }

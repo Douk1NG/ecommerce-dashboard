@@ -8,7 +8,7 @@ import type { FieldValues, Path, UseFormReturn } from "react-hook-form";
 export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox';
 
 export interface BaseField<T> {
-    label: string;
+    label?: string;
     name: Path<T>;
     description?: string;
     placeholder?: string;
@@ -42,6 +42,10 @@ export type TagboxField<T> = BaseField<T> & Omit<TagProps, 'type'> & {
     type: 'tagbox';
 };
 
+export type HiddenField<T> = BaseField<T> & {
+    type: 'hidden';
+};
+
 export type Field<T> =
     | TextField<T>
     | TextAreaField<T>
@@ -49,7 +53,8 @@ export type Field<T> =
     | MultiselectField<T>
     | FileField<T>
     | SwitchField<T>
-    | TagboxField<T>;
+    | TagboxField<T>
+    | HiddenField<T>;
 
 export type Fields<T> = Field<T>[];
 

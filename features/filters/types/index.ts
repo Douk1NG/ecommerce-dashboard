@@ -11,7 +11,3 @@ export type FilterFormProps = {
 export type FilterTableProps = {
     dataSource: Filter[];
 }
-
-export type FilterPageProps = {
-    children: React.ReactNode;
-}

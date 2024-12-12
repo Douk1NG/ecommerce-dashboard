@@ -5,7 +5,8 @@ import {
     MultiSelect,
     File,
     Switch,
-    Tagbox
+    Tagbox,
+    Hidden
 } from "./components";
 
 const Components = {
@@ -15,7 +16,8 @@ const Components = {
     multiselect: MultiSelect,
     file: File,
     switch: Switch,
-    tagbox: Tagbox
+    tagbox: Tagbox,
+    hidden: Hidden
 }
 
 const Component = (props: Record<string, unknown>) => {

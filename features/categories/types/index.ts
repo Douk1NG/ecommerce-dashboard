@@ -11,7 +11,3 @@ export type CategoryFormProps = {
 export type CategoryTableProps = {
     dataSource: Category[];
 }
-
-export type CategoryPageProps = {
-    children: React.ReactNode;
-}

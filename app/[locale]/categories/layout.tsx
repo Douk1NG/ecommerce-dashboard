@@ -1,6 +1,4 @@
 import { getTranslations } from "next-intl/server";
-
-import Layout from "@/features/categories"
 import CONSTANTS from "@/features/categories/resources/constants";
 
 import type { Metadata } from "next/types";
@@ -24,12 +22,8 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-export default function CategoriesLayout({
+export default function Layout({
     children,
 }: LayoutProps) {
-    return (
-        <Layout>
-            {children}
-        </Layout>
-    )
+    return children
 }

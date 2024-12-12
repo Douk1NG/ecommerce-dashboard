@@ -1,7 +1,4 @@
 import { getTranslations } from "next-intl/server";
-
-import Layout from "@/features/products"
-
 import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 import type { Metadata } from "next/types";
 
@@ -20,12 +17,8 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-export default function ProductsLayout({
+export default function Layout({
     children,
 }: LayoutProps) {
-    return (
-        <Layout>
-            {children}
-        </Layout>
-    )
+    return children
 }

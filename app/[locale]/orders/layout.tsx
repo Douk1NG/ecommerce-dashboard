@@ -18,8 +18,8 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-export default function OrdersLayout({
+export default function Layout({
     children,
 }: LayoutProps) {
-    return <>{children}</>
+    return children
 }

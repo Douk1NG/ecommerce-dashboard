@@ -1,8 +1,5 @@
 'use client'
-import { useRouter } from 'next/navigation';
 import ConfirmClose from '@/components/confirm';
-import { usePathname } from '@/i18n/routing';
-import { cleanSplit } from '@/lib/utils';
 import { useEffect } from 'react';
 
 type PropTypes = {
@@ -11,17 +8,6 @@ type PropTypes = {
 };
 
 const Index = ({ title, children }: PropTypes) => {
-    const router = useRouter();
-    const pathname = usePathname();
-
-    function onClose() {
-        const base = cleanSplit({
-            value: pathname,
-            criteria: '/'
-        }).slice(0, -1)
-
-        router.push(`/${base}`)
-    }
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -40,10 +26,7 @@ const Index = ({ title, children }: PropTypes) => {
                 <h2 className='text-2xl font-medium leading-7 text-gray-900 sm:truncate  sm:tracking-tight'>
                     {title}
                 </h2>
-                <ConfirmClose
-                    onConfirm={onClose}
-                    title='close'
-                />
+                <ConfirmClose />
             </div>
             <div className='mt-4 mb-4 overflow-y-auto overflow-x-hidden'>
                 {children}

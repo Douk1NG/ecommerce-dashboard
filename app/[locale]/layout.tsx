@@ -14,7 +14,6 @@ import { cookies } from 'next/headers';
 
 type Props = {
     children: React.ReactNode;
-    form: React.ReactNode;
     params: Promise<{
         locale: Locale;
     }>;
@@ -50,7 +49,7 @@ const RootLayout: React.FC<Props> = async (props: Props) => {
     const cookieStore = await cookies()
     const cookie = cookieStore.get("sidebar:state");
     const defaultOpen = cookie ? cookie.value === "true" : true
-    // todo: desde aca se puede obtener el form, de esa manera reutilizarlo en las paginas
+
     return (
         <html lang={locale}>
             <NextIntlClientProvider messages={messages}>

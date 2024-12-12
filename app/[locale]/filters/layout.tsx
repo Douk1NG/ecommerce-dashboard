@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import Layout from "@/features/filters"
 import CONSTANTS from "@/features/filters/resources/constants";
 
 import type { Metadata } from "next/types";
@@ -23,12 +22,14 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-export default function FiltersLayout({
+export default function Layout({
     children,
+    sidebar
 }: LayoutProps) {
     return (
-        <Layout>
+        <>
             {children}
-        </Layout>
+            {sidebar}
+        </>
     )
 }
