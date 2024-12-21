@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -13,14 +12,23 @@ import {
 } from "@/components/ui/dialog"
 
 import { translations } from '@/i18n/request';
+import { cleanSplit } from "@/lib/utils";
+import { usePathname } from "@/i18n/routing";
+import { useRouter } from "next/navigation";
 
 export default function Index() {
     const t = useTranslations(translations.dialog);
+    const pathname = usePathname();
     const router = useRouter();
     const title = 'close'
 
+    const base = cleanSplit({
+        value: pathname,
+        criteria: '/'
+    }).slice(0, -1).join('/')
+
     const onConfirm = () => {
-        router.back()
+        router.push(`/${base}`)
     }
 
     return (
@@ -31,7 +39,6 @@ export default function Index() {
                     type='button'
                     title={t(title)}
                 >
-
                     {t(title)}
                 </Button>
             </DialogTrigger>

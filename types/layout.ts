@@ -17,3 +17,7 @@ export type PageProps = {
         locale: string
     }>
 }
+
+export type StaticPageProps = {
+    locale: string
+}

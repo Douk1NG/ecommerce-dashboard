@@ -10,7 +10,8 @@ import type {
     Filter,
     FilterFormProps
 } from '@/features/filters/types';
-import { createFilter, updateFilter } from '../services';
+
+import { create, update } from '../services';
 
 export default function FilterForm({ filter }: FilterFormProps) {
 
@@ -25,14 +26,8 @@ export default function FilterForm({ filter }: FilterFormProps) {
         resolver: zodResolver(filterSchema),
     });
 
-    async function onSubmit(data: Filter) {
-        if (filter) {
-            const response = await updateFilter(data)
-            console.log(response)
-            return
-        }
-        const response = await createFilter(data)
-        console.log(response)
+    const onSubmit = (data: Filter) => {
+        console.log(data, filter)
     }
 
     return (

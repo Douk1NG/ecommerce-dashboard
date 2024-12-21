@@ -1,13 +1,9 @@
-import {
-    Text,
-    Textarea,
-    Currency,
-    MultiSelect,
-    File,
-    Switch,
-    Tagbox,
-    Hidden
-} from "./components";
+import Text from "./components/text";
+import Textarea from "./components/textarea";
+import Currency from "./components/currency";
+import MultiSelect from "./components/multiselect";
+import File from "./components/file";
+import Switch from "./components/switch";
 
 const Components = {
     text: Text,
@@ -16,8 +12,6 @@ const Components = {
     multiselect: MultiSelect,
     file: File,
     switch: Switch,
-    tagbox: Tagbox,
-    hidden: Hidden
 }
 
 const Component = (props: Record<string, unknown>) => {

@@ -1,3 +1,5 @@
+"use server"
+import { revalidatePath } from "next/cache"
 import { Filter } from "../types"
 
 export const getFilters = async () => {
@@ -7,26 +9,30 @@ export const getFilters = async () => {
 }
 
 export const getFilter = async (id: string) => {
-    const request = await fetch(`http://localhost:3000/es/api/filter/${id}`)
-    const response = await request.json()
-    return response.body
-}
-
-export const createFilter = async (data: Filter) => {
-    const request = await fetch('http://localhost:3000/es/api/filter', {
-        method: 'POST',
-        body: JSON.stringify(data)
+    const request = await fetch(`http://localhost:3000/es/api/filter/${id}`, {
+        cache: 'force-cache'
     })
     const response = await request.json()
     return response.body
 }
 
-export const updateFilter = async (data: Filter) => {
+export const create = async (data: Filter) => {
+    const request = await fetch('http://localhost:3000/es/api/filter', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    const response = await request.json()
+    revalidatePath('/filters')
+    return response.body
+}
+
+export const update = async (data: Filter) => {
     console.log(data)
     const request = await fetch(`http://localhost:3000/es/api/filter/${data.id}`, {
         method: 'PUT',
         body: JSON.stringify(data)
     })
     const response = await request.json()
+    revalidatePath('/filters')
     return response.body
 }

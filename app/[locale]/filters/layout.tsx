@@ -22,7 +22,7 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-export default function Layout({
+export default async function Layout({
     children,
     sidebar
 }: LayoutProps) {

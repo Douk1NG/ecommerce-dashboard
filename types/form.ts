@@ -1,4 +1,3 @@
-import { TagProps } from "@/components/form/components/tagbox";
 import { InputProps } from "@/components/ui/input";
 import type { MultiSelectProps } from "@/components/ui/multiselect";
 import type { SwitchProps } from "@radix-ui/react-switch";
@@ -10,7 +9,7 @@ export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file
 export interface BaseField<T> {
     label?: string;
     name: Path<T>;
-    description?: string;
+    description: string;
     placeholder?: string;
 }
 
@@ -38,13 +37,6 @@ export type SwitchField<T> = BaseField<T> & Omit<SwitchProps, 'type'> & {
     type: 'switch';
 };
 
-export type TagboxField<T> = BaseField<T> & Omit<TagProps, 'type'> & {
-    type: 'tagbox';
-};
-
-export type HiddenField<T> = BaseField<T> & {
-    type: 'hidden';
-};
 
 export type Field<T> =
     | TextField<T>
@@ -53,8 +45,6 @@ export type Field<T> =
     | MultiselectField<T>
     | FileField<T>
     | SwitchField<T>
-    | TagboxField<T>
-    | HiddenField<T>;
 
 export type Fields<T> = Field<T>[];
 

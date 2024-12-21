@@ -4,10 +4,6 @@ import CONSTANTS from './constants';
 
 const fields: Fields<Filter> = [
     {
-        "name": CONSTANTS.KEYS.ID,
-        "type": "hidden"
-    },
-    {
         "label": CONSTANTS.SCHEME.NAME,
         "name": CONSTANTS.KEYS.NAME,
         "description": CONSTANTS.DESCRIPTION.NAME,
@@ -17,7 +13,7 @@ const fields: Fields<Filter> = [
         "label": CONSTANTS.SCHEME.FILTERS,
         "name": CONSTANTS.KEYS.FILTERS,
         "description": CONSTANTS.DESCRIPTION.FILTERS,
-        "type": "tagbox"
+        "type": "text"
     }
 ]
 

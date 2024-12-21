@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.sidebar {
-  display: grid;
-  grid-template-rows: 40px 1fr;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

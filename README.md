@@ -24,11 +24,14 @@ This project is licensed under the [MIT License](LICENSE).
 - shadcn: for almost all the components
 - zod: for form validation
 - react-hook-form: for form validation
+- react-currency-input-field: for currency input
+- tanstack/react-table: for tables
 
 # Issues
 - Component form tira error de ref, sugiere usar forward pero según, está próximo a ser deprecado el forward
 
 # Todo
-- Root layout puede obtener el form, de esa manera reutilizarlo en las paginas ( creo, no recuerdo como)
+- Explorar post request usando nextjs server actions, ref: [text](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- Explorar ajuste en form [text](https://react-hook-form.com/advanced-usage#SmartFormComponent)
 - Reemplazar las translations por constantes
-
+- Dialog para eliminar (organizar el de confirm close)

@@ -8,7 +8,7 @@ const CONSTANTS = {
     LAYOUT: {
         TITLE: 'layout.title',
         ADD: 'layout.add',
-        LINK: '/filters/add'
+        LINK: '/filters/new'
     },
     KEYS: {
         ID: 'id',

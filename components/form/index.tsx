@@ -9,14 +9,38 @@ import {
 } from '@/components/ui/form';
 
 import Field from '@/components/form/field';
+import { Button } from '@/components/ui/button';
+import { useTranslations } from 'use-intl';
 
 import type { FormProps } from '@/types/form';
 import type { FieldValues } from 'react-hook-form';
-import { useTranslations } from 'use-intl';
-import { Button } from '@/components/ui/button';
 
-const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, translations }: FormProps<T>) => {
+const FormBuilder = <T extends FieldValues>({
+    form,
+    fields,
+    translations,
+    onSubmit
+}: FormProps<T>) => {
     const t = useTranslations(translations)
+
+    // const submitForm = async () => {
+    //     'use server'
+    // }
+
+    // const initialState = {
+    //     success: false,
+    //     message: ''
+    // }
+
+    // const [
+    //     state,
+    //     action,
+    //     isPending
+    // ] = useActionState(
+    //     submitForm,
+    //     initialState
+    // )
+
     return (
         <Form {...form}>
             <form
@@ -30,7 +54,9 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, translatio
                         key={item.name}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>{item.label &&t(item.label)}</FormLabel>
+                                <FormLabel>
+                                    {t(item.label)}
+                                </FormLabel>
                                 <FormControl>
                                     <Field
                                         {...field}
@@ -38,7 +64,7 @@ const FormBuilder = <T extends FieldValues>({ form, onSubmit, fields, translatio
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                    {item.description && t(item.description)}
+                                    {t(item.description)}
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
