@@ -40,6 +40,7 @@ export type SwitchField = BaseField & Omit<SwitchProps, 'type' | 'value'> & {
 
 export type TagboxField = BaseField & {
     type: 'tagbox';
+    readOnly?: boolean;
 };
 
 export type Field =

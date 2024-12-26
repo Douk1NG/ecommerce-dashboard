@@ -16,7 +16,8 @@ type Tag = {
 export default function Tagbox({
     name,
     value = [],
-    placeholder = ''
+    placeholder = '',
+    readOnly = false
 }: TagboxField) {
     const { toast } = useToast()
     const t = useTranslations(CONSTANTS.TAGBOX.NAMESPACE)
@@ -67,12 +68,14 @@ export default function Tagbox({
         <div className="space-y-4">
             <div className="flex space-x-2">
                 <Input
+                    id={name}
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder={placeholder}
                     className="flex-grow"
+                    readOnly={readOnly}
                 />
                 <Button
                     onClick={handleAddTag}
@@ -97,6 +100,7 @@ export default function Tagbox({
                             className="h-4 w-4 p-0 hover:bg-primary-foreground hover:text-primary"
                             onClick={() => handleRemoveTag(tag.id)}
                             title={t(CONSTANTS.TAGBOX.KEY_REMOVE)}
+                            disabled={readOnly}
                         >
                             <Icon name="circle-x" height={16} width={16} />
                         </Button>

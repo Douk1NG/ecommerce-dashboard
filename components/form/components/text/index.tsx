@@ -8,6 +8,7 @@ const Component = (props: TextField) => {
             defaultValue={props.value as string}
             id={props.name}
             name={props.name}
+            readOnly={props.readOnly}
             type="text"
         />
     )

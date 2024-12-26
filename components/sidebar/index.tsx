@@ -19,7 +19,8 @@ const Index = ({ title, children, isNew }: PropTypes) => {
     const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const isDetail = !isNew && !searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
+    const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
+    const isDetail = !isNew && !isEdit
 
     const base = cleanSplit({
         value: pathname,
