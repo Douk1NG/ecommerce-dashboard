@@ -1,25 +1,41 @@
-import CONSTANTS from "@/features/filters/resources/constants";
+import CONSTANTS from "@/modules/constants/filters";
 import CONSTANTS_LIB from "@/lib/constants";
-import Form from "@/features/filters/components/form";
+import Form from "@/modules/forms/filters";
 import Sidebar from "@/components/sidebar";
 import { getTranslations } from "next-intl/server";
-import { getFilter } from "@/features/filters/services";
 
-export default async function Page({ params }: any) {
+import {
+    getFilter
+} from "@/modules/services/filters";
+
+import fields from '@/modules/fields/filters';
+import { save } from "@/modules/actions/filters";
+import type { PageProps } from "@/types/layout";
+
+export default async function Page(
+    { params }: PageProps
+) {
     const { id, locale } = await params
+    const isNew = id === CONSTANTS_LIB.NEW
 
-    const t = await getTranslations({
+    const translations = await getTranslations({
         locale,
         namespace: CONSTANTS.NAMESPACE
     });
 
-    const filter = id !== CONSTANTS_LIB.NEW ? await getFilter(id) : undefined
+    const filter = !isNew ? await getFilter(id) : undefined
 
     return (
         <Sidebar
-            title={t(CONSTANTS.LAYOUT.TITLE)}
+            isNew={isNew}
+            title={translations(CONSTANTS.LAYOUT.TITLE)}
         >
-            <Form filter={filter} />
+            <Form
+                filter={filter}
+                fields={fields}
+                action={save}
+                translations={CONSTANTS.NAMESPACE}
+            />
         </Sidebar>
     )
 }

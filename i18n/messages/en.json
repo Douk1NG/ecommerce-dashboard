@@ -1,5 +1,8 @@
 {
     "layout": {
+        "breadcrumb": {
+            "default": "Click here to view navigation menu"
+        },
         "metadata": {
             "title": "Home",
             "description": "Platform that allows you to manage your e-commerce"
@@ -24,28 +27,32 @@
             "logout": "Log out",
             "profile": "Profile"
         },
-        "dialog": {
+        "tagbox": {
+            "add": "Add",
+            "remove": "Remove",
+            "validation": {
+                "unique": {
+                    "title": "Tag already exists",
+                    "description": "Please enter a unique tag"
+                }
+            }
+        },
+        "confirmClose": {
             "cancel": "Cancel",
             "accept": "Accept",
             "title": "Are you sure you want to close the form?",
             "description": "Any changes made will be lost.",
-            "close": "Close"
+            "name": "Close"
+        },
+        "confirmDelete": {
+            "cancel": "Cancel",
+            "accept": "Accept",
+            "title": "Are you sure you want to delete the record?",
+            "description": "You will not be able to recover the deleted data.",
+            "name": "Delete"
         },
         "upload" : {
             "title": "Upload"
-        },
-        "tagbox": {
-            "update": "Update",
-            "add": "Add",
-            "remove": "Remove",
-            "titles": {
-                "action": "Add / Update",
-                "tag": "Click to update the value",
-                "remove": "Click to remove"
-            },
-            "msg": {
-                "exists": "Tag already exists"
-            }
         }
     },
     "orders": {
@@ -64,9 +71,9 @@
         },
         "layout": {
             "title": "Products",
-            "add": "Add product",
+            "add": "Add",
             "description": "",
-            "save": "Save product"
+            "save": "Save"
         },
         "scheme": {
             "name": "Name",
@@ -96,9 +103,9 @@
         },
         "layout": {
             "title": "Categories",
-            "add": "Add category",
+            "add": "Add",
             "description": "",
-            "save": "Save category"
+            "save": "Save"
         },
         "scheme": {
             "name": "Name",
@@ -122,9 +129,9 @@
         },
         "layout": {
             "title": "Filters",
-            "add": "Add filter",
+            "add": "Add",
             "description": "",
-            "save": "Save filter"
+            "save": "Save"
         },
         "scheme": {
             "name": "Name",
@@ -136,7 +143,8 @@
         },
         "table": {
             "empty": "No filters found, to get started, press the add filter button.",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "edit": "Edit"
         }
     },
     "inventory": {

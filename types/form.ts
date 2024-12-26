@@ -2,55 +2,60 @@ import { InputProps } from "@/components/ui/input";
 import type { MultiSelectProps } from "@/components/ui/multiselect";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
-import type { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
 export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox';
 
-export interface BaseField<T> {
-    label?: string;
-    name: Path<T>;
+export interface BaseField {
+    id?: string;
+    label: string;
+    name: string;
     description: string;
     placeholder?: string;
+    value?: unknown;
 }
 
-export type TextField<T> = BaseField<T> & Omit<InputProps, 'type'> & {
+export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
     type: 'text';
 };
 
-export type TextAreaField<T> = BaseField<T> & Omit<InputProps, 'type'> & {
+export type TextAreaField = BaseField & Omit<InputProps, 'type' | 'value'> & {
     type: 'textarea';
 };
 
-export type CurrencyField<T> = BaseField<T> & Omit<CurrencyInputProps, 'type'> & {
+export type CurrencyField = BaseField & Omit<CurrencyInputProps, 'type' | 'value'> & {
     type: 'currency';
 };
 
-export type MultiselectField<T> = BaseField<T> & Omit<MultiSelectProps, 'type'> & {
+export type MultiselectField = BaseField & Omit<MultiSelectProps, 'type'> & {
     type: 'multiselect';
 };
 
-export type FileField<T> = BaseField<T> & Omit<InputProps, 'type'> & {
+export type FileField = BaseField & Omit<InputProps, 'type' | 'value'> & {
     type: 'file';
 };
 
-export type SwitchField<T> = BaseField<T> & Omit<SwitchProps, 'type'> & {
+export type SwitchField = BaseField & Omit<SwitchProps, 'type' | 'value'> & {
     type: 'switch';
 };
 
+export type TagboxField = BaseField & {
+    type: 'tagbox';
+};
 
-export type Field<T> =
-    | TextField<T>
-    | TextAreaField<T>
-    | CurrencyField<T>
-    | MultiselectField<T>
-    | FileField<T>
-    | SwitchField<T>
+export type Field =
+    | TextField
+    | TextAreaField
+    | CurrencyField
+    | MultiselectField
+    | FileField
+    | SwitchField
+    | TagboxField;
 
-export type Fields<T> = Field<T>[];
+export type Fields = Field[];
 
-export type FormProps<T extends FieldValues> = {
-    fields: Fields<T>;
-    form: UseFormReturn<T>;
-    onSubmit: (data: T) => void;
+export type FormProps = {
+    fields: Fields;
+    values?: Record<string, unknown>;
+    action: any;
     translations: string;
 }

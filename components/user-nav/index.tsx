@@ -38,6 +38,7 @@ const UserNav = (props: UserNavProps) => {
                         title={t('profile')}
                         variant="ghost"
                         className="relative h-8 w-8 aspect-square"
+                        type='button'
                     >
                         <Avatar className="h-8 w-8">
                             <AvatarImage

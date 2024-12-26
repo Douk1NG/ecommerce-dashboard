@@ -1,5 +1,8 @@
 {
     "layout": {
+        "breadcrumb": {
+            "default": "Clic aquí para ver el menú de navegación"
+        },
         "metadata": {
             "title": "Inicio",
             "description": "Plataforma que permite gestionar tu tienda virtual"
@@ -25,28 +28,32 @@
             "profile": "Perfil",
             "toggle": "Alternar navegación"
         },
-        "dialog": {
+        "confirmClose": {
             "cancel": "Cancelar",
             "accept": "Aceptar",
             "title": "¿Está seguro que desea cerrar el formulario?",
             "description": "Cualquier cambio realizado se perderá.",
-            "close": "Cerrar"
+            "name": "Cerrar"
+        },
+        "confirmDelete": {
+            "cancel": "Cancelar",
+            "accept": "Aceptar",
+            "title": "¿Está seguro que desea eliminar el registro?",
+            "description": "No podrás recuperar los datos eliminados.",
+            "name": "Eliminar"
+        },
+        "tagbox": {
+            "add": "Agregar",
+            "remove": "Eliminar",
+            "validation": {
+                "unique": {
+                    "title": "La etiqueta ya existe",
+                    "description": "Por favor, introduce una etiqueta única"
+                }
+            }
         },
         "upload" : {
             "title": "Cargar"
-        },
-        "tagbox": {
-            "update": "Actualizar",
-            "add": "Agregar",
-            "remove": "Eliminar",
-            "titles": {
-                "action": "Agregar / Actualizar",
-                "tag": "Click para actualizar el valor",
-                "remove": "Click para eliminar"
-            },
-            "msg": {
-                "exists": "La etiqueta ya existe"
-            }
         }
     },
     "orders": {
@@ -65,9 +72,9 @@
         },
         "layout": {
             "title": "Productos",
-            "add": "Añadir producto",
+            "add": "Agregar",
             "description": "",
-            "save": "Guardar producto"
+            "save": "Guardar"
         },
         "scheme": {
             "name": "Nombre",
@@ -97,9 +104,9 @@
         },
         "layout": {
             "title": "Categorías",
-            "add": "Agregar categoría",
+            "add": "Agregar",
             "description": "",
-            "save": "Guardar categoría"
+            "save": "Guardar"
         },
         "scheme": {
             "name": "Nombre",
@@ -123,9 +130,9 @@
         },
         "layout": {
             "title": "Filtros",
-            "add": "Añadir filtro",
+            "add": "Agregar",
             "description": "",
-            "save": "Guardar filtro"
+            "save": "Guardar"
         },
         "scheme": {
             "name": "Nombre",
@@ -136,8 +143,9 @@
             "filters": "Establece los filtros"
         },
         "table": {
-            "empty": "No se han encontrado filtros, para empezar, presiona el botón añadir filtro",
-            "info": "Click para ver su detalle"
+            "empty": "No se han encontrado filtros, para empezar, presiona el botón Agregar filtro",
+            "info": "Click para ver su detalle",
+            "edit": "Editar"
         }
     },
     "inventory": {

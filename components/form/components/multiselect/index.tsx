@@ -1,15 +1,15 @@
-import { MultiSelect, type MultiSelectProps } from "@/components/ui/multiselect";
+import { MultiSelect } from "@/components/ui/multiselect";
+import { MultiselectField } from "@/types/form";
 
-export default function Component(props: Record<string, unknown>) {
+export default function Component(props: MultiselectField) {
     return (
         <MultiSelect
-            options={props.options as MultiSelectProps['options']}
-            onValueChange={props.onChange as unknown as (value: string[]) => void}
-            defaultValue={props.value as string[]}
-            placeholder={props.placeholder as string}
-            variant="inverted"
-            maxCount={3}
-            creatable={props.creatable as boolean}
+            name={props.name}
+            options={props.options}
+            defaultValue={props.value as []}
+            placeholder={props.placeholder}
+            maxDisplayed={3}
+            creatable={props.creatable}
         />
     )
 }

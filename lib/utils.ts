@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * @desc helps to omit type checking and parse errors
 **/
-export function safeParseFloat(value?: any) {
+export function safeParseFloat(value?: unknown): number | unknown {
   if(typeof value === 'string') {
     return parseFloat(value);
   }

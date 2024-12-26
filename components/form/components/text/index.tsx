@@ -1,15 +1,14 @@
 import { Input } from "@/components/ui/input"
+import { TextField } from "@/types/form"
 
-const Component = (props: Record<string, unknown>) => {
+const Component = (props: TextField) => {
     return (
         <Input
-            type="text"
-            aria-describedby={props['aria-describedby'] as string}
-            aria-invalid={props['aria-invalid'] as boolean}
+            placeholder={props.placeholder}
             defaultValue={props.value as string}
-            id={props.id as string}
-            onBlur={props.onBlur as () => void}
-            onChange={props.onChange as (event: React.ChangeEvent<HTMLInputElement>) => void}
+            id={props.name}
+            name={props.name}
+            type="text"
         />
     )
 }

@@ -4,7 +4,7 @@ import { promises as fs } from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
 
-const dataFilePath = path.join(process.cwd(), 'data.json')
+const dataFilePath = path.join(process.cwd(), 'public/filters/data.json')
 
 export async function GET() {
     try {
@@ -13,8 +13,8 @@ export async function GET() {
 
         return NextResponse.json({
             body: base,
-            message: 'List all filters'
-        })
+            message: 'Filters obtained successfully'
+        }, { status: 200 })
 
     } catch (error) {
         return NextResponse.json({

@@ -1,18 +1,35 @@
 import {
     Sidebar,
-    SidebarRail
+    SidebarRail,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuItem,
+    SidebarFooter
 } from "@/components/ui/sidebar"
 
+import Title from "@/components/title"
+import UserNav from "@/components/user-nav"
+import LocaleSwitcher from "@/components/locale-switcher"
+
 import Content from "./content"
-import Footer from "./footer"
-import Header from "./header"
 
 function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar {...props}>
-            <Header />
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem className="px-4">
+                        <Title />
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
             <Content />
-            <Footer />
+            <SidebarFooter>
+            <SidebarMenuItem className="flex justify-between">
+                <UserNav />
+                <LocaleSwitcher />
+            </SidebarMenuItem>
+        </SidebarFooter>
             <SidebarRail />
         </Sidebar>
     )

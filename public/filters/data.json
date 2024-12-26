@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "Talla alfabética",
+    "filters": [
+      {
+        "id": 1,
+        "value": "XS"
+      },
+      {
+        "id": 2,
+        "value": "S"
+      },
+      {
+        "id": 3,
+        "value": "M"
+      },
+      {
+        "id": 4,
+        "value": "L"
+      }
+    ]
+  },
+  {
+    "id": "8f7ecabd-ab90-4917-9a6a-831edd5a2af7",
+    "name": "Talla númerica",
+    "filters": [
+      {
+        "id": 5,
+        "value": "37"
+      },
+      {
+        "id": 6,
+        "value": "38"
+      },
+      {
+        "id": 7,
+        "value": "39"
+      }
+    ]
+  }
+]

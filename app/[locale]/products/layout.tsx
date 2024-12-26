@@ -1,24 +1,41 @@
 import { getTranslations } from "next-intl/server";
-import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
+import CONSTANTS from "@/modules/constants/products";
+
 import type { Metadata } from "next/types";
 
-export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
+import type {
+    GenerateMetadataProps,
+    LayoutProps
+} from "@/types/layout";
+
+export async function generateMetadata(
+    props: GenerateMetadataProps
+): Promise<Metadata> {
     const params = await props.params;
 
     const {
         locale
     } = params;
 
-    const t = await getTranslations({ locale, namespace: "products" });
+    const t = await getTranslations({
+        locale,
+        namespace: CONSTANTS.NAMESPACE
+    });
 
     return {
-        title: t("metadata.title"),
-        description: t("metadata.description"),
+        title: t(CONSTANTS.METADATA.TITLE),
+        description: t(CONSTANTS.METADATA.DESCRIPTION)
     };
 }
 
-export default function Layout({
+export default async function Layout({
     children,
+    sidebar
 }: LayoutProps) {
-    return children
+    return (
+        <>
+            {children}
+            {sidebar}
+        </>
+    )
 }

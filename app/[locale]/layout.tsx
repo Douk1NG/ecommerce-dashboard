@@ -9,6 +9,7 @@ import type { GenerateMetadataProps } from "@/types/layout";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import Nav from "@/components/nav";
 import Header from "@/components/header";
+import { Toaster } from "@/components/ui/toaster"
 import { Locale } from '@/i18n/routing';
 import { cookies } from 'next/headers';
 
@@ -58,6 +59,7 @@ const RootLayout: React.FC<Props> = async (props: Props) => {
                     <SidebarInset>
                         <Header />
                         {children}
+                        <Toaster />
                     </SidebarInset>
                 </SidebarProvider>
             </NextIntlClientProvider>

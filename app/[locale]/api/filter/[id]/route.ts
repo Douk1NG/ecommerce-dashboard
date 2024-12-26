@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-const dataFilePath = path.join(process.cwd(), 'data.json')
+const dataFilePath = path.join(process.cwd(), 'public/filters/data.json')
 
 export async function GET(
     _request: Request,
@@ -17,8 +17,8 @@ export async function GET(
 
         return NextResponse.json({
             body: filter,
-            message: 'Filter obtained successfully'
-        })
+            message: 'Filter obtained successfully',
+        }, { status: 200 })
     } catch (error) {
         return NextResponse.json({
             error: 'Failed to fetch filter'
@@ -37,7 +37,6 @@ export async function PUT(
         const currentData = await fs.readFile(dataFilePath, 'utf8')
         const base = JSON.parse(currentData)
 
-        console.log(filterId)
         const index = base.findIndex((item: any) => item.id === filterId)
 
         if (index === -1) {

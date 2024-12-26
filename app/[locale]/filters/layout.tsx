@@ -1,10 +1,16 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/features/filters/resources/constants";
+import CONSTANTS from "@/modules/constants/filters";
 
 import type { Metadata } from "next/types";
-import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 
-export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
+import type {
+    GenerateMetadataProps,
+    LayoutProps
+} from "@/types/layout";
+
+export async function generateMetadata(
+    props: GenerateMetadataProps
+): Promise<Metadata> {
     const params = await props.params;
 
     const {

@@ -1,22 +1,11 @@
-import { useTranslations } from "next-intl";
-import { translations } from '@/i18n/request';
-import Layout from "@/components/layout";
-import products from "@/features/products/resources/products.json"
-import ProductTable from "@/features/products/components/table";
+import { PageProps } from "@/types/layout"
+import Layout from "@/modules/components/products"
 
-export default function Page() {
-    const t = useTranslations(translations.products);
-
+export default async function Page(props: PageProps) {
+    const { locale } = await props.params
     return (
         <Layout
-            title={t('layout.title')}
-            action={{
-                title: t('layout.add'),
-                href: '/products/new',
-            }}
-            description={t('layout.description')}
-        >
-            <ProductTable dataSource={products} />
-        </Layout>
+            locale={locale}
+        />
     )
 }

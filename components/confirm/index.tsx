@@ -1,5 +1,7 @@
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button"
+import Icon from '@/components/icon';
+import { useTranslations } from "next-intl";
+
 import {
     Dialog,
     DialogClose,
@@ -11,50 +13,41 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-import { translations } from '@/i18n/request';
-import { cleanSplit } from "@/lib/utils";
-import { usePathname } from "@/i18n/routing";
-import { useRouter } from "next/navigation";
+import type { PropTypes } from "@/types/components/dialog";
 
-export default function Index() {
-    const t = useTranslations(translations.dialog);
-    const pathname = usePathname();
-    const router = useRouter();
-    const title = 'close'
-
-    const base = cleanSplit({
-        value: pathname,
-        criteria: '/'
-    }).slice(0, -1).join('/')
-
-    const onConfirm = () => {
-        router.push(`/${base}`)
-    }
+export default function Index({
+    icon,
+    onConfirm,
+    translations,
+    variant = 'outline'
+}: PropTypes) {
+    const t = useTranslations(translations);
 
     return (
         <Dialog>
             <DialogTrigger asChild>
                 <Button
-                    variant="outline"
+                    variant={variant}
                     type='button'
-                    title={t(title)}
+                    title={t('name')}
                 >
-                    {t(title)}
+                    <Icon name={icon} />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="w-[90vw] md:max-w-md">
                 <DialogHeader>
                     <DialogTitle>{t('title')}</DialogTitle>
                     <DialogDescription>
                         {t('description')}
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter className="sm:justify-end gap-4 md:gap-1">
+                <DialogFooter className="flex-row justify-center gap-4 md:gap-1">
                     <DialogClose asChild>
                         <Button
                             type="button"
                             variant="secondary"
                             title={t('cancel')}
+                            className='w-fit'
                         >
                             {t('cancel')}
                         </Button>
@@ -65,6 +58,7 @@ export default function Index() {
                             type='button'
                             variant='default'
                             title={t('accept')}
+                            className='w-fit'
                         >
                             {t('accept')}
                         </Button>
