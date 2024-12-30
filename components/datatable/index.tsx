@@ -186,7 +186,7 @@ export default function DataTable<TData, TValue>({
                                                     className="w-full"
                                                     onClick={() => onRowClick(row)}
                                                 >
-                                                    {t('table.edit')}
+                                                    {t('table.detail')}
                                                     <Icon name="pencil" className="ml-2" />
                                                 </Button>
                                             </div>

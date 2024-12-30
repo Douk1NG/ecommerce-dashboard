@@ -1,6 +1,6 @@
 import CONSTANTS from "@/modules/constants/filters";
 import CONSTANTS_LIB from "@/lib/constants";
-import Form from "@/modules/forms/filters";
+import FormBuilder from '@/components/form';
 import Sidebar from "@/components/sidebar";
 import { getTranslations } from "next-intl/server";
 
@@ -30,10 +30,10 @@ export default async function Page(
             isNew={isNew}
             title={translations(CONSTANTS.LAYOUT.TITLE)}
         >
-            <Form
-                filter={filter}
-                fields={fields}
+            <FormBuilder
                 action={save}
+                fields={fields}
+                values={filter}
                 translations={CONSTANTS.NAMESPACE}
             />
         </Sidebar>

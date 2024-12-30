@@ -7,6 +7,8 @@ import type {
     FilterFormData
 } from '@/modules/types/filters'
 
+import { revalidatePath } from 'next/cache'
+
 export async function save(
     prevState: ActionResponse | null,
     formData: FormData
@@ -15,16 +17,17 @@ export async function save(
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     try {
+
         const rawData: FilterFormData = {
-            id: Number(formData.get('id')),
+            id: formData.get('id') ? Number(formData.get('id')) : undefined,
             name: formData.get('name') as string,
             filters: formData.get('filters') as string
         }
 
-        console.log(rawData)
-
         const parsedFilters = JSON.parse(rawData.filters)
-        // Validate the form data
+        const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
+
+        rawData.filters = filters
         const validatedData = filterSchema.safeParse(rawData)
 
         if (!validatedData.success) {
@@ -32,6 +35,7 @@ export async function save(
                 success: false,
                 message: 'Please fix the errors in the form',
                 errors: validatedData.error.flatten().fieldErrors,
+                data: rawData
             }
         }
 

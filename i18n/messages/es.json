@@ -145,7 +145,7 @@
         "table": {
             "empty": "No se han encontrado filtros, para empezar, presiona el botón Agregar filtro",
             "info": "Click para ver su detalle",
-            "edit": "Editar"
+            "detail": "Detalle"
         }
     },
     "inventory": {

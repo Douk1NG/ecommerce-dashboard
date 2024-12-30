@@ -16,7 +16,7 @@ export type FilterTableProps = {
 }
 
 export interface FilterFormData {
-    id: number;
+    id?: number;
     name: string;
     filters: string;
 }
@@ -27,4 +27,5 @@ export interface ActionResponse {
     errors?: {
         [K in keyof FilterFormData]?: string[];
     };
+    data?: FilterFormData;
 }

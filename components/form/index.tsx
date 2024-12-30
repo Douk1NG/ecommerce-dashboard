@@ -68,6 +68,11 @@ const FormBuilder = ({
                     <p className='text-sm text-muted-foreground'>
                         {t(item.description)}
                     </p>
+                    {state?.errors?.[item.name as keyof typeof state.errors] && (
+                        <p id={`${item.name}-error`} className="text-sm text-red-500">
+                            {state.errors[item.name as keyof typeof state.errors][0]}
+                        </p>
+                    )}
                 </div>
             ))}
             {state?.message && (
