@@ -5,7 +5,7 @@ const directoryPath = path.join(__dirname, './../public/icons/');
 
 fs.readdir(directoryPath, (err, files) => {
     if (err) {
-        return console.log('Unable to scan directory: ' + err);
+        return console.error('Unable to scan directory: ' + err);
     }
 
     const svgFiles = files

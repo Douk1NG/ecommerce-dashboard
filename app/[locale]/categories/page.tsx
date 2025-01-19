@@ -1,19 +1,11 @@
-import CONSTANTS from '@/features/categories/resources/constants';
-import CategoriesTable from '@/features/categories/components/table';
-import Layout from "@/components/layout";
-import { useTranslations } from "next-intl";
+import { PageProps } from "@/types/layout"
+import Layout from "@/modules/components/filters"
 
-export default function Page() {
-    const t = useTranslations(CONSTANTS.NAMESPACE);
+export default async function Page(props: PageProps) {
+    const { locale } = await props.params
     return (
         <Layout
-            title={t(CONSTANTS.LAYOUT.TITLE)}
-            action={{
-                title: t(CONSTANTS.LAYOUT.ADD),
-                href: CONSTANTS.LAYOUT.LINK
-            }}
-        >
-            <CategoriesTable dataSource={[]} />
-        </Layout>
+            locale={locale}
+        />
     )
 }

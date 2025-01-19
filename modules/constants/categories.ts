@@ -1,22 +1,5 @@
-const scheme = {
-    id: 'id',
-    name: 'name',
-    filters: 'filters'
-}
-
-const columns = {
-    header: scheme
-}
-
-const translations = {
-
-}
-
-const form = {
-}
-
 const CONSTANTS = {
-    NAMESPACE: 'filters',
+    NAMESPACE: 'categories',
     SIDEBAR_TITLE : 'layout.add',
     METADATA: {
         TITLE: 'metadata.title',
@@ -25,7 +8,7 @@ const CONSTANTS = {
     LAYOUT: {
         TITLE: 'layout.title',
         ADD: 'layout.add',
-        LINK: '/filters/new'
+        LINK: '/categories/new'
     },
     KEYS: {
         ID: 'id',

@@ -26,3 +26,13 @@ export function cleanSplit({value, criteria}: { value: string , criteria: string
 
   return value
 }
+
+/**
+ * @desc returns the base path of the current path
+**/
+export function getBasePath(pathname: string) {
+  return cleanSplit({
+    value: pathname,
+    criteria: '/'
+  }).slice(0, -1).join('/')
+}

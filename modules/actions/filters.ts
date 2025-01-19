@@ -1,56 +1,79 @@
 'use server'
 
 import filterSchema from '@/modules/schemas/filters'
+import { deleteFilter, save as saveService } from '../services/filters'
+import { revalidatePath } from 'next/cache'
 
 import type {
     ActionResponse,
     FilterFormData
 } from '@/modules/types/filters'
 
-import { revalidatePath } from 'next/cache'
-
-export async function save(
+export default async function SaveFilter(
+    id: string | undefined,
     prevState: ActionResponse | null,
     formData: FormData
 ): Promise<ActionResponse> {
 
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const rawData: FilterFormData = {
+        id: id ? Number(id) : undefined,
+        name: formData.get('name') as string,
+        filters: formData.get('filters') as string
+    }
 
-    try {
+    const parsedFilters = JSON.parse(rawData.filters)
+    const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
 
-        const rawData: FilterFormData = {
-            id: formData.get('id') ? Number(formData.get('id')) : undefined,
-            name: formData.get('name') as string,
-            filters: formData.get('filters') as string
-        }
+    rawData.filters = filters
+    const validatedData = filterSchema.safeParse(rawData)
 
-        const parsedFilters = JSON.parse(rawData.filters)
-        const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
-
-        rawData.filters = filters
-        const validatedData = filterSchema.safeParse(rawData)
-
-        if (!validatedData.success) {
-            return {
-                success: false,
-                message: 'Please fix the errors in the form',
-                errors: validatedData.error.flatten().fieldErrors,
-                data: rawData
-            }
-        }
-
-        // Here you would typically save the address to your database
-        console.log('Address submitted:', validatedData.data)
-
-        return {
-            success: true,
-            message: 'Address saved successfully!',
-        }
-    } catch (error) {
+    if (!validatedData.success) {
         return {
             success: false,
-            message: 'An unexpected error occurred',
+            message: 'Please fix the errors in the form',
+            errors: validatedData.error.flatten().fieldErrors,
+            data: rawData
         }
+    }
+
+    const { success, message, id: idResponse } = await saveService(validatedData.data)
+    if (success) {
+        revalidatePath(`/[locale]/filters`, 'page')
+
+        return {
+            success,
+            message,
+            data: {
+                ...rawData,
+                id: idResponse || rawData.id
+            }
+        }
+    }
+
+    return {
+        success: false,
+        message,
+        data: rawData
     }
 }
 
+export async function DeleteFilter(
+    id: string
+) {
+    const request = await deleteFilter(id)
+    const response = await request.json()
+
+    if (request.ok) {
+        revalidatePath(`/[locale]/filters`, 'page')
+
+        return {
+            success: true,
+            message: response.message
+        }
+    }
+
+    return {
+        success: false,
+        message: response.message
+    }
+}

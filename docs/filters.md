@@ -6,7 +6,7 @@
 ```json
 {
     "name": "Talla alfabética",
-    "filters": ["XS", "S", "M", "L", "XL", "OVERSIZE M"]
+    "filters": ["XS", "S", "M", "L", "XL"]
 }
 ```
 
@@ -19,7 +19,7 @@
 {
     "id": 1,
     "name": "Talla alfabética",
-    "filters": ["XS", "S", "M", "L", "XL", "OVERSIZE M"]
+    "filters": ["XS", "S", "M", "L"]
 }
 ```
 
@@ -33,7 +33,7 @@
     {
         "id": 1,
         "name": "Talla alfabética",
-        "filters": ["XS", "S", "M", "L", "XL", "OVERSIZE M"]
+        "filters": ["XS", "S", "M", "L"]
     }
     {
         "id": 2,
@@ -52,6 +52,18 @@
 {
     "id": 1,
     "name": "Talla alfabética",
-    "filters": ["XS", "S", "M", "L", "XL", "OVERSIZE M"]
+    "filters": [{
+        "id": 1,
+        "value": "XS"
+    }, {
+        "id": 2,
+        "value": "S"
+    }, {
+        "id": 3,
+        "value": "M"
+    }, {
+        "id": 4,
+        "value": "L"
+    }]
 }
 ```

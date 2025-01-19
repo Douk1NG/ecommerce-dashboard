@@ -56,6 +56,14 @@
             "title": "Cargar"
         }
     },
+    "login": {
+        "metadata": {
+            "title": "Login",
+            "description": "Inicia sesión en tu cuenta"
+        },
+        "title": "Login",
+        "description": "Inicia sesión en tu cuenta"
+    },
     "orders": {
         "metadata": {
             "title": "Pedidos",

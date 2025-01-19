@@ -41,7 +41,11 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
     translations: string,
-    options: options
+    options?: options
+}
+
+const defaultOptions = {
+    selection: 'single'
 }
 
 export default function DataTable<TData, TValue>({
@@ -54,8 +58,8 @@ export default function DataTable<TData, TValue>({
     const t = useTranslations(translations)
 
     const {
-        selection = 'single'
-    } = options
+        selection
+    } = options || defaultOptions
 
     const isSelectable = selection !== 'none'
 

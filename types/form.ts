@@ -1,5 +1,6 @@
 import { InputProps } from "@/components/ui/input";
 import type { MultiSelectProps } from "@/components/ui/multiselect";
+import { ActionResponse } from "@/modules/types/filters";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
 
@@ -55,8 +56,8 @@ export type Field =
 export type Fields = Field[];
 
 export type FormProps = {
-    fields: Fields;
     values?: Record<string, unknown>;
-    action: any;
-    translations: string;
+    fields: Fields;
+    action: (id: string | undefined, prevState: ActionResponse | null, formData: FormData) => Promise<ActionResponse>;
+    translations: (key: string) => string;
 }

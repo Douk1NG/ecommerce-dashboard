@@ -4,28 +4,26 @@ import Confirm from '@/components/confirm';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/icon';
 
-import { cleanSplit } from "@/lib/utils";
+import { getBasePath } from "@/lib/utils";
 import { usePathname } from "@/i18n/routing";
 import { useRouter, useSearchParams } from "next/navigation";
 import CONSTANTS from '@/lib/constants';
+import { toast } from '@/hooks/use-toast';
 
 type PropTypes = {
     title: string;
-    children: React.ReactNode;
-    isNew?: boolean;
+    children: React.ReactNode
+    onDelete: () => Promise<any>;
+    isNew: boolean
 };
 
-const Index = ({ title, children, isNew }: PropTypes) => {
+const Index = ({ title, children, isNew, onDelete }: PropTypes) => {
     const pathname = usePathname();
-    const router = useRouter();
     const searchParams = useSearchParams();
+    const router = useRouter();
+    const base = getBasePath(pathname)
     const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
     const isDetail = !isNew && !isEdit
-
-    const base = cleanSplit({
-        value: pathname,
-        criteria: '/'
-    }).slice(0, -1).join('/')
 
     const onConfirm = () => {
         router.push(`/${base}`)
@@ -33,6 +31,24 @@ const Index = ({ title, children, isNew }: PropTypes) => {
 
     const onEdit = () => {
         router.push(`?${CONSTANTS.LAYOUT.SIDEBAR.EDIT}=${CONSTANTS.LAYOUT.SIDEBAR.IS_EDITING}`)
+    }
+
+    const onDeleteInternal = async () => {
+        const response = await onDelete()
+        const { success, message } = response
+
+        const title = success ? '' : 'Ha ocurrido un error.'
+        const variant = success ? 'default' : 'destructive'
+
+        toast({
+            title: title,
+            description: message,
+            variant: variant,
+        })
+
+        if (response.success) {
+            router.push(`/${base}`)
+        }
     }
 
     return (
@@ -63,15 +79,25 @@ const Index = ({ title, children, isNew }: PropTypes) => {
                                 <Confirm
                                     translations={CONSTANTS.LAYOUT.CONFIRM.DELETE}
                                     icon='trash'
-                                    onConfirm={onConfirm}
+                                    onConfirm={onDeleteInternal}
                                 />
                             )
                         }
-                        <Confirm
-                            translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
-                            icon='close'
-                            onConfirm={onConfirm}
-                        />
+                        {isDetail ? (
+                            <Button
+                                onClick={onConfirm}
+                                variant='outline'
+                                type='button'
+                            >
+                                <Icon name='close' />
+                            </Button>
+                        ) : (
+                            <Confirm
+                                translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
+                                icon='close'
+                                onConfirm={onConfirm}
+                            />
+                        )}
                     </div>
                 </div>
                 {children}

@@ -1,5 +1,9 @@
 const CONSTANTS = {
     NEW: 'new',
+    METADATA: {
+        TITLE: 'metadata.title',
+        DESCRIPTION: 'metadata.description'
+    },
     TAGBOX: {
         NAMESPACE: 'layout.tagbox',
         KEY_ADD: 'add',
@@ -15,8 +19,8 @@ const CONSTANTS = {
     LAYOUT: {
         NAMESPACE: 'layout',
         SIDEBAR: {
-            EDIT: 'UPT',
-            IS_EDITING: '1'
+            EDIT: 'MODE',
+            IS_EDITING: 'EDIT'
         },
         BREADCRUMB: {
             NAMESPACE: 'breadcrumb.default'

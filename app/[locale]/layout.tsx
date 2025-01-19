@@ -6,12 +6,15 @@ import { NextIntlClientProvider } from "next-intl";
 import type { Metadata } from "next";
 import type { GenerateMetadataProps } from "@/types/layout";
 
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import {
+    SidebarInset,
+    SidebarProvider
+} from "@/components/ui/sidebar";
+
 import Nav from "@/components/nav";
 import Header from "@/components/header";
 import { Toaster } from "@/components/ui/toaster"
 import { Locale } from '@/i18n/routing';
-import { cookies } from 'next/headers';
 
 type Props = {
     children: React.ReactNode;
@@ -47,22 +50,21 @@ const RootLayout: React.FC<Props> = async (props: Props) => {
     } = props;
 
     const messages = await getMessages();
-    const cookieStore = await cookies()
-    const cookie = cookieStore.get("sidebar:state");
-    const defaultOpen = cookie ? cookie.value === "true" : true
 
     return (
         <html lang={locale}>
-            <NextIntlClientProvider messages={messages}>
-                <SidebarProvider defaultOpen={defaultOpen}>
-                    <Nav />
-                    <SidebarInset>
-                        <Header />
-                        {children}
-                        <Toaster />
-                    </SidebarInset>
-                </SidebarProvider>
-            </NextIntlClientProvider>
+            <body>
+                <NextIntlClientProvider messages={messages}>
+                    <SidebarProvider>
+                        <Nav />
+                        <SidebarInset>
+                            <Header />
+                            {children}
+                            <Toaster />
+                        </SidebarInset>
+                    </SidebarProvider>
+                </NextIntlClientProvider>
+            </body>
         </html>
     );
 };

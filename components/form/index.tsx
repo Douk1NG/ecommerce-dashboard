@@ -1,43 +1,39 @@
 'use client'
-import { useTranslations } from 'use-intl';
-import { useActionState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import CONSTANTS from '@/lib/constants';
+import { useActionState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getBasePath } from '@/lib/utils';
+import { toast } from '@/hooks/use-toast';
 import { usePathname } from '@/i18n/routing';
-
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import Field from '@/components/form/field';
+import Icon from '@/components/icon';
+
 import {
     Alert,
     AlertDescription
 } from '@/components/ui/alert';
 
-import Field from '@/components/form/field';
-import Icon from '@/components/icon';
-import CONSTANTS from '@/lib/constants';
-import { cleanSplit } from "@/lib/utils";
-
 import type { FormProps } from '@/types/form';
-
 const FormBuilder = ({
-    values,
     fields,
+    values,
     translations,
     action
 }: FormProps) => {
-    const t = useTranslations(translations)
-    const searchParams = useSearchParams();
     const pathname = usePathname();
+    const router = useRouter();
+    const base = getBasePath(pathname)
+    const searchParams = useSearchParams();
 
-    const [_, id] = cleanSplit({
-        value: pathname,
-        criteria: '/'
-    });
-
-    const isNew = id === CONSTANTS.NEW
+    const isCreate = !values
     const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
-    const isDetail = !isNew && !isEdit
+    const isDetail = !isCreate && !isEdit
 
-    const defaultState = {
+    const actionWithId = action.bind(null, values?.id as string)
+
+    const initialValues = {
         success: false,
         message: '',
         errors: {},
@@ -48,7 +44,22 @@ const FormBuilder = ({
         state,
         formAction,
         isPending
-    ] = useActionState(action, defaultState)
+    // @ts-expect-error
+    ] = useActionState(
+        actionWithId,
+        initialValues
+    )
+
+    useEffect(() => {
+        if (state.success) {
+            toast({
+                title: 'Success',
+                description: state.message,
+                variant: 'default'
+            })
+            router.push(`/${base}/${state.data?.id}`)
+        }
+    }, [state])
 
     return (
         <form
@@ -58,27 +69,32 @@ const FormBuilder = ({
             {fields.map((item) => (
                 <div className="space-y-2" key={item.name}>
                     <Label htmlFor={item.name}>
-                        {t(item.label)}
+                        {translations(item.label)}
                     </Label>
                     <Field
                         {...item}
+                        // @ts-expect-error
                         value={state.data?.[item.name]}
                         readOnly={isDetail}
                     />
                     <p className='text-sm text-muted-foreground'>
-                        {t(item.description)}
+                        {translations(item.description)}
                     </p>
-                    {state?.errors?.[item.name as keyof typeof state.errors] && (
+                    {/* @ts-expect-error */}
+                    {state?.errors?.[item.name] && (
                         <p id={`${item.name}-error`} className="text-sm text-red-500">
-                            {state.errors[item.name as keyof typeof state.errors][0]}
+                            {/* @ts-expect-error */}
+                            {state.errors[item.name][0]}
                         </p>
                     )}
                 </div>
             ))}
-            {state?.message && (
-                <Alert variant={state.success ? "default" : "destructive"}>
-                    {state.success && <Icon name='check' className='w-4 h-4' />}
-                    <AlertDescription>{state.message}</AlertDescription>
+            {state?.message && !state.success && (
+                <Alert className='text-red-800 border-red-800 bg-red-500/20' >
+                    <AlertDescription className='italic flex items-center gap-2 select-none'>
+                        <Icon name='circle-x' className='h-5 w-5'/>
+                        {state.message}
+                    </AlertDescription>
                 </Alert>
             )}
             {
@@ -89,7 +105,7 @@ const FormBuilder = ({
                             disabled={isPending}
                         >
                             {isPending && <Icon name='loader' className='animate-spin mr-2' />}
-                            {t('layout.save')}
+                            {translations('layout.save')}
                         </Button>
                     </div>
                 )

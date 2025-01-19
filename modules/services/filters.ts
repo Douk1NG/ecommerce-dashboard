@@ -1,75 +1,90 @@
 "use server"
-import { revalidatePath } from "next/cache"
 import { Filter } from "@/modules/types/filters"
 
+// temp
+const token = process.env.NEXT_PUBLIC_API_TOKEN
+const path = `${process.env.NEXT_PUBLIC_API_URL}/filters`
+
 export const getFilters = async () => {
-    const request = await fetch(
-        'http://localhost:3000/es/api/filter', {
-            cache: 'force-cache'
-        }
-    )
-    if (request.ok) {
-        const response = await request.json()
-        const parsed = response.body.map((item: Record<string, unknown>) => {
-            item.filters = (item.filters as Record<string, unknown>[])
-            .map((filter: Record<string, unknown>) => filter.value).join(', ')
-            return item
+    try {
+        const request = await fetch(
+            path, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
-        return parsed
-    }
-    return []
-}
 
-export const getFiltersMultiselect = async () => {
-    const request = await fetch(
-        'http://localhost:3000/es/api/filter', {
-        cache: 'force-cache'
-    })
-    
-    if (request.ok) {
-        const response = await request.json()
-        const parsed = response.body.map((item: Record<string, unknown>) => {
-            return (item.filters as Record<string, unknown>[])
-            .map((filter: Record<string, unknown>) => {
-                return {
-                    label: filter.value,
-                    value: filter.id
-                }
-            })
-        }).flat()
+        if (request.ok) {
+            return await request.json()
+        }
 
-        return parsed
+        return []
+
+    } catch (error) {
+        return []
     }
-    return []
 }
 
 export const getFilter = async (id: string) => {
-    const request = await fetch(
-        `http://localhost:3000/es/api/filter/${id}`, {
-        cache: 'force-cache'
-    })
-    const response = await request.json()
-    return response.body
+    try {
+        const request = await fetch(
+            `${path}/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const response = await request.json()
+
+        return response
+    } catch (error) {
+        return null
+    }
 }
 
-export const create = async (data: Filter) => {
-    const request = await fetch(
-        'http://localhost:3000/es/api/filter', {
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    const response = await request.json()
-    revalidatePath('/filters')
-    return response.body
+export const save = async (data: Filter) => {
+    try {
+        const response = data.id ? await update(data) : await create(data)
+        const { message, id } = await response.json()
+
+        return {
+            id: id,
+            success: response.ok,
+            message
+        }
+    } catch (error) {
+        return {
+            success: false,
+            message: error instanceof Error ? error.message : 'An unexpected error occurred'
+        }
+    }
 }
 
-export const update = async (data: Filter) => {
-    const request = await fetch(
-        `http://localhost:3000/es/api/filter/${data.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data)
-    })
-    const response = await request.json()
-    revalidatePath('/filters')
-    return response.body
-}
+export const create = async (data: Filter) => await fetch(
+    path, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+})
+
+export const update = async (data: Filter) => await fetch(
+    path, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+})
+
+export const deleteFilter = async (id: string) => await fetch(
+    `${path}/${id}`, {
+    method: 'DELETE',
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+})
