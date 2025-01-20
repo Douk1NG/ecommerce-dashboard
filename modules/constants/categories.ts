@@ -13,16 +13,19 @@ const CONSTANTS = {
     KEYS: {
         ID: 'id',
         NAME: 'name',
-        FILTERS: 'filters'
+        FILTERS: 'filters',
+        SUBCATEGORIES: 'subcategories'
     },
     SCHEME: {
         ID: 'scheme.id',
         NAME: 'scheme.name',
-        FILTERS: 'scheme.filters'
+        FILTERS: 'scheme.filters',
+        SUBCATEGORIES: 'scheme.subcategories'
     },
     DESCRIPTION: {
         NAME: 'description.name',
-        FILTERS: 'description.filters'
+        FILTERS: 'description.filters',
+        SUBCATEGORIES: 'description.subcategories'
     }
 }
 

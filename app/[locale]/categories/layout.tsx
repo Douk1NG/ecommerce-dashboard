@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/modules/constants/filters";
+import CONSTANTS from "@/modules/constants/categories";
 
 import type { Metadata } from "next/types";
 

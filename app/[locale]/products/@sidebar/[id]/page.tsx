@@ -1,6 +1,6 @@
 import CONSTANTS from "@/modules/constants/products";
 import CONSTANTS_LIB from "@/lib/constants";
-import Form from "@/modules/forms/products";
+import Form from "@/modules/components/products/form";
 import Sidebar from "@/components/sidebar";
 import { getTranslations } from "next-intl/server";
 import {

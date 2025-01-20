@@ -111,7 +111,7 @@
         },
         "layout": {
             "title": "Categories",
-            "add": "Add",
+            "add": "Create",
             "description": "",
             "save": "Save"
         },
@@ -126,7 +126,7 @@
             "filters": "Set the filter"
         },
         "table": {
-            "empty": "No categories found, to get started, press the add category button.",
+            "empty": "No categories found, to get started, press create category button.",
             "info": "Click to view its details"
         }
     },

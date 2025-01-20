@@ -1,11 +1,11 @@
 "use server"
-import { Filter } from "@/modules/types/filters"
+import { Category } from "@/modules/types/categories"
 
 // temp
 const token = process.env.NEXT_PUBLIC_API_TOKEN
-const path = `${process.env.NEXT_PUBLIC_API_URL}/filters`
+const path = `${process.env.NEXT_PUBLIC_API_URL}/categories`
 
-export const getFilters = async () => {
+export const getCategories = async () => {
     try {
         const request = await fetch(
             path, {
@@ -26,7 +26,7 @@ export const getFilters = async () => {
     }
 }
 
-export const getFilter = async (id: string) => {
+export const getCategory = async (id: string) => {
     try {
         const request = await fetch(
             `${path}/${id}`, {
@@ -41,7 +41,7 @@ export const getFilter = async (id: string) => {
     }
 }
 
-export const save = async (data: Filter) => {
+export const save = async (data: Category) => {
     try {
         const response = data.id ? await update(data) : await create(data)
         const { message, body } = await response.json()
@@ -59,7 +59,7 @@ export const save = async (data: Filter) => {
     }
 }
 
-export const create = async (data: Filter) => await fetch(
+export const create = async (data: Category) => await fetch(
     path, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -70,7 +70,7 @@ export const create = async (data: Filter) => await fetch(
     }
 })
 
-export const update = async (data: Filter) => await fetch(
+export const update = async (data: Category) => await fetch(
     `${path}/${data.id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -81,7 +81,7 @@ export const update = async (data: Filter) => await fetch(
     }
 })
 
-export const deleteFilter = async (id: string) => await fetch(
+export const deleteCategory = async (id: string) => await fetch(
     `${path}/${id}`, {
     method: 'DELETE',
     headers: {
