@@ -4,10 +4,12 @@ import categorySchema from '@/modules/schemas/categories'
 import { deleteCategory, save as saveService } from '@/modules/services/categories'
 import { revalidatePath } from 'next/cache'
 
+import type { ActionResponse } from '@/types/form'
+
 import type {
-    ActionResponse,
     CategoryFormData
 } from '@/modules/types/categories'
+
 
 export default async function SaveCategory(
     id: string | undefined,
@@ -15,17 +17,9 @@ export default async function SaveCategory(
     formData: FormData
 ): Promise<ActionResponse> {
 
-    const rawData: CategoryFormData = {
-        id: id ? Number(id) : undefined,
-        name: formData.get('name') as string,
-        subcategories: formData.get('subcategories') as string,
-        filters: formData.get('filters') as string
-    }
+    // @ts-expect-error todo
+    const rawData: CategoryFormData = {}
 
-    const parsedFilters = JSON.parse(rawData.filters)
-    const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
-
-    rawData.filters = filters
     const validatedData = categorySchema.safeParse(rawData)
 
     if (!validatedData.success) {
@@ -39,7 +33,7 @@ export default async function SaveCategory(
 
     const { success, message, id: idResponse } = await saveService(validatedData.data)
     if (success) {
-        revalidatePath(`/[locale]/filters`, 'page')
+        revalidatePath(`/[locale]/categories`, 'page')
 
         return {
             success,

@@ -118,12 +118,20 @@
         "scheme": {
             "name": "Name",
             "subcategories": "Subcategories",
-            "filters": "Filters"
+            "filters": "Filters",
+            "featured_category": "Featured category",
+            "image": "Image",
+            "parent_id": "Parent category",
+            "description": "Description"
         },
         "description": {
             "name": "Set the category name",
             "subcategories": "Set the subcategories",
-            "filters": "Set the filter"
+            "filters": "Set the filter",
+            "featured_category": "Set if the category is featured",
+            "image": "Set the category image",
+            "parent_id": "Set the parent category",
+            "description": "Set the category description"
         },
         "table": {
             "empty": "No categories found, to get started, press create category button.",

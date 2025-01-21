@@ -25,6 +25,7 @@ const Index = ({ title, description, action, children }: PropsType) => {
                             href={action.href}
                             className={buttonVariants({ variant: "default" })}
                             scroll={false}
+                            type="button"
                         >
                             {action.title}
                         </Link>

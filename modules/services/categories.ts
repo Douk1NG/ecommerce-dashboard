@@ -72,8 +72,11 @@ export const create = async (data: Category) => await fetch(
 
 export const update = async (data: Category) => await fetch(
     `${path}/${data.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
+    method: 'POST',
+    body: JSON.stringify({
+        ...data,
+        method: 'PUT'
+    }),
     headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

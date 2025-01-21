@@ -3,9 +3,12 @@ import CONSTANTS from '@/modules/constants/categories';
 
 const categorySchema = z.object({
     [CONSTANTS.KEYS.ID]: z.number().optional(),
-    [CONSTANTS.KEYS.NAME] : z.string(),
-    [CONSTANTS.KEYS.SUBCATEGORIES]: z.array(z.string()),
+    [CONSTANTS.KEYS.NAME] : z.string().min(1),
+    [CONSTANTS.KEYS.DESCRIPTION]: z.string().optional(),
+    [CONSTANTS.KEYS.FEATURED_CATEGORY]: z.boolean().optional(),
+    [CONSTANTS.KEYS.PARENT_ID]: z.string().optional(),
     [CONSTANTS.KEYS.FILTERS]: z.array(z.string()),
+    [CONSTANTS.KEYS.IMAGE]: z.instanceof(File).optional(),
 });
 
 export default categorySchema

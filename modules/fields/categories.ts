@@ -9,11 +9,22 @@ const fields: Fields = [
         "type": "text"
     },
     {
-        "label": CONSTANTS.SCHEME.SUBCATEGORIES,
-        "name": CONSTANTS.KEYS.SUBCATEGORIES,
-        "description": CONSTANTS.DESCRIPTION.SUBCATEGORIES,
-        "type": "multiselect",
-        "options": []
+        "label": CONSTANTS.SCHEME.DESCRIPTION,
+        "name": CONSTANTS.KEYS.DESCRIPTION,
+        "description": CONSTANTS.DESCRIPTION.DESCRIPTION,
+        "type": "textarea"
+    },
+    {
+        "label": CONSTANTS.SCHEME.PARENT_ID,
+        "name": CONSTANTS.KEYS.PARENT_ID,
+        "description": CONSTANTS.DESCRIPTION.PARENT_ID,
+        "type": "select"
+    },
+    {
+        "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
+        "name": CONSTANTS.KEYS.FEATURED_CATEGORY,
+        "description": CONSTANTS.DESCRIPTION.FEATURED_CATEGORY,
+        "type": "switch"
     },
     {
         "label": CONSTANTS.SCHEME.FILTERS,
@@ -21,7 +32,13 @@ const fields: Fields = [
         "description": CONSTANTS.DESCRIPTION.FILTERS,
         "type": "multiselect",
         "options": []
-    }
+    },
+    {
+        "label": CONSTANTS.SCHEME.IMAGE,
+        "name": CONSTANTS.KEYS.IMAGE,
+        "description": CONSTANTS.DESCRIPTION.IMAGE,
+        "type": "file"
+    },
 ]
 
 export default fields;

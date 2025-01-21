@@ -1,6 +1,6 @@
 const CONSTANTS = {
     NAMESPACE: 'categories',
-    SIDEBAR_TITLE : 'layout.add',
+    SIDEBAR_TITLE: 'layout.add',
     METADATA: {
         TITLE: 'metadata.title',
         DESCRIPTION: 'metadata.description'
@@ -11,21 +11,32 @@ const CONSTANTS = {
         LINK: '/categories/new'
     },
     KEYS: {
-        ID: 'id',
-        NAME: 'name',
+        SUBCATEGORIES: 'subcategories',
+        DESCRIPTION: 'description',
+        FEATURED_CATEGORY: 'featured_category',
         FILTERS: 'filters',
-        SUBCATEGORIES: 'subcategories'
+        ID: 'id',
+        IMAGE: 'image',
+        NAME: 'name',
+        PARENT_ID: 'parent_id',
     },
     SCHEME: {
-        ID: 'scheme.id',
-        NAME: 'scheme.name',
+        SUBCATEGORIES: 'scheme.subcategories',
+        DESCRIPTION: 'scheme.description',
+        FEATURED_CATEGORY: 'scheme.featured_category',
         FILTERS: 'scheme.filters',
-        SUBCATEGORIES: 'scheme.subcategories'
+        ID: 'scheme.id',
+        IMAGE: 'scheme.image',
+        NAME: 'scheme.name',
+        PARENT_ID: 'scheme.parent_id'
     },
     DESCRIPTION: {
-        NAME: 'description.name',
+        DESCRIPTION: 'description.description',
+        FEATURED_CATEGORY: 'description.featured_category',
         FILTERS: 'description.filters',
-        SUBCATEGORIES: 'description.subcategories'
+        IMAGE: 'description.image',
+        NAME: 'description.name',
+        PARENT_ID: 'description.parent_id',
     }
 }
 

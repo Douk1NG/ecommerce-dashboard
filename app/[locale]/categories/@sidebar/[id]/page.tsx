@@ -4,7 +4,7 @@ import {
     getCategory
 } from "@/modules/services/categories";
 
-import Form from "@/modules/components/categories/form";
+import Layout from "@/modules/components/categories/form";
 
 import type { PageProps } from "@/types/layout";
 
@@ -17,7 +17,7 @@ export default async function Page(
     const category = !isNew ? await getCategory(id) : undefined
 
     return (
-        <Form
+        <Layout
             values={category}
             isNew={isNew}
         />

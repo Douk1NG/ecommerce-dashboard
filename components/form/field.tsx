@@ -5,6 +5,7 @@ import MultiSelect from "./components/multiselect";
 import File from "./components/file";
 import Switch from "./components/switch";
 import Tagbox from "./components/tagbox";
+import Select from "./components/select";
 
 import type { Field } from "@/types/form";
 
@@ -15,7 +16,8 @@ const Components = {
     multiselect: MultiSelect,
     file: File,
     switch: Switch,
-    tagbox: Tagbox
+    tagbox: Tagbox,
+    select: Select
 };
 
 const Index = <T extends Field>(props: T) => {

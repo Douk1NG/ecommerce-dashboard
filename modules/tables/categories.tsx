@@ -1,8 +1,7 @@
+'use client'
 import CONSTANTS from "@/modules/constants/categories"
-
 import DataTable from "@/components/datatable"
 import columns from "@/modules/columns/categories"
-
 import type { TableProps } from "@/modules/types/categories"
 
 function Table({ dataSource }: TableProps) {

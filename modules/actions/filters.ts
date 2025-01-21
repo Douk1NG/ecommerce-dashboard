@@ -4,10 +4,8 @@ import filterSchema from '@/modules/schemas/filters'
 import { deleteFilter, save as saveService } from '../services/filters'
 import { revalidatePath } from 'next/cache'
 
-import type {
-    ActionResponse,
-    FilterFormData
-} from '@/modules/types/filters'
+import type { FilterFormData } from '@/modules/types/filters'
+import type { ActionResponse } from '@/types/form'
 
 export default async function SaveFilter(
     id: string | undefined,

@@ -7,18 +7,12 @@ export type TableProps = {
     dataSource: Category[];
 }
 
-export interface CategoryFormData {
+export type CategoryFormData = {
     id?: number;
     name: string;
-    subcategories: string;
-    filters: string;
-}
-
-export interface ActionResponse {
-    success: boolean;
-    message: string;
-    errors?: {
-        [K in keyof CategoryFormData]?: string[];
-    };
-    data?: CategoryFormData;
+    description?: string;
+    featured_category?: boolean;
+    parent_id?: string;
+    filters?: string;
+    image?: File;
 }

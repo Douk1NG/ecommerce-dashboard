@@ -1,10 +1,10 @@
-import { InputProps } from "@/components/ui/input";
+import type { InputProps } from "@/components/ui/input";
 import type { MultiSelectProps } from "@/components/ui/multiselect";
-import { ActionResponse } from "@/modules/types/filters";
+import type { SelectProps } from "@radix-ui/react-select";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
 
-export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox';
+export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select';
 
 export interface BaseField {
     id?: string;
@@ -17,6 +17,10 @@ export interface BaseField {
 
 export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
     type: 'text';
+};
+
+export type SelectField = BaseField & Omit<SelectProps, 'type' | 'value'> & {
+    type: 'select';
 };
 
 export type TextAreaField = BaseField & Omit<InputProps, 'type' | 'value'> & {
@@ -51,9 +55,19 @@ export type Field =
     | MultiselectField
     | FileField
     | SwitchField
+    | SelectField
     | TagboxField;
 
 export type Fields = Field[];
+
+export type ActionResponse = {
+    success: boolean;
+    message: string;
+    errors?: {
+        [x: string]: string[] | undefined
+    };
+    data: Record<string, unknown>;
+}
 
 export type FormProps = {
     values?: Record<string, unknown>;

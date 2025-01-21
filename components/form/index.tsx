@@ -44,7 +44,7 @@ const FormBuilder = ({
         state,
         formAction,
         isPending
-    // @ts-expect-error
+    // @ts-expect-error overload
     ] = useActionState(
         actionWithId,
         initialValues
@@ -73,18 +73,15 @@ const FormBuilder = ({
                     </Label>
                     <Field
                         {...item}
-                        // @ts-expect-error
                         value={state.data?.[item.name]}
                         readOnly={isDetail}
                     />
                     <p className='text-sm text-muted-foreground'>
                         {translations(item.description)}
                     </p>
-                    {/* @ts-expect-error */}
                     {state?.errors?.[item.name] && (
                         <p id={`${item.name}-error`} className="text-sm text-red-500">
-                            {/* @ts-expect-error */}
-                            {state.errors[item.name][0]}
+                            {state.errors[item.name]?.at(0)}
                         </p>
                     )}
                 </div>

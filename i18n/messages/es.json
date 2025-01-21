@@ -118,13 +118,21 @@
         },
         "scheme": {
             "name": "Nombre",
+            "description": "Descripción",
             "subcategories": "Subcategorías",
-            "filters": "Filtros"
+            "filters": "Filtros",
+            "featured_category": "Categoría destacada",
+            "image": "Imagen",
+            "parent_id": "Categoría padre"
         },
         "description": {
-            "name": "Establece el nombre del categorías",
+            "name": "Establece el nombre de la categoría",
+            "description": "Establece la descripción de la categoría",
             "subcategories": "Las subcategorías seleccionadas heredarán los filtros de la categoría.",
-            "filters": "Establece los filtros"
+            "filters": "Establece los filtros",
+            "featured_category": "Establece si la categoría es destacada",
+            "image": "Establece la imagen de la categoría",
+            "parent_id": "Establece la categoría padre"
         },
         "table": {
             "empty": "No se encontraron categorías, para comenzar, presiona el botón agregar categoría",

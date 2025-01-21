@@ -87,7 +87,7 @@ export default function ImageUploader(props: Record<string, any>) {
                     className="bg-secondary accent-foreground"
                     type='button'
                 >
-                    <Icon name="upload" /> Upload
+                    {/* <Icon name="upload" /> Upload */}
                 </Button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -99,6 +99,8 @@ export default function ImageUploader(props: Record<string, any>) {
                                 alt={`Uploaded image ${index + 1}`}
                                 className="w-full h-40 object-cover rounded cursor-pointer"
                                 onClick={() => onClickImage(image.preview)}
+                                width={100}
+                                height={100}
                             />
                             <div className="absolute top-2 right-2 space-x-1">
                                 <Button

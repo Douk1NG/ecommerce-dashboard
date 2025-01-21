@@ -39,7 +39,7 @@ export default function RootPage() {
                                     </p>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className="w-full group">
+                                    <Button className="w-full group" type="button">
                                         Get Started
                                         <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
                                     </Button>
@@ -60,7 +60,7 @@ export default function RootPage() {
                                 </CardContent>
                                 <CardFooter>
 
-                                    <Button className="w-full group">
+                                    <Button className="w-full group" type="button">
                                         Get Started
                                         <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
                                     </Button>
@@ -81,7 +81,7 @@ export default function RootPage() {
                                     </p>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className="w-full group">
+                                    <Button className="w-full group" type="button">
                                         Get Started
                                         <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
                                     </Button>
@@ -99,7 +99,7 @@ export default function RootPage() {
                             Our comprehensive documentation and support team are here to help you make the most of
                             Wedevs.
                         </p>
-                        <Button variant="secondary" size="lg" asChild>
+                        <Button variant="secondary" size="lg" type="button" asChild>
                             <Link href="/docs">View Documentation</Link>
                         </Button>
                     </div>
