@@ -22,7 +22,7 @@
 ```
 
 ---
-## PUT `/api/filter`
+## PUT `/api/filters/:id`
 
 ### Request Body
 ```json
@@ -59,6 +59,25 @@
         "id": 2,
         "name": "Talla númerica",
         "filters": ["37", "38", "39", "40"]
+    }]
+}
+```
+
+---
+
+## GET `/api/filter?selectable=true`
+
+### Response Body
+```json
+{
+    "success": true,
+    "message": "Filters retrieved successfully",
+    "body": [{
+        "id": 1,
+        "value": "Talla alfabética"
+    }, {
+        "id": 2,
+        "value": "Talla númerica"
     }]
 }
 ```

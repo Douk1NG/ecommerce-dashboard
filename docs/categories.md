@@ -3,18 +3,20 @@
 ## POST `/api/categories`
 
 ### Request Body
-```json
-{
-    "name": "Talla alfabética",
-    "filters": ["XS", "S", "M", "L", "XL"]
-}
+```multipart/form-data
+name: "Camiseta"
+description: ""
+featured_category: true
+parent: '{"id": 1, "value": "Ropa"}'
+filters: '[1, 2]'
+image: image.jpg
 ```
 
 ## Response Body
 ```json
 {
     "success": true,
-    "message": "Filter created successfully",
+    "message": "Category created successfully",
     "body": {
         "id": 1
     }
@@ -22,15 +24,17 @@
 ```
 
 ---
-## PUT `/api/filter`
+## PUT `/api/categories/:id`
 
 ### Request Body
-```json
-{
-    "id": 1,
-    "name": "Talla alfabética",
-    "filters": ["XS", "S", "M", "L"]
-}
+```multipart/form-data
+id: 1
+name: "Camiseta"
+description: ""
+featured_category: true
+parent: '{"id": 1, "value": "Ropa"}'
+filters: '[1, 2]'
+image: image.jpg
 ```
 
 ## Response Body
@@ -44,62 +48,98 @@
 
 ---
 
-## GET `/api/filter`
+## GET `/api/categories`
 
 ### Response Body
 ```json
 {
     "success": true,
-    "message": "Filters retrieved successfully",
+    "message": "Categories retrieved successfully",
     "body": [{
         "id": 1,
-        "name": "Talla alfabética",
-        "filters": ["XS", "S", "M", "L"]
-    }, {
+        "name": "Ropa",
+        "subcategories": ["Camiseta", "Chaqueta"],
+        "filters": ["Talla Alfabética", "Talla numérica"],
+        "featured_category": false
+    },
+    {
         "id": 2,
-        "name": "Talla númerica",
-        "filters": ["37", "38", "39", "40"]
+        "name": "Camiseta",
+        "subcategories": [],
+        "filters": ["Talla Alfabética"],
+        "featured_category": true
     }]
 }
 ```
 
 ---
-## GET `/api/filter/:id`
+
+## GET `/api/categories?selectable=true`
 
 ### Response Body
 ```json
 {
     "success": true,
-    "message": "Filter retrieved successfully",
-    "body": {
+    "message": "Categories retrieved successfully",
+    "body": [{
         "id": 1,
-        "name": "Talla alfabética",
+        "value": "Ropa",
         "filters": [{
             "id": 1,
-            "value": "XS"
+            "value": "Talla Alfabética"
         }, {
             "id": 2,
-            "value": "S"
-        }, {
-            "id": 3,
-            "value": "M"
-        }, {
-            "id": 4,
-            "value": "L"
+            "value": "Talla numérica"
         }]
+    }, {
+        "id": 2,
+        "value": "Camiseta",
+        "filters": [{
+            "id": 1,
+            "value": "Talla Alfabética"
+        }]
+    }]
+}
+```
+
+---
+## GET `/api/categories/:id`
+
+### Response Body
+```json
+{
+    "success": true,
+    "message": "Category retrieved successfully",
+    "body": {
+        "id": 1,
+        "name": "Ropa",
+        "description": "",
+        "featured_category": false,
+        "parent": {
+            "id": 1,
+            "value": "Ropa"
+        },
+        "filters": [{
+            "id": 1,
+            "value": "Talla Alfabética"
+        }, {
+            "id": 2,
+            "value": "Talla numérica"
+        }],
+        "image": "https://www.google.com/image.jpg"
     }
 }
 ```
 
 ---
 
-## DELETE `/api/filter/:id`
+## DELETE `/api/categories/:id`
 
 ### Response Body
 ```json
 {
     "success": true,
-    "message": "Filter deleted successfully",
+    "message": "Category deleted successfully",
     "body": {}
 }
 ```

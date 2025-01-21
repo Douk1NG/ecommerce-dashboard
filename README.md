@@ -14,6 +14,7 @@ To get started with the eCommerce Dashboard, follow these steps:
 2. Install the necessary dependencies by running `npm install`.
 3. Start the server by running `npm start`.
 4. Open your web browser and navigate to `http://localhost:3000`.
+5. Configure the .env.local file with the correct API URL and token.
 
 ## License
 
@@ -23,15 +24,8 @@ This project is licensed under the [MIT License](LICENSE).
 - next-intl : for internationalization
 - shadcn: for almost all the components
 - zod: for form validation
-- react-hook-form: for form validation
 - react-currency-input-field: for currency input
 - tanstack/react-table: for tables
 
-# Issues
-- Component form tira error de ref, sugiere usar forward pero según, está próximo a ser deprecado el forward
-
 # Todo
-- Explorar post request usando nextjs server actions, ref: [text](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-- Explorar ajuste en form [text](https://react-hook-form.com/advanced-usage#SmartFormComponent)
 - Reemplazar las translations por constantes
-- Dialog para eliminar (organizar el de confirm close)
