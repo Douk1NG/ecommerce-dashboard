@@ -24,8 +24,8 @@ image: image.jpg
 ```
 
 ---
-## PUT `/api/categories/:id`
-// se omite el campo image si no se quiere actualizar
+## POST `/api/categories/:id`
+se omite el campo image si no se quiere actualizar
 ### Request Body
 ```multipart/form-data
 id: 1
@@ -34,6 +34,7 @@ description: ""
 featured_category: true
 parent_id: 1
 filters: '[1, 2]'
+method: 'PUT'
 ```
 
 ## Response Body
