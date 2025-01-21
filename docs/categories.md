@@ -7,7 +7,7 @@
 name: "Camiseta"
 description: ""
 featured_category: true
-parent: '{"id": 1, "value": "Ropa"}'
+parent_id: 1
 filters: '[1, 2]'
 image: image.jpg
 ```
@@ -32,7 +32,7 @@ id: 1
 name: "Camiseta"
 description: ""
 featured_category: true
-parent: '{"id": 1, "value": "Ropa"}'
+parent_id: 1
 filters: '[1, 2]'
 image: image.jpg
 ```
@@ -115,7 +115,7 @@ image: image.jpg
         "name": "Ropa",
         "description": "",
         "featured_category": false,
-        "parent": {
+        "parent_id": {
             "id": 1,
             "value": "Ropa"
         },
