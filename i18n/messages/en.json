@@ -135,7 +135,8 @@
         },
         "table": {
             "empty": "No categories found, to get started, press create category button.",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "detail": "Detail"
         }
     },
     "filters": {

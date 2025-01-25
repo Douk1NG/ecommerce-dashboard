@@ -136,7 +136,8 @@
         },
         "table": {
             "empty": "No se encontraron categorías, para comenzar, presiona el botón agregar categoría",
-            "info": "Click para ver su detalle"
+            "info": "Click para ver su detalle",
+            "detail": "Detalle"
         }
     },
     "filters": {

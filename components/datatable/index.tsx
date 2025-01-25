@@ -109,7 +109,7 @@ export default function DataTable<TData, TValue>({
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={header.id} className="text-center">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -128,7 +128,7 @@ export default function DataTable<TData, TValue>({
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className={isSelectable ? "cursor-pointer" : ""}
+                                    className={`${isSelectable ? "cursor-pointer" : ""} text-center`}
                                     onClick={isSelectable ? () => onRowClick(row) : undefined}
                                     title={t('table.info')}
                                 >

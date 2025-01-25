@@ -1,7 +1,8 @@
 import { Fields } from '@/types/form';
 import CONSTANTS from "@/modules/constants/categories";
+import type { Option } from "@/types/form";
 
-const fields: Fields = [
+const fields: (options: Option[]) => Fields = (options) => [
     {
         "label": CONSTANTS.SCHEME.NAME,
         "name": CONSTANTS.KEYS.NAME,
@@ -18,7 +19,11 @@ const fields: Fields = [
         "label": CONSTANTS.SCHEME.PARENT_ID,
         "name": CONSTANTS.KEYS.PARENT_ID,
         "description": CONSTANTS.DESCRIPTION.PARENT_ID,
-        "type": "select"
+        "type": "select",
+        "options": options,
+        "propagates": {
+            [CONSTANTS.KEYS.FILTERS]: CONSTANTS.KEYS.FILTERS
+        }
     },
     {
         "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
@@ -31,6 +36,7 @@ const fields: Fields = [
         "name": CONSTANTS.KEYS.FILTERS,
         "description": CONSTANTS.DESCRIPTION.FILTERS,
         "type": "multiselect",
+        "group": CONSTANTS.KEYS.FILTERS,
         "options": []
     },
     {

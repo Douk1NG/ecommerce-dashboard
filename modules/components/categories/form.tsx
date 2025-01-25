@@ -6,17 +6,19 @@ import Sidebar from "@/components/sidebar";
 import CONSTANTS from "@/modules/constants/categories";
 import { useTranslations } from 'next-intl';
 import type { Category } from '@/modules/types/categories';
+import type { Option } from '@/types/form';
 
 type FormProps = {
     values: Category
-    isNew: boolean
+    isNew: boolean,
+    selectableCategories: Option[]
 }
 
-export default function Form({ values, isNew }: FormProps) {
+export default function Form({ values, isNew, selectableCategories }: FormProps) {
     const onDelete = async () => {
         return await DeleteCategory(values.id as string)
     }
-
+    const hidratatedFields = fields(selectableCategories)
     const t = useTranslations(CONSTANTS.NAMESPACE)
 
     return (
@@ -27,7 +29,7 @@ export default function Form({ values, isNew }: FormProps) {
         >
             <FormBuilder
                 action={SaveCategory}
-                fields={fields}
+                fields={hidratatedFields}
                 values={values}
                 translations={t}
             />

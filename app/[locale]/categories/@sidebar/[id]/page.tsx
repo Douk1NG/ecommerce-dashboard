@@ -1,7 +1,8 @@
 import CONSTANTS_LIB from "@/lib/constants";
 
 import {
-    getCategory
+    getCategory,
+    getSelectableCategories
 } from "@/modules/services/categories";
 
 import Layout from "@/modules/components/categories/form";
@@ -15,11 +16,12 @@ export default async function Page(
     const isNew = id === CONSTANTS_LIB.NEW
 
     const category = !isNew ? await getCategory(id) : undefined
-
+    const selectableCategories = await getSelectableCategories()
     return (
         <Layout
             values={category}
             isNew={isNew}
+            selectableCategories={selectableCategories}
         />
     )
 }

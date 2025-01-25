@@ -6,6 +6,11 @@ import type { CurrencyInputProps } from "react-currency-input-field";
 
 export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select';
 
+export type Option = {
+    id: string;
+    value: string;
+}
+
 export interface BaseField {
     id?: string;
     label: string;
@@ -13,6 +18,9 @@ export interface BaseField {
     description: string;
     placeholder?: string;
     value?: unknown;
+    propagates?: {
+        [x: string]: string;
+    };
 }
 
 export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
@@ -21,6 +29,7 @@ export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
 
 export type SelectField = BaseField & Omit<SelectProps, 'type' | 'value'> & {
     type: 'select';
+    options?: Option[];
 };
 
 export type TextAreaField = BaseField & Omit<InputProps, 'type' | 'value'> & {

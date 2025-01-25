@@ -5,18 +5,27 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { SelectField } from "@/types/form"
+
+import type { SelectField } from "@/types/form"
 
 const Component = (props: SelectField) => {
+
     return (
-        <Select defaultValue={props.value as string}>
-            <SelectTrigger className="w-[180px]">
+        <Select
+            defaultValue={props.value as string}
+            name={props.name}
+        >
+            <SelectTrigger>
                 <SelectValue placeholder={props.placeholder} />
             </SelectTrigger>
             <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                {props.options?.map((option) => (
+                    <SelectItem
+                        key={option.id}
+                        value={option.id.toString()}
+                    >{option.value}
+                    </SelectItem>
+                ))}
             </SelectContent>
         </Select>
     )

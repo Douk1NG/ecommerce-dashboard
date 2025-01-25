@@ -16,7 +16,7 @@ export const getCategories = async () => {
 
         if (request.ok) {
             const { body } = await request.json()
-            return body
+            return body.at(0)
         }
 
         return []
@@ -34,10 +34,26 @@ export const getCategory = async (id: string) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        const { body } = await request.json()
+        console.log(path, id)
+        const { body, message } = await request.json()
+        console.log(message)
         return body
     } catch (error) {
         return null
+    }
+}
+
+export const getSelectableCategories = async () => {
+    try {
+        const request = await fetch(`${path}?selectable=true`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+        }
+    })
+        const { body } = await request.json()
+        return body.at(0)
+    } catch (error) {
+        return []
     }
 }
 
