@@ -41,10 +41,10 @@ export default function ImageUploader({
     const [preferredImageId, setPreferredImageId] = useState<string | null>(null)
     const [dragActive, setDragActive] = useState(false)
     const [carouselOpen, setCarouselOpen] = useState(false)
-    const [selectedImageIndex, setSelectedImageIndex] = useState(0)
     const isLimitReached = images.length >= maxFiles
     const fileInputRef = useRef<HTMLInputElement>(null)
     const isSingleImage = images.length && maxFiles === 1
+    const inputName = `${name}${maxFiles > 1 ? '[]' : ''}`
 
     const generateUniqueId = (file: File) => {
         return `${file.name}-${file.lastModified}`
@@ -137,13 +137,34 @@ export default function ImageUploader({
         setPreferredImageId(id)
     }, [])
 
-    const openCarousel = useCallback((index: number) => {
-        setSelectedImageIndex(index)
+    const openCarousel = useCallback(() => {
         setCarouselOpen(true)
     }, [])
 
     return (
         <div className="w-full">
+            {images.map((file) => (
+                <input
+                    key={file.id}
+                    type="file"
+                    name={inputName}
+                    className="hidden"
+                    ref={(element) => {
+                        if (element) {
+                            const dataTransfer = new DataTransfer()
+                            dataTransfer.items.add(file)
+                            element.files = dataTransfer.files
+                        }
+                    }}
+                />
+            ))}
+            {preferred.enabled && preferredImageId && (
+                <input
+                    type="hidden"
+                    name={`${name}_preferred`}
+                    value={preferredImageId}
+                />
+            )}
             <div
                 className={`${isSingleImage ? "hidden" : ""} p-4 border-2 border-dashed rounded-lg ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300"
                     } ${isLimitReached ? "opacity-50 cursor-not-allowed" : ""}`}
@@ -152,7 +173,14 @@ export default function ImageUploader({
                 onDragOver={isLimitReached ? undefined : handleDrag}
                 onDrop={isLimitReached ? undefined : handleDrop}
             >
-                <input ref={fileInputRef} type="file" multiple onChange={handleChange} accept="image/*" className="hidden" />
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    onChange={handleChange}
+                    accept="image/*"
+                    className="hidden"
+                />
                 <div className="text-center">
                     <Icon
                         name="upload"
@@ -176,13 +204,13 @@ export default function ImageUploader({
             </div>
             {images.length > 0 && (
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                    {images.map((file, index) => (
+                    {images.map((file) => (
                         <div key={file.id} className="relative">
                             <img
                                 src={file.preview}
                                 alt={file.name}
                                 className="h-48 w-full object-cover rounded-md cursor-pointer"
-                                onClick={() => openCarousel(index)}
+                                onClick={openCarousel}
                                 title="View image"
                             />
                             <Button

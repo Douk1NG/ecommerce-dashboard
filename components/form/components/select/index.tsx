@@ -13,7 +13,7 @@ const Component = ({
     return (
         <Select
             options={options}
-            value={value}
+            defaultValue={value}
             name={name}
             placeholder={placeholder}
             className='select-tw-fix'

@@ -67,7 +67,7 @@ export const save = async (data: Filter) => {
         const { message, body } = await response.json()
 
         return {
-            id: body.id,
+            id: body?.id,
             success: response.ok,
             message
         }

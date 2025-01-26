@@ -57,13 +57,14 @@ export const getSelectableCategories = async () => {
     }
 }
 
-export const save = async (data: Category) => {
+export const save = async (data: FormData) => {
     try {
-        const response = data.id ? await update(data) : await create(data)
+        const id = data.get('id')
+        const response = id ? await update(data, id as string) : await create(data)
         const { message, body } = await response.json()
 
         return {
-            id: body.id,
+            id: body?.id,
             success: response.ok,
             message
         }
@@ -75,27 +76,24 @@ export const save = async (data: Category) => {
     }
 }
 
-export const create = async (data: Category) => await fetch(
+export const create = async (data: FormData) => await fetch(
     path, {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: data,
     headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
     }
 })
 
-export const update = async (data: Category) => await fetch(
-    `${path}/${data.id}`, {
+export const update = async (data: FormData, id: string) => await fetch(
+    `${path}/${id}`, {
     method: 'POST',
-    body: JSON.stringify({
-        ...data,
-        method: 'PUT'
-    }),
+    body: data,
     headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
     }
 })

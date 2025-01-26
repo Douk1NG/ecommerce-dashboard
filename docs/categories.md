@@ -7,7 +7,7 @@
 name: "Camiseta"
 description: ""
 featured_category: true
-parent_id: 1
+parent_id: '1'
 filters: '[1, 2]'
 image: image.jpg
 ```
@@ -32,7 +32,7 @@ id: 1
 name: "Camiseta"
 description: ""
 featured_category: true
-parent_id: 1
+parent_id: "1"
 filters: '[1, 2]'
 method: 'PUT'
 ```

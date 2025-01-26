@@ -13,11 +13,11 @@ export default async function SaveFilter(
     formData: FormData
 ): Promise<ActionResponse> {
 
-    const rawData: FilterFormData = {
+    const rawData = {
         id: id ? Number(id) : undefined,
-        name: formData.get('name') as string,
-        filters: formData.get('filters') as string
-    }
+        name: formData.get('name'),
+        filters: formData.get('filters')
+    } as FilterFormData
 
     const parsedFilters = JSON.parse(rawData.filters)
     const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)

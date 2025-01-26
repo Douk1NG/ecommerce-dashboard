@@ -17,9 +17,18 @@ export default async function SaveCategory(
     formData: FormData
 ): Promise<ActionResponse> {
 
-    // @ts-expect-error todo
-    const rawData: CategoryFormData = {}
+    const rawData = {
+        id: id ? Number(id) : undefined,
+        name: formData.get('name'),
+        description: formData.get('description'),
+        parent_id: formData.get('parent_id'),
+        filters: formData.get('filters'),
+        image: formData.get('image')
+    } as CategoryFormData
 
+    const parsedFilters = JSON.parse(rawData.filters as string)
+    const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
+    rawData.filters = parsedFilters
     const validatedData = categorySchema.safeParse(rawData)
 
     if (!validatedData.success) {
@@ -31,7 +40,18 @@ export default async function SaveCategory(
         }
     }
 
-    const { success, message, id: idResponse } = await saveService(validatedData.data)
+    formData.set('filters', JSON.stringify(filters))
+
+    if (id) {
+        formData.set('id', id)
+        formData.set('method', 'PUT')
+    }
+
+    const {
+        success,
+        message,
+        id: idResponse
+    } = await saveService(formData)
     if (success) {
         revalidatePath(`/[locale]/categories`, 'page')
 
