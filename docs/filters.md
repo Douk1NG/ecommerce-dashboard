@@ -73,11 +73,11 @@
     "success": true,
     "message": "Filters retrieved successfully",
     "body": [{
-        "id": 1,
-        "value": "Talla alfabética"
+        "value": 1,
+        "label": "Talla alfabética"
     }, {
-        "id": 2,
-        "value": "Talla númerica"
+        "value": 2,
+        "label": "Talla númerica"
     }]
 }
 ```
@@ -94,17 +94,17 @@
         "id": 1,
         "name": "Talla alfabética",
         "filters": [{
-            "id": 1,
-            "value": "XS"
+            "value": 1,
+            "label": "XS"
         }, {
-            "id": 2,
-            "value": "S"
+            "value": 2,
+            "label": "S"
         }, {
-            "id": 3,
-            "value": "M"
+            "value": 3,
+            "label": "M"
         }, {
-            "id": 4,
-            "value": "L"
+            "value": 4,
+            "label": "L"
         }]
     }
 }

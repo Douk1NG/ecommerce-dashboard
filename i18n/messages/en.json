@@ -129,7 +129,7 @@
             "subcategories": "Set the subcategories",
             "filters": "Set the filter",
             "featured_category": "Set if the category is featured",
-            "image": "Set the category image",
+            "image": "",
             "parent_id": "Set the parent category",
             "description": "Set the category description"
         },

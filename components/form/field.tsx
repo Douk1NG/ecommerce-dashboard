@@ -6,6 +6,7 @@ import File from "./components/file";
 import Switch from "./components/switch";
 import Tagbox from "./components/tagbox";
 import Select from "./components/select";
+import ImageUploader from "./components/image-uploader";
 
 import type { Field } from "@/types/form";
 
@@ -17,7 +18,8 @@ const Components = {
     file: File,
     switch: Switch,
     tagbox: Tagbox,
-    select: Select
+    select: Select,
+    image: ImageUploader
 };
 
 const Index = <T extends Field>(props: T) => {

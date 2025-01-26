@@ -85,18 +85,18 @@ method: 'PUT'
         "id": 1,
         "value": "Ropa",
         "filters": [{
-            "id": 1,
-            "value": "Talla Alfabética"
+            "value": 1,
+            "label": "Talla Alfabética"
         }, {
-            "id": 2,
-            "value": "Talla numérica"
+            "value": 2,
+            "label": "Talla numérica"
         }]
     }, {
         "id": 2,
         "value": "Camiseta",
         "filters": [{
-            "id": 1,
-            "value": "Talla Alfabética"
+            "value": 1,
+            "label": "Talla Alfabética"
         }]
     }]
 }
@@ -116,15 +116,15 @@ method: 'PUT'
         "description": "",
         "featured_category": false,
         "parent_id": {
-            "id": 1,
-            "value": "Ropa"
+            "value": 1,
+            "label": "Ropa"
         },
         "filters": [{
-            "id": 1,
-            "value": "Talla Alfabética"
+            "value": 1,
+            "label": "Talla Alfabética"
         }, {
-            "id": 2,
-            "value": "Talla numérica"
+            "value": 2,
+            "label": "Talla numérica"
         }],
         "image": "https://www.google.com/image.jpg"
     }

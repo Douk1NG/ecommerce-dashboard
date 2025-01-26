@@ -1,14 +1,13 @@
+import { ImageUploaderProps } from "@/components/form/components/image-uploader";
 import type { InputProps } from "@/components/ui/input";
-import type { MultiSelectProps } from "@/components/ui/multiselect";
-import type { SelectProps } from "@radix-ui/react-select";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
 
-export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select';
+export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select' | 'image';
 
 export type Option = {
-    id: string;
-    value: string;
+    value: string | number;
+    label: string;
 }
 
 export interface BaseField {
@@ -27,7 +26,7 @@ export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
     type: 'text';
 };
 
-export type SelectField = BaseField & Omit<SelectProps, 'type' | 'value'> & {
+export type SelectField = BaseField & {
     type: 'select';
     options?: Option[];
 };
@@ -40,8 +39,9 @@ export type CurrencyField = BaseField & Omit<CurrencyInputProps, 'type' | 'value
     type: 'currency';
 };
 
-export type MultiselectField = BaseField & Omit<MultiSelectProps, 'type'> & {
+export type MultiselectField = BaseField & {
     type: 'multiselect';
+    options?: Option[];
 };
 
 export type FileField = BaseField & Omit<InputProps, 'type' | 'value'> & {
@@ -57,6 +57,10 @@ export type TagboxField = BaseField & {
     readOnly?: boolean;
 };
 
+export type ImageField = BaseField & ImageUploaderProps & {
+    type: 'image';
+};
+
 export type Field =
     | TextField
     | TextAreaField
@@ -65,7 +69,8 @@ export type Field =
     | FileField
     | SwitchField
     | SelectField
-    | TagboxField;
+    | TagboxField
+    | ImageField;
 
 export type Fields = Field[];
 

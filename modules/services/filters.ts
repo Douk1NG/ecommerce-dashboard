@@ -41,6 +41,26 @@ export const getFilter = async (id: string) => {
     }
 }
 
+export const getSelectableFilters = async () => {
+    try {
+        const request = await fetch(`${path}?selectable=true`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+        }
+    })
+        const { body } = await request.json()
+
+        const temp = body.map((filter: Filter) => ({
+            value: filter.id,
+            label: filter.name
+        }))
+
+        return temp
+    } catch (error) {
+        return []
+    }
+}
+
 export const save = async (data: Filter) => {
     try {
         const response = data.id ? await update(data) : await create(data)

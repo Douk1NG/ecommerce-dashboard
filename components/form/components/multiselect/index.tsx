@@ -1,15 +1,25 @@
-import { MultiSelect } from "@/components/ui/multiselect";
-import { MultiselectField } from "@/types/form";
+import dynamic from 'next/dynamic'
+import { MultiselectField } from '@/types/form'
 
-export default function Component(props: MultiselectField) {
+const Multiselect = dynamic(() => import('react-select'), { ssr: false })
+
+export default function Component({
+    options = [],
+    value,
+    name,
+    placeholder = ''
+}:  MultiselectField) {
+
     return (
-        <MultiSelect
-            name={props.name}
-            options={props.options}
-            defaultValue={props.value as []}
-            placeholder={props.placeholder}
-            maxDisplayed={3}
-            creatable={props.creatable}
+        <Multiselect
+            name={name}
+            placeholder={placeholder}
+            defaultValue={value}
+            isMulti
+            options={options}
+            className='select-tw-fix'
+            isClearable={true}
+            closeMenuOnSelect={true}
         />
     )
 }

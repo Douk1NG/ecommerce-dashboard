@@ -11,14 +11,17 @@ import type { Option } from '@/types/form';
 type FormProps = {
     values: Category
     isNew: boolean,
-    selectableCategories: Option[]
+    content: {
+        filters: Option[],
+        categories: Option[]
+    }
 }
 
-export default function Form({ values, isNew, selectableCategories }: FormProps) {
+export default function Form({ values, isNew, content }: FormProps) {
     const onDelete = async () => {
         return await DeleteCategory(values.id as string)
     }
-    const hidratatedFields = fields(selectableCategories)
+    const hidratatedFields = fields(content)
     const t = useTranslations(CONSTANTS.NAMESPACE)
 
     return (

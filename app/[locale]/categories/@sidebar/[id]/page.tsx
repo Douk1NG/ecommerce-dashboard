@@ -5,6 +5,8 @@ import {
     getSelectableCategories
 } from "@/modules/services/categories";
 
+import { getSelectableFilters } from "@/modules/services/filters";
+
 import Layout from "@/modules/components/categories/form";
 
 import type { PageProps } from "@/types/layout";
@@ -16,12 +18,16 @@ export default async function Page(
     const isNew = id === CONSTANTS_LIB.NEW
 
     const category = !isNew ? await getCategory(id) : undefined
-    const selectableCategories = await getSelectableCategories()
+    const content = {
+        filters: await getSelectableFilters(),
+        categories: await getSelectableCategories()
+    }
+
     return (
         <Layout
             values={category}
             isNew={isNew}
-            selectableCategories={selectableCategories}
+            content={content}
         />
     )
 }

@@ -1,33 +1,24 @@
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
+import dynamic from 'next/dynamic'
 import type { SelectField } from "@/types/form"
 
-const Component = (props: SelectField) => {
+const Select = dynamic(() => import('react-select'), { ssr: false })
+
+const Component = ({
+    options = [],
+    value,
+    name,
+    placeholder = ''
+}: SelectField) => {
 
     return (
         <Select
-            defaultValue={props.value as string}
-            name={props.name}
-        >
-            <SelectTrigger>
-                <SelectValue placeholder={props.placeholder} />
-            </SelectTrigger>
-            <SelectContent>
-                {props.options?.map((option) => (
-                    <SelectItem
-                        key={option.id}
-                        value={option.id.toString()}
-                    >{option.value}
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
+            options={options}
+            value={value}
+            name={name}
+            placeholder={placeholder}
+            className='select-tw-fix'
+            isClearable={true}
+        />
     )
 }
 

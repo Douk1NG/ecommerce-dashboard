@@ -2,7 +2,12 @@ import { Fields } from '@/types/form';
 import CONSTANTS from "@/modules/constants/categories";
 import type { Option } from "@/types/form";
 
-const fields: (options: Option[]) => Fields = (options) => [
+type FieldsProps = {
+    categories: Option[],
+    filters: Option[]
+}
+
+const fields: (props: FieldsProps) => Fields = ({ categories, filters }) => [
     {
         "label": CONSTANTS.SCHEME.NAME,
         "name": CONSTANTS.KEYS.NAME,
@@ -20,10 +25,17 @@ const fields: (options: Option[]) => Fields = (options) => [
         "name": CONSTANTS.KEYS.PARENT_ID,
         "description": CONSTANTS.DESCRIPTION.PARENT_ID,
         "type": "select",
-        "options": options,
+        "options": categories,
         "propagates": {
             [CONSTANTS.KEYS.FILTERS]: CONSTANTS.KEYS.FILTERS
         }
+    },
+    {
+        "label": CONSTANTS.SCHEME.FILTERS,
+        "name": CONSTANTS.KEYS.FILTERS,
+        "description": CONSTANTS.DESCRIPTION.FILTERS,
+        "type": "multiselect",
+        "options": filters
     },
     {
         "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
@@ -32,19 +44,14 @@ const fields: (options: Option[]) => Fields = (options) => [
         "type": "switch"
     },
     {
-        "label": CONSTANTS.SCHEME.FILTERS,
-        "name": CONSTANTS.KEYS.FILTERS,
-        "description": CONSTANTS.DESCRIPTION.FILTERS,
-        "type": "multiselect",
-        "group": CONSTANTS.KEYS.FILTERS,
-        "options": []
-    },
-    {
         "label": CONSTANTS.SCHEME.IMAGE,
         "name": CONSTANTS.KEYS.IMAGE,
         "description": CONSTANTS.DESCRIPTION.IMAGE,
-        "type": "file"
-    },
+        "type": "image",
+        "options": {
+            "maxFiles": 1
+        }
+    }
 ]
 
 export default fields;
