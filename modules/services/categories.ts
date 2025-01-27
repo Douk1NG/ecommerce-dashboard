@@ -15,7 +15,8 @@ export const getCategories = async () => {
 
         if (request.ok) {
             const { body } = await request.json()
-            return body.at(0)
+            console.log(body, 'getAll')
+            return body
         }
 
         return []
@@ -34,6 +35,7 @@ export const getCategory = async (id: string) => {
             }
         })
         const { body } = await request.json()
+        console.log(body, 'getCategory')
         return body
     } catch (error) {
         return null
@@ -48,7 +50,8 @@ export const getSelectableCategories = async () => {
         }
     })
         const { body } = await request.json()
-        return body.at(0)
+        console.log(body, 'getSelectableCategories')
+        return body
     } catch (error) {
         return []
     }
