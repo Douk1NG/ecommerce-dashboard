@@ -1,0 +1,73 @@
+import { formatFileSize } from "@/lib/file"
+import { Button } from "@/components/ui/button"
+import Icon from "@/components/icon"
+
+interface DropZoneProps {
+    isLimitReached: boolean
+    isSingleImage: boolean
+    dragActive: boolean
+    maxFileSize: number
+    handlers: {
+        drag: (e: React.DragEvent<HTMLDivElement>) => void
+        drop: (e: React.DragEvent<HTMLDivElement>) => void
+        change: (e: React.ChangeEvent<HTMLInputElement>) => void
+    }
+    fileInputRef: React.RefObject<HTMLInputElement>
+}
+
+export const DropZone = ({
+    isLimitReached,
+    isSingleImage,
+    dragActive,
+    maxFileSize,
+    handlers,
+    fileInputRef
+}: DropZoneProps) => {
+    return (
+        <div
+            className={`p-4 border-2 border-dashed rounded-lg
+                ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300"}
+                ${isSingleImage ? "hidden" : ""}
+                ${isLimitReached ? "opacity-50 cursor-not-allowed" : ""}`
+            }
+            onDragEnter={handlers.drag}
+            onDragLeave={handlers.drag}
+            onDragOver={handlers.drag}
+            onDrop={handlers.drop}
+        >
+            <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                onChange={handlers.change}
+                accept="image/*"
+                className="hidden"
+            />
+            <div className="text-center">
+                <Icon
+                    name="upload"
+                    className="mx-auto text-gray-400"
+                />
+                <p className="mt-2 text-sm text-gray-600">
+                    Drag and drop images here, or click to select files
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
+                    {`PNG, JPG, GIF up to ${formatFileSize(maxFileSize)}`}
+                </p>
+                <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isLimitReached}
+                >
+                    Select files
+                </Button>
+                {isLimitReached && (
+                    <p className="mt-2 text-sm text-red-500">
+                        Maximum number of files reached
+                    </p>
+                )}
+            </div>
+        </div>
+    )
+}

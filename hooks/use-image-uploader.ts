@@ -1,0 +1,121 @@
+import { useState, useCallback, useRef } from "react"
+import { isValidFileType } from "@/lib/file"
+
+type ImageFile = File & {
+    preview: string
+    id: string
+}
+
+interface UseImageUploaderProps {
+    maxFiles: number
+    maxFileSize: number
+}
+
+export const useImageUploader = ({ maxFiles, maxFileSize }: UseImageUploaderProps) => {
+    const [images, setImages] = useState<ImageFile[]>([])
+    const [preferredImageId, setPreferredImageId] = useState<string | null>(null)
+    const [dragActive, setDragActive] = useState(false)
+    const [carouselOpen, setCarouselOpen] = useState(false)
+    const fileInputRef = useRef<HTMLInputElement>(null)
+
+    const isLimitReached = images.length >= maxFiles
+    const isSingleImage = Boolean(images.length && maxFiles === 1)
+
+    const generateUniqueId = useCallback((file: File) => {
+        return `${file.name}-${file.lastModified}`
+    }, [])
+
+    const handleFiles = useCallback(
+        (files: FileList) => {
+            if (isLimitReached) return
+
+            const validFiles = Array.from(files).filter((file) =>
+                isValidFileType(file) && file.size <= maxFileSize
+            )
+
+            const newImages = validFiles.map((file) => {
+                const id = generateUniqueId(file)
+                return Object.assign(file, {
+                    preview: URL.createObjectURL(file),
+                    id: id,
+                })
+            })
+
+            setImages((prevImages) => {
+                const updatedImages = [
+                    ...prevImages.filter(prevImage =>
+                        !newImages.some(newImage => newImage.id === prevImage.id)
+                    ),
+                    ...newImages
+                ].slice(0, maxFiles)
+                return updatedImages
+            })
+
+            if (fileInputRef.current) {
+                fileInputRef.current.value = ""
+            }
+
+            if (!preferredImageId && newImages.length > 0) {
+                setPreferredImageId(newImages[0].id)
+            }
+        },
+        [isLimitReached, maxFileSize, maxFiles, preferredImageId, generateUniqueId],
+    )
+
+    const handlers = {
+        files: handleFiles,
+        drag: useCallback((e: React.DragEvent<HTMLDivElement>) => {
+            if (isLimitReached) return
+            e.preventDefault()
+            e.stopPropagation()
+            if (e.type === "dragenter" || e.type === "dragover") {
+                setDragActive(true)
+            } else if (e.type === "dragleave") {
+                setDragActive(false)
+            }
+        }, [isLimitReached]),
+        drop: useCallback((e: React.DragEvent<HTMLDivElement>) => {
+            if (isLimitReached) return
+            e.preventDefault()
+            e.stopPropagation()
+            setDragActive(false)
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                handleFiles(e.dataTransfer.files)
+            }
+        }, [handleFiles, isLimitReached]),
+        change: useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault()
+            if (e.target.files && e.target.files[0]) {
+                handleFiles(e.target.files)
+            }
+        }, [handleFiles]),
+        removeImage: useCallback((id: string) => {
+            setImages((prevImages) =>
+                prevImages.filter((image) => image.id !== id)
+            )
+            if (preferredImageId === id) {
+                setPreferredImageId(images.length > 1 ? images[0].id : null)
+            }
+        }, [images, preferredImageId]),
+        setPreferred: useCallback((id: string) => {
+            setPreferredImageId(id)
+        }, []),
+        openCarousel: useCallback(() => {
+            setCarouselOpen(true)
+        }, []),
+        closeCarousel: useCallback(() => {
+            setCarouselOpen(false)
+        }, [])
+    }
+
+    return {
+        images,
+        preferredImageId,
+        dragActive,
+        carouselOpen,
+        isLimitReached,
+        isSingleImage,
+        fileInputRef,
+        handlers
+    }
+}
