@@ -85,9 +85,9 @@ export default function ImageUploader({
 
     const handleDrag = useCallback(
         (e: React.DragEvent<HTMLDivElement>) => {
+            if (isLimitReached) return
             e.preventDefault()
             e.stopPropagation()
-            if (isLimitReached) return
             if (e.type === "dragenter" || e.type === "dragover") {
                 setDragActive(true)
             } else if (e.type === "dragleave") {
@@ -99,10 +99,10 @@ export default function ImageUploader({
 
     const handleDrop = useCallback(
         (e: React.DragEvent<HTMLDivElement>) => {
+            if (isLimitReached) return
             e.preventDefault()
             e.stopPropagation()
             setDragActive(false)
-            if (isLimitReached) return
             if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                 handleFiles(e.dataTransfer.files)
             }
@@ -166,12 +166,11 @@ export default function ImageUploader({
                 />
             )}
             <div
-                className={`${isSingleImage ? "hidden" : ""} p-4 border-2 border-dashed rounded-lg ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300"
-                    } ${isLimitReached ? "opacity-50 cursor-not-allowed" : ""}`}
-                onDragEnter={isLimitReached ? undefined : handleDrag}
-                onDragLeave={isLimitReached ? undefined : handleDrag}
-                onDragOver={isLimitReached ? undefined : handleDrag}
-                onDrop={isLimitReached ? undefined : handleDrop}
+                className={`p-4 border-2 border-dashed rounded-lg ${dragActive ? "border-blue-400 bg-blue-50" : "border-gray-300"} ${isSingleImage ? "hidden" : ""} ${isLimitReached ? "opacity-50 cursor-not-allowed" : ""}`}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
             >
                 <input
                     ref={fileInputRef}
@@ -188,17 +187,14 @@ export default function ImageUploader({
                     />
                     <p className="mt-2 text-sm text-gray-600">Drag and drop images here, or click to select files</p>
                     <p className="mt-1 text-xs text-gray-500">{`PNG, JPG, GIF up to ${formatFileSize(maxFileSize)}`}</p>
-                    <button
+                    <Button
                         type="button"
+                        variant="secondary"
                         onClick={() => fileInputRef.current?.click()}
-                        className={`mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${isLimitReached
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            }`}
                         disabled={isLimitReached}
                     >
                         Select files
-                    </button>
+                    </Button>
                     {isLimitReached && <p className="mt-2 text-sm text-red-500">Maximum number of files reached</p>}
                 </div>
             </div>

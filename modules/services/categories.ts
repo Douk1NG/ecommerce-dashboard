@@ -1,5 +1,4 @@
 "use server"
-import { Category } from "@/modules/types/categories"
 
 // temp
 const token = process.env.NEXT_PUBLIC_API_TOKEN
@@ -34,9 +33,7 @@ export const getCategory = async (id: string) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        console.log(path, id)
-        const { body, message } = await request.json()
-        console.log(message)
+        const { body } = await request.json()
         return body
     } catch (error) {
         return null
@@ -82,7 +79,6 @@ export const create = async (data: FormData) => await fetch(
     body: data,
     headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
     }
 })
@@ -93,7 +89,6 @@ export const update = async (data: FormData, id: string) => await fetch(
     body: data,
     headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
     }
 })
