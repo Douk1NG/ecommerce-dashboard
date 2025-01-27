@@ -49,13 +49,7 @@ export const getSelectableFilters = async () => {
         }
     })
         const { body } = await request.json()
-
-        const temp = body.map((filter: Filter) => ({
-            value: filter.id,
-            label: filter.name
-        }))
-
-        return temp
+        return body
     } catch (error) {
         return []
     }

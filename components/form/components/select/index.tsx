@@ -7,7 +7,8 @@ const Component = ({
     options = [],
     value,
     name,
-    placeholder = ''
+    placeholder = '',
+    readOnly
 }: SelectField) => {
 
     return (
@@ -18,6 +19,7 @@ const Component = ({
             placeholder={placeholder}
             className='select-tw-fix'
             isClearable={true}
+            isDisabled={readOnly}
         />
     )
 }

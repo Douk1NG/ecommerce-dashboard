@@ -8,7 +8,8 @@ export default function Component({
     options = [],
     value = [],
     name,
-    placeholder = ''
+    placeholder = '',
+    readOnly
 }: MultiselectField) {
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -29,6 +30,7 @@ export default function Component({
                 isClearable={true}
                 closeMenuOnSelect={true}
                 onChange={handleChange}
+                isDisabled={readOnly}
             />
             <input
                 name={name}

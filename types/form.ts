@@ -20,6 +20,7 @@ export interface BaseField {
     propagates?: {
         [x: string]: string;
     };
+    readOnly?: boolean;
 }
 
 export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {

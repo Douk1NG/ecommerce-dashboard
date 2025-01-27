@@ -1,11 +1,13 @@
 import { Switch } from '@/components/ui/switch';
+import type { SwitchField } from '@/types/form';
 
-export default function Component(props: Record<string, unknown>) {
+export default function Component(props: SwitchField) {
     return (
         <Switch
+            name={props.name}
             className="flex"
             checked={props.value as boolean}
-            onCheckedChange={props.onChange as (checked: boolean) => void}
+            disabled={props.readOnly}
         />
     )
 }
