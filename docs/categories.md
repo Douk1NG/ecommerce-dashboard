@@ -82,8 +82,8 @@ method: 'PUT'
     "success": true,
     "message": "Categories retrieved successfully",
     "body": [{
-        "id": 1,
-        "value": "Ropa",
+        "value": 1,
+        "label": "Ropa",
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética"
@@ -92,8 +92,8 @@ method: 'PUT'
             "label": "Talla numérica"
         }]
     }, {
-        "id": 2,
-        "value": "Camiseta",
+        "value": 2,
+        "label": "Camiseta",
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética"
