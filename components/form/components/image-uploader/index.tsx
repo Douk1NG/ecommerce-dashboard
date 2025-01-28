@@ -13,10 +13,13 @@ export default function ImageUploader({
         preferred = {
             enabled: false
         }
-    }
+    },
+    value,
+    readOnly
 }: ImageField) {
     const {
         images,
+        externalImages,
         preferredImageId,
         dragActive,
         carouselOpen,
@@ -24,7 +27,15 @@ export default function ImageUploader({
         isSingleImage,
         handlers,
         fileInputRef
-    } = useImageUploader({ maxFiles, maxFileSize })
+    } = useImageUploader({ maxFiles, maxFileSize, value, readOnly })
+
+    const allImages = [
+        ...externalImages.map(img => ({
+            ...img,
+            preview: img.url
+        })),
+        ...images
+    ]
 
     return (
         <div className="w-full">
@@ -36,23 +47,31 @@ export default function ImageUploader({
                     id: preferredImageId
                 }}
             />
-            <DropZone
-                fileInputRef={fileInputRef}
-                isLimitReached={isLimitReached}
-                isSingleImage={isSingleImage}
-                dragActive={dragActive}
-                maxFileSize={maxFileSize}
-                handlers={handlers}
-            />
+            {!readOnly && (
+                <DropZone
+                    fileInputRef={fileInputRef}
+                    isLimitReached={isLimitReached}
+                    isSingleImage={isSingleImage}
+                    dragActive={dragActive}
+                    maxFileSize={maxFileSize}
+                    handlers={handlers}
+                >
+                    {<p className="mt-2 text-sm text-gray-600">
+                        {images.length} / {maxFiles} images uploaded
+                    </p>}
+                </DropZone>
+            )}
             <ImageList
                 images={images}
+                externalImages={externalImages}
                 preferred={preferred}
                 preferredImageId={preferredImageId}
+                readOnly={readOnly}
                 handlers={handlers}
             />
             {carouselOpen && (
                 <Carousel
-                    images={images}
+                    images={allImages}
                     onClose={handlers.closeCarousel}
                 />
             )}

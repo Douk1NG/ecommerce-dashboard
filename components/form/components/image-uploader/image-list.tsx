@@ -5,10 +5,12 @@ import type { ImageFile } from "@/types/components/image-uploader"
 
 interface ImageListProps {
     images: ImageFile[]
+    externalImages: Array<{ url: string, id: string }>
     preferred: {
         enabled: boolean
     }
     preferredImageId: string | null
+    readOnly?: boolean
     handlers: {
         removeImage: (id: string) => void
         setPreferred: (id: string) => void
@@ -18,14 +20,52 @@ interface ImageListProps {
 
 export const ImageList = ({
     images,
+    externalImages,
     preferred,
     preferredImageId,
+    readOnly,
     handlers
 }: ImageListProps) => {
-    if (images.length === 0) return null
+    if (images.length === 0 && externalImages.length === 0) return null
 
     return (
         <div className="mt-4 grid grid-cols-2 gap-4">
+            {externalImages.map((file) => (
+                <div key={file.id} className="relative">
+                    <img
+                        src={file.url}
+                        alt="External image"
+                        className="h-48 w-full object-cover rounded-md cursor-pointer"
+                        onClick={handlers.openCarousel}
+                        title="View image"
+                    />
+                    {!readOnly && (
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => handlers.removeImage(file.id)}
+                            title="Remove image"
+                            className="absolute top-0 right-0 rounded-full"
+                        >
+                            <Icon name="close" />
+                        </Button>
+                    )}
+                    {preferred.enabled && !readOnly && (
+                        <button
+                            type="button"
+                            onClick={() => handlers.setPreferred(file.id)}
+                            className={`absolute bottom-0 right-0 mb-1 mr-1 rounded-full p-1
+                                ${preferredImageId === file.id ? "bg-yellow-500" : "bg-gray-200"}`
+                            }
+                        >
+                            <Icon
+                                name="star"
+                                className={preferredImageId === file.id ? "text-white" : "text-gray-600"}
+                            />
+                        </button>
+                    )}
+                </div>
+            ))}
             {images.map((file) => (
                 <div key={file.id} className="relative">
                     <img
@@ -35,16 +75,18 @@ export const ImageList = ({
                         onClick={handlers.openCarousel}
                         title="View image"
                     />
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => handlers.removeImage(file.id)}
-                        title="Remove image"
-                        className="absolute top-0 right-0 rounded-full"
-                    >
-                        <Icon name="close" />
-                    </Button>
-                    {preferred.enabled && (
+                    {!readOnly && (
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => handlers.removeImage(file.id)}
+                            title="Remove image"
+                            className="absolute top-0 right-0 rounded-full"
+                        >
+                            <Icon name="close" />
+                        </Button>
+                    )}
+                    {preferred.enabled && !readOnly && (
                         <button
                             type="button"
                             onClick={() => handlers.setPreferred(file.id)}

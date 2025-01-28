@@ -13,6 +13,7 @@ interface DropZoneProps {
         change: (e: React.ChangeEvent<HTMLInputElement>) => void
     }
     fileInputRef: React.RefObject<HTMLInputElement>
+    children?: React.ReactNode
 }
 
 export const DropZone = ({
@@ -21,7 +22,8 @@ export const DropZone = ({
     dragActive,
     maxFileSize,
     handlers,
-    fileInputRef
+    fileInputRef,
+    children
 }: DropZoneProps) => {
     return (
         <div
@@ -46,7 +48,7 @@ export const DropZone = ({
             <div className="text-center">
                 <Icon
                     name="upload"
-                    className="mx-auto text-gray-400"
+                    className="mx-auto text-gray-400 w-10 h-10"
                 />
                 <p className="mt-2 text-sm text-gray-600">
                     Drag and drop images here, or click to select files
@@ -59,9 +61,11 @@ export const DropZone = ({
                     variant="secondary"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isLimitReached}
+                    className="mt-2"
                 >
                     Select files
                 </Button>
+                {children}
                 {isLimitReached && (
                     <p className="mt-2 text-sm text-red-500">
                         Maximum number of files reached

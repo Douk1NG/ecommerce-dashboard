@@ -3,6 +3,11 @@ export type ImageFile = File & {
     id: string
 }
 
+export type ExternalImage = {
+    url: string
+    id: string
+}
+
 export type ImageUploaderHandlers = {
     files: (files: FileList) => void
     drag: (e: React.DragEvent<HTMLDivElement>) => void

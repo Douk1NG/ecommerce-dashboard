@@ -9,17 +9,27 @@ type ImageFile = File & {
 interface UseImageUploaderProps {
     maxFiles: number
     maxFileSize: number
+    value?: string | string[]
+    readOnly?: boolean
 }
 
-export const useImageUploader = ({ maxFiles, maxFileSize }: UseImageUploaderProps) => {
+export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: UseImageUploaderProps) => {
     const [images, setImages] = useState<ImageFile[]>([])
+    const [externalImages, setExternalImages] = useState<Array<{url: string, id: string}>>(() => {
+        if (!value) return []
+        const urls = Array.isArray(value) ? value : [value]
+        return urls.map((url) => ({
+            url,
+            id: `external-${url.split('/').pop()}-${Date.now()}`
+        }))
+    })
     const [preferredImageId, setPreferredImageId] = useState<string | null>(null)
     const [dragActive, setDragActive] = useState(false)
     const [carouselOpen, setCarouselOpen] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
-    const isLimitReached = images.length >= maxFiles
-    const isSingleImage = Boolean(images.length && maxFiles === 1)
+    const isLimitReached = (images.length + externalImages.length) >= maxFiles
+    const isSingleImage = Boolean((images.length + externalImages.length) && maxFiles === 1)
 
     const generateUniqueId = useCallback((file: File) => {
         return `${file.name}-${file.lastModified}`
@@ -62,6 +72,14 @@ export const useImageUploader = ({ maxFiles, maxFileSize }: UseImageUploaderProp
         [isLimitReached, maxFileSize, maxFiles, preferredImageId, generateUniqueId],
     )
 
+    const removeExternalImage = useCallback((id: string) => {
+        if (readOnly) return
+        setExternalImages(prev => prev.filter(img => img.id !== id))
+        if (preferredImageId === id) {
+            setPreferredImageId(null)
+        }
+    }, [readOnly, preferredImageId])
+
     const handlers = {
         files: handleFiles,
         drag: useCallback((e: React.DragEvent<HTMLDivElement>) => {
@@ -90,13 +108,18 @@ export const useImageUploader = ({ maxFiles, maxFileSize }: UseImageUploaderProp
             }
         }, [handleFiles]),
         removeImage: useCallback((id: string) => {
-            setImages((prevImages) =>
-                prevImages.filter((image) => image.id !== id)
-            )
-            if (preferredImageId === id) {
-                setPreferredImageId(images.length > 1 ? images[0].id : null)
+            if (readOnly) return
+            if (id.startsWith('external-')) {
+                removeExternalImage(id)
+            } else {
+                setImages((prevImages) =>
+                    prevImages.filter((image) => image.id !== id)
+                )
             }
-        }, [images, preferredImageId]),
+            if (preferredImageId === id) {
+                setPreferredImageId(null)
+            }
+        }, [readOnly, removeExternalImage, preferredImageId]),
         setPreferred: useCallback((id: string) => {
             setPreferredImageId(id)
         }, []),
@@ -110,11 +133,13 @@ export const useImageUploader = ({ maxFiles, maxFileSize }: UseImageUploaderProp
 
     return {
         images,
+        externalImages,
         preferredImageId,
         dragActive,
         carouselOpen,
         isLimitReached,
         isSingleImage,
+        readOnly,
         fileInputRef,
         handlers
     }

@@ -45,8 +45,8 @@ export const getSelectableCategories = async () => {
         const request = await fetch(`${path}?selectable=true`, {
             headers: {
                 'Authorization': `Bearer ${token}`
-        }
-    })
+            }
+        })
         const { body } = await request.json()
         return body
     } catch (error) {

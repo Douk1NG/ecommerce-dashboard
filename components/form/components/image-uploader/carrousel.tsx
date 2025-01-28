@@ -1,8 +1,15 @@
 import { useState } from "react"
 import Icon from "@/components/icon"
 
+interface CarouselImage {
+    id: string
+    preview: string
+    name?: string
+    url?: string
+}
+
 interface CarouselProps {
-    images: { id: string; preview: string; name: string }[]
+    images: CarouselImage[]
     onClose: () => void
 }
 
@@ -23,58 +30,61 @@ export default function Carousel({ images, onClose }: CarouselProps) {
         setCurrentIndex(newIndex)
     }
 
+    const currentImage = images[currentIndex]
+    const imageUrl = currentImage.preview || currentImage.url
+    const imageName = currentImage.name || 'Image'
+
     return (
         <div
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/75 flex items-center justify-center z-50"
             onClick={onClose}
         >
             <div
-                className="relative w-full max-w-4xl flex justify-center"
+                className="relative max-w-7xl w-[90vw] mx-auto"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button
                     onClick={onClose}
-                    className="absolute right-4 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    className="absolute right-2 top-4 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 z-10"
                     type="button"
+                    aria-label="Close gallery"
                 >
-                    <Icon name="close" />
+                    <Icon name="close" className="h-6 w-6 text-black" />
                 </button>
-                <div className="relative max-h-[80vh] max-w-[80vw] overflow-auto">
+
+                <div className="relative h-[80vh] flex items-center justify-center rounded-lg bg-black/20">
                     <img
-                        src={images[currentIndex].preview}
-                        alt={images[currentIndex].name}
-                        className="object-cover"
-                        title={images[currentIndex].name}
+                        src={imageUrl}
+                        alt={imageName}
+                        className="max-h-full max-w-full object-contain rounded-sm"
+                        title={imageName}
+                        loading="eager"
                     />
                 </div>
-                {!isSingleImage && <>
-                    <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+
+                {!isSingleImage && (
+                    <>
                         <button
                             type="button"
                             onClick={goToPrevious}
-                            className="bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            aria-label="Previous image"
                         >
-                            <Icon
-                                name="chevron-left"
-                                className="h-6 w-6 text-black"
-                            />
+                            <Icon name="chevron-left" className="h-6 w-6 text-black" />
                         </button>
-                    </div>
-                    <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
                         <button
                             type="button"
                             onClick={goToNext}
-                            className="bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            aria-label="Next image"
                         >
-                            <Icon
-                                name="chevron-right"
-                                className="h-6 w-6 text-black"
-                            />
+                            <Icon name="chevron-right" className="h-6 w-6 text-black" />
                         </button>
-                    </div>
-                </>}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 bg-opacity-50 px-3 py-1 rounded-full">
-                    <p className="text-white text-sm select-none">
+                    </>
+                )}
+
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+                    <p className="text-white text-sm select-none" role="status">
                         {currentIndex + 1} / {images.length}
                     </p>
                 </div>
