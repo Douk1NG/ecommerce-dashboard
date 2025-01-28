@@ -46,6 +46,7 @@ export default function ImageUploader({
                     enabled: preferred.enabled,
                     id: preferredImageId
                 }}
+                maxFiles={maxFiles}
             />
             {!readOnly && (
                 <DropZone

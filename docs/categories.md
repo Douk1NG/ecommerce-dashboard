@@ -3,10 +3,12 @@
 ## POST `/api/categories`
 
 ### Request Body
+Se omite el campo image si no se quiere actualizar
+Se omite el campo featured_category si no se quiere actualizar
 ```multipart/form-data
 name: "Camiseta"
 description: ""
-featured_category: true
+featured_category: 'on'
 parent_id: '1'
 filters: '[1, 2]'
 image: image.jpg
@@ -26,15 +28,16 @@ image: image.jpg
 ---
 ## POST `/api/categories/:id`
 se omite el campo image si no se quiere actualizar
+Se omite el campo featured_category si no se quiere actualizar
 ### Request Body
 ```multipart/form-data
 id: 1
 name: "Camiseta"
 description: ""
-featured_category: true
+featured_category: 'on'
 parent_id: "1"
 filters: '[1, 2]'
-method: 'PUT'
+_method: 'PUT'
 ```
 
 ## Response Body
@@ -114,7 +117,7 @@ method: 'PUT'
         "id": 1,
         "name": "Ropa",
         "description": "",
-        "featured_category": false,
+        "featured_category": true,
         "parent_id": {
             "value": 1,
             "label": "Ropa"

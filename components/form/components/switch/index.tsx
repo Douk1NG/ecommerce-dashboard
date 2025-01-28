@@ -6,8 +6,8 @@ export default function Component(props: SwitchField) {
         <Switch
             name={props.name}
             className="flex"
-            checked={props.value as boolean}
             disabled={props.readOnly}
+            defaultChecked={props.value as boolean}
         />
     )
 }

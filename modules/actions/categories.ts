@@ -23,7 +23,8 @@ export default async function SaveCategory(
         description: formData.get('description'),
         parent_id: formData.get('parent_id'),
         filters: formData.get('filters'),
-        image: formData.get('image')
+        image: formData.get('image'),
+        featured_category: formData.get('featured_category') === 'on'
     } as CategoryFormData
 
     const parsedFilters = JSON.parse(rawData.filters as string)
@@ -41,10 +42,9 @@ export default async function SaveCategory(
     }
 
     formData.set('filters', JSON.stringify(filters))
-
     if (id) {
         formData.set('id', id)
-        formData.set('method', 'PUT')
+        formData.set('_method', 'PUT')
     }
 
     const {
