@@ -18,8 +18,9 @@ export interface BaseField {
     description?: string;
     placeholder?: string;
     value?: unknown;
-    propagates?: {
-        [x: string]: string;
+    inheritFrom?: {
+        field: string;
+        property: string;
     };
     readOnly?: boolean;
 }

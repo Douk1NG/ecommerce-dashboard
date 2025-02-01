@@ -35,10 +35,15 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filters }) => [
         "name": CONSTANTS.KEYS.FILTERS,
         "description": CONSTANTS.DESCRIPTION.FILTERS,
         "type": "multiselect",
-        "options": filters
+        "options": filters,
+        "inheritFrom": {
+            "field": CONSTANTS.KEYS.PARENT_ID,
+            "property": CONSTANTS.KEYS.FILTERS
+        }
     },
     {
         "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
+
         "name": CONSTANTS.KEYS.FEATURED_CATEGORY,
         "description": CONSTANTS.DESCRIPTION.FEATURED_CATEGORY,
         "type": "switch"

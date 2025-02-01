@@ -44,12 +44,17 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
         "name": CONSTANTS.KEYS.FILTER_COMBINATIONS,
         "description": CONSTANTS.DESCRIPTION.FILTER_COMBINATIONS,
         "type": "group",
+        "inheritFrom": {
+            "field": CONSTANTS.KEYS.CATEGORIES,
+            "property": "filters"
+        },
         "fields": [
             {
                 "label": CONSTANTS.SCHEME.FILTERS,
                 "name": "temp1",
                 "type": "multiselect",
                 "options": []
+
             },
             {
                 "label": CONSTANTS.SCHEME.PRICE,
