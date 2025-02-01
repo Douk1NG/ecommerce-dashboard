@@ -54,7 +54,6 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
                 "name": "temp1",
                 "type": "multiselect",
                 "options": []
-
             },
             {
                 "label": CONSTANTS.SCHEME.PRICE,

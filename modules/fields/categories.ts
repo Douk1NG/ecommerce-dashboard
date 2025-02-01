@@ -25,10 +25,7 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filters }) => [
         "name": CONSTANTS.KEYS.PARENT_ID,
         "description": CONSTANTS.DESCRIPTION.PARENT_ID,
         "type": "select",
-        "options": categories,
-        "propagates": {
-            [CONSTANTS.KEYS.FILTERS]: CONSTANTS.KEYS.FILTERS
-        }
+        "options": categories
     },
     {
         "label": CONSTANTS.SCHEME.FILTERS,
@@ -43,7 +40,6 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filters }) => [
     },
     {
         "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
-
         "name": CONSTANTS.KEYS.FEATURED_CATEGORY,
         "description": CONSTANTS.DESCRIPTION.FEATURED_CATEGORY,
         "type": "switch"
