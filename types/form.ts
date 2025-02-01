@@ -1,9 +1,10 @@
-import { ImageUploaderProps } from "@/components/form/components/image-uploader";
 import type { InputProps } from "@/components/ui/input";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
+import type { ImageUploaderProps } from "@/types/components/image-uploader";
 
-export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select' | 'image';
+export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select' | 'image' | 'group';
+
 
 export type Option = {
     value: string | number;
@@ -14,7 +15,7 @@ export interface BaseField {
     id?: string;
     label: string;
     name: string;
-    description: string;
+    description?: string;
     placeholder?: string;
     value?: unknown;
     propagates?: {
@@ -62,9 +63,15 @@ export type ImageField = BaseField & ImageUploaderProps & {
     type: 'image';
 };
 
+export type GroupField = BaseField & {
+    type: 'group';
+    fields: Field[];
+};
+
 export type Field =
     | TextField
     | TextAreaField
+    | GroupField
     | CurrencyField
     | MultiselectField
     | FileField

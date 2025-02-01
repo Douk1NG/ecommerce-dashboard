@@ -6,7 +6,6 @@ import { getBasePath } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 import { usePathname } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import Field from '@/components/form/field';
 import Icon from '@/components/icon';
 
@@ -69,17 +68,13 @@ const FormBuilder = ({
         >
             {fields.map((item) => (
                 <div className="space-y-2" key={item.name}>
-                    <Label htmlFor={item.name}>
-                        {translations(item.label)}
-                    </Label>
                     <Field
                         {...item}
+                        label={translations(item.label)}
+                        description={translations(item.description ?? '')}
                         value={state.data?.[item.name]}
                         readOnly={isDetail}
                     />
-                    <p className='text-sm text-muted-foreground'>
-                        {translations(item.description)}
-                    </p>
                     {state?.errors?.[item.name] && (
                         <p id={`${item.name}-error`} className="text-sm text-red-500">
                             {state.errors[item.name]?.at(0)}

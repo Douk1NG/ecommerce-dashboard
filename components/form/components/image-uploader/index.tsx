@@ -27,7 +27,12 @@ export default function ImageUploader({
         isSingleImage,
         handlers,
         fileInputRef
-    } = useImageUploader({ maxFiles, maxFileSize, value, readOnly })
+    } = useImageUploader({
+        maxFiles,
+        maxFileSize,
+        value: value as string[],
+        readOnly
+    })
 
     const allImages = [
         ...externalImages.map(img => ({

@@ -21,7 +21,9 @@ const CONSTANTS = {
         ACTIVE: 'active',
         IMAGES: 'images',
         MAIN_IMAGE: 'main_image',
-        RELATED_IMAGES: 'related_images'
+        RELATED_IMAGES: 'related_images',
+        FILTER_COMBINATIONS: 'filter_combinations',
+        FILTERS: 'filters'
     },
     SCHEME: {
         ID: 'scheme.id',
@@ -33,7 +35,9 @@ const CONSTANTS = {
         ACTIVE: 'scheme.active',
         IMAGES: 'scheme.images',
         MAIN_IMAGE: 'scheme.main_image',
-        RELATED_IMAGES: 'scheme.related_images'
+        RELATED_IMAGES: 'scheme.related_images',
+        FILTER_COMBINATIONS: 'scheme.filter_combinations',
+        FILTERS: 'scheme.filters'
     },
     DESCRIPTION: {
         NAME: 'description.name',
@@ -44,7 +48,9 @@ const CONSTANTS = {
         ACTIVE: 'description.active',
         IMAGES: 'description.images',
         MAIN_IMAGE: 'description.main_image',
-        RELATED_IMAGES: 'description.related_images'
+        RELATED_IMAGES: 'description.related_images',
+        FILTER_COMBINATIONS: 'description.filter_combinations',
+        FILTERS: 'description.filters'
     }
 }
 

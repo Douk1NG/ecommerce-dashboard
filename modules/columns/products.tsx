@@ -8,10 +8,6 @@ const columns: ColumnDef<Product>[] = [
         header: "scheme.name",
     },
     {
-        accessorKey: "description",
-        header: "scheme.description",
-    },
-    {
         accessorKey: "price",
         header: "scheme.price",
         cell: ({ row }) => {

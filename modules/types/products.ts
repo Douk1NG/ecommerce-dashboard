@@ -1,37 +1,26 @@
 import { z } from "zod";
 import productSchema from "@/modules/schemas/products";
-import { Fields } from "@/types/form";
 
 export type Product = z.infer<typeof productSchema>;
 
-export type ProductFormProps = {
-    product?: Product;
-    fields: Fields;
-    action: any;
-    translations: string;
+export type TableProps = {
+    dataSource: Product[];
 };
 
-export type ProductTableProps = {
-    dataSource: Product[];
+export type FilterCombination = {
+    price: number;
+    filters: number[];
 }
 
 export type ProductFormData = {
-    id: number;
+    id?: number;
     name: string;
-    description: string;
+    description?: string;
     price: number;
     featured_product: boolean;
     categories: number[];
     active: boolean;
     main_image: File;
     related_images: File[];
+    filter_combinations: FilterCombination[];
 }
-
-export interface ActionResponse {
-    success: boolean;
-    message: string;
-    errors?: {
-        [K in keyof ProductFormData]?: string[];
-    };
-}
-

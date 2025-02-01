@@ -18,3 +18,13 @@ export type ImageUploaderHandlers = {
     openCarousel: () => void
     closeCarousel: () => void
 }
+
+export type ImageUploaderProps = {
+    options: {
+        maxFiles?: number
+        maxFileSize?: number
+        preferred?: {
+            enabled: boolean
+        }
+    }
+}

@@ -89,7 +89,12 @@
             "price": "Price",
             "categories": "Categories",
             "images": "Images",
-            "active": "Active"
+            "active": "Active",
+            "featured_product": "Featured product",
+            "main_image": "Main image",
+            "related_images": "Related images",
+            "filter_combinations": "Filter combination",
+            "filters": "Filters"
         },
         "description": {
             "name": "Set the product name.",
@@ -97,7 +102,11 @@
             "price": "Set the product price.",
             "categories": "Set the product categories.",
             "images": "Set the product images",
-            "active": "Set the product status"
+            "active": "Set the product status",
+            "featured_product": "Set if the product is featured",
+            "main_image": "Set the main image of the product",
+            "related_images": "Set the related images of the product",
+            "filter_combinations": "Set the filter combination of the product"
         },
         "table": {
             "empty": "No products found, to get started, press the add product button.",
