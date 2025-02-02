@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import CONSTANTS from '@/lib/constants'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -35,4 +36,19 @@ export function getBasePath(pathname: string) {
     value: pathname,
     criteria: '/'
   }).slice(0, -1).join('/')
+}
+
+/**
+ * @desc returns the form mode
+**/
+export function getFormMode(searchParams: URLSearchParams, values: any) {
+    const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
+    const isDetail = values && !isEdit
+    const showSaveButton = !isDetail
+
+    return {
+        isEdit,
+        isDetail,
+        showSaveButton
+    }
 }
