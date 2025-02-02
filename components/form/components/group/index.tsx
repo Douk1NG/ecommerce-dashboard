@@ -1,8 +1,10 @@
 import type { GroupField } from "@/types/form";
 import Field from "@/components/form/field";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
+import { useFieldInheritance } from "@/hooks/use-field-inheritance";
+import type { Option } from "@/types/form";
 
 type Group = {
     [key: string]: unknown;
@@ -12,10 +14,16 @@ export default function Component({
     name,
     fields,
     value = [] as Group[],
-    readOnly
-
+    readOnly,
+    inheritFrom
 }: GroupField) {
     const [groups, setGroups] = useState<Group[]>(Array.isArray(value) && value.length > 0 ? value as Group[] : [{}]);
+
+    const inheritanceMethod = useCallback((value: unknown) => {
+        setGroups(value as Option[])
+    }, [])
+
+    useFieldInheritance(inheritFrom, inheritanceMethod)
 
     const addGroup = () => {
         setGroups([...groups, {}]);
@@ -48,7 +56,7 @@ export default function Component({
                                 key={field.name}
                                 {...field}
                                 name={`${name}[${index}][${field.name}]`}
-                                value={groupValue[field.name] }
+                                value={groupValue[field.name]}
                             />
                         ))}
                     </div>

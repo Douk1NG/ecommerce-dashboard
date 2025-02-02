@@ -20,8 +20,21 @@ export const useFieldInheritance = (
 
         if (sourceValue === previousValue.current) return
 
+        if (Array.isArray(sourceValue)) {
+            const valueToInherit = sourceValue.map(item => {
+                if (inheritFrom.property) {
+                    return (item as Record<string, unknown>)?.[inheritFrom.property]
+                }
+                return item
+            }).flat()
+
+            previousValue.current = valueToInherit
+            onInherit(valueToInherit)
+            return
+        }
+
         const valueToInherit = inheritFrom.property
-            ? (sourceValue as any)?.[inheritFrom.property]
+            ? (sourceValue as Record<string, unknown>)?.[inheritFrom.property]
             : sourceValue
 
         previousValue.current = sourceValue
