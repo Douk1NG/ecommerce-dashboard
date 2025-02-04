@@ -19,7 +19,7 @@ export default function Component({
     const { onChange } = useInheritanceContext()
 
     const inheritanceMethod = useCallback((value: unknown) => {
-        // @ts-expect-error
+        // @ts-expect-error - react-select types are overcomplicated
         selectRef.current?.setValue(value, 'select-option')
     }, [])
 

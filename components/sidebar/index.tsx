@@ -54,7 +54,7 @@ const Index = ({ title, children, isNew, onDelete }: PropTypes) => {
     return (
         <div>
             <aside
-                className="fixed right-0 top-0 z-20 h-screen w-full bg-white px-4 border-l-2 border-gray-100 shadow-sm md:w-[50%] grid grid-rows-[50px_1fr] py-2 gap-2 overflow-y-auto"
+                className="fixed right-0 top-0 z-20 h-screen w-full bg-white px-4 border-l-2 border-gray-100 shadow-sm md:w-[60%] grid grid-rows-[50px_1fr] py-2 gap-2 overflow-y-auto"
                 aria-label='sidebar'
             >
                 <div className='flex justify-between items-center'>

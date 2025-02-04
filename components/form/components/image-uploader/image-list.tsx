@@ -1,22 +1,7 @@
 import { formatFileSize } from "@/lib/file"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
-import type { ImageFile } from "@/types/components/image-uploader"
-
-interface ImageListProps {
-    images: ImageFile[]
-    externalImages: Array<{ url: string, id: string }>
-    preferred: {
-        enabled: boolean
-    }
-    preferredImageId: string | null
-    readOnly?: boolean
-    handlers: {
-        removeImage: (id: string) => void
-        setPreferred: (id: string) => void
-        openCarousel: () => void
-    }
-}
+import type { ImageListProps } from "@/types/components/image-uploader"
 
 export const ImageList = ({
     images,

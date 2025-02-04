@@ -1,9 +1,9 @@
+import CurrencyInput from 'react-currency-input-field';
 import { cn, safeParseFloat } from '@/lib/utils';
+import { CurrencyField } from '@/types/form';
 import { useLocale } from 'next-intl';
 
-import CurrencyInput from 'react-currency-input-field';
-
-export default function Component(props: Record<string, unknown>) {
+export default function Component(props: CurrencyField) {
     const locale = useLocale();
 
     // TODO: improve the currency config
@@ -21,12 +21,6 @@ export default function Component(props: Record<string, unknown>) {
 
     const { value } = props;
 
-    const handleChange = (_value?: string, _name?: string, values?: Record<string, unknown>) => {
-        if (typeof props.onChange === 'function') {
-            props.onChange(values?.float);
-        }
-    }
-
     return (
         <CurrencyInput
             className={cn(
@@ -34,9 +28,8 @@ export default function Component(props: Record<string, unknown>) {
             )}
             intlConfig={intlConfig}
             step={intlConfig.step}
-            defaultValue={safeParseFloat(value)}
+            defaultValue={safeParseFloat(value) as string}
             allowNegativeValue={false}
-            onValueChange={handleChange}
         />
     )
 }

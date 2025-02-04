@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
-import type { Option } from "@/types/form";
+import type { Option } from "@/types/components/select";
 
 type Group = {
     [key: string]: unknown;
@@ -13,14 +13,14 @@ type Group = {
 export default function Component({
     name,
     fields,
-    value = [] as Group[],
     readOnly,
     inheritFrom
 }: GroupField) {
-    const [groups, setGroups] = useState<Group[]>(Array.isArray(value) && value.length > 0 ? value as Group[] : [{}]);
+    const [groups, setGroups] = useState<Group[]>([{}]);
+    const [options, setOptions] = useState<Option[]>([])
 
     const inheritanceMethod = useCallback((value: unknown) => {
-        setGroups(value as Option[])
+        setOptions(value as Option[])
     }, [])
 
     useFieldInheritance(inheritFrom, inheritanceMethod)
@@ -43,20 +43,21 @@ export default function Component({
                     onClick={addGroup}
                     className="hover:text-green-800 hover:bg-green-50 w-fit self-end"
                 >
-
-
                     Agregar
                 </Button>
             )}
             {groups.map((groupValue, index) => (
-                <div key={index} className="flex items-end gap-2 border p-4 rounded relative">
+                <div
+                    key={index}
+                    className="flex items-end gap-2 border p-4 rounded relative"
+                >
                     <div className="flex-1 flex gap-2">
-                        {fields.map((field) => (
+                        {fields.map((field, index) => (
+                            //@ts-ignore todo
                             <Field
-                                key={field.name}
+                                key={index}
+                                name={`${name}[]`}
                                 {...field}
-                                name={`${name}[${index}][${field.name}]`}
-                                value={groupValue[field.name]}
                             />
                         ))}
                     </div>

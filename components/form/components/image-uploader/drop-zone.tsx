@@ -1,20 +1,7 @@
 import { formatFileSize } from "@/lib/file"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
-
-interface DropZoneProps {
-    isLimitReached: boolean
-    isSingleImage: boolean
-    dragActive: boolean
-    maxFileSize: number
-    handlers: {
-        drag: (e: React.DragEvent<HTMLDivElement>) => void
-        drop: (e: React.DragEvent<HTMLDivElement>) => void
-        change: (e: React.ChangeEvent<HTMLInputElement>) => void
-    }
-    fileInputRef: React.RefObject<HTMLInputElement>
-    children?: React.ReactNode
-}
+import type { DropZoneProps } from "@/types/components/image-uploader"
 
 export const DropZone = ({
     isLimitReached,

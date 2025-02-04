@@ -1,18 +1,9 @@
-import type { ImageFile } from "@/types/components/image-uploader"
-
-interface HiddenInputsProps {
-    images: ImageFile[]
-    name: string
-    preferred: {
-        enabled: boolean
-        id: string | null
-    },
-    maxFiles: number
-}
+import type { HiddenInputsProps } from "@/types/components/image-uploader"
 
 export const HiddenInputs = ({ images, name, preferred, maxFiles }: HiddenInputsProps) => {
     const inputName = maxFiles > 1 ? `${name}[]` : name
     return (
+
         <>
             {images.map((file) => (
                 <input

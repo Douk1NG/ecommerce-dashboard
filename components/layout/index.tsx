@@ -1,17 +1,8 @@
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
+import type { LayoutContentProps } from "@/types/layout"
 
-interface PropsType {
-    title?: string
-    description?: string
-    action?: {
-        title: string
-        href: string
-    }
-    children: React.ReactNode
-}
-
-const Index = ({ title, description, action, children }: PropsType) => {
+const Index = ({ title, description, action, children }: LayoutContentProps) => {
     return (
         <>
             <div className="flex items-center justify-between space-y-2 mb-4 px-4 py-6 lg:px-8">

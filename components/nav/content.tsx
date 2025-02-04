@@ -14,9 +14,9 @@ import {
 import { useTranslations } from "next-intl"
 import { translations } from "@/i18n/request"
 import Icon from "@/components/icon"
-import { Icons } from "@/types/icon"
 import { usePathname } from "@/i18n/routing"
 import navItems from "@/lib/navigation"
+import { Icons } from "@/types/icon"
 
 const isActive = (pathname: string, link: string) => {
     return pathname.includes(link);

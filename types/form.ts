@@ -2,14 +2,9 @@ import type { InputProps } from "@/components/ui/input";
 import type { SwitchProps } from "@radix-ui/react-switch";
 import type { CurrencyInputProps } from "react-currency-input-field";
 import type { ImageUploaderProps } from "@/types/components/image-uploader";
+import type { Option } from "@/types/components/select";
 
 export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select' | 'image' | 'group';
-
-
-export type Option = {
-    value: string | number;
-    label: string;
-}
 
 export interface BaseField {
     id?: string;
@@ -47,10 +42,6 @@ export type MultiselectField = BaseField & {
     options?: Option[];
 };
 
-export type FileField = BaseField & Omit<InputProps, 'type' | 'value'> & {
-    type: 'file';
-};
-
 export type SwitchField = BaseField & Omit<SwitchProps, 'type' | 'value'> & {
     type: 'switch';
 };
@@ -66,7 +57,7 @@ export type ImageField = BaseField & ImageUploaderProps & {
 
 export type GroupField = BaseField & {
     type: 'group';
-    fields: Field[];
+    fields: Omit<Field, 'name'>[];
 };
 
 export type Field =
@@ -75,7 +66,6 @@ export type Field =
     | GroupField
     | CurrencyField
     | MultiselectField
-    | FileField
     | SwitchField
     | SelectField
     | TagboxField

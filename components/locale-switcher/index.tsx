@@ -1,7 +1,6 @@
 'use client'
-import { useTransition } from 'react'
-import { useParams } from "next/navigation"
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 
 import {
     DropdownMenu,
@@ -15,35 +14,15 @@ import {
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
 
-import { type Locale, locales, usePathname, useRouter } from "@/i18n/routing"
+import { type Locale, locales} from "@/i18n/routing"
 import { translations } from '@/i18n/request'
 
 const LocaleSwitcher = () => {
     const t = useTranslations(translations.header);
-    const locale = useLocale();
-    const router = useRouter();
-    const pathname = usePathname();
-    const params = useParams();
-    const [isPending, startTransition] = useTransition();
+    const { locale, isPending, switchLocale } = useLocaleSwitcher();
 
     function handleLocaleChange(event: React.MouseEvent<HTMLDivElement>): void {
-        const newLocale = event.currentTarget.id as Locale;
-        if (newLocale === locale) return;
-
-        document.cookie.replace(
-            new RegExp(`(^| )locale=([^;]+)(;|$)`),
-            `$1locale=${newLocale}$3`
-        )
-
-        startTransition(() => {
-            router.replace(
-                // @ts-expect-error
-                { pathname, params },
-                { locale: newLocale }
-            );
-
-            router.refresh();
-        });
+        switchLocale(event.currentTarget.id as Locale);
     }
 
     return (

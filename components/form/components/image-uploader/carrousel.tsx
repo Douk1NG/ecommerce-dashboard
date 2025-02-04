@@ -1,17 +1,6 @@
 import { useState } from "react"
 import Icon from "@/components/icon"
-
-interface CarouselImage {
-    id: string
-    preview: string
-    name?: string
-    url?: string
-}
-
-interface CarouselProps {
-    images: CarouselImage[]
-    onClose: () => void
-}
+import type { CarouselProps } from "@/types/components/image-uploader"
 
 export default function Carousel({ images, onClose }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0)

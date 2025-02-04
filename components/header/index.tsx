@@ -1,7 +1,7 @@
 "use client";
-import React from 'react';
-import { useMemo } from 'react';
+import { Fragment } from 'react';
 import { Separator } from '@/components/ui/separator';
+
 import {
     Breadcrumb,
     BreadcrumbList,
@@ -12,39 +12,39 @@ import {
 } from '@/components/ui/breadcrumb';
 
 import { SidebarTrigger } from '@/components/ui/sidebar';
-
+import { useBreadcrumbPath } from '@/hooks/use-breadcrumb-path';
 import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/routing';
 
 import CONSTANTS from '@/lib/constants';
-import links from '@/lib/navigation';
 import type { NavItem } from '@/types/nav';
 
-const useBreadcrumbPath = (currentUrl: string) => {
-    return useMemo(() => {
-        const findBreadcrumbPath = (
-            items: NavItem[],
-            url: string,
-            path: NavItem[] = []
-        ): NavItem[] | null => {
-
-            for (const item of items) {
-                const newPath = [...path, item];
-
-                if (url.includes(item.url)) {
-                    return newPath;
-                }
-
-                if (item.items) {
-                    const result = findBreadcrumbPath(item.items, url, newPath);
-                    if (result) return result;
-                }
-            }
-            return null;
-        };
-
-        return findBreadcrumbPath(links, currentUrl);
-    }, [currentUrl]);
+const BreadcrumbContent = ({ breadcrumbPath, t }: {
+    breadcrumbPath: NavItem[] | null,
+    t: (key: string) => string
+}) => {
+    return (
+        <Breadcrumb>
+            <BreadcrumbList>
+                {breadcrumbPath?.map((crumb, index) => (
+                    index === breadcrumbPath.length - 1 ? (
+                        <BreadcrumbItem key={crumb.url}>
+                            <BreadcrumbPage>{t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}</BreadcrumbPage>
+                        </BreadcrumbItem>
+                    ) : (
+                        <Fragment key={crumb.url}>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href={crumb.url}>
+                                    {t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator key={`separator-${crumb.url}`} />
+                        </Fragment>
+                    )
+                ))}
+            </BreadcrumbList>
+        </Breadcrumb>
+    );
 };
 
 const Header = () => {
@@ -59,26 +59,7 @@ const Header = () => {
             </SidebarTrigger>
 
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-                <BreadcrumbList>
-                    {breadcrumbPath?.map((crumb, index) => (
-                        index === breadcrumbPath.length - 1 ? (
-                            <BreadcrumbItem key={crumb.url}>
-                                <BreadcrumbPage>{t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        ) : (
-                            <React.Fragment key={crumb.url}>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink href={crumb.url}>
-                                        {t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator key={`separator-${crumb.url}`} />
-                            </React.Fragment>
-                        )
-                    ))}
-                </BreadcrumbList>
-            </Breadcrumb>
+            <BreadcrumbContent breadcrumbPath={breadcrumbPath} t={t} />
         </div>
     );
 };

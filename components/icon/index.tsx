@@ -1,35 +1,13 @@
 import { Icons } from "@/types/icon";
-
-// prettier-ignore
-import {
-    ComponentProps,
-    Suspense,
-    lazy,
-    useMemo
-} from "react";
+import { ComponentProps, Suspense, useMemo } from "react";
+import { useIcon } from "@/hooks/use-icon";
 
 interface LazySvgProps extends ComponentProps<"svg"> {
     name: Icons;
 }
 
-const cachedIcons: Record<Icons, React.LazyExoticComponent<any>> = {} as Record<Icons, React.LazyExoticComponent<any>>;
-
-const loadIcon = (name: Icons) => {
-    if (!cachedIcons[name]) {
-        cachedIcons[name] = lazy(() =>
-            import(`@/public/icons/${name}.svg`)
-                .catch(() => {
-                    return {
-                        default: () => <span title={`Icon ${name} not found`}>⚠️</span>
-                    };
-                })
-        );
-    }
-    return cachedIcons[name];
-};
-
 const Icon = ({ name, ...props }: LazySvgProps) => {
-    const SVG = useMemo(() => loadIcon(name), [name]);
+    const SVG = useMemo(() => useIcon(name), [name]);
 
     return (
         <Suspense fallback={<span className="icon-loading" />}>
@@ -37,6 +15,5 @@ const Icon = ({ name, ...props }: LazySvgProps) => {
         </Suspense>
     );
 };
-
 
 export default Icon;

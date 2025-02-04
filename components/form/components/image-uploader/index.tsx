@@ -7,22 +7,26 @@ import type { ImageField } from "@/types/form"
 
 export default function ImageUploader({
     name,
-    options: {
+    options,
+    value,
+    readOnly
+}: ImageField) {
+
+    const {
         maxFiles = 5,
         maxFileSize = 5 * 1024 * 1024,
         preferred = {
             enabled: false
         }
-    },
-    value,
-    readOnly
-}: ImageField) {
+    } = options || {}
+
     const {
         images,
         externalImages,
         preferredImageId,
         dragActive,
         carouselOpen,
+
         isLimitReached,
         isSingleImage,
         handlers,

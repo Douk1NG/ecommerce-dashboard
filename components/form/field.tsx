@@ -1,14 +1,13 @@
-import { Label } from "@/components/ui/label";
 import Text from "./components/text";
 import Textarea from "./components/textarea";
 import Currency from "./components/currency";
 import MultiSelect from "./components/multiselect";
-import File from "./components/file";
 import Switch from "./components/switch";
 import Tagbox from "./components/tagbox";
 import Select from "./components/select";
 import ImageUploader from "./components/image-uploader";
 import Group from "./components/group";
+import { Label } from "@/components/ui/label";
 
 import type { Field } from "@/types/form";
 
@@ -17,7 +16,6 @@ const Components = {
     textarea: Textarea,
     currency: Currency,
     multiselect: MultiSelect,
-    file: File,
     switch: Switch,
     tagbox: Tagbox,
     select: Select,

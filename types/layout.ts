@@ -21,3 +21,13 @@ export type PageProps = {
 export type StaticPageProps = {
     locale: string
 }
+
+export type LayoutContentProps = {
+    title?: string
+    description?: string
+    action?: {
+        title: string
+        href: string
+    }
+    children: React.ReactNode
+}
