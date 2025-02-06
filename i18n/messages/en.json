@@ -106,7 +106,8 @@
             "featured_product": "Set if the product is featured",
             "main_image": "Set the main image of the product",
             "related_images": "Set the related images of the product",
-            "filter_combinations": "Set the filter combination of the product"
+            "filter_combinations": "Set the filter combination of the product",
+            "filters": "Set the filters of the product"
         },
         "table": {
             "empty": "No products found, to get started, press the add product button.",

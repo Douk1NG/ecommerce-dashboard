@@ -25,8 +25,6 @@ export default function Tagbox({
         removeTag
     } = useTagbox(value as Tag[])
 
-    console.log(tags)
-
     return (
         <div className="space-y-4">
             <div className="flex space-x-2">

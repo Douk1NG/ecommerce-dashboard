@@ -107,7 +107,8 @@
             "featured_product": "Establece si el producto es destacado",
             "main_image": "Establece la imagen principal del producto",
             "related_images": "Establece las imágenes relacionadas del producto",
-            "filter_combinations": "Establece la combinación de filtros del producto"
+            "filter_combinations": "Establece la combinación de filtros del producto",
+            "filters": "Establece los filtros del producto"
         },
         "table": {
             "empty": "No se han encontrado productos, para comenzar, presiona el botón agregar producto",

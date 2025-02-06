@@ -1,6 +1,6 @@
 import { Fields } from '@/types/form';
 import CONSTANTS from '@/modules/constants/products';
-import type { Option } from "@/types/form";
+import type { Option } from "@/types/components/select";
 
 type FieldsProps = {
     categories: Option[]
@@ -43,11 +43,21 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
         "label": CONSTANTS.SCHEME.FILTER_COMBINATIONS,
         "name": CONSTANTS.KEYS.FILTER_COMBINATIONS,
         "description": CONSTANTS.DESCRIPTION.FILTER_COMBINATIONS,
-        "type": "tagbox",
+        "type": "group",
         "inheritFrom": {
             "field": CONSTANTS.KEYS.CATEGORIES,
             "property": "filters"
-        }
+        },
+        "fields": [
+            {
+                "label": CONSTANTS.SCHEME.FILTERS,
+                "type": "multiselect"
+            },
+            {
+                "label": CONSTANTS.SCHEME.PRICE,
+                "type": "currency"
+            }
+        ]
     },
     {
         "label": CONSTANTS.SCHEME.IMAGES,
