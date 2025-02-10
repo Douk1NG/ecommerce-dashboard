@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRef, useCallback } from 'react'
 import { useInheritanceContext } from '@/context/InheritanceProvider'
+import { useDebouncedCallback } from 'use-debounce'
 import { useFieldInheritance } from '@/hooks/use-field-inheritance'
 import type { MultiselectField } from '@/types/form'
 
@@ -12,11 +13,13 @@ export default function Component({
     name,
     placeholder = '',
     readOnly,
-    inheritFrom
+    inheritFrom,
+    onChange: innerOnChange
 }: MultiselectField) {
     const inputRef = useRef<HTMLInputElement>(null)
     const selectRef = useRef(null)
-    const { onChange } = useInheritanceContext()
+
+    const { onChange: onChangeInheritance } = useInheritanceContext()
 
     const inheritanceMethod = useCallback((value: unknown) => {
         // @ts-expect-error - react-select types are overcomplicated
@@ -25,12 +28,14 @@ export default function Component({
 
     useFieldInheritance(inheritFrom, inheritanceMethod)
 
-    const handleChange = (value: unknown) => {
+    const handleChange = useDebouncedCallback((value: unknown) => {
         if (inputRef.current) {
             inputRef.current.value = JSON.stringify(value)
         }
-        onChange(name, value)
-    }
+        onChangeInheritance(name, value)
+        innerOnChange?.(value)
+    }, 400)
+
 
     return (
         <>

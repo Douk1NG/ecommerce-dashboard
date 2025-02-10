@@ -2,7 +2,7 @@
 import fields from '@/modules/fields/categories';
 import SaveCategory, { DeleteCategory } from "@/modules/actions/categories";
 import FormBuilder from '@/components/form';
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/categories";
 import { useTranslations } from 'next-intl';
 import type { Category } from '@/modules/types/categories';

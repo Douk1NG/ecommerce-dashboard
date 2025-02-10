@@ -7,6 +7,6 @@ export const formatFileSize = (bytes: number): string => {
 }
 
 export const isValidFileType = (file: File): boolean => {
-    const acceptedTypes = ["image/jpeg", "image/png", "image/gif"]
+    const acceptedTypes = ["image/jpeg", "image/png", "image/webp"]
     return acceptedTypes.includes(file.type)
 }

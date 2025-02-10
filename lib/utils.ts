@@ -52,3 +52,12 @@ export function getFormMode(searchParams: URLSearchParams, values: any) {
         showSaveButton
     }
 }
+
+/**
+ * @desc returns a unique array by a key
+**/
+export function getUniqueByKey<T extends Record<string, unknown>>(array: T[], key: string) {
+  return array.filter((item, index, self) =>
+      index === self.findIndex((t) => t[key] === item[key])
+  );
+};

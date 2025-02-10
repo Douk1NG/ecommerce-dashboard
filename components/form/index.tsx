@@ -51,7 +51,6 @@ const FormBuilder = ({
                         />
                         <FieldError
                             id={item.name}
-                            // @ts-expect-error
                             error={state?.errors?.[item.name]?.at(0)}
                         />
                     </div>

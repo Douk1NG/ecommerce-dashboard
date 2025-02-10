@@ -1,10 +1,7 @@
-import type { InputProps } from "@/components/ui/input";
-import type { SwitchProps } from "@radix-ui/react-switch";
-import type { CurrencyInputProps } from "react-currency-input-field";
 import type { ImageUploaderProps } from "@/types/components/image-uploader";
 import type { Option } from "@/types/components/select";
 
-export type FieldType = 'text' | 'textarea' | 'currency' | 'multiselect' | 'file' | 'switch' | 'tagbox' | 'select' | 'image' | 'group';
+export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multiselect' | 'switch' | 'tagbox' | 'image' | 'group';
 
 export interface BaseField {
     id?: string;
@@ -18,37 +15,39 @@ export interface BaseField {
         property: string;
     };
     readOnly?: boolean;
+    onChange?: (value: unknown) => void;
 }
 
-export type TextField = BaseField & Omit<InputProps, 'type' | 'value'> & {
+export interface WithOptions {
+    options?: Option[];
+}
+
+export type TextField = BaseField & {
     type: 'text';
 };
 
-export type SelectField = BaseField & {
+export type SelectField = BaseField & WithOptions & {
     type: 'select';
-    options?: Option[];
 };
 
-export type TextAreaField = BaseField & Omit<InputProps, 'type' | 'value'> & {
+export type TextAreaField = BaseField & {
     type: 'textarea';
 };
 
-export type CurrencyField = BaseField & Omit<CurrencyInputProps, 'type' | 'value'> & {
+export type CurrencyField = BaseField & {
     type: 'currency';
 };
 
-export type MultiselectField = BaseField & {
+export type MultiselectField = BaseField & WithOptions & {
     type: 'multiselect';
-    options?: Option[];
 };
 
-export type SwitchField = BaseField & Omit<SwitchProps, 'type' | 'value'> & {
+export type SwitchField = BaseField & {
     type: 'switch';
 };
 
 export type TagboxField = BaseField & {
     type: 'tagbox';
-    readOnly?: boolean;
 };
 
 export type ImageField = BaseField & ImageUploaderProps & {
@@ -57,7 +56,6 @@ export type ImageField = BaseField & ImageUploaderProps & {
 
 export type GroupField = BaseField & {
     type: 'group';
-    fields: Omit<Field, 'name'>[];
 };
 
 export type Field =
@@ -77,7 +75,7 @@ export type ActionResponse = {
     success: boolean;
     message: string;
     errors?: {
-        [x: string]: string[] | undefined
+        [x: string]: string[] | undefined;
     };
     data: Record<string, unknown>;
 }
@@ -85,6 +83,10 @@ export type ActionResponse = {
 export type FormProps = {
     values?: Record<string, unknown>;
     fields: Fields;
-    action: (id: string | undefined, prevState: ActionResponse | null, formData: FormData) => Promise<ActionResponse>;
+    action: (
+        id: string | undefined,
+        prevState: ActionResponse | null,
+        formData: FormData
+    ) => Promise<ActionResponse>;
     translations: (key: string) => string;
 }

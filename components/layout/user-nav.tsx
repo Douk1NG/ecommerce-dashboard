@@ -23,8 +23,9 @@ import { translations } from '@/i18n/request';
 import type { UserNavProps } from "@/types/nav";
 
 const user = {
-    "username": "Dibey Valencia",
-    "email": "dialexanderx@gmail.com"
+    "username": "username",
+    "email": "example@email.com",
+    "avatar": "/images/avatar.jpg"
 }
 
 const UserNav = (props: UserNavProps) => {
@@ -42,7 +43,7 @@ const UserNav = (props: UserNavProps) => {
                     >
                         <Avatar className="h-8 w-8">
                             <AvatarImage
-                                src="/images/avatar.png"
+                                src={user.avatar}
                                 alt="@shadcn"
                             />
                             <AvatarFallback>AI</AvatarFallback>

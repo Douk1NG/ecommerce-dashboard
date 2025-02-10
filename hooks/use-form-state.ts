@@ -2,6 +2,7 @@ import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from '@/hooks/use-toast'
 import { getBasePath } from '@/lib/utils'
+import type { ActionResponse } from '@/types/form'
 
 export function useFormState(action: any, values: any, pathname: string) {
     const router = useRouter()
@@ -15,7 +16,7 @@ export function useFormState(action: any, values: any, pathname: string) {
         message: '',
         errors: {},
         data: values
-    })
+    } as ActionResponse)
 
     useEffect(() => {
         if (state.success) {

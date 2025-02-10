@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import Nav from "@/components/nav";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster"
 import { Locale } from '@/i18n/routing';
 

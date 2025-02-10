@@ -2,7 +2,7 @@ import CurrencyInput from 'react-currency-input-field';
 import { cn, safeParseFloat } from '@/lib/utils';
 import { CurrencyField } from '@/types/form';
 import { useLocale } from 'next-intl';
-
+import { useDebouncedCallback } from 'use-debounce'
 export default function Component(props: CurrencyField) {
     const locale = useLocale();
 
@@ -19,7 +19,11 @@ export default function Component(props: CurrencyField) {
         intlConfig.step = 1;
     }
 
-    const { value } = props;
+    const { value, onChange } = props;
+
+    const handleChange = useDebouncedCallback((_value?: string, _name?: string, values?: Record<string, unknown>) => {
+        onChange?.(values?.float);
+    }, 400)
 
     return (
         <CurrencyInput
@@ -30,6 +34,8 @@ export default function Component(props: CurrencyField) {
             step={intlConfig.step}
             defaultValue={safeParseFloat(value) as string}
             allowNegativeValue={false}
+            name={props.name}
+            onValueChange={handleChange}
         />
     )
 }

@@ -47,17 +47,7 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
         "inheritFrom": {
             "field": CONSTANTS.KEYS.CATEGORIES,
             "property": "filters"
-        },
-        "fields": [
-            {
-                "label": CONSTANTS.SCHEME.FILTERS,
-                "type": "multiselect"
-            },
-            {
-                "label": CONSTANTS.SCHEME.PRICE,
-                "type": "currency"
-            }
-        ]
+        }
     },
     {
         "label": CONSTANTS.SCHEME.IMAGES,

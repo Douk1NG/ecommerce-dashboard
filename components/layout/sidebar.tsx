@@ -1,6 +1,6 @@
 'use client'
 
-import Confirm from '@/components/confirm';
+import Confirm from '@/components/layout/confirm';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/icon';
 

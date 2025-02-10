@@ -2,7 +2,7 @@
 import fields from '@/modules/fields/filters';
 import SaveFilter, { DeleteFilter } from "@/modules/actions/filters";
 import FormBuilder from '@/components/form';
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/filters";
 import { useTranslations } from 'next-intl';
 import type { Filter } from '@/modules/types/filters';

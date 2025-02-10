@@ -7,9 +7,9 @@ import {
     SidebarFooter
 } from "@/components/ui/sidebar"
 
-import Title from "@/components/title"
-import UserNav from "@/components/user-nav"
-import LocaleSwitcher from "@/components/locale-switcher"
+import Title from "@/components/layout/title"
+import UserNav from "@/components/layout/user-nav"
+import LocaleSwitcher from "@/components/layout/locale-switcher"
 
 import Content from "./content"
 

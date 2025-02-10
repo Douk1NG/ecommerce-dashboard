@@ -20,7 +20,7 @@ export function useLocaleSwitcher() {
 
         startTransition(() => {
             router.replace(
-                // @ts-expect-error
+                // @ts-expect-error poor handling of params from library
                 { pathname, params },
                 { locale: newLocale }
             );

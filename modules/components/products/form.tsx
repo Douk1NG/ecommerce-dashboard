@@ -2,7 +2,7 @@
 import fields from '@/modules/fields/products';
 import SaveProduct, { DeleteProduct } from "@/modules/actions/products";
 import FormBuilder from '@/components/form';
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/products";
 import { useTranslations } from 'next-intl';
 import type { Product } from '@/modules/types/products';

@@ -1,27 +1,38 @@
-import type { GroupField } from "@/types/form";
 import Field from "@/components/form/field";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useFieldInheritance } from "@/hooks/use-field-inheritance";
 import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
-import { useFieldInheritance } from "@/hooks/use-field-inheritance";
+import { getUniqueByKey } from "@/lib/utils";
+
 import type { Option } from "@/types/components/select";
+import type { GroupField } from "@/types/form";
 
 type Group = {
-    [key: string]: unknown;
+    id?: number;
+    filters?: string[];
+    price?: number;
+    index?: number;
 }
 
 export default function Component({
     name,
-    fields,
     readOnly,
-    inheritFrom
+    inheritFrom,
+    value: defaultValue
 }: GroupField) {
-    const [groups, setGroups] = useState<Group[]>([{}]);
-    const [options, setOptions] = useState<Option[]>([])
+    const [groups, setGroups] = useState<Group[]>(defaultValue as Group[] ?? [{}]);
+    const [options, setOptions] = useState<Option[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const inheritanceMethod = useCallback((value: unknown) => {
-        setOptions(value as Option[])
-    }, [])
+        const uniqueOptions = Array.isArray(value) ? getUniqueByKey(value as Option[], 'value') : []
+
+        if (JSON.stringify(options) !== JSON.stringify(uniqueOptions)) {
+            setOptions(uniqueOptions)
+        }
+
+    }, [options])
 
     useFieldInheritance(inheritFrom, inheritanceMethod)
 
@@ -31,6 +42,22 @@ export default function Component({
 
     const removeGroup = (index: number) => {
         setGroups(groups.filter((_, i) => i !== index));
+    };
+
+    const handleChange = (value: unknown, index: number, id: unknown) => {
+        const updatedGroups = [...groups];
+        const field = Array.isArray(value) ? 'filters' : 'price';
+
+        updatedGroups[index] = {
+            ...updatedGroups[index],
+            id: id as number,
+            [field]: value
+        };
+
+        setGroups(updatedGroups);
+        if (inputRef.current) {
+            inputRef.current.value = JSON.stringify(updatedGroups);
+        }
     };
 
     return (
@@ -46,37 +73,48 @@ export default function Component({
                     Agregar
                 </Button>
             )}
-            {groups.map((groupValue, index) => (
+            <input
+                ref={inputRef}
+                type="hidden"
+                name={name}
+                value={JSON.stringify(defaultValue)}
+            />
+            {groups.map((group, index) => (
                 <div
                     key={index}
                     className="flex items-end gap-2 border p-4 rounded relative"
                 >
                     <div className="flex-1 flex gap-2">
-                        {fields.map((field, index) => (
-                            //@ts-ignore todo
-                            <Field
-                                key={index}
-                                name={`${name}[]`}
-                                {...field}
-                            />
-                        ))}
+                        <Field
+                            label="Filtros"
+                            name={`${name}_filters_${index}`}
+                            options={options}
+                            type="multiselect"
+                            value={group.filters}
+                            onChange={(value: unknown) => handleChange(value, index, group.id)}
+                        />
+                        <Field
+                            label="Precio"
+                            name={`${name}_price_${index}`}
+                            type="currency"
+                            value={group.price}
+                            onChange={(value: unknown) => handleChange(value, index, group.id)}
+                        />
                     </div>
-                    {!readOnly && (
+                    {(!readOnly && groups.length > 1) && (
                         <Button
                             type="button"
                             variant="ghost"
                             size="icon"
                             onClick={() => removeGroup(index)}
                             className="absolute top-0 right-0 rounded-full hover:text-red-800 hover:bg-red-50"
+                            title="Eliminar grupo"
                         >
                             <Icon name="trash" />
                         </Button>
-
                     )}
                 </div>
             ))}
         </div>
-
     );
-
 }

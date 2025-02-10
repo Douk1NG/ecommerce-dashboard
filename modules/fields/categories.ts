@@ -1,6 +1,6 @@
 import { Fields } from '@/types/form';
 import CONSTANTS from "@/modules/constants/categories";
-import type { Option } from "@/types/form";
+import type { Option } from "@/types/components/select";
 
 type FieldsProps = {
     categories: Option[],

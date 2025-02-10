@@ -39,6 +39,7 @@ export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: Use
         (files: FileList) => {
             if (isLimitReached) return
 
+            // todo: add error handling when file is not valid
             const validFiles = Array.from(files).filter((file) =>
                 isValidFileType(file) && file.size <= maxFileSize
             )
