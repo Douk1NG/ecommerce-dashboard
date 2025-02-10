@@ -66,7 +66,8 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
         "label": CONSTANTS.SCHEME.ACTIVE,
         "name": CONSTANTS.KEYS.ACTIVE,
         "description": CONSTANTS.DESCRIPTION.ACTIVE,
-        "type": "switch"
+        "type": "switch",
+        "defaultValue": true
     }
 ]
 
