@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce'
 export default function Component(props: CurrencyField) {
     const locale = useLocale();
+    const { value, id, name, onChange } = props;
 
     // TODO: improve the currency config
     const intlConfig = {
@@ -19,14 +20,13 @@ export default function Component(props: CurrencyField) {
         intlConfig.step = 1;
     }
 
-    const { value, onChange } = props;
-
     const handleChange = useDebouncedCallback((_value?: string, _name?: string, values?: Record<string, unknown>) => {
         onChange?.(values?.float);
     }, 400)
 
     return (
         <CurrencyInput
+            id={id ?? name}
             className={cn(
                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             )}

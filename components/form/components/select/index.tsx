@@ -19,6 +19,7 @@ const Component = ({
 
     return (
         <Select
+            id={name}
             options={options}
             defaultValue={value}
             name={name}

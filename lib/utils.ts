@@ -61,3 +61,42 @@ export function getUniqueByKey<T extends Record<string, unknown>>(array: T[], ke
       index === self.findIndex((t) => t[key] === item[key])
   );
 };
+
+/**
+ * @desc returns a parsed JSON
+**/
+export const safeParseJSON = (value: unknown) => {
+  if(typeof value === 'string') {
+    return JSON.parse(value)
+  }
+  return value
+}
+
+/**
+ * @desc clean symbols from a string
+ */
+export const cleanSymbols = (value: string) => {
+  return value.replace(/[^\w\s]/g, '')
+}
+
+/**
+ * @desc returns a parsed number
+ */
+export const safeParseNumber = (value: unknown) => {
+  if(typeof value === 'string') {
+    return Number(cleanSymbols(value))
+  }
+
+  return value
+}
+
+/**
+ * @desc returns a parsed boolean
+ */
+export const safeParseBoolean = (value: unknown) => {
+  if(typeof value === 'string') {
+    return Boolean(value)
+  }
+
+  return value
+}

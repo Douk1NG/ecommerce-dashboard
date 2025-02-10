@@ -1,27 +1,16 @@
-import { useState } from "react"
 import Icon from "@/components/icon"
+import { useCarousel } from "@/hooks/use-carrousel"
 import type { CarouselProps } from "@/types/components/image-uploader"
 
 export default function Carousel({ images, onClose }: CarouselProps) {
-    const [currentIndex, setCurrentIndex] = useState(0)
-
-    const isSingleImage = images.length === 1
-
-    const goToPrevious = () => {
-        const isFirstSlide = currentIndex === 0
-        const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1
-        setCurrentIndex(newIndex)
-    }
-
-    const goToNext = () => {
-        const isLastSlide = currentIndex === images.length - 1
-        const newIndex = isLastSlide ? 0 : currentIndex + 1
-        setCurrentIndex(newIndex)
-    }
-
-    const currentImage = images[currentIndex]
-    const imageUrl = currentImage.preview || currentImage.url
-    const imageName = currentImage.name || 'Image'
+    const {
+        currentIndex,
+        isSingleImage,
+        goToPrevious,
+        goToNext,
+        imageUrl,
+        imageName
+    } = useCarousel(images)
 
     return (
         <div

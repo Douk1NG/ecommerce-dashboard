@@ -46,7 +46,7 @@ export type ImageListProps = {
 
 export type HiddenInputsProps = {
     images: ImageFile[]
-    name: string
+    name?: string
     preferred: {
 
         enabled: boolean

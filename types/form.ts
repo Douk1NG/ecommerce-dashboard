@@ -6,7 +6,7 @@ export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multisele
 export interface BaseField {
     id?: string;
     label: string;
-    name: string;
+    name?: string;
     description?: string;
     placeholder?: string;
     value?: unknown;

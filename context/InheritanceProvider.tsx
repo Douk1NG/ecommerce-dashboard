@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode } from 'react'
 
 type InheritanceContextType = {
-    onChange: (name: string, value: unknown) => void
+    onChange: (name?: string, value?: unknown) => void
     getFieldValue: (name: string) => unknown
 }
 
@@ -17,7 +17,7 @@ export const useInheritanceContext = () => {
 
 type InheritanceProviderProps = {
     children: ReactNode
-    onChange: (name: string, value: unknown) => void
+    onChange: (name?: string, value?: unknown) => void
     getFieldValue: (name: string) => unknown
 }
 

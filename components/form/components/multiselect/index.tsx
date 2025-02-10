@@ -8,6 +8,7 @@ import type { MultiselectField } from '@/types/form'
 const Multiselect = dynamic(() => import('react-select'), { ssr: false })
 
 export default function Component({
+    id,
     options = [],
     value = [],
     name,
@@ -36,10 +37,10 @@ export default function Component({
         innerOnChange?.(value)
     }, 400)
 
-
     return (
         <>
             <Multiselect
+                id={id}
                 ref={selectRef}
                 placeholder={placeholder}
                 defaultValue={value}

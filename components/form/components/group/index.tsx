@@ -19,9 +19,9 @@ export default function Component({
     name,
     readOnly,
     inheritFrom,
-    value: defaultValue
+    value: defaultValue = [{}]
 }: GroupField) {
-    const [groups, setGroups] = useState<Group[]>(defaultValue as Group[] ?? [{}]);
+    const [groups, setGroups] = useState<Group[]>(defaultValue as Group[]);
     const [options, setOptions] = useState<Option[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -87,7 +87,7 @@ export default function Component({
                     <div className="flex-1 flex gap-2">
                         <Field
                             label="Filtros"
-                            name={`${name}_filters_${index}`}
+                            id={`${name}_filters_${index}`}
                             options={options}
                             type="multiselect"
                             value={group.filters}
@@ -95,7 +95,7 @@ export default function Component({
                         />
                         <Field
                             label="Precio"
-                            name={`${name}_price_${index}`}
+                            id={`${name}_price_${index}`}
                             type="currency"
                             value={group.price}
                             onChange={(value: unknown) => handleChange(value, index, group.id)}
