@@ -17,11 +17,11 @@ export const ImageList = ({
     return (
         <div className="mt-4 grid grid-cols-2 gap-4">
             {externalImages.map((file) => (
-                <div key={file.id} className="relative">
+                <div key={file.id} className="relative h-48 w-full ">
                     <Image
                         src={file.url}
                         alt="External image"
-                        className="h-48 w-full object-cover rounded-md cursor-pointer"
+                        className="object-cover rounded-md cursor-pointer"
                         onClick={handlers.openCarousel}
                         title="View image"
                         loading="lazy"
