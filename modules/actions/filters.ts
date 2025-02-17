@@ -3,6 +3,7 @@
 import filterSchema from '@/modules/schemas/filters'
 import { deleteFilter, save as saveService } from '../services/filters'
 import { revalidatePath } from 'next/cache'
+import { getPropertyOfArray, safeParseJSON } from '@/lib/utils'
 
 import type { FilterFormData } from '@/modules/types/filters'
 import type { ActionResponse } from '@/types/form'
@@ -16,13 +17,9 @@ export default async function SaveFilter(
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),
-        filters: formData.get('filters')
+        filters: getPropertyOfArray(safeParseJSON(formData.get('filters')), 'label')
     } as FilterFormData
 
-    const parsedFilters = JSON.parse(rawData.filters)
-    const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
-
-    rawData.filters = filters
     const validatedData = filterSchema.safeParse(rawData)
 
     if (!validatedData.success) {

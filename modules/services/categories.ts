@@ -40,9 +40,10 @@ export const getCategory = async (id: string) => {
     }
 }
 
-export const getSelectableCategories = async () => {
+export const getSelectableCategories = async (full: boolean = false) => {
+    const query = full ? '?full=true' : ''
     try {
-        const request = await fetch(`${path}?selectable=true`, {
+        const request = await fetch(`${path}?selectable=true${query}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

@@ -1,15 +1,23 @@
 'use server'
-
-import categorySchema from '@/modules/schemas/categories'
-import { deleteCategory, save as saveService } from '@/modules/services/categories'
 import { revalidatePath } from 'next/cache'
+import categorySchema from '@/modules/schemas/categories'
+
+import {
+    getPropertyOfArray,
+    safeParseBoolean,
+    safeParseJSON
+} from '@/lib/utils'
+
+import {
+    deleteCategory,
+    save as saveService
+} from '@/modules/services/categories'
 
 import type { ActionResponse } from '@/types/form'
 
 import type {
     CategoryFormData
 } from '@/modules/types/categories'
-
 
 export default async function SaveCategory(
     id: string | undefined,
@@ -22,14 +30,11 @@ export default async function SaveCategory(
         name: formData.get('name'),
         description: formData.get('description'),
         parent_id: formData.get('parent_id'),
-        filters: formData.get('filters'),
+        filters: getPropertyOfArray(safeParseJSON(formData.get('filters')), 'value'),
         image: formData.get('image'),
-        featured_category: formData.get('featured_category') === 'on'
+        featured_category: safeParseBoolean(formData.get('featured_category'))
     } as CategoryFormData
 
-    const parsedFilters = JSON.parse(rawData.filters as string)
-    const filters = parsedFilters.map((filter: Record<string, unknown>) => filter.value)
-    rawData.filters = parsedFilters
     const validatedData = categorySchema.safeParse(rawData)
 
     if (!validatedData.success) {
@@ -41,12 +46,19 @@ export default async function SaveCategory(
         }
     }
 
-    formData.set('filters', JSON.stringify(filters))
+    formData.set('filters', JSON.stringify(rawData.filters))
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
     }
 
+    console.log('post', { formData, rawData })
+    return {
+        success: false,
+        message: 'Please fix the errors in the form',
+        errors: {},
+        data: rawData
+    }
     const {
         success,
         message,

@@ -8,22 +8,22 @@ type InheritanceConfig = {
 
 export const useFieldInheritance = (
     inheritFrom: InheritanceConfig | undefined,
-    onInherit: (value: unknown) => void
+    onInherit: (value: unknown) => void,
+    readOnly?: boolean
 ) => {
     const { getFieldValue } = useInheritanceContext()
     const previousValue = useRef<unknown>(null)
 
     useEffect(() => {
-        if (!inheritFrom) return
+        if (!inheritFrom || readOnly) return
 
-        const sourceValue = getFieldValue(inheritFrom.field)
-
+        const sourceValue = getFieldValue?.(inheritFrom.field)
         if (sourceValue === previousValue.current) return
 
         if (Array.isArray(sourceValue)) {
             const valueToInherit = sourceValue.map(item => {
                 if (inheritFrom.property) {
-                    return (item as Record<string, unknown>)?.[inheritFrom.property]
+                    return item?.[inheritFrom.property]
                 }
                 return item
             }).flat()
@@ -40,5 +40,5 @@ export const useFieldInheritance = (
         previousValue.current = sourceValue
         onInherit(valueToInherit)
 
-    }, [inheritFrom?.field, getFieldValue])
+    }, [inheritFrom?.field, getFieldValue, onInherit])
 }

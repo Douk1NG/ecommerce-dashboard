@@ -14,7 +14,7 @@ const Component = ({
     const { onChange } = useInheritanceContext()
 
     const handleChange = (value: unknown) => {
-        onChange(name, value)
+        onChange?.(name, value)
     }
 
     return (

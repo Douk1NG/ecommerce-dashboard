@@ -1,4 +1,5 @@
 import { buttonVariants } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import type { LayoutContentProps } from "@/types/layout"
 
@@ -7,8 +8,8 @@ const Index = ({ title, description, action, children }: LayoutContentProps) => 
         <>
             <div className="flex items-center justify-between space-y-2 mb-4 px-4 py-6 lg:px-8">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-                    <small>{description}</small>
+                    <h2 className="text-3xl font-bold tracking-tight">{(title)}</h2>
+                    <small>{(description)}</small>
                 </div>
                 {action && (
                     <div className="flex items-center space-x-2">
@@ -18,7 +19,7 @@ const Index = ({ title, description, action, children }: LayoutContentProps) => 
                             scroll={false}
                             type="button"
                         >
-                            {action.title}
+                            {(action.title)}
                         </Link>
                     </div>
                 )}

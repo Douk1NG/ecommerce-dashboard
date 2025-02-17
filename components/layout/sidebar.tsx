@@ -1,7 +1,6 @@
 'use client'
 
 import Confirm from '@/components/layout/confirm';
-import { Button } from '@/components/ui/button';
 import Icon from '@/components/icon';
 
 import { getBasePath } from "@/lib/utils";
@@ -9,15 +8,19 @@ import { usePathname } from "@/i18n/routing";
 import { useRouter, useSearchParams } from "next/navigation";
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
+import { useTranslations } from 'next-intl';
+import IntlButton from '../intl/ui/Button';
 
 type PropTypes = {
     title: string;
     children: React.ReactNode
     onDelete: () => Promise<any>;
     isNew: boolean
+    translations: string
 };
 
-const Index = ({ title, children, isNew, onDelete }: PropTypes) => {
+const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) => {
+    const t = useTranslations(translations)
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -59,19 +62,18 @@ const Index = ({ title, children, isNew, onDelete }: PropTypes) => {
             >
                 <div className='flex justify-between items-center'>
                     <h2 className='text-2xl font-medium leading-7 text-gray-900'>
-                        {title}
+                        {t(title)}
                     </h2>
                     <div className='flex items-center gap-2'>
                         {isDetail &&
                             (
-                                <Button
+                                <IntlButton
                                     variant='outline'
-                                    title='Editar'
-                                    type='button'
+                                    title='layout.sidebar.edit'
                                     onClick={onEdit}
                                 >
                                     <Icon name='pencil' />
-                                </Button>
+                                </IntlButton>
                             )
                         }
                         {isDetail &&
@@ -84,13 +86,13 @@ const Index = ({ title, children, isNew, onDelete }: PropTypes) => {
                             )
                         }
                         {isDetail ? (
-                            <Button
-                                onClick={onConfirm}
+                            <IntlButton
                                 variant='outline'
-                                type='button'
+                                title='layout.sidebar.close'
+                                onClick={onConfirm}
                             >
                                 <Icon name='close' />
-                            </Button>
+                            </IntlButton>
                         ) : (
                             <Confirm
                                 translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}

@@ -41,15 +41,14 @@ export function getBasePath(pathname: string) {
 /**
  * @desc returns the form mode
 **/
-export function getFormMode(searchParams: URLSearchParams, values: any) {
+export function getDisplayMode(searchParams: URLSearchParams, values: unknown) {
     const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
-    const isDetail = values && !isEdit
-    const showSaveButton = !isDetail
+    const isDetail = Boolean(values && !isEdit)
+    const isNotDetail = !isDetail
 
     return {
-        isEdit,
-        isDetail,
-        showSaveButton
+        showSaveButton: isNotDetail,
+        readOnly: isDetail
     }
 }
 
@@ -96,6 +95,17 @@ export const safeParseNumber = (value: unknown) => {
 export const safeParseBoolean = (value: unknown) => {
   if(typeof value === 'string') {
     return Boolean(value)
+  }
+
+  return false
+}
+
+/**
+ * @desc returns a property of an array of objects
+ */
+export const getPropertyOfArray = (value: unknown, property: string) => {
+  if(Array.isArray(value)) {
+    return value.map((item) => item[property])
   }
 
   return value

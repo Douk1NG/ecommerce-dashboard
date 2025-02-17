@@ -1,20 +1,22 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
-export function useFormFields(initialData: Record<string, unknown> = {}) {
-    const [fieldValues, setFieldValues] = useState<Record<string, unknown>>(initialData)
+export function useFormFields() {
+    const [fieldValues, setFieldValues] = useState<Record<string, unknown>>({})
 
-    const handleFieldChange = (name: string, value: unknown) => {
+    const handleFieldChange = useCallback((name?: string, value?: unknown) => {
+        if (!name) return
         setFieldValues(prev => ({
             ...prev,
             [name]: value
         }))
-    }
+    }, [])
 
-    const getFieldValue = (name: string, fallbackData?: Record<string, unknown>) =>
-        fieldValues[name] ?? fallbackData?.[name]
+    const getFieldValue = useCallback((name?: string) => {
+        if (!name) return
+        return fieldValues?.[name]
+    }, [fieldValues])
 
     return {
-        fieldValues,
         handleFieldChange,
         getFieldValue
     }

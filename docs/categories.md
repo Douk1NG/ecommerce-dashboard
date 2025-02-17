@@ -3,7 +3,6 @@
 ## POST `/api/categories`
 
 ### Request Body
-Se omite el campo image si no se quiere actualizar
 Se omite el campo featured_category si no se quiere actualizar
 ```multipart/form-data
 name: "Camiseta"
@@ -27,7 +26,7 @@ image: image.jpg
 
 ---
 ## POST `/api/categories/:id`
-se omite el campo image si no se quiere actualizar
+se envia url en el campo image si no se quiere actualizar, se omite si se quiere eliminar
 Se omite el campo featured_category si no se quiere actualizar
 ### Request Body
 ```multipart/form-data
@@ -100,6 +99,64 @@ _method: 'PUT'
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética"
+        }]
+    }]
+}
+```
+
+## GET `/api/categories?selectable=true&full=true`
+
+### Response Body
+```json
+{
+    "success": true,
+    "message": "Categories retrieved successfully",
+    "body": [{
+        "value": 1,
+        "label": "Ropa",
+        "filters": [{
+            "value": 1,
+            "label": "Talla Alfabética",
+            "filters": [{
+                "value": 21,
+                "label": "XS"
+            }, {
+                "value": 22,
+                "label": "S"
+            }, {
+                "value": 23,
+                "label": "M"
+            }]
+        }, {
+            "value": 2,
+            "label": "Talla numérica",
+            "filters": [{
+                "value": 11,
+                "label": "30"
+            }, {
+                "value": 12,
+                "label": "31"
+            }, {
+                "value": 13,
+                "label": "32"
+            }]
+        }]
+    }, {
+        "value": 2,
+        "label": "Camiseta",
+        "filters": [{
+            "value": 1,
+            "label": "Talla Alfabética",
+            "filters": [{
+                "value": 21,
+                "label": "XS"
+            }, {
+                "value": 22,
+                "label": "S"
+            }, {
+                "value": 23,
+                "label": "M"
+            }]
         }]
     }]
 }

@@ -38,7 +38,7 @@ export type ImageListProps = {
     preferredImageId: string | null
     readOnly?: boolean
     handlers: {
-        removeImage: (id: string) => void
+        removeImage: (id: string, external?: boolean) => void
         setPreferred: (id: string) => void
         openCarousel: () => void
     }

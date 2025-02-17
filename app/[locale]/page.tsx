@@ -18,7 +18,7 @@ export default function RootPage() {
                         Welcome to Wedevs!
                     </h1>
                     <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                        Your all-in-one solution for your business. Let's get started
+                        Your all-in-one solution for your business. Let&apos;s get started
                         with setting up your workspace.
                     </p>
                 </section>
@@ -59,12 +59,10 @@ export default function RootPage() {
                                     </p>
                                 </CardContent>
                                 <CardFooter>
-
                                     <Button className="w-full group" type="button">
                                         Get Started
                                         <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
                                     </Button>
-
                                 </CardFooter>
                             </Card>
                         </Link>

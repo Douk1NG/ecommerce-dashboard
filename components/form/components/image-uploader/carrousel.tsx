@@ -1,6 +1,7 @@
 import Icon from "@/components/icon"
+import Image from "next/image"
 import { useCarousel } from "@/hooks/use-carrousel"
-import type { CarouselProps } from "@/types/components/image-uploader"
+import type { CarouselProps } from "@/types/image-uploader"
 
 export default function Carousel({ images, onClose }: CarouselProps) {
     const {
@@ -31,13 +32,15 @@ export default function Carousel({ images, onClose }: CarouselProps) {
                 </button>
 
                 <div className="relative h-[80vh] flex items-center justify-center rounded-lg bg-black/20">
-                    <img
-                        src={imageUrl}
-                        alt={imageName}
-                        className="max-h-full max-w-full object-contain rounded-sm"
-                        title={imageName}
-                        loading="eager"
-                    />
+                    {imageUrl &&
+                        (<Image
+                            src={imageUrl}
+                            alt={imageName}
+                            className="max-h-full max-w-full object-contain rounded-sm"
+                            title={imageName}
+                            loading="lazy"
+                            fill
+                        />)}
                 </div>
 
                 {!isSingleImage && (

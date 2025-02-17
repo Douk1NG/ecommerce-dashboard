@@ -1,7 +1,8 @@
 import { formatFileSize } from "@/lib/file"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
-import type { ImageListProps } from "@/types/components/image-uploader"
+import Image from "next/image"
+import type { ImageListProps } from "@/types/image-uploader"
 
 export const ImageList = ({
     images,
@@ -17,20 +18,23 @@ export const ImageList = ({
         <div className="mt-4 grid grid-cols-2 gap-4">
             {externalImages.map((file) => (
                 <div key={file.id} className="relative">
-                    <img
+                    <Image
                         src={file.url}
                         alt="External image"
                         className="h-48 w-full object-cover rounded-md cursor-pointer"
                         onClick={handlers.openCarousel}
                         title="View image"
+                        loading="lazy"
+                        fill
                     />
                     {!readOnly && (
                         <Button
                             variant="outline"
                             size="icon"
-                            onClick={() => handlers.removeImage(file.id)}
+                            onClick={() => handlers.removeImage(file.id, true)}
                             title="Remove image"
                             className="absolute top-0 right-0 rounded-full"
+                            type="button"
                         >
                             <Icon name="close" />
                         </Button>
@@ -52,13 +56,15 @@ export const ImageList = ({
                 </div>
             ))}
             {images.map((file) => (
-                <div key={file.id} className="relative">
-                    <img
+                <div key={file.id} className="relative h-48 w-full">
+                    <Image
                         src={file.preview}
                         alt={file.name}
-                        className="h-48 w-full object-cover rounded-md cursor-pointer"
+                        className="object-cover rounded-md cursor-pointer"
                         onClick={handlers.openCarousel}
                         title="View image"
+                        loading="lazy"
+                        fill
                     />
                     {!readOnly && (
                         <Button
@@ -67,6 +73,7 @@ export const ImageList = ({
                             onClick={() => handlers.removeImage(file.id)}
                             title="Remove image"
                             className="absolute top-0 right-0 rounded-full"
+                            type="button"
                         >
                             <Icon name="close" />
                         </Button>

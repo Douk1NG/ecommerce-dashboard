@@ -1,5 +1,5 @@
-import type { ImageUploaderProps } from "@/types/components/image-uploader";
-import type { Option } from "@/types/components/select";
+import type { ImageUploaderProps } from "@/types/image-uploader";
+import type { Option } from "@/types/select";
 
 export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multiselect' | 'switch' | 'tagbox' | 'image' | 'group';
 
@@ -89,5 +89,5 @@ export type FormProps = {
         prevState: ActionResponse | null,
         formData: FormData
     ) => Promise<ActionResponse>;
-    translations: (key: string) => string;
+    translations: string;
 }

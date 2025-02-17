@@ -4,10 +4,9 @@ import SaveProduct, { DeleteProduct } from "@/modules/actions/products";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/products";
-import { useTranslations } from 'next-intl';
 import type { Product } from '@/modules/types/products';
 
-import type { Option } from '@/types/form';
+import type { Option } from '@/types/select';
 
 type FormProps = {
     values: Product
@@ -18,25 +17,25 @@ type FormProps = {
 }
 
 export default function Form({ values, isNew, content }: FormProps) {
+
     const onDelete = async () => {
         return await DeleteProduct(values.id as string)
     }
-    const hidratatedFields = fields(content)
-    const t = useTranslations(CONSTANTS.NAMESPACE)
 
+    const hidratatedFields = fields(content)
 
     return (
         <Sidebar
-            title={t(CONSTANTS.LAYOUT.TITLE)}
+            title={CONSTANTS.LAYOUT.TITLE}
             onDelete={onDelete}
             isNew={isNew}
+            translations={CONSTANTS.NAMESPACE}
         >
             <FormBuilder
                 action={SaveProduct}
                 fields={hidratatedFields}
                 values={values}
-                translations={t}
-
+                translations={CONSTANTS.NAMESPACE}
             />
         </Sidebar>
     )

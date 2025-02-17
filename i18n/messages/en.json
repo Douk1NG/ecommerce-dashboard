@@ -1,5 +1,11 @@
 {
     "layout": {
+        "sidebar": {
+            "edit": "Edit",
+            "close": "Close",
+            "delete": "Delete",
+            "save": "Save"
+        },
         "breadcrumb": {
             "default": "Click here to view navigation menu"
         },
@@ -111,7 +117,8 @@
         },
         "table": {
             "empty": "No products found, to get started, press the add product button.",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "detail": "Detail"
         }
     },
     "categories": {

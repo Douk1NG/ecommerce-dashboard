@@ -4,9 +4,8 @@ import SaveCategory, { DeleteCategory } from "@/modules/actions/categories";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/categories";
-import { useTranslations } from 'next-intl';
 import type { Category } from '@/modules/types/categories';
-import type { Option } from '@/types/form';
+import type { Option } from '@/types/select';
 
 type FormProps = {
     values: Category
@@ -22,19 +21,19 @@ export default function Form({ values, isNew, content }: FormProps) {
         return await DeleteCategory(values.id as string)
     }
     const hidratatedFields = fields(content)
-    const t = useTranslations(CONSTANTS.NAMESPACE)
 
     return (
         <Sidebar
-            title={t(CONSTANTS.LAYOUT.TITLE)}
+            title={CONSTANTS.LAYOUT.TITLE}
             onDelete={onDelete}
             isNew={isNew}
+            translations={CONSTANTS.NAMESPACE}
         >
             <FormBuilder
                 action={SaveCategory}
                 fields={hidratatedFields}
                 values={values}
-                translations={t}
+                translations={CONSTANTS.NAMESPACE}
             />
         </Sidebar>
     )

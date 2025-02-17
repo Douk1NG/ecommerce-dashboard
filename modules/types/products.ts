@@ -8,19 +8,22 @@ export type TableProps = {
 };
 
 export type FilterCombination = {
-    price: number;
-    filters: number[];
+    id?: number;
+    price?: number;
+    filters?: number[];
 }
 
 export type ProductFormData = {
     id?: number;
     name: string;
-    description?: string;
+    description: string;
     price: number;
     featured_product: boolean;
-    categories: number[];
+    categories: string[];
     active: boolean;
-    main_image: File;
-    related_images: File[];
+    images: File[];
+    images_preferred: string;
     filter_combinations: FilterCombination[];
+    main_image?: File;
+    related_images?: File[];
 }

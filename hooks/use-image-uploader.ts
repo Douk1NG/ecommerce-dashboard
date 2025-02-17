@@ -20,7 +20,7 @@ export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: Use
         const urls = Array.isArray(value) ? value : [value]
         return urls.map((url) => ({
             url,
-            id: `external-${url.split('/').pop()}-${Date.now()}`
+            id: url
         }))
     })
     const [preferredImageId, setPreferredImageId] = useState<string | null>(null)
@@ -108,18 +108,22 @@ export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: Use
                 handleFiles(e.target.files)
             }
         }, [handleFiles]),
-        removeImage: useCallback((id: string) => {
+        removeImage: useCallback((id: string, external?: boolean) => {
             if (readOnly) return
-            if (id.startsWith('external-')) {
-                removeExternalImage(id)
-            } else {
-                setImages((prevImages) =>
-                    prevImages.filter((image) => image.id !== id)
-                )
-            }
+
             if (preferredImageId === id) {
                 setPreferredImageId(null)
             }
+
+            if (external) {
+                removeExternalImage(id)
+                return
+            }
+
+            setImages((prevImages) =>
+                prevImages.filter((image) => image.id !== id)
+            )
+
         }, [readOnly, removeExternalImage, preferredImageId]),
         setPreferred: useCallback((id: string) => {
             setPreferredImageId(id)

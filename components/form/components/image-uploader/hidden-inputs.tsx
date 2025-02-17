@@ -1,4 +1,4 @@
-import type { HiddenInputsProps } from "@/types/components/image-uploader"
+import type { HiddenInputsProps } from "@/types/image-uploader"
 
 export const HiddenInputs = ({ images, name, preferred, maxFiles }: HiddenInputsProps) => {
     const inputName = maxFiles > 1 ? `${name}[]` : name

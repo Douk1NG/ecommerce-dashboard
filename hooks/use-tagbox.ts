@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { useToast } from '@/hooks/use-toast'
 import { useTranslations } from 'next-intl'
 import CONSTANTS from '@/lib/constants'
-import type { Tag } from '@/types/components/tagbox'
+import type { Tag } from '@/types/tagbox'
 
 export const useTagbox = (initialTags: Tag[] = []) => {
     const { toast } = useToast()

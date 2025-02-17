@@ -10,5 +10,5 @@ export type TableProps = {
 export type FilterFormData = {
     id?: number;
     name: string;
-    filters: string;
+    filters: string[];
 }

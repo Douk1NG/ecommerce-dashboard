@@ -191,7 +191,6 @@ export default function DataTable<TData, TValue>({
                                                     onClick={() => onRowClick(row)}
                                                 >
                                                     {t('table.detail')}
-                                                    <Icon name="pencil" className="ml-2" />
                                                 </Button>
                                             </div>
                                         </div>

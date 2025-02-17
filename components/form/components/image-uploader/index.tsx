@@ -26,7 +26,6 @@ export default function ImageUploader({
         preferredImageId,
         dragActive,
         carouselOpen,
-
         isLimitReached,
         isSingleImage,
         handlers,

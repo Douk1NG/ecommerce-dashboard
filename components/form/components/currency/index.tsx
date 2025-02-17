@@ -3,10 +3,10 @@ import { cn, safeParseFloat } from '@/lib/utils';
 import { CurrencyField } from '@/types/form';
 import { useLocale } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce'
+
 export default function Component(props: CurrencyField) {
     const locale = useLocale();
     const { value, id, name, onChange } = props;
-
     // TODO: improve the currency config
     const intlConfig = {
         locale: 'es-CO',
@@ -21,6 +21,7 @@ export default function Component(props: CurrencyField) {
     }
 
     const handleChange = useDebouncedCallback((_value?: string, _name?: string, values?: Record<string, unknown>) => {
+        // todo: fix behaviour : components call this function without fire events
         onChange?.(values?.float);
     }, 400)
 
@@ -32,7 +33,7 @@ export default function Component(props: CurrencyField) {
             )}
             intlConfig={intlConfig}
             step={intlConfig.step}
-            defaultValue={safeParseFloat(value) as string}
+            defaultValue={safeParseFloat(value) as number}
             allowNegativeValue={false}
             name={props.name}
             onValueChange={handleChange}

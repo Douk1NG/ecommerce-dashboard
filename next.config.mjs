@@ -28,9 +28,9 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: 'assets.adidas.com',
-                pathname: '/images/**',
+                protocol: 'http',
+                hostname: 'tenant1.localhost',
+                pathname: '/storage/**',
             }
         ],
     }

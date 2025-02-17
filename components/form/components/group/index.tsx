@@ -5,8 +5,9 @@ import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { getUniqueByKey } from "@/lib/utils";
 
-import type { Option } from "@/types/components/select";
+import type { Option } from "@/types/select";
 import type { GroupField } from "@/types/form";
+import { useInheritanceContext } from "@/context/InheritanceProvider";
 
 type Group = {
     id?: number;
@@ -34,7 +35,7 @@ export default function Component({
 
     }, [options])
 
-    useFieldInheritance(inheritFrom, inheritanceMethod)
+    useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
 
     const addGroup = () => {
         setGroups([...groups, {}]);
@@ -55,9 +56,6 @@ export default function Component({
         };
 
         setGroups(updatedGroups);
-        if (inputRef.current) {
-            inputRef.current.value = JSON.stringify(updatedGroups);
-        }
     };
 
     return (
@@ -77,7 +75,7 @@ export default function Component({
                 ref={inputRef}
                 type="hidden"
                 name={name}
-                value={JSON.stringify(defaultValue)}
+                value={JSON.stringify(groups)}
             />
             {groups.map((group, index) => (
                 <div

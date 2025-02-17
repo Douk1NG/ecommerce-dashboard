@@ -6,7 +6,7 @@ import Icon from '@/components/icon'
 import { useTranslations } from 'next-intl'
 import { useTagbox } from '@/hooks/use-tagbox'
 import type { TagboxField } from '@/types/form'
-import type { Tag } from '@/types/components/tagbox'
+import type { Tag } from '@/types/tagbox'
 
 export default function Tagbox({
     name,

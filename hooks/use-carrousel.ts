@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { CarouselImage } from "@/types/components/image-uploader"
+import type { CarouselImage } from "@/types/image-uploader"
 
 export function useCarousel(images: CarouselImage[]) {
     const [currentIndex, setCurrentIndex] = useState(0)

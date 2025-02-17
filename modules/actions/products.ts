@@ -7,8 +7,16 @@ import { revalidatePath } from 'next/cache'
 import type { ActionResponse } from '@/types/form'
 
 import type {
+    FilterCombination,
     ProductFormData
 } from '@/modules/types/products'
+
+import {
+    getPropertyOfArray,
+    safeParseBoolean,
+    safeParseJSON,
+    safeParseNumber
+} from '@/lib/utils'
 
 export default async function SaveProduct(
     id: string | undefined,
@@ -19,10 +27,24 @@ export default async function SaveProduct(
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),
-        description: formData.get('description')
+        description: formData.get('description'),
+        categories: getPropertyOfArray(safeParseJSON(formData.get('categories')), 'value'),
+        price: safeParseNumber(formData.get('price')),
+        featured_product: safeParseBoolean(formData.get('featured_product')),
+        filter_combinations: safeParseJSON(formData.get('filter_combinations')).map((it: FilterCombination) => {
+            return {
+                price: safeParseNumber(it.price) as number,
+                filters: getPropertyOfArray(it.filters, 'value') as number[]
+            }
+        }),
+        images: formData.getAll('images[]'),
+        images_preferred: formData.get('images_preferred'),
+        active: safeParseBoolean(formData.get('active'))
     } as ProductFormData
 
-    console.log(formData, rawData)
+    rawData.main_image = rawData.images?.find((image: File) => image.name === rawData.images_preferred)
+    rawData.related_images = rawData.images?.filter((image: File) => image.name !== rawData.images_preferred)
+
     const validatedData = productSchema.safeParse(rawData)
 
     if (!validatedData.success) {
@@ -34,6 +56,20 @@ export default async function SaveProduct(
         }
     }
 
+    formData.set('categories', JSON.stringify(rawData.categories))
+    formData.set('filter_combinations', JSON.stringify(rawData.filter_combinations))
+    formData.set('price', rawData.price.toString())
+    formData.set('main_image', rawData.main_image as File)
+    formData.set('active', rawData.active ? '1' : '0')
+    formData.set('featured_product', rawData.featured_product ? '1' : '0')
+
+    rawData.related_images?.forEach((image: File) => {
+        formData.set('related_images[]', image)
+    })
+
+    formData.delete('images[]')
+    formData.delete('images_preferred')
+
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
@@ -42,18 +78,17 @@ export default async function SaveProduct(
     const {
         success,
         message,
-        id: idResponse
+        id: response_id
     } = await saveService(formData)
     if (success) {
         revalidatePath(`/[locale]/products`, 'page')
-
 
         return {
             success,
             message,
             data: {
                 ...rawData,
-                id: idResponse || rawData.id
+                id: response_id
             }
         }
     }
