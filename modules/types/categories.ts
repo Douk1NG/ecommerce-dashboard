@@ -13,7 +13,7 @@ export type CategoryFormData = {
     description?: string;
     featured_category?: boolean;
     parent_id?: string;
-    filters?: number[];
+    filters?: FormDataEntryValue[];
     image?: File;
     external_images?: string;
 }

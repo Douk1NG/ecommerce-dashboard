@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useRef, useCallback, useState } from 'react'
+import { useRef, useCallback } from 'react'
 import { useInheritanceContext } from '@/context/InheritanceProvider'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFieldInheritance } from '@/hooks/use-field-inheritance'
@@ -19,7 +19,6 @@ export default function Component({
     onChange: innerOnChange
 }: MultiselectField) {
     const selectRef = useRef(null)
-    const [hiddenValue, setHiddenValue] = useState(JSON.stringify(value))
 
     const { onChange: onChangeInheritance } = useInheritanceContext()
 
@@ -27,38 +26,30 @@ export default function Component({
         if (selectRef.current) {
             // @ts-expect-error - react-select types are overcomplicated
             selectRef.current.setValue(value, 'select-option')
-            setHiddenValue(JSON.stringify(value))
         }
     }, [])
 
     useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
 
     const handleChange = useDebouncedCallback((value: unknown) => {
-        setHiddenValue(JSON.stringify(value))
         onChangeInheritance?.(name, value)
         innerOnChange?.(value)
     }, 400)
 
     return (
-        <>
-            <Multiselect
-                id={id}
-                ref={selectRef}
-                placeholder={placeholder}
-                defaultValue={value}
-                isMulti
-                options={options}
-                className='select-tw-fix'
-                isClearable={true}
-                closeMenuOnSelect={true}
-                onChange={handleChange}
-                isDisabled={readOnly}
-            />
-            <input
-                name={name}
-                type="hidden"
-                value={hiddenValue}
-            />
-        </>
+        <Multiselect
+            id={id}
+            ref={selectRef}
+            placeholder={placeholder}
+            defaultValue={value}
+            isMulti
+            options={options}
+            className='select-tw-fix'
+            isClearable={true}
+            closeMenuOnSelect={true}
+            onChange={handleChange}
+            isDisabled={readOnly}
+            name={name}
+        />
     )
 }

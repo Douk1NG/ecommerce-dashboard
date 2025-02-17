@@ -30,7 +30,7 @@ export default async function SaveCategory(
         name: formData.get('name'),
         description: formData.get('description'),
         parent_id: formData.get('parent_id'),
-        filters: getPropertyOfArray(safeParseJSON(formData.get('filters')), 'value'),
+        filters: formData.getAll('filters'),
         image: formData.get('image'),
         featured_category: safeParseBoolean(formData.get('featured_category')),
         external_images: formData.get('external_images')
@@ -47,7 +47,7 @@ export default async function SaveCategory(
         }
     }
 
-    formData.set('filters', JSON.stringify(rawData.filters))
+    formData.set('filters', JSON.stringify(rawData.filters?.map(filter => Number(filter))))
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')

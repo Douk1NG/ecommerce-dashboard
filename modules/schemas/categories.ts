@@ -7,7 +7,7 @@ const categorySchema = z.object({
     [CONSTANTS.KEYS.DESCRIPTION]: z.string().optional(),
     [CONSTANTS.KEYS.FEATURED_CATEGORY]: z.boolean().optional(),
     [CONSTANTS.KEYS.PARENT_ID]: z.string().optional(),
-    [CONSTANTS.KEYS.FILTERS]: z.array(z.number()).optional(),
+    [CONSTANTS.KEYS.FILTERS]: z.array(z.string()).optional(),
     [CONSTANTS.KEYS.IMAGE]: z.instanceof(File).or(z.null()).optional(),
 });
 

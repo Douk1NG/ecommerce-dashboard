@@ -4,6 +4,8 @@
 
 ### Request Body
 Se omite el campo featured_category si no se quiere actualizar
+Se omite el campo image si no se quiere actualizar
+
 ```multipart/form-data
 name: "Camiseta"
 description: ""
@@ -49,7 +51,6 @@ _method: 'PUT'
 ```
 
 ---
-
 ## GET `/api/categories`
 
 ### Response Body
