@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useState } from 'react'
 import { useInheritanceContext } from '@/context/InheritanceProvider'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFieldInheritance } from '@/hooks/use-field-inheritance'
@@ -18,24 +18,23 @@ export default function Component({
     inheritFrom,
     onChange: innerOnChange
 }: MultiselectField) {
-    const inputRef = useRef<HTMLInputElement>(null)
     const selectRef = useRef(null)
+    const [hiddenValue, setHiddenValue] = useState(JSON.stringify(value))
 
     const { onChange: onChangeInheritance } = useInheritanceContext()
 
     const inheritanceMethod = useCallback((value: unknown) => {
-        if (selectRef.current && inputRef.current) {
+        if (selectRef.current) {
             // @ts-expect-error - react-select types are overcomplicated
             selectRef.current.setValue(value, 'select-option')
+            setHiddenValue(JSON.stringify(value))
         }
     }, [])
 
     useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
 
     const handleChange = useDebouncedCallback((value: unknown) => {
-        if (inputRef.current) {
-            inputRef.current.value = JSON.stringify(value)
-        }
+        setHiddenValue(JSON.stringify(value))
         onChangeInheritance?.(name, value)
         innerOnChange?.(value)
     }, 400)
@@ -57,9 +56,8 @@ export default function Component({
             />
             <input
                 name={name}
-                ref={inputRef}
                 type="hidden"
-                defaultValue={JSON.stringify(value)}
+                value={hiddenValue}
             />
         </>
     )

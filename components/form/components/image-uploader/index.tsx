@@ -48,6 +48,7 @@ export default function ImageUploader({
     return (
         <div className="w-full">
             <HiddenInputs
+                externalImages={externalImages}
                 images={images}
                 name={name}
                 preferred={{

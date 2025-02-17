@@ -46,6 +46,7 @@ export type ImageListProps = {
 
 export type HiddenInputsProps = {
     images: ImageFile[]
+    externalImages: ExternalImage[]
     name?: string
     preferred: {
 

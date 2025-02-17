@@ -32,7 +32,8 @@ export default async function SaveCategory(
         parent_id: formData.get('parent_id'),
         filters: getPropertyOfArray(safeParseJSON(formData.get('filters')), 'value'),
         image: formData.get('image'),
-        featured_category: safeParseBoolean(formData.get('featured_category'))
+        featured_category: safeParseBoolean(formData.get('featured_category')),
+        external_images: formData.get('external_images')
     } as CategoryFormData
 
     const validatedData = categorySchema.safeParse(rawData)
@@ -50,15 +51,12 @@ export default async function SaveCategory(
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
+
+        if (rawData.external_images) {
+            formData.set('image', rawData.external_images)
+        }
     }
 
-    console.log('post', { formData, rawData })
-    return {
-        success: false,
-        message: 'Please fix the errors in the form',
-        errors: {},
-        data: rawData
-    }
     const {
         success,
         message,

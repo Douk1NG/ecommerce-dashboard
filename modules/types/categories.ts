@@ -15,4 +15,5 @@ export type CategoryFormData = {
     parent_id?: string;
     filters?: number[];
     image?: File;
+    external_images?: string;
 }
