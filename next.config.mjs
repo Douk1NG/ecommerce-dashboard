@@ -33,6 +33,11 @@ const nextConfig = {
                 pathname: '/storage/**',
             }
         ],
+    },
+    experimental: {
+        serverActions : {
+            bodySizeLimit: '12mb'
+        }
     }
 };
 

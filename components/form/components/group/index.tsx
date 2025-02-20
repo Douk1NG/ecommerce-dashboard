@@ -27,10 +27,13 @@ export default function Component({
     const inputRef = useRef<HTMLInputElement>(null);
 
     const inheritanceMethod = useCallback((value: unknown) => {
-        const uniqueOptions = Array.isArray(value) ? getUniqueByKey(value as Option[], 'value') : []
+        if (!Array.isArray(value)) return;
 
-        if (JSON.stringify(options) !== JSON.stringify(uniqueOptions)) {
-            setOptions(uniqueOptions)
+        const uniqueFilters = getUniqueByKey(value as Option[], 'value');
+        const hasFilterOptionsChanged = JSON.stringify(options) !== JSON.stringify(uniqueFilters);
+
+        if (hasFilterOptionsChanged) {
+            setOptions(uniqueFilters)
         }
 
     }, [options])
@@ -38,11 +41,11 @@ export default function Component({
     useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
 
     const addGroup = () => {
-        setGroups([...groups, {}]);
+        setGroups(prevGroups => [...prevGroups, {}]);
     };
 
-    const removeGroup = (index: number) => {
-        setGroups(groups.filter((_, i) => i !== index));
+    const removeGroup = (indexToRemove: number) => {
+        setGroups(prevGroups => prevGroups.filter((_, index) => index !== indexToRemove));
     };
 
     const handleChange = (value: unknown, index: number, id: unknown) => {
