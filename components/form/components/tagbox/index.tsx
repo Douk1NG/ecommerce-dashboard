@@ -35,7 +35,7 @@ export default function Tagbox({
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder={placeholder}
-                    className="flex-grow"
+                    className="grow"
                     readOnly={readOnly}
                 />
                 <Button
