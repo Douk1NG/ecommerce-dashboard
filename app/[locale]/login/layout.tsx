@@ -3,14 +3,10 @@ import CONSTANTS from "@/modules/constants/login";
 import { default as LIB_CONSTANTS } from "@/lib/constants";
 
 import type { Metadata } from "next/types";
-
-import type {
-    GenerateMetadataProps,
-    LayoutProps
-} from "@/types/layout";
+import type { LoginLayoutProps } from "@/types/layout";
 
 export async function generateMetadata(
-    props: GenerateMetadataProps
+    props: LoginLayoutProps
 ): Promise<Metadata> {
     const params = await props.params;
 
@@ -29,6 +25,6 @@ export async function generateMetadata(
     };
 }
 
-export default async function Layout({children}: LayoutProps) {
+export default async function Layout({ children }: LoginLayoutProps) {
     return children
 }

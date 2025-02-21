@@ -1,6 +1,4 @@
 import { PageProps } from "@/types/layout"
-import Layout from "@/modules/components/filters"
-
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 

@@ -1,14 +1,21 @@
+type Params = {
+    id: string
+    locale: string
+}
+
 export type GenerateMetadataProps = {
-    params?: Promise<any>
+    params: Promise<Params>
 }
 
 export type LayoutProps = {
-    children: React.ReactNode;
-    params?: Promise<{
-        id: string
-        locale: string
-    }>
-    sidebar?: React.ReactNode
+    children: React.ReactNode
+    params: Promise<Params>
+    sidebar: React.ReactNode
+}
+
+export type LoginLayoutProps = {
+    children: React.ReactNode
+    params: Promise<Params>
 }
 
 export type PageProps = {

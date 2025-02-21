@@ -9,6 +9,7 @@ import ImageUploader from "./components/image-uploader";
 import Group from "./components/group";
 import { Label } from "@/components/ui/label";
 import type { Field } from "@/types/form";
+import type { JSX } from "react";
 
 const Components = {
     text: Text,

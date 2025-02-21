@@ -3,7 +3,9 @@ import { ImageList } from './image-list'
 import { HiddenInputs } from './hidden-inputs'
 import { useImageUploader } from '@/hooks/use-image-uploader'
 import Carousel from './carrousel'
+
 import type { ImageField } from "@/types/form"
+import type { RefObject } from 'react'
 
 export default function ImageUploader({
     name,
@@ -59,7 +61,7 @@ export default function ImageUploader({
             />
             {!readOnly && (
                 <DropZone
-                    fileInputRef={fileInputRef}
+                    fileInputRef={fileInputRef as RefObject<HTMLInputElement>}
                     isLimitReached={isLimitReached}
                     isSingleImage={isSingleImage}
                     dragActive={dragActive}

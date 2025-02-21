@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
-import type { GenerateMetadataProps, LayoutProps } from "@/types/layout";
 import type { Metadata } from "next/types";
+import type { LoginLayoutProps } from "@/types/layout";
 
-export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata(props: LoginLayoutProps): Promise<Metadata> {
     const params = await props.params;
 
     const {
@@ -20,6 +20,6 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
 
 export default function Layout({
     children,
-}: LayoutProps) {
+}: LoginLayoutProps) {
     return children
 }
