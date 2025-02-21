@@ -1,6 +1,8 @@
+import { Locale } from "@/i18n/routing"
+
 type Params = {
     id: string
-    locale: string
+    locale: Locale
 }
 
 export type GenerateMetadataProps = {

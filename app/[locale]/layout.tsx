@@ -4,7 +4,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
 import type { Metadata } from "next";
-import type { GenerateMetadataProps } from "@/types/layout";
+import type { GenerateMetadataProps, LoginLayoutProps } from "@/types/layout";
 
 import {
     SidebarInset,
@@ -14,14 +14,6 @@ import {
 import Nav from "@/components/nav";
 import Header from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster"
-import { Locale } from '@/i18n/routing';
-
-type Props = {
-    children: React.ReactNode;
-    params: Promise<{
-        locale: Locale;
-    }>;
-};
 
 export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
     const params = await props.params;
@@ -38,7 +30,7 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-const RootLayout: React.FC<Props> = async (props: Props) => {
+const RootLayout: React.FC<LoginLayoutProps> = async (props: LoginLayoutProps) => {
     const params = await props.params;
 
     const {
