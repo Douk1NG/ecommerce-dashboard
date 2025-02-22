@@ -6,6 +6,7 @@ import Carousel from './carrousel'
 
 import type { ImageField } from "@/types/form"
 import type { RefObject } from 'react'
+import type { UseImageUploaderProps } from "@/types/image-uploader"
 
 export default function ImageUploader({
     name,
@@ -35,7 +36,7 @@ export default function ImageUploader({
     } = useImageUploader({
         maxFiles,
         maxFileSize,
-        value: value as string[],
+        value: value as UseImageUploaderProps['value'],
         readOnly
     })
 
@@ -69,7 +70,7 @@ export default function ImageUploader({
                     handlers={handlers}
                 >
                     {<p className="mt-2 text-sm text-gray-600">
-                        {images.length} / {maxFiles} images uploaded
+                        {allImages.length} / {maxFiles} images uploaded
                     </p>}
                 </DropZone>
             )}

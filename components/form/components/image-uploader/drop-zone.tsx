@@ -32,7 +32,7 @@ export const DropZone = ({
                 accept="image/*"
                 className="hidden"
             />
-            <div className="text-center">
+            <div className="text-center cursor-pointer" onClick={isLimitReached ? undefined : () => fileInputRef.current?.click()}>
                 <Icon
                     name="upload"
                     className="mx-auto text-gray-400 w-10 h-10"
@@ -48,7 +48,7 @@ export const DropZone = ({
                     variant="secondary"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isLimitReached}
-                    className="mt-2"
+                    className="mt-2 hover:bg-gray-200 cursor-pointer"
                 >
                     Select files
                 </Button>

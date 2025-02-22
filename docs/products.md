@@ -3,7 +3,9 @@
 ## POST `/api/products`
 
 ### Request Body
-- Se omite el campo main_image sino se selecciono una imagen principal
+- delete_images: [urls]
+- main image: string | file  --> si es file reemplazar imagen principal, si es string se actualiza la imagen principal o no se actualiza
+- related images: todas las imagenes nuevas
 ```multipart/form-data
 name: "Camiseta"
 description: ""
@@ -33,10 +35,10 @@ active: "1"
 ```
 
 ---
-## POST `/api/categories/:id`
-- Se omite el campo image si no se quiere actualizar
-- Se omite el campo featured_category si no se quiere actualizar
--
+## POST `/api/products/:id`
+- delete_images: [urls]
+- main image: string | file  --> si es file reemplazar imagen principal, si es string se actualiza la imagen principal o no se actualiza
+- related images: todas las imagenes nuevas
 ### Request Body
 ```multipart/form-data
 id: 1
@@ -68,143 +70,88 @@ _method: 'PUT'
 
 ---
 
-## GET `/api/categories`
+## GET `/api/products`
 
 ### Response Body
 ```json
 {
     "success": true,
-    "message": "Categories retrieved successfully",
+    "message": "Products retrieved successfully",
     "body": [{
         "id": 1,
         "name": "Ropa",
-        "subcategories": ["Camiseta", "Chaqueta"],
-        "filters": ["Talla Alfabética", "Talla numérica"],
-        "featured_category": false
+        "price": 100,
+        "active": 1
     },
     {
         "id": 2,
         "name": "Camiseta",
-        "subcategories": [],
-        "filters": ["Talla Alfabética"],
-        "featured_category": true
+        "price": 100,
+        "active": 1
     }]
 }
 ```
 
 ---
-
-## GET `/api/categories?selectable=true`
-
-### Response Body
-```json
-{
-    "success": true,
-    "message": "Categories retrieved successfully",
-    "body": [{
-        "value": 1,
-        "label": "Ropa",
-        "filters": [{
-            "value": 1,
-            "label": "Talla Alfabética"
-        }, {
-            "value": 2,
-            "label": "Talla numérica"
-        }]
-    }, {
-        "value": 2,
-        "label": "Camiseta",
-        "filters": [{
-            "value": 1,
-            "label": "Talla Alfabética"
-        }]
-    }]
-}
-```
-
-## GET `/api/categories?selectable=true&full=true`
+## GET `/api/products/:id`
 
 ### Response Body
 ```json
 {
     "success": true,
-    "message": "Categories retrieved successfully",
-    "body": [{
-        "value": 1,
-        "label": "Ropa",
-        "filters": [{
-            "value": 1,
-            "label": "Talla Alfabética",
-            "filters": [{
-                "value": 21,
-                "label": "XS"
-            }, {
-                "value": 22,
-                "label": "S"
-            }, {
-                "value": 23,
-                "label": "M"
-            }]
-        }, {
-            "value": 2,
-            "label": "Talla numérica",
-            "filters": [{
-                "value": 11,
-                "label": "30"
-            }, {
-                "value": 12,
-                "label": "31"
-            }, {
-                "value": 13,
-                "label": "32"
-            }]
-        }]
-    }, {
-        "value": 2,
-        "label": "Camiseta",
-        "filters": [{
-            "value": 1,
-            "label": "Talla Alfabética",
-            "filters": [{
-                "value": 21,
-                "label": "XS"
-            }, {
-                "value": 22,
-                "label": "S"
-            }, {
-                "value": 23,
-                "label": "M"
-            }]
-        }]
-    }]
-}
-```
-
----
-## GET `/api/categories/:id`
-
-### Response Body
-```json
-{
-    "success": true,
-    "message": "Category retrieved successfully",
+    "message": "Product retrieved successfully",
     "body": {
-        "id": 1,
-        "name": "Ropa",
-        "description": "",
-        "featured_category": true,
-        "parent_id": {
-            "value": 1,
-            "label": "Ropa"
-        },
-        "filters": [{
-            "value": 1,
-            "label": "Talla Alfabética"
-        }, {
-            "value": 2,
-            "label": "Talla numérica"
-        }],
-        "image": "https://www.google.com/image.jpg"
+        "id": 16,
+        "name": "Camisa POLO",
+        "description": "description",
+        "price": "5000.00",
+        "featured_product": false,
+        "active": true,
+        "categories": [
+            {
+                "value": 1,
+                "label": "Ropa",
+                "filters": [
+                    {
+                        "value": 3,
+                        "label": "Tallas de ropa",
+                        "filters": []
+                    },
+                    {
+                        "value": 2,
+                        "label": "Colores",
+                        "filters": []
+                    },
+                    {
+                        "value": 1,
+                        "label": "Marca",
+                        "filters": []
+                    }
+                ]
+            }
+        ],
+        "filter_combinations": [
+            {
+                "id": 6,
+                "filters": [{
+                    "value": 2,
+                    "label": "Colores"
+                }],
+                "price": "10000"
+            },
+            {
+                "id": 11,
+                "filters": [{
+                    "value": 1,
+                    "label": "Marca"
+                }],
+                "price": "10000"
+            }
+        ],
+        "images": {
+            "values": ["http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe7201551e_1739581216.jpeg", "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg"],
+            "preferred": "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg",
+        }
     }
 }
 ```

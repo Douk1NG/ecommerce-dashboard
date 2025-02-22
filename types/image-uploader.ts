@@ -19,6 +19,16 @@ export type ImageUploaderHandlers = {
     closeCarousel: () => void
 }
 
+export type UseImageUploaderProps = {
+    maxFiles: number
+    maxFileSize: number
+    value?: {
+        values: string[] | string
+        preferred: string
+    }
+    readOnly?: boolean
+}
+
 export type ImageUploaderProps = {
     options?: {
         maxFiles?: number
@@ -35,7 +45,7 @@ export type ImageListProps = {
     preferred: {
         enabled: boolean
     }
-    preferredImageId: string | null
+    preferredImageId?: string
     readOnly?: boolean
     handlers: {
         removeImage: (id: string, external?: boolean) => void
@@ -49,9 +59,8 @@ export type HiddenInputsProps = {
     externalImages: ExternalImage[]
     name?: string
     preferred: {
-
         enabled: boolean
-        id: string | null
+        id?: string
     },
     maxFiles: number
 }

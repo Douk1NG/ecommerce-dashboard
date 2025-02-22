@@ -36,7 +36,57 @@ export const getProduct = async (id: string) => {
             }
         })
         const { body } = await request.json()
-        return body
+
+        return {
+            "id": 16,
+            "name": "Camisa POLO",
+            "description": "description",
+            "price": "5000.00",
+            "featured_product": false,
+            "active": true,
+            "categories": [
+                {
+                    "value": 1,
+                    "label": "Ropa",
+                    "filters": [
+                        {
+                            "value": 3,
+                            "label": "Tallas de ropa"
+                        },
+                        {
+                            "value": 2,
+                            "label": "Colores"
+                        },
+                        {
+                            "value": 1,
+                            "label": "Marca"
+                        }
+                    ]
+                }
+            ],
+            "filter_combinations": [
+                {
+                    "id": 6,
+                    "filters": [{
+                        "value": 2,
+                        "label": "Colores"
+                    }],
+                    "price": "10000"
+                },
+                {
+                    "id": 11,
+                    "filters": [{
+                        "value": 1,
+                        "label": "Marca"
+                    }],
+                    "price": "10000"
+                }
+            ],
+            "images": {
+                "images": ["http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe7201551e_1739581216.jpeg", "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg"],
+                "preferred": "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg",
+            }
+        }
     } catch (error) {
         return null
     }

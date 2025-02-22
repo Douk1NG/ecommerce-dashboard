@@ -1,29 +1,28 @@
 import { useState, useCallback, useRef } from "react"
 import { isValidFileType } from "@/lib/file"
+import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/types/image-uploader"
 
-type ImageFile = File & {
-    preview: string
-    id: string
-}
-
-interface UseImageUploaderProps {
-    maxFiles: number
-    maxFileSize: number
-    value?: string | string[]
-    readOnly?: boolean
-}
-
-export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: UseImageUploaderProps) => {
-    const [images, setImages] = useState<ImageFile[]>([])
-    const [externalImages, setExternalImages] = useState<Array<{url: string, id: string}>>(() => {
-        if (!value) return []
-        const urls = Array.isArray(value) ? value : [value]
+const getExternalImages = (value: UseImageUploaderProps['value']) => {
+    if (value?.values.length) {
+        const urls = Array.isArray(value.values) ? value.values : [value.values]
         return urls.map((url) => ({
             url,
             id: url
         }))
-    })
-    const [preferredImageId, setPreferredImageId] = useState<string | null>(null)
+    }
+    return []
+}
+
+export const useImageUploader = ({
+    maxFiles,
+    maxFileSize,
+    value,
+    readOnly
+}: UseImageUploaderProps) => {
+    const [images, setImages] = useState<ImageFile[]>([])
+    const [externalImages, setExternalImages] = useState<ExternalImage[]>(getExternalImages(value))
+
+    const [preferredImageId, setPreferredImageId] = useState(value?.preferred)
     const [dragActive, setDragActive] = useState(false)
     const [carouselOpen, setCarouselOpen] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -77,7 +76,7 @@ export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: Use
         if (readOnly) return
         setExternalImages(prev => prev.filter(img => img.id !== id))
         if (preferredImageId === id) {
-            setPreferredImageId(null)
+            setPreferredImageId(undefined)
         }
     }, [readOnly, preferredImageId])
 
@@ -112,7 +111,7 @@ export const useImageUploader = ({ maxFiles, maxFileSize, value, readOnly }: Use
             if (readOnly) return
 
             if (preferredImageId === id) {
-                setPreferredImageId(null)
+                setPreferredImageId(undefined)
             }
 
             if (external) {

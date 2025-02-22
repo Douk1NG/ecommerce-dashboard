@@ -7,7 +7,6 @@ import { getUniqueByKey } from "@/lib/utils";
 
 import type { Option } from "@/types/select";
 import type { GroupField } from "@/types/form";
-import { useInheritanceContext } from "@/context/InheritanceProvider";
 
 type Group = {
     id?: number;
