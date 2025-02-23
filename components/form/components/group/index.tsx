@@ -68,7 +68,7 @@ export default function Component({
                     variant="secondary"
                     size="default"
                     onClick={addGroup}
-                    className="hover:text-green-800 hover:bg-green-50 w-fit self-end"
+                    className="cursor-pointer hover:text-green-800 hover:bg-green-50 w-fit self-end"
                 >
                     Agregar
                 </Button>
@@ -84,7 +84,7 @@ export default function Component({
                     key={index}
                     className="flex items-end gap-2 border p-4 rounded relative"
                 >
-                    <div className="flex-1 flex gap-2">
+                    <div className="flex flex-1 gap-2 flex-col md:flex-row">
                         <Field
                             label="Filtros"
                             id={`${name}_filters_${index}`}
@@ -92,6 +92,7 @@ export default function Component({
                             type="multiselect"
                             value={group.filters}
                             onChange={(value: unknown) => handleChange(value, index, group.id)}
+                            readOnly={readOnly}
                         />
                         <Field
                             label="Precio"
@@ -99,6 +100,7 @@ export default function Component({
                             type="currency"
                             value={group.price}
                             onChange={(value: unknown) => handleChange(value, index, group.id)}
+                            readOnly={readOnly}
                         />
                     </div>
                     {(!readOnly && groups.length > 1) && (
@@ -107,7 +109,7 @@ export default function Component({
                             variant="ghost"
                             size="icon"
                             onClick={() => removeGroup(index)}
-                            className="absolute top-0 right-0 rounded-full hover:text-red-800 hover:bg-red-50"
+                            className="cursor-pointer absolute top-0 right-0 rounded-full hover:text-red-800 hover:bg-red-50"
                             title="Eliminar grupo"
                         >
                             <Icon name="trash" />

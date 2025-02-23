@@ -83,7 +83,7 @@ export const getProduct = async (id: string) => {
                 }
             ],
             "images": {
-                "images": ["http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe7201551e_1739581216.jpeg", "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg"],
+                "values": ["http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe7201551e_1739581216.jpeg", "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg"],
                 "preferred": "http://tenant1.localhost:8000/storage/tenancy/tenants/tenant1/products/16/67afe720986c0_1739581216.jpeg",
             }
         }

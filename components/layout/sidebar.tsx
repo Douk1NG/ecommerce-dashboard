@@ -6,6 +6,8 @@ import Icon from '@/components/icon';
 import { getBasePath } from "@/lib/utils";
 import { usePathname } from "@/i18n/routing";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from 'react';
+
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
 import { useTranslations } from 'next-intl';
@@ -53,6 +55,13 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
             router.push(`/${base}`)
         }
     }
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [])
 
     return (
         <div>

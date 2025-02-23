@@ -24,7 +24,7 @@ export default function Carousel({ images, onClose }: CarouselProps) {
             >
                 <button
                     onClick={onClose}
-                    className="absolute right-2 top-4 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 z-10"
+                    className="cursor-pointer absolute right-2 top-4 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 z-10"
                     type="button"
                     aria-label="Close gallery"
                 >
@@ -48,7 +48,7 @@ export default function Carousel({ images, onClose }: CarouselProps) {
                         <button
                             type="button"
                             onClick={goToPrevious}
-                            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            className="cursor-pointer absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
                             aria-label="Previous image"
                         >
                             <Icon name="chevron-left" className="h-6 w-6 text-black" />
@@ -56,7 +56,7 @@ export default function Carousel({ images, onClose }: CarouselProps) {
                         <button
                             type="button"
                             onClick={goToNext}
-                            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            className="cursor-pointer absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
                             aria-label="Next image"
                         >
                             <Icon name="chevron-right" className="h-6 w-6 text-black" />

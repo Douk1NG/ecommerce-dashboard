@@ -186,10 +186,6 @@
   }
 }
 
-.select-tw-fix input {
-  box-shadow: none !important;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -294,4 +290,8 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+.select-tw-fix input {
+  box-shadow: none !important;
 }

@@ -19,6 +19,21 @@ export type ImageUploaderHandlers = {
     closeCarousel: () => void
 }
 
+export type ImageCardProps = {
+    image: ImageFile | ExternalImage;
+    isExternal: boolean;
+    preferred: {
+        enabled: boolean;
+    };
+    preferredImageId?: string;
+    readOnly?: boolean;
+    handlers: {
+        openCarousel: () => void;
+        removeImage: (id: string, isExternal?: boolean) => void;
+        setPreferred: (id: string) => void;
+    };
+}
+
 export type UseImageUploaderProps = {
     maxFiles: number
     maxFileSize: number
