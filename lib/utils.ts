@@ -66,7 +66,7 @@ export function getUniqueByKey<T extends Record<string, unknown>>(array: T[], ke
  * @desc returns a parsed JSON
 **/
 export const safeParseJSON = (value: unknown) => {
-  if(typeof value === 'string') {
+  if(typeof value === 'string' && value) {
     return JSON.parse(value)
   }
   return value
@@ -83,7 +83,7 @@ export const cleanSymbols = (value: string) => {
  * @desc returns a parsed number
  */
 export const safeParseNumber = (value: unknown) => {
-  if(typeof value === 'string') {
+  if(typeof value === 'string' && value) {
     return Number(cleanSymbols(value))
   }
 
@@ -94,7 +94,7 @@ export const safeParseNumber = (value: unknown) => {
  * @desc returns a parsed boolean
  */
 export const safeParseBoolean = (value: unknown) => {
-  if(typeof value === 'string') {
+  if(typeof value === 'string' && value) {
     return Boolean(value)
   }
 

@@ -72,11 +72,12 @@ export type ImageListProps = {
 export type HiddenInputsProps = {
     images: ImageFile[]
     externalImages: ExternalImage[]
+    removedExternalImages: string[]
     name?: string
     preferred: {
         enabled: boolean
         id?: string
-    },
+    }
     maxFiles: number
 }
 

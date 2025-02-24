@@ -39,7 +39,9 @@ export default async function SaveProduct(
         }),
         images: formData.getAll('images[]'),
         images_preferred: formData.get('images_preferred'),
-        active: safeParseBoolean(formData.get('active'))
+        images_removed: formData.getAll('images_removed[]'),
+        active: safeParseBoolean(formData.get('active')),
+
     } as ProductFormData
 
     rawData.main_image = rawData.images?.find((image: File) => image.name === rawData.images_preferred)
@@ -73,6 +75,7 @@ export default async function SaveProduct(
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
+        formData.set('delete_images', formData.get('images_removed[]') as string)
     }
 
     const {

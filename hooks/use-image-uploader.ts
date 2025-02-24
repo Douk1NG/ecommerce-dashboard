@@ -21,6 +21,7 @@ export const useImageUploader = ({
 }: UseImageUploaderProps) => {
     const [images, setImages] = useState<ImageFile[]>([])
     const [externalImages, setExternalImages] = useState<ExternalImage[]>(getExternalImages(value))
+    const [removedExternalImages, setRemovedExternalImages] = useState<string[]>([])
 
     const [preferredImageId, setPreferredImageId] = useState(value?.preferred)
     const [dragActive, setDragActive] = useState(false)
@@ -75,6 +76,7 @@ export const useImageUploader = ({
     const removeExternalImage = useCallback((id: string) => {
         if (readOnly) return
         setExternalImages(prev => prev.filter(img => img.id !== id))
+        setRemovedExternalImages(prev => [...prev, id])
         if (preferredImageId === id) {
             setPreferredImageId(undefined)
         }
@@ -138,6 +140,7 @@ export const useImageUploader = ({
     return {
         images,
         externalImages,
+        removedExternalImages,
         preferredImageId,
         dragActive,
         carouselOpen,

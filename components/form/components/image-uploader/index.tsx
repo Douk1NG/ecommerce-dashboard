@@ -32,7 +32,8 @@ export default function ImageUploader({
         isLimitReached,
         isSingleImage,
         handlers,
-        fileInputRef
+        fileInputRef,
+        removedExternalImages
     } = useImageUploader({
         maxFiles,
         maxFileSize,
@@ -52,6 +53,7 @@ export default function ImageUploader({
         <div className="w-full">
             <HiddenInputs
                 externalImages={externalImages}
+                removedExternalImages={removedExternalImages}
                 images={images}
                 name={name}
                 preferred={{

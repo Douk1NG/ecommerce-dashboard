@@ -3,6 +3,7 @@ import type { HiddenInputsProps } from "@/types/image-uploader"
 export const HiddenInputs = ({
     images,
     externalImages,
+    removedExternalImages,
     name,
     preferred,
     maxFiles
@@ -42,6 +43,14 @@ export const HiddenInputs = ({
                     value={preferred.id}
                 />
             )}
+            {removedExternalImages.map((id) => (
+                <input
+                    key={`removed-${id}`}
+                    type="hidden"
+                    name={`${name}_removed[]`}
+                    value={id}
+                />
+            ))}
         </>
     )
 }
