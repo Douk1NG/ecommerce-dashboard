@@ -12,6 +12,14 @@ export const DropZone = ({
     fileInputRef,
     children
 }: DropZoneProps) => {
+
+    const handleOpenFileDialog = () => {
+        if (isLimitReached) {
+            return
+        }
+        fileInputRef.current?.click()
+    }
+
     return (
         <div
             className={`p-4 border-2 border-dashed rounded-lg
@@ -23,7 +31,10 @@ export const DropZone = ({
             onDragLeave={handlers.drag}
             onDragOver={handlers.drag}
             onDrop={handlers.drop}
-            onClick={isLimitReached ? undefined : () => fileInputRef.current?.click()}
+            onClick={handleOpenFileDialog}
+            role="button"
+            tabIndex={0}
+            aria-label="Upload images"
         >
             <input
                 ref={fileInputRef}
@@ -47,7 +58,10 @@ export const DropZone = ({
                 <Button
                     type="button"
                     variant="secondary"
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        handleOpenFileDialog()
+                    }}
                     disabled={isLimitReached}
                     className={`mt-2 ${isLimitReached ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200 cursor-pointer"}`}
                 >

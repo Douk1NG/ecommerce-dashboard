@@ -19,23 +19,20 @@ export default function Component({
     name,
     readOnly,
     inheritFrom,
-    value: defaultValue = [{}]
+    value: defaultValue = [{}],
+    options: defaultOptions = []
 }: GroupField) {
     const [groups, setGroups] = useState<Group[]>(defaultValue as Group[]);
-    const [options, setOptions] = useState<Option[]>([]);
+    const [options, setOptions] = useState<Option[]>(defaultOptions || []);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const inheritanceMethod = useCallback((value: unknown) => {
         if (!Array.isArray(value)) return;
 
         const uniqueFilters = getUniqueByKey(value as Option[], 'value');
-        const hasFilterOptionsChanged = JSON.stringify(options) !== JSON.stringify(uniqueFilters);
+        setOptions(uniqueFilters);
 
-        if (hasFilterOptionsChanged) {
-            setOptions(uniqueFilters)
-        }
-
-    }, [options])
+    }, []);
 
     useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
 

@@ -115,17 +115,48 @@ _method: 'PUT'
                     {
                         "value": 3,
                         "label": "Tallas de ropa",
-                        "filters": []
+                        "options": [
+                            {
+                                "value": 331,
+                                "label": "S"
+                            },
+                            {
+                                "value": 332,
+                                "label": "M"
+                            },
+                            {
+                                "value": 333,
+                                "label": "L"
+                            }
+                        ]
                     },
                     {
                         "value": 2,
                         "label": "Colores",
-                        "filters": []
+                        "options": [
+                            {
+                                "value": 666,
+                                "label": "Rojo"
+                            },
+                            {
+                                "value": 667,
+                                "label": "Azul"
+                            }
+                        ]
                     },
                     {
                         "value": 1,
                         "label": "Marca",
-                        "filters": []
+                        "options": [
+                            {
+                                "value": 111,
+                                "label": "Adidas"
+                            },
+                            {
+                                "value": 112,
+                                "label": "Nike"
+                            }
+                        ]
                     }
                 ]
             }
@@ -134,16 +165,16 @@ _method: 'PUT'
             {
                 "id": 6,
                 "filters": [{
-                    "value": 2,
-                    "label": "Colores"
+                    "value": 666,
+                    "label": "Rojo"
                 }],
                 "price": "10000"
             },
             {
                 "id": 11,
                 "filters": [{
-                    "value": 1,
-                    "label": "Marca"
+                    "value": 111,
+                    "label": "Nike"
                 }],
                 "price": "10000"
             }

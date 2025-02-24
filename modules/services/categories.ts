@@ -1,13 +1,17 @@
 "use server"
 
+import { buildGetQuery } from "@/lib/utils"
+import type { Query } from "@/types/services"
+
 // temp
 const token = process.env.NEXT_PUBLIC_API_TOKEN
 const path = `${process.env.NEXT_PUBLIC_API_URL}/categories`
 
-export const getCategories = async () => {
+export const getCategories = async (query?: Query) => {
     try {
+        const queryString = buildGetQuery(query)
         const request = await fetch(
-            path, {
+            path + queryString, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -37,21 +41,6 @@ export const getCategory = async (id: string) => {
         return body
     } catch (error) {
         return null
-    }
-}
-
-export const getSelectableCategories = async (full: boolean = false) => {
-    const query = full ? '?full=true' : ''
-    try {
-        const request = await fetch(`${path}?selectable=true${query}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const { body } = await request.json()
-        return body
-    } catch (error) {
-        return []
     }
 }
 

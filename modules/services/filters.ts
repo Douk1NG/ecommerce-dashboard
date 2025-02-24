@@ -1,14 +1,18 @@
 "use server"
-import { Filter } from "@/modules/types/filters"
+import type { Filter } from "@/modules/types/filters"
+import type { Query } from "@/types/services"
+
+import { buildGetQuery } from "@/lib/utils"
 
 // temp
 const token = process.env.NEXT_PUBLIC_API_TOKEN
 const path = `${process.env.NEXT_PUBLIC_API_URL}/filters`
 
-export const getFilters = async () => {
+export const getFilters = async (query?: Query) => {
     try {
+        const queryString = buildGetQuery(query)
         const request = await fetch(
-            path, {
+            path + queryString, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -38,20 +42,6 @@ export const getFilter = async (id: string) => {
         return body
     } catch (error) {
         return null
-    }
-}
-
-export const getSelectableFilters = async () => {
-    try {
-        const request = await fetch(`${path}?selectable=true`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-        }
-    })
-        const { body } = await request.json()
-        return body
-    } catch (error) {
-        return []
     }
 }
 

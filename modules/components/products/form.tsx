@@ -12,7 +12,7 @@ type FormProps = {
     values: Product
     isNew: boolean,
     content: {
-        categories: Option[]
+        categories?: Option[]
     }
 }
 

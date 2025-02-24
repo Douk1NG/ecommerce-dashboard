@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import CONSTANTS from '@/lib/constants'
+import type { Query } from "@/types/services";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -109,4 +110,24 @@ export const getPropertyOfArray = (value: unknown, property: string) => {
   }
 
   return value
+}
+
+/**
+ * @desc returns a query string
+ */
+export const buildGetQuery = (query?: Query) => {
+  if (!query) {
+    return ''
+  }
+
+  const [selectable, full] = Object.entries(query).flat()
+
+  const build = `?${selectable}=${Boolean(selectable)}`
+
+  if (full) {
+    const [key, value] = Object.entries(full).flat()
+    return `${build}&${key}=${value}`
+  }
+
+  return build
 }

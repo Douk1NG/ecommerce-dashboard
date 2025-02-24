@@ -5,13 +5,13 @@ import {
 } from "@/modules/services/products";
 
 import {
-    getSelectableCategories
+    getCategories
 } from "@/modules/services/categories";
 
 import Layout from "@/modules/components/products/form";
 
-
 import type { PageProps } from "@/types/layout";
+import type { Product } from "@/modules/types/products";
 
 export default async function Page(
     { params }: PageProps
@@ -20,13 +20,20 @@ export default async function Page(
     const isNew = id === CONSTANTS_LIB.NEW
 
     const product = !isNew ? await getProduct(id) : undefined
+    const filterCombinations = product?.categories?.map(category => category.filters).flat() ?? []
+
     const content = {
-        categories: await getSelectableCategories()
+        categories: await getCategories({
+            selectable: {
+                full: true
+            }
+        }),
+        filter_combinations: filterCombinations
     }
 
     return (
         <Layout
-            values={product}
+            values={product as unknown as Product}
             isNew={isNew}
             content={content}
         />

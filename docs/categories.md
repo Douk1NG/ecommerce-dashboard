@@ -118,7 +118,7 @@ _method: 'PUT'
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética",
-            "filters": [{
+            "options": [{
                 "value": 21,
                 "label": "XS"
             }, {
@@ -131,7 +131,7 @@ _method: 'PUT'
         }, {
             "value": 2,
             "label": "Talla numérica",
-            "filters": [{
+            "options": [{
                 "value": 11,
                 "label": "30"
             }, {
@@ -148,7 +148,7 @@ _method: 'PUT'
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética",
-            "filters": [{
+            "options": [{
                 "value": 21,
                 "label": "XS"
             }, {

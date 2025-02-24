@@ -2,10 +2,10 @@ import CONSTANTS_LIB from "@/lib/constants";
 
 import {
     getCategory,
-    getSelectableCategories
+    getCategories
 } from "@/modules/services/categories";
 
-import { getSelectableFilters } from "@/modules/services/filters";
+import { getFilters } from "@/modules/services/filters";
 
 import Layout from "@/modules/components/categories/form";
 
@@ -19,8 +19,16 @@ export default async function Page(
 
     const category = !isNew ? await getCategory(id) : undefined
     const content = {
-        filters: await getSelectableFilters(),
-        categories: await getSelectableCategories()
+        filters: await getFilters({
+            selectable: {
+                full: false
+            }
+        }),
+        categories: await getCategories({
+            selectable: {
+                full : false
+            }
+        })
     }
 
     return (

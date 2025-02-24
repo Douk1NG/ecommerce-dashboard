@@ -6,11 +6,12 @@ import Icon from '@/components/icon';
 import { getBasePath } from "@/lib/utils";
 import { usePathname } from "@/i18n/routing";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
-import { useTranslations } from 'next-intl';
+
 import IntlButton from '../intl/ui/Button';
 
 type PropTypes = {
@@ -31,7 +32,7 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
     const isDetail = !isNew && !isEdit
 
     const onConfirm = () => {
-        router.push(`/${base}`)
+        router.push(`/${base}`, { scroll: false })
     }
 
     const onEdit = () => {

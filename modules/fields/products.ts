@@ -3,10 +3,11 @@ import CONSTANTS from '@/modules/constants/products';
 import type { Option } from "@/types/select";
 
 type FieldsProps = {
-    categories: Option[]
+    categories?: Option[]
+    filter_combinations?: Option[]
 }
 
-const fields: (props: FieldsProps) => Fields = ({ categories }) => [
+const fields: (props: FieldsProps) => Fields = ({ categories, filter_combinations }) => [
     {
         "label": CONSTANTS.SCHEME.NAME,
         "name": CONSTANTS.KEYS.NAME,
@@ -47,7 +48,8 @@ const fields: (props: FieldsProps) => Fields = ({ categories }) => [
         "inheritFrom": {
             "field": CONSTANTS.KEYS.CATEGORIES,
             "property": "filters"
-        }
+        },
+        "options": filter_combinations
     },
     {
         "label": CONSTANTS.SCHEME.IMAGES,

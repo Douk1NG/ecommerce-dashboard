@@ -12,8 +12,8 @@ const productSchema = z.object({
     [CONSTANTS.KEYS.MAIN_IMAGE]: z.instanceof(File).optional(),
     [CONSTANTS.KEYS.RELATED_IMAGES]: z.array(z.instanceof(File)).optional(),
     [CONSTANTS.KEYS.FILTER_COMBINATIONS]: z.array(z.object({
-        price: z.number(),
-        filters: z.array(z.number())
+        [CONSTANTS.KEYS.PRICE]: z.number(),
+        [CONSTANTS.KEYS.FILTERS]: z.array(z.number())
     }))
 });
 

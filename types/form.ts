@@ -55,7 +55,7 @@ export type ImageField = BaseField & ImageUploaderProps & {
     type: 'image';
 };
 
-export type GroupField = BaseField & {
+export type GroupField = BaseField & WithOptions & {
     type: 'group';
 };
 
