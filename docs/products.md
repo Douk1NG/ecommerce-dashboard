@@ -115,6 +115,7 @@ _method: 'PUT'
                     {
                         "value": 3,
                         "label": "Tallas de ropa",
+                        "isFixed": true,
                         "options": [
                             {
                                 "value": 331,
@@ -133,6 +134,7 @@ _method: 'PUT'
                     {
                         "value": 2,
                         "label": "Colores",
+                        "isFixed": true,
                         "options": [
                             {
                                 "value": 666,
@@ -147,6 +149,7 @@ _method: 'PUT'
                     {
                         "value": 1,
                         "label": "Marca",
+                        "isFixed": true,
                         "options": [
                             {
                                 "value": 111,

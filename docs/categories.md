@@ -106,7 +106,7 @@ _method: 'PUT'
 ```
 
 ## GET `/api/categories?selectable=true&full=true`
-
+// SI ES FULL AGREGAR PROPIEDAD ISFIXED
 ### Response Body
 ```json
 {
@@ -118,6 +118,7 @@ _method: 'PUT'
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética",
+            "isFixed": true,
             "options": [{
                 "value": 21,
                 "label": "XS"
@@ -131,6 +132,7 @@ _method: 'PUT'
         }, {
             "value": 2,
             "label": "Talla numérica",
+            "isFixed": true,
             "options": [{
                 "value": 11,
                 "label": "30"
@@ -148,6 +150,7 @@ _method: 'PUT'
         "filters": [{
             "value": 1,
             "label": "Talla Alfabética",
+            "isFixed": true,
             "options": [{
                 "value": 21,
                 "label": "XS"

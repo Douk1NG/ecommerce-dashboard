@@ -52,6 +52,7 @@ export const getProduct = async (id: string) => {
                         {
                             "value": 3,
                             "label": "Tallas de ropa",
+                            "isFixed": true,
                             "options": [
                                 {
                                     "value": 331,
@@ -70,6 +71,7 @@ export const getProduct = async (id: string) => {
                         {
                             "value": 2,
                             "label": "Colores",
+                            "isFixed": true,
                             "options": [
                                 {
                                     "value": 666,
@@ -84,6 +86,7 @@ export const getProduct = async (id: string) => {
                         {
                             "value": 1,
                             "label": "Marca",
+                            "isFixed": true,
                             "options": [
                                 {
                                     "value": 111,

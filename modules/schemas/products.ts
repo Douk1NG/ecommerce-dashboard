@@ -6,7 +6,7 @@ const productSchema = z.object({
     [CONSTANTS.KEYS.NAME]: z.string(),
     [CONSTANTS.KEYS.DESCRIPTION]: z.string(),
     [CONSTANTS.KEYS.PRICE]: z.number(),
-    [CONSTANTS.KEYS.CATEGORIES]: z.array(z.number()),
+    [CONSTANTS.KEYS.CATEGORIES]: z.array(z.string()),
     [CONSTANTS.KEYS.ACTIVE]: z.boolean().default(true),
     [CONSTANTS.KEYS.FEATURED_PRODUCT]: z.boolean(),
     [CONSTANTS.KEYS.MAIN_IMAGE]: z.instanceof(File).optional(),
