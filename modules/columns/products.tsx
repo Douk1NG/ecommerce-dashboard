@@ -1,17 +1,18 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Product } from '@/modules/types/products';
 import { safeParseFloat } from "@/lib/utils";
+import CONSTANTS from "@/modules/constants/products";
 
 const columns: ColumnDef<Product>[] = [
     {
-        accessorKey: "name",
-        header: "scheme.name",
+        accessorKey: CONSTANTS.KEYS.NAME,
+        header: CONSTANTS.SCHEME.NAME,
     },
     {
-        accessorKey: "price",
-        header: "scheme.price",
+        accessorKey: CONSTANTS.KEYS.PRICE,
+        header: CONSTANTS.SCHEME.PRICE,
         cell: ({ row }) => {
-            const price = safeParseFloat(row.getValue("price"))
+            const price = safeParseFloat(row.getValue(CONSTANTS.KEYS.PRICE))
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
@@ -21,8 +22,8 @@ const columns: ColumnDef<Product>[] = [
         },
     },
     {
-        accessorKey: "active",
-        header: "scheme.active",
+        accessorKey: CONSTANTS.KEYS.ACTIVE,
+        header: CONSTANTS.SCHEME.ACTIVE,
         cell: ({ row }) => {
             const product = row.original
             const active = Boolean(product.active)

@@ -43,7 +43,10 @@ This project is licensed under the [MIT License](LICENSE).
 - redesign the modules folder
 
 # Reported bugs
-- Controlled/Uncontrolled inputs on categories
+- Cuando deselecciono una categoria en productos, los elementos seleccionados no se deseleccionan (se debe conservar la selección de filtros que prevalezca según el caso)
+
+- Validacion de
+- Imagen principal en editar no se adjunta
 
 # Rules
 - Any type is not allowed

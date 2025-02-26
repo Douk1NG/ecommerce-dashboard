@@ -58,7 +58,7 @@
                 }
             }
         },
-        "upload" : {
+        "upload": {
             "title": "Cargar"
         }
     },
@@ -193,10 +193,79 @@
         },
         "scheme": {
             "product": "Producto",
-            "quantity": "Cantidad"
+            "quantity": "Cantidad",
+            "price": "Precio"
         },
         "table": {
             "empty": "No se han encontrado productos en el inventario, para iniciar, presiona el botón entradas",
+            "info": "Click para ver su detalle"
+        }
+    },
+    "inflow": {
+        "metadata": {
+            "title": "Entradas",
+            "description": "Consulta las entradas registradas en la tienda"
+        },
+        "layout": {
+            "title": "Entradas",
+            "description": "",
+            "add": "Crear",
+            "save": "Guardar"
+        },
+        "scheme": {
+            "product_name": "Producto",
+            "quantity": "Cantidad",
+            "unit_price": "Precio",
+            "total_price": "Precio total",
+            "reason": "Razón",
+            "date": "Fecha",
+            "combinations": "Combinaciones"
+        },
+        "description": {
+            "product_name": "Establece el producto",
+            "quantity": "Establece la cantidad",
+            "unit_price": "Establece el precio por unidad",
+            "total_price": "Establece el precio total",
+            "reason": "Establece la razón",
+            "date": "Establece la fecha",
+            "combinations": "Establece las combinaciones"
+        },
+        "table": {
+            "empty": "No se han encontrado entradas, para empezar, presiona el botón crear entrada",
+            "info": "Click para ver su detalle"
+        }
+    },
+    "outflow": {
+        "metadata": {
+            "title": "Salidas",
+            "description": "Consulta las salidas registradas en la tienda"
+        },
+        "layout": {
+            "title": "Salidas",
+            "description": "",
+            "add": "Crear",
+            "save": "Guardar"
+        },
+        "scheme": {
+            "product_name": "Producto",
+            "quantity": "Cantidad",
+            "unit_price": "Precio",
+            "total_price": "Precio total",
+            "reason": "Razón",
+            "date": "Fecha",
+            "combinations": "Combinaciones"
+        },
+        "description": {
+            "product_name": "Establece el producto",
+            "quantity": "Establece la cantidad",
+            "unit_price": "Establece el precio",
+            "total_price": "Establece el precio total",
+            "reason": "Establece la razón",
+            "date": "Establece la fecha",
+            "combinations": "Establece las combinaciones"
+        },
+        "table": {
+            "empty": "No se han encontrado salidas, para empezar, presiona el botón crear salida",
             "info": "Click para ver su detalle"
         }
     }

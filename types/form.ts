@@ -1,7 +1,7 @@
 import type { ImageUploaderProps } from "@/types/image-uploader";
 import type { Option } from "@/types/select";
 
-export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multiselect' | 'switch' | 'tagbox' | 'image' | 'group';
+export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multiselect' | 'switch' | 'tagbox' | 'image' | 'group_variant_inventory' | 'group_variant_product' | 'number';
 
 export interface BaseField {
     id?: string;
@@ -56,7 +56,11 @@ export type ImageField = BaseField & ImageUploaderProps & {
 };
 
 export type GroupField = BaseField & WithOptions & {
-    type: 'group';
+    type: 'group_variant_inventory' | 'group_variant_product';
+};
+
+export type NumberField = BaseField & {
+    type: 'number';
 };
 
 export type Field =
@@ -68,7 +72,8 @@ export type Field =
     | SwitchField
     | SelectField
     | TagboxField
-    | ImageField;
+    | ImageField
+    | NumberField;
 
 export type Fields = Field[];
 

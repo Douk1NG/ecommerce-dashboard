@@ -192,10 +192,79 @@
         },
         "scheme": {
             "product": "Product",
-            "quantity": "Quantity"
+            "quantity": "Quantity",
+            "price": "Price"
         },
         "table": {
             "empty": "No products found, to get started, press the add an inflow",
+            "info": "Click to view its details"
+        }
+    },
+    "inflow": {
+        "metadata": {
+            "title": "Inflow",
+            "description": "Check the inflow available in the store"
+        },
+        "layout": {
+            "title": "Inflow",
+            "description": "",
+            "add": "Create",
+            "save": "Save"
+        },
+        "scheme": {
+            "product_name": "Product",
+            "quantity": "Quantity",
+            "unit_price": "Price",
+            "total_price": "Total price",
+            "reason": "Reason",
+            "date": "Date",
+            "combinations": "Combinations"
+        },
+        "description": {
+            "product_name": "Set the product",
+            "quantity": "Set the quantity",
+            "unit_price": "Set the price",
+            "total_price": "Set the total price",
+            "reason": "Set the reason",
+            "date": "Set the date",
+            "combinations": "Set the combinations"
+        },
+        "table": {
+            "empty": "No inflows found, to get started, press the create inflow button.",
+            "info": "Click to view its details"
+        }
+    },
+    "outflow": {
+        "metadata": {
+            "title": "Outflow",
+            "description": "Check the outflow available in the store"
+        },
+        "layout": {
+            "title": "Outflow",
+            "description": "",
+            "add": "Create",
+            "save": "Save"
+        },
+        "scheme": {
+            "product_name": "Product",
+            "quantity": "Quantity",
+            "unit_price": "Price",
+            "total_price": "Total price",
+            "reason": "Reason",
+            "date": "Date",
+            "combinations": "Combinations"
+        },
+        "description": {
+            "product_name": "Set the product",
+            "quantity": "Set the quantity",
+            "unit_price": "Set the price per unit",
+            "total_price": "Set the total price",
+            "reason": "Set the reason",
+            "date": "Set the date",
+            "combinations": "Set the combinations"
+        },
+        "table": {
+            "empty": "No outflows found, to get started, press the create outflow button.",
             "info": "Click to view its details"
         }
     }

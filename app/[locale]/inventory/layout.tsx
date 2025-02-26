@@ -1,12 +1,11 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/modules/constants/login";
-import { default as LIB_CONSTANTS } from "@/lib/constants";
+import CONSTANTS from "@/modules/constants/inventory";
 
 import type { Metadata } from "next/types";
-import type { BaseLayoutProps } from "@/types/layout";
+import type { LayoutProps } from "@/types/layout";
 
 export async function generateMetadata(
-    props: BaseLayoutProps
+    props: LayoutProps
 ): Promise<Metadata> {
     const params = await props.params;
 
@@ -20,11 +19,13 @@ export async function generateMetadata(
     });
 
     return {
-        title: t(LIB_CONSTANTS.METADATA.TITLE),
-        description: t(LIB_CONSTANTS.METADATA.DESCRIPTION)
+        title: t(CONSTANTS.METADATA.TITLE),
+        description: t(CONSTANTS.METADATA.DESCRIPTION)
     };
 }
 
-export default async function Layout({ children }: BaseLayoutProps) {
+export default async function Layout({
+    children
+}: LayoutProps) {
     return children
 }

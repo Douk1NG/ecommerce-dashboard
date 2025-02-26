@@ -4,7 +4,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
 import type { Metadata } from "next";
-import type { GenerateMetadataProps, LoginLayoutProps } from "@/types/layout";
+import type { GenerateMetadataProps, BaseLayoutProps } from "@/types/layout";
 
 import {
     SidebarInset,
@@ -30,7 +30,7 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     };
 }
 
-const RootLayout: React.FC<LoginLayoutProps> = async (props: LoginLayoutProps) => {
+const RootLayout: React.FC<BaseLayoutProps> = async (props: BaseLayoutProps) => {
     const params = await props.params;
 
     const {

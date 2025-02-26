@@ -6,7 +6,9 @@ import Switch from "./components/switch";
 import Tagbox from "./components/tagbox";
 import Select from "./components/select";
 import ImageUploader from "./components/image-uploader";
-import Group from "./components/group";
+import GroupInventory from "./components/group/inventory";
+import GroupProduct from "./components/group/product";
+import Number from "./components/number";
 import { Label } from "@/components/ui/label";
 import type { Field } from "@/types/form";
 import type { JSX } from "react";
@@ -20,7 +22,9 @@ const Components = {
     tagbox: Tagbox,
     select: Select,
     image: ImageUploader,
-    group: Group
+    group_variant_inventory: GroupInventory,
+    group_variant_product: GroupProduct,
+    number: Number
 };
 
 const Index = <T extends Field>(props: T) => {

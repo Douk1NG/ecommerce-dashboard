@@ -9,13 +9,11 @@ export type GenerateMetadataProps = {
     params: Promise<Params>
 }
 
-export type LayoutProps = {
-    children: React.ReactNode
-    params: Promise<Params>
+export type LayoutProps = BaseLayoutProps & {
     sidebar: React.ReactNode
 }
 
-export type LoginLayoutProps = {
+export type BaseLayoutProps = {
     children: React.ReactNode
     params: Promise<Params>
 }

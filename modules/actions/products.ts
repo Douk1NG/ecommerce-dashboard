@@ -23,12 +23,11 @@ export default async function SaveProduct(
     prevState: ActionResponse | null,
     formData: FormData
 ): Promise<ActionResponse> {
-
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),
         description: formData.get('description'),
-        categories: getPropertyOfArray(safeParseJSON(formData.get('categories')), 'value'),
+        categories: formData.getAll('categories'),
         price: safeParseNumber(formData.get('price')),
         featured_product: safeParseBoolean(formData.get('featured_product')),
         filter_combinations: safeParseJSON(formData.get('filter_combinations')).map((it: FilterCombination) => {
@@ -58,7 +57,7 @@ export default async function SaveProduct(
         }
     }
 
-    formData.set('categories', JSON.stringify(rawData.categories))
+    formData.set('categories', JSON.stringify(rawData.categories.map((it: string) => Number(it))))
     formData.set('filter_combinations', JSON.stringify(rawData.filter_combinations))
     formData.set('price', rawData.price.toString())
     formData.set('main_image', rawData.main_image as File)
@@ -71,12 +70,15 @@ export default async function SaveProduct(
 
     formData.delete('images[]')
     formData.delete('images_preferred')
+    formData.delete('images_external[]')
 
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
         formData.set('delete_images', formData.get('images_removed[]') as string)
     }
+
+    console.log(formData)
 
     const {
         success,
