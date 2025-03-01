@@ -44,7 +44,7 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filter_combination
         "label": CONSTANTS.SCHEME.FILTER_COMBINATIONS,
         "name": CONSTANTS.KEYS.FILTER_COMBINATIONS,
         "description": CONSTANTS.DESCRIPTION.FILTER_COMBINATIONS,
-        "type": "group",
+        "type": "group_variant_product",
         "inheritFrom": {
             "field": CONSTANTS.KEYS.CATEGORIES,
             "property": "filters"
