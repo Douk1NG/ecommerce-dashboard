@@ -16,7 +16,7 @@ export const getProducts = async () => {
 
         if (request.ok) {
             const { body } = await request.json()
-            return body.products
+            return body
         }
 
         return []
