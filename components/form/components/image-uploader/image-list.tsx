@@ -34,7 +34,7 @@ const ImageCard = ({
                     className="cursor-pointer absolute top-0 right-0 rounded-full"
                     type="button"
                 >
-                    <Icon name="close" />
+                    <Icon name="close" className="h-5 w-5" />
                 </Button>
             )}
             {preferred.enabled && !readOnly && (

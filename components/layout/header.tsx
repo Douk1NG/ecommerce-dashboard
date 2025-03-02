@@ -1,6 +1,7 @@
 "use client";
 import { Fragment } from 'react';
 import { Separator } from '@/components/ui/separator';
+import IntlText from '@/components/intl/ui/Text';
 
 import {
     Breadcrumb,
@@ -13,15 +14,13 @@ import {
 
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useBreadcrumbPath } from '@/hooks/use-breadcrumb-path';
-import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/routing';
 
 import CONSTANTS from '@/lib/constants';
 import type { NavItem } from '@/types/nav';
 
-const BreadcrumbContent = ({ breadcrumbPath, t }: {
-    breadcrumbPath: NavItem[] | null,
-    t: (key: string) => string
+const BreadcrumbContent = ({ breadcrumbPath }: {
+    breadcrumbPath: NavItem[] | null
 }) => {
     return (
         <Breadcrumb>
@@ -29,13 +28,15 @@ const BreadcrumbContent = ({ breadcrumbPath, t }: {
                 {breadcrumbPath?.map((crumb, index) => (
                     index === breadcrumbPath.length - 1 ? (
                         <BreadcrumbItem key={crumb.url}>
-                            <BreadcrumbPage>{t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}</BreadcrumbPage>
+                            <BreadcrumbPage>
+                                <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`} />
+                            </BreadcrumbPage>
                         </BreadcrumbItem>
                     ) : (
                         <Fragment key={crumb.url}>
                             <BreadcrumbItem>
                                 <BreadcrumbLink href={crumb.url}>
-                                    {t(`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`)}
+                                    <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${crumb.title}`} />
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator key={`separator-${crumb.url}`} />
@@ -50,16 +51,16 @@ const BreadcrumbContent = ({ breadcrumbPath, t }: {
 const Header = () => {
     const pathname = usePathname();
     const breadcrumbPath = useBreadcrumbPath(pathname);
-    const t = useTranslations(CONSTANTS.LAYOUT.NAMESPACE);
-
     return (
         <div className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1">
-                {!breadcrumbPath && (<>{t(CONSTANTS.LAYOUT.BREADCRUMB.NAMESPACE)}</>)}
+                {!breadcrumbPath && (
+                    <IntlText title={CONSTANTS.LAYOUT.BREADCRUMB.NAMESPACE} />
+                )}
             </SidebarTrigger>
 
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <BreadcrumbContent breadcrumbPath={breadcrumbPath} t={t} />
+            <BreadcrumbContent breadcrumbPath={breadcrumbPath} />
         </div>
     );
 };

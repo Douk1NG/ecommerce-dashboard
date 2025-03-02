@@ -11,6 +11,10 @@ const columns: ColumnDef<Inflow>[] = [
     {
         accessorKey: CONSTANTS.KEYS.QUANTITY,
         header: CONSTANTS.SCHEME.QUANTITY,
+    },
+    {
+        accessorKey: CONSTANTS.KEYS.DATE,
+        header: CONSTANTS.SCHEME.DATE,
     }
 ]
 

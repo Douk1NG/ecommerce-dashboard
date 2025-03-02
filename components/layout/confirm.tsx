@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
+import IntlButton from "@/components/intl/ui/Button";
+import IntlText from "@/components/intl/ui/Text";
 import Icon from '@/components/icon';
-import { useTranslations } from "next-intl";
 
 import {
     Dialog,
@@ -18,50 +18,51 @@ import type { PropTypes } from "@/types/dialog";
 export default function Index({
     icon,
     onConfirm,
-    translations,
+    translations: {
+        TITLE,
+        DESCRIPTION,
+        NAME,
+        CANCEL,
+        ACCEPT
+    },
     variant = 'outline'
 }: PropTypes) {
-    const t = useTranslations(translations);
-
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button
+                <IntlButton
                     variant={variant}
-                    type='button'
-                    title={t('name')}
+                    title={NAME}
                 >
-                    <Icon name={icon} />
-                </Button>
+                    <Icon name={icon} className='h-5 w-5' />
+                </IntlButton>
             </DialogTrigger>
             <DialogContent className="w-[90vw] md:max-w-md">
                 <DialogHeader>
-                    <DialogTitle>{t('title')}</DialogTitle>
+                    <DialogTitle>
+                        <IntlText title={TITLE} />
+                    </DialogTitle>
                     <DialogDescription>
-                        {t('description')}
+                        <IntlText title={DESCRIPTION} />
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="flex-row justify-center gap-4 md:gap-1">
                     <DialogClose asChild>
-                        <Button
-                            type="button"
+                        <IntlButton
                             variant="secondary"
-                            title={t('cancel')}
+                            title={CANCEL}
                             className='w-fit'
-                        >
-                            {t('cancel')}
-                        </Button>
+                            text
+                        />
                     </DialogClose>
                     <DialogClose asChild>
-                        <Button
+                        <IntlButton
+                            variant="default"
                             onClick={onConfirm}
-                            type='button'
-                            variant='default'
-                            title={t('accept')}
+                            title={ACCEPT}
                             className='w-fit'
-                        >
-                            {t('accept')}
-                        </Button>
+                            text
+                        />
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>

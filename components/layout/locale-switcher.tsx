@@ -1,7 +1,4 @@
 'use client'
-import { useTranslations } from 'next-intl'
-import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
-
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -11,15 +8,19 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
-
+import IntlButton from "@/components/intl/ui/Button";
+import IntlText from '@/components/intl/ui/Text';
+import CONSTANTS from "@/lib/constants";
+import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 import { type Locale, locales} from "@/i18n/routing"
-import { translations } from '@/i18n/request'
 
 const LocaleSwitcher = () => {
-    const t = useTranslations(translations.header);
-    const { locale, isPending, switchLocale } = useLocaleSwitcher();
+    const {
+        locale,
+        isPending,
+        switchLocale
+    } = useLocaleSwitcher();
 
     function handleLocaleChange(event: React.MouseEvent<HTMLDivElement>): void {
         switchLocale(event.currentTarget.id as Locale);
@@ -30,18 +31,20 @@ const LocaleSwitcher = () => {
             <DropdownMenuTrigger asChild>
             </DropdownMenuTrigger>
             <DropdownMenuTrigger asChild disabled={isPending}>
-                <Button
-                    type="button"
+                <IntlButton
                     variant="ghost"
                     size="icon"
-                    title={t('lang')}
+                    title={CONSTANTS.LAYOUT.LOCALE_SWITCHER.SWITCH}
+                    tooltip
                 >
-                    <Icon name='globe'/>
+                    <Icon name='globe' className='h-5 w-5' />
                     <small className='uppercase'>{locale}</small>
-                </Button>
+                </IntlButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{t('lang')}</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                    <IntlText title={CONSTANTS.LAYOUT.LOCALE_SWITCHER.SWITCH} />
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {locales.map((it) => (
                     <DropdownMenuCheckboxItem
@@ -50,7 +53,7 @@ const LocaleSwitcher = () => {
                         id={it}
                         checked={it === locale}
                     >
-                        {t(`langs.${it}`)}
+                        <IntlText title={`${CONSTANTS.LAYOUT.LOCALE_SWITCHER.LANGS}.${it}`} />
                     </DropdownMenuCheckboxItem>
                 ))}
             </DropdownMenuContent>

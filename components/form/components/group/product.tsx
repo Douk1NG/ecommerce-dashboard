@@ -109,7 +109,7 @@ export default function Component({
                             className="cursor-pointer absolute top-0 right-0 rounded-full hover:text-red-800 hover:bg-red-50"
                             title="Eliminar grupo"
                         >
-                            <Icon name="trash" />
+                            <Icon name="trash" className="h-5 w-5" />
                         </Button>
                     )}
                 </div>

@@ -8,9 +8,9 @@ export default function FormSubmitButton({ isPending }: { isPending: boolean }) 
                 type='submit'
                 disabled={isPending}
                 title='layout.sidebar.save'
-                showTitle={true}
+                text
             >
-                {isPending && <Icon name='loader' className='animate-spin mr-2' />}
+                {isPending && <Icon name='loader' className='animate-spin mr-2 h-4 w-4' />}
             </IntlButton>
         </div>
     )

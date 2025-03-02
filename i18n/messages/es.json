@@ -24,29 +24,32 @@
             "inflow": "Entradas",
             "settings": "Configuraciones"
         },
-        "header": {
+        "locale": {
+            "switch": "Cambiar lenguaje",
             "langs": {
                 "es": "Español",
                 "en": "Inglés"
-            },
-            "lang": "Cambiar lenguaje",
-            "logout": "Cerrar sesión",
+            }
+        },
+        "user": {
             "profile": "Perfil",
-            "toggle": "Alternar navegación"
+            "logout": "Cerrar sesión"
         },
-        "confirmClose": {
-            "cancel": "Cancelar",
-            "accept": "Aceptar",
-            "title": "¿Está seguro que desea cerrar el formulario?",
-            "description": "Cualquier cambio realizado se perderá.",
-            "name": "Cerrar"
-        },
-        "confirmDelete": {
-            "cancel": "Cancelar",
-            "accept": "Aceptar",
-            "title": "¿Está seguro que desea eliminar el registro?",
-            "description": "No podrás recuperar los datos eliminados.",
-            "name": "Eliminar"
+        "confirm": {
+            "close": {
+                "cancel": "Cancelar",
+                "accept": "Aceptar",
+                "title": "¿Está seguro que desea cerrar el formulario?",
+                "description": "Cualquier cambio realizado se perderá.",
+                "name": "Cerrar"
+            },
+            "delete": {
+                "cancel": "Cancelar",
+                "accept": "Aceptar",
+                "title": "¿Está seguro que desea eliminar el registro?",
+                "description": "No podrás recuperar los datos eliminados.",
+                "name": "Eliminar"
+            }
         },
         "tagbox": {
             "add": "Agregar",

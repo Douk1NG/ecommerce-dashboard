@@ -18,13 +18,3 @@ export function localize(key: string, locale: string) {
     const keys = key.split('.');
     return keys.reduce((acc, part) => acc && acc[part], messages);
 }
-
-export const translations = {
-    'navbar': 'layout.navbar',
-    'header': 'layout.header',
-    'dialog': 'layout.dialog',
-    'orders': 'orders',
-    'categories': 'categories',
-    'filters': 'filters',
-    'products': 'products'
-}

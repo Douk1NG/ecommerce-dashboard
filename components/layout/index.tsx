@@ -1,9 +1,13 @@
 import { buttonVariants } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 import type { LayoutContentProps } from "@/types/layout"
 
-const Index = ({ title, description, action, children }: LayoutContentProps) => {
+const Index = ({
+    title,
+    description,
+    action,
+    children
+}: LayoutContentProps) => {
     return (
         <>
             <div className="flex items-center justify-between space-y-2 mb-4 px-4 py-6 lg:px-8">

@@ -3,6 +3,13 @@ import { isValidFileType } from "@/lib/file"
 import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/types/image-uploader"
 
 const getExternalImages = (value: UseImageUploaderProps['value']) => {
+    if(typeof value === 'string') {
+        return [{
+            url: value,
+            id: value
+        }]
+    }
+
     if (value?.values.length) {
         const urls = Array.isArray(value.values) ? value.values : [value.values]
         return urls.map((url) => ({

@@ -287,7 +287,7 @@ const SidebarTrigger = React.forwardRef<
         type='button'
         {...props}
       >
-        <Icon name="panel-left" />
+        <Icon name="panel-left" className="h-5 w-5" />
         <span className="sr-only">Toggle Sidebar</span>
       </Button>
       <span className="md:hidden" onClick={handleClick}>{children}</span>

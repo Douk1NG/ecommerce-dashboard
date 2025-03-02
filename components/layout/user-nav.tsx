@@ -1,5 +1,3 @@
-import { useTranslations } from "next-intl";
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,7 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { Button } from "@/components/ui/button"
+import IntlButton from "@/components/intl/ui/Button";
+import IntlText from "@/components/intl/ui/Text";
 
 import {
     Avatar,
@@ -18,7 +17,7 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import { translations } from '@/i18n/request';
+import CONSTANTS from "@/lib/constants";
 
 import type { UserNavProps } from "@/types/nav";
 
@@ -29,17 +28,14 @@ const user = {
 }
 
 const UserNav = (props: UserNavProps) => {
-
-    const t = useTranslations(translations.header);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <div className="flex gap-2">
-                    <Button
-                        title={t('profile')}
+                    <IntlButton
+                        title={CONSTANTS.LAYOUT.USERNAV.PROFILE}
                         variant="ghost"
                         className="relative h-8 w-8 aspect-square"
-                        type='button'
                     >
                         <Avatar className="h-8 w-8">
                             <AvatarImage
@@ -48,7 +44,7 @@ const UserNav = (props: UserNavProps) => {
                             />
                             <AvatarFallback>AI</AvatarFallback>
                         </Avatar>
-                    </Button>
+                    </IntlButton>
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">{user.username}</p>
                         <p className="text-xs leading-none text-muted-foreground">
@@ -60,13 +56,13 @@ const UserNav = (props: UserNavProps) => {
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        {t('profile')}
+                        <IntlText title={CONSTANTS.LAYOUT.USERNAV.PROFILE} />
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    {t('logout')}
+                    <IntlText title={CONSTANTS.LAYOUT.USERNAV.LOGOUT} />
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
             </DropdownMenuContent>

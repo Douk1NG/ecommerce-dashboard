@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
 
-import IntlButton from '../intl/ui/Button';
+import IntlButton from '@/components/intl/ui/Button';
 
 type PropTypes = {
     title: string;
@@ -82,7 +82,7 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                                     title='layout.sidebar.edit'
                                     onClick={onEdit}
                                 >
-                                    <Icon name='pencil' />
+                                    <Icon name='pencil' className='h-5 w-5'/>
                                 </IntlButton>
                             )
                         }
@@ -98,10 +98,10 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                         {isDetail ? (
                             <IntlButton
                                 variant='outline'
-                                title='layout.sidebar.close'
+                                title={CONSTANTS.LAYOUT.SIDEBAR.CLOSE}
                                 onClick={onConfirm}
                             >
-                                <Icon name='close' />
+                                <Icon name='close' className='h-5 w-5' />
                             </IntlButton>
                         ) : (
                             <Confirm

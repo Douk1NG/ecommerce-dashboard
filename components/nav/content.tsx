@@ -11,19 +11,18 @@ import {
     SidebarMenuSubButton
 } from '@/components/ui/sidebar'
 
-import { useTranslations } from "next-intl"
-import { translations } from "@/i18n/request"
-import Icon from "@/components/icon"
 import { usePathname } from "@/i18n/routing"
+import Icon from "@/components/icon"
+import CONSTANTS from "@/lib/constants";
 import navItems from "@/lib/navigation"
-import { Icons } from "@/types/icon"
+import IntlText from '@/components/intl/ui/Text'
+import type { Icons } from "@/types/icon"
 
 const isActive = (pathname: string, link: string) => {
     return pathname.includes(link);
 }
 
 const Index = () => {
-    const t = useTranslations(translations.navbar);
     const pathname = usePathname();
 
     return (
@@ -31,21 +30,36 @@ const Index = () => {
             <SidebarGroup>
                 <SidebarMenu>
                     {navItems.map((item) => (
-                        <SidebarMenuItem key={item.title} className="p-1">
-                            <SidebarMenuButton asChild isActive={isActive(pathname, item.url)}>
-                                <a href={item.url} className="font-medium">
-                                    <div><Icon name={item.icon as Icons} /></div>
-                                    <span>{t(item.title)}</span>
+                        <SidebarMenuItem
+                            key={item.title}
+                            className="p-1"
+                        >
+                            <SidebarMenuButton
+                                asChild
+                                isActive={isActive(pathname, item.url)}
+                            >
+                                <a
+                                    href={item.url}
+                                    className="font-medium"
+                                >
+                                    <Icon name={item.icon as Icons} className='h-5 w-5' />
+                                    <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${item.title}`} />
                                 </a>
                             </SidebarMenuButton>
                             {item.items?.length ? (
                                 <SidebarMenuSub>
                                     {item.items.map((item) => (
-                                        <SidebarMenuSubItem key={item.title} className="p-1">
-                                            <SidebarMenuSubButton asChild isActive={isActive(pathname, item.url)}>
+                                        <SidebarMenuSubItem
+                                            key={item.title}
+                                            className="p-1"
+                                        >
+                                            <SidebarMenuSubButton
+                                                asChild
+                                                isActive={isActive(pathname, item.url)}
+                                            >
                                                 <a href={item.url}>
-                                                    <div><Icon name={item.icon as Icons} /></div>
-                                                    <span>{t(item.title)}</span>
+                                                    <Icon name={item.icon as Icons} className='h-5 w-5' />
+                                                    <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${item.title}`} />
                                                 </a>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>

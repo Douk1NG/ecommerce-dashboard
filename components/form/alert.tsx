@@ -6,7 +6,7 @@ export default function FormAlert({ message }: { message: string }) {
         <Alert className='text-red-800 border-red-800 bg-red-500/20'>
             <AlertDescription className='italic flex items-center gap-2 select-none'>
 
-            <Icon name='circle-x' className='h-5 w-5' />
+            <Icon name='circle-x' className="h-4 w-4" />
                 {message}
             </AlertDescription>
         </Alert>

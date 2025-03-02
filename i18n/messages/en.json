@@ -24,14 +24,16 @@
             "inflow": "Inflow",
             "settings": "Settings"
         },
-        "header": {
+        "locale": {
+            "switch": "Switch language",
             "langs": {
                 "es": "Spanish",
                 "en": "English"
-            },
-            "lang": "Switch language",
-            "logout": "Log out",
-            "profile": "Profile"
+            }
+        },
+        "user": {
+            "profile": "Profile",
+            "logout": "Log out"
         },
         "tagbox": {
             "add": "Add",
@@ -43,19 +45,21 @@
                 }
             }
         },
-        "confirmClose": {
-            "cancel": "Cancel",
-            "accept": "Accept",
-            "title": "Are you sure you want to close the form?",
-            "description": "Any changes made will be lost.",
-            "name": "Close"
-        },
-        "confirmDelete": {
-            "cancel": "Cancel",
-            "accept": "Accept",
-            "title": "Are you sure you want to delete the record?",
-            "description": "You will not be able to recover the deleted data.",
-            "name": "Delete"
+        "confirm": {
+            "close": {
+                "cancel": "Cancel",
+                "accept": "Accept",
+                "title": "Are you sure you want to close the form?",
+                "description": "Any changes made will be lost.",
+                "name": "Close"
+            },
+            "delete": {
+                "cancel": "Cancel",
+                "accept": "Accept",
+                "title": "Are you sure you want to delete the record?",
+                "description": "You will not be able to recover the deleted data.",
+                "name": "Delete"
+            }
         },
         "upload" : {
             "title": "Upload"
