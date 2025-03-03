@@ -24,7 +24,7 @@ const CONSTANTS = {
             CLOSE: 'layout.sidebar.close'
         },
         BREADCRUMB: {
-            NAMESPACE: 'breadcrumb.default'
+            NAMESPACE: 'layout.breadcrumb.default'
         },
         CONFIRM: {
             CLOSE: {

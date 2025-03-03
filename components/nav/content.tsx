@@ -42,7 +42,7 @@ const Index = () => {
                                     href={item.url}
                                     className="font-medium"
                                 >
-                                    <Icon name={item.icon as Icons} className='h-5 w-5' />
+                                    <Icon name={item.icon as Icons} className='h-6 w-6' />
                                     <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${item.title}`} />
                                 </a>
                             </SidebarMenuButton>
@@ -58,7 +58,7 @@ const Index = () => {
                                                 isActive={isActive(pathname, item.url)}
                                             >
                                                 <a href={item.url}>
-                                                    <Icon name={item.icon as Icons} className='h-5 w-5' />
+                                                    <Icon name={item.icon as Icons} className='h-6 w-6' />
                                                     <IntlText title={`${CONSTANTS.LAYOUT.NAVBAR.NAMESPACE}.${item.title}`} />
                                                 </a>
                                             </SidebarMenuSubButton>

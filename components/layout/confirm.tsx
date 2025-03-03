@@ -33,6 +33,7 @@ export default function Index({
                 <IntlButton
                     variant={variant}
                     title={NAME}
+                    tooltip
                 >
                     <Icon name={icon} className='h-5 w-5' />
                 </IntlButton>

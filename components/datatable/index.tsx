@@ -1,84 +1,59 @@
 "use client"
 
-import {
-    Cell,
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    Row,
-    useReactTable,
-} from "@tanstack/react-table"
+import { type ColumnDef, flexRender, getCoreRowModel, type Row, useReactTable } from "@tanstack/react-table"
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-import {
-    Accordion,
-    AccordionItem,
-    AccordionTrigger,
-    AccordionContent
-} from "@/components/ui/accordion"
-
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { useParams, useRouter } from "next/navigation"
 import { usePathname } from "@/i18n/routing"
 import { cleanSplit } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { Button } from "../ui/button"
-import Icon from "../icon"
-
 
 type options = {
-    selection?: 'single' | 'none'
+    selection?: "single" | "none"
 }
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
-    data: TData[],
-    translations: string,
+    data: TData[]
+    translations: string
     options?: options
 }
 
 const defaultOptions = {
-    selection: 'single'
+    selection: "single",
 }
 
 export default function DataTable<TData, TValue>({
     columns,
     data,
     translations,
-    options
+    options,
 }: DataTableProps<TData, TValue>) {
-
     const t = useTranslations(translations)
 
-    const {
-        selection
-    } = options || defaultOptions
+    const { selection } = options || defaultOptions
 
-    const isSelectable = selection !== 'none'
+    const isSelectable = selection !== "none"
 
     const table = useReactTable({
         data,
         columns,
-        getCoreRowModel: getCoreRowModel()
+        getCoreRowModel: getCoreRowModel(),
     })
 
-    const router = useRouter();
-    const pathname = usePathname();
-    const params = useParams();
+    const router = useRouter()
+    const pathname = usePathname()
+    const params = useParams()
 
     const headerGroups = table.getHeaderGroups()
     const rowsModel = table.getRowModel()
 
     const onRowClick = (row: Row<TData>) => {
-        if (selection === 'none') {
-            return;
+        if (selection === "none") {
+            return
         }
         const selectedRow = row.original as Record<string, unknown>
         const rowId = selectedRow.id
@@ -86,7 +61,7 @@ export default function DataTable<TData, TValue>({
         if (params.id) {
             const [base, id] = cleanSplit({
                 value: pathname,
-                criteria: '/'
+                criteria: "/",
             })
 
             if (id == rowId) {
@@ -110,12 +85,7 @@ export default function DataTable<TData, TValue>({
                                 {headerGroup.headers.map((header) => {
                                     return (
                                         <TableHead key={header.id} className="text-center">
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    t(header.column.columnDef.header),
-                                                    header.getContext()
-                                                )}
+                                            {header.isPlaceholder ? null : flexRender(t(header.column.columnDef.header), header.getContext())}
                                         </TableHead>
                                     )
                                 })}
@@ -130,21 +100,17 @@ export default function DataTable<TData, TValue>({
                                     data-state={row.getIsSelected() && "selected"}
                                     className={`${isSelectable ? "cursor-pointer" : ""} text-center`}
                                     onClick={isSelectable ? () => onRowClick(row) : undefined}
-                                    title={t('table.info')}
+                                    title={t("table.info")}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </TableCell>
+                                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                     ))}
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell
-                                    colSpan={columns.length} className="h-24 text-center"
-                                >
-                                    {t('table.empty')}
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    {t("table.empty")}
                                 </TableCell>
                             </TableRow>
                         )}
@@ -152,58 +118,43 @@ export default function DataTable<TData, TValue>({
                 </Table>
             </div>
             <div className="md:hidden space-y-4">
-                <Accordion type="single" collapsible className="space-y-4">
-                    {rowsModel.rows?.length ? (
-                        rowsModel.rows.map((row) => {
-                            const visibleCells = row.getVisibleCells()
-                            const firstCell = visibleCells[0]
-                            const restCells = visibleCells.slice(1)
+                {rowsModel.rows?.length ? (
+                    rowsModel.rows.map((row) => (
+                        <Card key={row.id}>
+                            <CardContent className="p-4">
+                                {row.getVisibleCells().map((cell) => {
+                                    const header = headerGroups[0].headers.find((h) => h.id === cell.column.id)
 
-                            return (
-                                <AccordionItem key={row.id} value={`item-${row.id}`}>
-                                    <AccordionTrigger className="flex items-center gap-4 px-4">
-                                        <div className="flex flex-col text-start ">
-                                            <h6 className="text-muted-foreground">{t(firstCell.column.columnDef.header?.toString())}</h6>
-                                            <p className="font-medium">
-                                                {flexRender(
-                                                    firstCell.column.columnDef.cell,
-                                                    firstCell.getContext()
-                                                )}
-                                            </p>
-                                        </div>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        <div className="space-y-4 px-4 pb-4">
-                                            <div className="flex items-center justify-between gap-4">
-                                                {restCells.map((cell) => (
-                                                    <div key={cell.id} className="w-full">
-                                                        <h6 className="font-medium">{t(cell.column.columnDef.header?.toString())}</h6>
-                                                        <p className="text-muted-foreground" key={cell.id}>
-                                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                        </p>
-                                                    </div>
-                                                ))}
-                                                <Button
-                                                    variant="outline"
-                                                    size="icon"
-                                                    type="button"
-                                                    className="w-full"
-                                                    onClick={() => onRowClick(row)}
-                                                >
-                                                    {t('table.detail')}
-                                                </Button>
+                                    return (
+                                        <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">
+                                            <div className="font-medium text-sm text-muted-foreground">
+                                                {header && !header.isPlaceholder ? t(header.column.columnDef.header) : null}
                                             </div>
+                                            <div className="text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
                                         </div>
-
-                                    </AccordionContent>
-                                </AccordionItem>
-                            )
-                        })
-                    ) : (
-                        <></>
-                    )}
-                </Accordion>
+                                    )
+                                })}
+                            </CardContent>
+                            {isSelectable && (
+                                    <CardFooter className="p-4 pt-0 flex justify-end">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="cursor-pointer"
+                                            onClick={() => onRowClick(row)}>
+                                            {t("table.detail")}
+                                        </Button>
+                                    </CardFooter>
+                                )}
+                        </Card>
+                    ))
+                ) : (
+                    <Card>
+                        <CardContent className="p-4 text-center">{t("table.empty")}</CardContent>
+                    </Card>
+                )}
             </div>
         </div>
     )
 }
+

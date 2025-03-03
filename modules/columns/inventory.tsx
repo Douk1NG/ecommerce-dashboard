@@ -1,7 +1,8 @@
+import CONSTANTS from "@/modules/constants/inventory";
+import Currency from "@/components/datatable/components/currency";
+
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Inventory } from '@/modules/types/inventory';
-import { safeParseFloat } from "@/lib/utils";
-import CONSTANTS from "@/modules/constants/inventory";
 
 const columns: ColumnDef<Inventory>[] = [
     {
@@ -15,15 +16,12 @@ const columns: ColumnDef<Inventory>[] = [
     {
         accessorKey: CONSTANTS.KEYS.PRICE,
         header: CONSTANTS.SCHEME.PRICE,
-        cell: ({ row }) => {
-            const price = safeParseFloat(row.getValue(CONSTANTS.KEYS.PRICE))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(price as number)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
+        cell: ({ row }) => (
+            <Currency
+                row={row}
+                name={CONSTANTS.KEYS.PRICE}
+            />
+        )
     }
 ]
 

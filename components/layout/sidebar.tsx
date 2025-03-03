@@ -81,6 +81,7 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                                     variant='outline'
                                     title='layout.sidebar.edit'
                                     onClick={onEdit}
+                                    tooltip
                                 >
                                     <Icon name='pencil' className='h-5 w-5'/>
                                 </IntlButton>
@@ -100,6 +101,7 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                                 variant='outline'
                                 title={CONSTANTS.LAYOUT.SIDEBAR.CLOSE}
                                 onClick={onConfirm}
+                                tooltip
                             >
                                 <Icon name='close' className='h-5 w-5' />
                             </IntlButton>

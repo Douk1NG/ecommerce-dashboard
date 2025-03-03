@@ -11,7 +11,7 @@ const Icon = ({ name, ...props }: LazySvgProps) => {
 
     return (
         <Suspense fallback={<span className="icon-loading" />}>
-            <SVG {...props} />
+            <span><SVG {...props} /></span>
         </Suspense>
     );
 };

@@ -41,7 +41,7 @@ export default function RootPage() {
                                 <CardFooter>
                                     <Button className="w-full group" type="button">
                                         Get Started
-                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
+                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1 h-6 w-6" />
                                     </Button>
                                 </CardFooter>
                             </Card>
@@ -61,7 +61,7 @@ export default function RootPage() {
                                 <CardFooter>
                                     <Button className="w-full group" type="button">
                                         Get Started
-                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
+                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1 h-6 w-6" />
                                     </Button>
                                 </CardFooter>
                             </Card>
@@ -81,7 +81,7 @@ export default function RootPage() {
                                 <CardFooter>
                                     <Button className="w-full group" type="button">
                                         Get Started
-                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1" />
+                                        <Icon name="arrow-right" className="ml-2 transition-transform group-hover:translate-x-1 h-6 w-6" />
                                     </Button>
                                 </CardFooter>
                             </Card>
