@@ -6,7 +6,7 @@ const getExternalImages = (value: UseImageUploaderProps['value']) => {
     if(typeof value === 'string') {
         return [{
             url: value,
-            id: value
+            name: value
         }]
     }
 
@@ -14,7 +14,7 @@ const getExternalImages = (value: UseImageUploaderProps['value']) => {
         const urls = Array.isArray(value.values) ? value.values : [value.values]
         return urls.map((url) => ({
             url,
-            id: url
+            name: url
         }))
     }
     return []
@@ -30,7 +30,7 @@ export const useImageUploader = ({
     const [externalImages, setExternalImages] = useState<ExternalImage[]>(getExternalImages(value))
     const [removedExternalImages, setRemovedExternalImages] = useState<string[]>([])
 
-    const [preferredImageId, setPreferredImageId] = useState(value?.preferred)
+    const [preferredImageName, setPreferredImageName] = useState(value?.preferred)
     const [dragActive, setDragActive] = useState(false)
     const [carouselOpen, setCarouselOpen] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -38,31 +38,25 @@ export const useImageUploader = ({
     const isLimitReached = (images.length + externalImages.length) >= maxFiles
     const isSingleImage = Boolean((images.length + externalImages.length) && maxFiles === 1)
 
-    const generateUniqueId = useCallback((file: File) => {
-        return `${file.name}-${file.lastModified}`
-    }, [])
-
     const handleFiles = useCallback(
         (files: FileList) => {
             if (isLimitReached) return
 
-            // todo: add error handling when file is not valid
             const validFiles = Array.from(files).filter((file) =>
                 isValidFileType(file) && file.size <= maxFileSize
             )
 
             const newImages = validFiles.map((file) => {
-                const id = generateUniqueId(file)
-                return Object.assign(file, {
+                const imageFile = new File([file], file.name, { type: file.type })
+                return Object.assign(imageFile, {
                     preview: URL.createObjectURL(file),
-                    id: id,
                 })
             })
 
             setImages((prevImages) => {
                 const updatedImages = [
                     ...prevImages.filter(prevImage =>
-                        !newImages.some(newImage => newImage.id === prevImage.id)
+                        !newImages.some(newImage => newImage.name === prevImage.name)
                     ),
                     ...newImages
                 ].slice(0, maxFiles)
@@ -73,21 +67,21 @@ export const useImageUploader = ({
                 fileInputRef.current.value = ""
             }
 
-            if (!preferredImageId && newImages.length > 0) {
-                setPreferredImageId(newImages[0].id)
+            if (!preferredImageName && newImages.length > 0) {
+                setPreferredImageName(newImages[0].name)
             }
         },
-        [isLimitReached, maxFileSize, maxFiles, preferredImageId, generateUniqueId],
+        [isLimitReached, maxFileSize, maxFiles, preferredImageName],
     )
 
-    const removeExternalImage = useCallback((id: string) => {
+    const removeExternalImage = useCallback((name: string) => {
         if (readOnly) return
-        setExternalImages(prev => prev.filter(img => img.id !== id))
-        setRemovedExternalImages(prev => [...prev, id])
-        if (preferredImageId === id) {
-            setPreferredImageId(undefined)
+        setExternalImages(prev => prev.filter(img => img.name !== name))
+        setRemovedExternalImages(prev => [...prev, name])
+        if (preferredImageName === name) {
+            setPreferredImageName(undefined)
         }
-    }, [readOnly, preferredImageId])
+    }, [readOnly, preferredImageName])
 
     const handlers = {
         files: handleFiles,
@@ -116,25 +110,25 @@ export const useImageUploader = ({
                 handleFiles(e.target.files)
             }
         }, [handleFiles]),
-        removeImage: useCallback((id: string, external?: boolean) => {
+        removeImage: useCallback((name: string, external?: boolean) => {
             if (readOnly) return
 
-            if (preferredImageId === id) {
-                setPreferredImageId(undefined)
+            if (preferredImageName === name) {
+                setPreferredImageName(undefined)
             }
 
             if (external) {
-                removeExternalImage(id)
+                removeExternalImage(name)
                 return
             }
 
             setImages((prevImages) =>
-                prevImages.filter((image) => image.id !== id)
+                prevImages.filter((image) => image.name !== name)
             )
 
-        }, [readOnly, removeExternalImage, preferredImageId]),
-        setPreferred: useCallback((id: string) => {
-            setPreferredImageId(id)
+        }, [readOnly, removeExternalImage, preferredImageName]),
+        setPreferred: useCallback((name: string) => {
+            setPreferredImageName(name)
         }, []),
         openCarousel: useCallback(() => {
             setCarouselOpen(true)
@@ -148,7 +142,7 @@ export const useImageUploader = ({
         images,
         externalImages,
         removedExternalImages,
-        preferredImageId,
+        preferredImageName,
         dragActive,
         carouselOpen,
         isLimitReached,

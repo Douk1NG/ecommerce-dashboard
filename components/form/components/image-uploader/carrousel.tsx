@@ -11,36 +11,47 @@ export default function Carousel({ images, onClose }: CarouselProps) {
         goToNext,
         imageUrl,
         imageName
-    } = useCarousel(images)
+    } = useCarousel(images, onClose)
 
     return (
         <div
-            className="fixed inset-0 bg-black/75 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
             onClick={onClose}
         >
             <div
-                className="relative max-w-7xl w-[90vw] mx-auto"
+                className="relative w-full h-full flex items-center justify-center"
                 onClick={(e) => e.stopPropagation()}
             >
+
                 <button
                     onClick={onClose}
-                    className="cursor-pointer absolute right-2 top-4 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 z-10"
+                    className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 z-10 cursor-pointer"
                     type="button"
                     aria-label="Close gallery"
+                    title="Close gallery"
                 >
-                    <Icon name="close" className="h-6 w-6 text-black" />
+                    <Icon name="close" className="h-6 w-6 text-white md:h-8 md:w-8" />
                 </button>
 
-                <div className="relative h-[80vh] flex items-center justify-center rounded-lg bg-black/20">
-                    {imageUrl &&
-                        (<Image
-                            src={imageUrl}
-                            alt={imageName}
-                            className="max-h-full max-w-full object-contain rounded-sm"
-                            title={imageName}
-                            loading="lazy"
-                            fill
-                        />)}
+                <div className="relative w-full h-full flex items-center justify-center p-4">
+                    <div
+                        className="relative w-full h-full max-h-[90vh]"
+                        onClick={onClose}
+                        title="Close gallery"
+                    >
+                        {imageUrl && (
+                            <Image
+                                onClick={(e) => e.stopPropagation()}
+                                src={imageUrl}
+                                alt={imageName}
+                                className="object-contain rounded-sm !w-fit !h-fit max-h-[90vh] m-auto"
+                                title={imageName}
+                                loading="lazy"
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                            />
+                        )}
+                    </div>
                 </div>
 
                 {!isSingleImage && (
@@ -48,23 +59,25 @@ export default function Carousel({ images, onClose }: CarouselProps) {
                         <button
                             type="button"
                             onClick={goToPrevious}
-                            className="cursor-pointer absolute top-1/2 left-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 cursor-pointer"
                             aria-label="Previous image"
+                            title="Previous image"
                         >
-                            <Icon name="chevron-left" className="h-6 w-6 text-black" />
+                            <Icon name="chevron-left" className="h-6 w-6 text-white md:h-8 md:w-8" />
                         </button>
                         <button
                             type="button"
                             onClick={goToNext}
-                            className="cursor-pointer absolute top-1/2 right-2 -translate-y-1/2 bg-white/50 hover:bg-white/75 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 cursor-pointer"
                             aria-label="Next image"
+                            title="Next image"
                         >
-                            <Icon name="chevron-right" className="h-6 w-6 text-black" />
+                            <Icon name="chevron-right" className="h-6 w-6 text-white md:h-8 md:w-8" />
                         </button>
                     </>
                 )}
 
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 px-4 py-2 rounded-full">
                     <p className="text-white text-sm select-none" role="status">
                         {currentIndex + 1} / {images.length}
                     </p>

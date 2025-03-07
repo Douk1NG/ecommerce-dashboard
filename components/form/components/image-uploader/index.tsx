@@ -26,7 +26,7 @@ export default function ImageUploader({
     const {
         images,
         externalImages,
-        preferredImageId,
+        preferredImageName,
         dragActive,
         carouselOpen,
         isLimitReached,
@@ -58,7 +58,7 @@ export default function ImageUploader({
                 name={name}
                 preferred={{
                     enabled: preferred.enabled,
-                    id: preferredImageId
+                    name: preferredImageName
                 }}
                 maxFiles={maxFiles}
             />
@@ -80,7 +80,7 @@ export default function ImageUploader({
                 images={images}
                 externalImages={externalImages}
                 preferred={preferred}
-                preferredImageId={preferredImageId}
+                preferredImageName={preferredImageName}
                 readOnly={readOnly}
                 handlers={handlers}
             />

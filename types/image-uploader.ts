@@ -1,11 +1,10 @@
 export type ImageFile = File & {
     preview: string
-    id: string
 }
 
 export type ExternalImage = {
     url: string
-    id: string
+    name: string
 }
 
 export type ImageUploaderHandlers = {
@@ -13,8 +12,8 @@ export type ImageUploaderHandlers = {
     drag: (e: React.DragEvent<HTMLDivElement>) => void
     drop: (e: React.DragEvent<HTMLDivElement>) => void
     change: (e: React.ChangeEvent<HTMLInputElement>) => void
-    removeImage: (id: string) => void
-    setPreferred: (id: string) => void
+    removeImage: (name: string, external?: boolean) => void
+    setPreferred: (name: string) => void
     openCarousel: () => void
     closeCarousel: () => void
 }
@@ -25,12 +24,12 @@ export type ImageCardProps = {
     preferred: {
         enabled: boolean;
     };
-    preferredImageId?: string;
+    preferredImageName?: string;
     readOnly?: boolean;
     handlers: {
         openCarousel: () => void;
-        removeImage: (id: string, isExternal?: boolean) => void;
-        setPreferred: (id: string) => void;
+        removeImage: (name: string, isExternal?: boolean) => void;
+        setPreferred: (name: string) => void;
     };
 }
 
@@ -56,15 +55,15 @@ export type ImageUploaderProps = {
 
 export type ImageListProps = {
     images: ImageFile[]
-    externalImages: Array<{ url: string, id: string }>
+    externalImages: ExternalImage[]
     preferred: {
         enabled: boolean
     }
-    preferredImageId?: string
+    preferredImageName?: string
     readOnly?: boolean
     handlers: {
-        removeImage: (id: string, external?: boolean) => void
-        setPreferred: (id: string) => void
+        removeImage: (name: string, external?: boolean) => void
+        setPreferred: (name: string) => void
         openCarousel: () => void
     }
 }
@@ -76,7 +75,7 @@ export type HiddenInputsProps = {
     name?: string
     preferred: {
         enabled: boolean
-        id?: string
+        name?: string
     }
     maxFiles: number
 }
@@ -95,12 +94,7 @@ export type DropZoneProps = {
     children?: React.ReactNode
 }
 
-export type CarouselImage = {
-    id: string
-    preview: string
-    name?: string
-    url?: string
-}
+export type CarouselImage = ImageFile | ExternalImage
 
 export type CarouselProps = {
     images: CarouselImage[]

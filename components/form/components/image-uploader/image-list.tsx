@@ -3,18 +3,25 @@ import { Button } from "@/components/ui/button"
 import Icon from "@/components/icon"
 import Image from "next/image"
 import type { ImageCardProps, ImageListProps, ImageFile, ExternalImage } from "@/types/image-uploader"
+import { cn } from "@/lib/utils"
 
 const ImageCard = ({
     image,
     isExternal,
     preferred,
-    preferredImageId,
+    preferredImageName,
     readOnly,
     handlers
 }: ImageCardProps) => {
-    const { url, preview, name, size } = image as ImageFile & ExternalImage
+    const {
+        url,
+        preview,
+        name,
+        size
+    } = image as ImageFile & ExternalImage
+
     return (
-        <div key={image.id} className="relative h-48 w-full">
+        <div key={name} className="relative h-[30vh] w-full">
             <Image
                 src={isExternal ? url : preview }
                 alt={isExternal ? url : name}
@@ -29,7 +36,7 @@ const ImageCard = ({
                 <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => handlers.removeImage(image.id, isExternal)}
+                    onClick={() => handlers.removeImage(name, isExternal)}
                     title="Remove image"
                     className="cursor-pointer absolute top-0 right-0 rounded-full"
                     type="button"
@@ -40,14 +47,17 @@ const ImageCard = ({
             {preferred.enabled && !readOnly && (
                 <button
                     type="button"
-                    onClick={() => handlers.setPreferred(image.id)}
+                    onClick={() => handlers.setPreferred(name)}
+                    title="Set as preferred image"
                     className={`cursor-pointer absolute bottom-0 right-0 mb-1 mr-1 rounded-full p-1
-                        ${preferredImageId === image.id ? "bg-yellow-500" : "bg-gray-200"}`
-                    }
+                        ${preferredImageName === name ? "bg-yellow-500" : "bg-gray-200"}`}
                 >
                     <Icon
                         name="star"
-                        className={preferredImageId === image.id ? "text-white" : "text-gray-600"}
+                        className={cn(
+                            "h-8 w-8",
+                            preferredImageName === name ? "text-white" : "text-gray-600"
+                        )}
                     />
                 </button>
             )}
@@ -64,7 +74,7 @@ export const ImageList = ({
     images,
     externalImages,
     preferred,
-    preferredImageId,
+    preferredImageName,
     readOnly,
     handlers
 }: ImageListProps) => {
@@ -74,22 +84,22 @@ export const ImageList = ({
         <div className="mt-4 grid grid-cols-2 gap-4">
             {externalImages.map((file) => (
                 <ImageCard
-                    key={file.id}
+                    key={file.name}
                     image={file}
                     isExternal={true}
                     preferred={preferred}
-                    preferredImageId={preferredImageId}
+                    preferredImageName={preferredImageName}
                     readOnly={readOnly}
                     handlers={handlers}
                 />
             ))}
             {images.map((file) => (
                 <ImageCard
-                    key={file.id}
+                    key={file.name}
                     image={file}
                     isExternal={false}
                     preferred={preferred}
-                    preferredImageId={preferredImageId}
+                    preferredImageName={preferredImageName}
                     readOnly={readOnly}
                     handlers={handlers}
                 />

@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { CarouselImage } from "@/types/image-uploader"
 
-export function useCarousel(images: CarouselImage[]) {
+export function useCarousel(images: CarouselImage[], onClose: () => void) {
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const isSingleImage = images.length === 1
@@ -18,9 +18,29 @@ export function useCarousel(images: CarouselImage[]) {
         setCurrentIndex(newIndex)
     }
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            switch (e.key) {
+                case 'Escape':
+                    onClose()
+                    break
+                case 'ArrowLeft':
+                    if (!isSingleImage) goToPrevious()
+                    break
+                case 'ArrowRight':
+                    if (!isSingleImage) goToNext()
+                    break
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [isSingleImage, goToPrevious, goToNext, onClose])
+
     const currentImage = images[currentIndex]
-    const imageUrl = currentImage.preview || currentImage.url
-    const imageName = currentImage.name || 'Image'
+    // todo hardcoded
+    const imageUrl = 'preview' in currentImage ? currentImage.preview : currentImage.url
+    const imageName = currentImage.name
 
     return {
         currentIndex,

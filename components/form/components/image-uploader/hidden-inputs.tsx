@@ -15,15 +15,15 @@ export const HiddenInputs = ({
         <>
             {externalImages.map((file) => (
                 <input
-                    key={file.id}
+                    key={file.name}
                     type="hidden"
                     name={externalInputName}
-                    value={file.id}
+                    value={file.name}
                 />
             ))}
             {images.map((file) => (
                 <input
-                    key={file.id}
+                    key={file.name}
                     type="file"
                     name={inputName}
                     className="hidden"
@@ -36,19 +36,19 @@ export const HiddenInputs = ({
                     }}
                 />
             ))}
-            {preferred.enabled && preferred.id && (
+            {preferred.enabled && preferred.name && (
                 <input
                     type="hidden"
                     name={`${name}_preferred`}
-                    value={preferred.id}
+                    value={preferred.name}
                 />
             )}
-            {removedExternalImages.map((id) => (
+            {removedExternalImages.map((name) => (
                 <input
-                    key={`removed-${id}`}
+                    key={`removed-${name}`}
                     type="hidden"
                     name={`${name}_removed[]`}
-                    value={id}
+                    value={name}
                 />
             ))}
         </>

@@ -26,7 +26,7 @@ export default function Form({ values, isNew, content }: FormProps) {
 
     return (
         <Sidebar
-            title={CONSTANTS.LAYOUT.TITLE}
+            title={CONSTANTS.SIDEBAR_TITLE}
             onDelete={onDelete}
             isNew={isNew}
             translations={CONSTANTS.NAMESPACE}

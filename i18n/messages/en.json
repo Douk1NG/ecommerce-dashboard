@@ -89,7 +89,7 @@
         },
         "layout": {
             "title": "Products",
-            "add": "Add",
+            "add": "Add product",
             "description": "",
             "save": "Save"
         },
