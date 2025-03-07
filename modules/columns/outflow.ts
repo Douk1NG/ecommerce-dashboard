@@ -5,8 +5,8 @@ import CONSTANTS from "@/modules/constants/outflow";
 
 const columns: ColumnDef<Outflow>[] = [
     {
-        accessorKey: CONSTANTS.KEYS.PRODUCT_NAME,
-        header: CONSTANTS.SCHEME.PRODUCT_NAME,
+        accessorKey: CONSTANTS.KEYS.PRODUCT,
+        header: CONSTANTS.SCHEME.PRODUCT,
     },
     {
         accessorKey: CONSTANTS.KEYS.QUANTITY,

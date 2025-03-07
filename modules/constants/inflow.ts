@@ -16,8 +16,7 @@ const CONSTANTS = {
     },
     KEYS: {
         ID: 'id',
-        PRODUCT_ID: 'product_id',
-        PRODUCT_NAME: 'product_name',
+        PRODUCT: 'product',
         QUANTITY: 'quantity',
         UNIT_PRICE: 'unit_price',
         TOTAL_PRICE: 'total_price',
@@ -28,8 +27,7 @@ const CONSTANTS = {
     },
     SCHEME: {
         ID: 'scheme.id',
-        PRODUCT_ID: 'scheme.product_id',
-        PRODUCT_NAME: 'scheme.product_name',
+        PRODUCT: 'scheme.product',
         QUANTITY: 'scheme.quantity',
         UNIT_PRICE: 'scheme.unit_price',
         TOTAL_PRICE: 'scheme.total_price',
@@ -39,8 +37,7 @@ const CONSTANTS = {
     },
     DESCRIPTION: {
         ID: 'description.id',
-        PRODUCT_ID: 'description.product_id',
-        PRODUCT_NAME: 'description.product_name',
+        PRODUCT: 'description.product',
         QUANTITY: 'description.quantity',
         UNIT_PRICE: 'description.unit_price',
         TOTAL_PRICE: 'description.total_price',

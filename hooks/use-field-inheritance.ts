@@ -8,12 +8,11 @@ type InheritanceConfig = {
 
 export const useFieldInheritance = (
     inheritFrom: InheritanceConfig | undefined,
-    onInherit: (value: unknown) => void,
-    readOnly?: boolean
+    onInherit: (value: unknown) => void
 ) => {
     const { getFieldValue } = useInheritanceContext()
     const previousValue = useRef<unknown>(null)
-    const preventEvent = !inheritFrom || readOnly
+    const preventEvent = !inheritFrom
 
     useEffect(() => {
         if (preventEvent) return

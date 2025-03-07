@@ -217,7 +217,8 @@
         },
         "table": {
             "empty": "No products found, to get started, press the add an inflow",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "detail": "Detail"
         }
     },
     "inflow": {
@@ -237,7 +238,7 @@
             "save": "Save"
         },
         "scheme": {
-            "product_name": "Product",
+            "product": "Product",
             "quantity": "Quantity",
             "unit_price": "Price",
             "total_price": "Total price",
@@ -246,7 +247,7 @@
             "combinations": "Combinations"
         },
         "description": {
-            "product_name": "Set the product",
+            "product": "Set the product",
             "quantity": "Set the quantity",
             "unit_price": "Set the price",
             "total_price": "Set the total price",
@@ -256,7 +257,8 @@
         },
         "table": {
             "empty": "No inflows found, to get started, press the create inflow button.",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "detail": "Detail"
         }
     },
     "outflow": {
@@ -276,7 +278,7 @@
             "save": "Save"
         },
         "scheme": {
-            "product_name": "Product",
+            "product": "Product",
             "quantity": "Quantity",
             "unit_price": "Price",
             "total_price": "Total price",
@@ -285,7 +287,7 @@
             "combinations": "Combinations"
         },
         "description": {
-            "product_name": "Set the product",
+            "product": "Set the product",
             "quantity": "Set the quantity",
             "unit_price": "Set the price per unit",
             "total_price": "Set the total price",
@@ -295,7 +297,8 @@
         },
         "table": {
             "empty": "No outflows found, to get started, press the create outflow button.",
-            "info": "Click to view its details"
+            "info": "Click to view its details",
+            "detail": "Detail"
         }
     }
 }

@@ -100,7 +100,7 @@ export default function DataTable<TData, TValue>({
                                     data-state={row.getIsSelected() && "selected"}
                                     className={`${isSelectable ? "cursor-pointer" : ""} text-center`}
                                     onClick={isSelectable ? () => onRowClick(row) : undefined}
-                                    title={t("table.info")}
+                                    title={isSelectable ? t("table.info") : undefined}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>

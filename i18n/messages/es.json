@@ -217,7 +217,8 @@
         },
         "table": {
             "empty": "No se han encontrado productos en el inventario, para iniciar, presiona el botón entradas",
-            "info": "Click para ver su detalle"
+            "info": "Click para ver su detalle",
+            "detail": "Detalle"
         }
     },
     "inflow": {
@@ -237,7 +238,7 @@
             "save": "Guardar"
         },
         "scheme": {
-            "product_name": "Producto",
+            "product": "Producto",
             "quantity": "Cantidad",
             "unit_price": "Precio",
             "total_price": "Precio total",
@@ -246,7 +247,7 @@
             "combinations": "Combinaciones"
         },
         "description": {
-            "product_name": "Establece el producto",
+            "product": "Establece el producto",
             "quantity": "Establece la cantidad",
             "unit_price": "Establece el precio por unidad",
             "total_price": "Establece el precio total",
@@ -256,7 +257,8 @@
         },
         "table": {
             "empty": "No se han encontrado entradas, para empezar, presiona el botón crear entrada",
-            "info": "Click para ver su detalle"
+            "info": "Click para ver su detalle",
+            "detail": "Detalle"
         }
     },
     "outflow": {
@@ -276,7 +278,7 @@
             "save": "Guardar"
         },
         "scheme": {
-            "product_name": "Producto",
+            "product": "Producto",
             "quantity": "Cantidad",
             "unit_price": "Precio",
             "total_price": "Precio total",
@@ -285,7 +287,7 @@
             "combinations": "Combinaciones"
         },
         "description": {
-            "product_name": "Establece el producto",
+            "product": "Establece el producto",
             "quantity": "Establece la cantidad",
             "unit_price": "Establece el precio",
             "total_price": "Establece el precio total",
@@ -295,7 +297,8 @@
         },
         "table": {
             "empty": "No se han encontrado salidas, para empezar, presiona el botón crear salida",
-            "info": "Click para ver su detalle"
+            "info": "Click para ver su detalle",
+            "detail": "Detalle"
         }
     }
 }

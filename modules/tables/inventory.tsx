@@ -10,6 +10,9 @@ function InventoryTable({ dataSource }: TableProps) {
             columns={columns}
             data={dataSource}
             translations={CONSTANTS.NAMESPACE}
+            options={{
+                selection: 'none'
+            }}
         />
     )
 }

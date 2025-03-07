@@ -29,7 +29,7 @@ export default function Component({
         }
     }, [])
 
-    useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
+    useFieldInheritance(inheritFrom, inheritanceMethod)
 
     const handleChange = useDebouncedCallback((value: unknown) => {
         onChangeInheritance?.(name, value)

@@ -8,9 +8,9 @@ type FieldsProps = {
 
 const fields: (props: FieldsProps) => Fields = ({ products }) => [
     {
-        "label": CONSTANTS.SCHEME.PRODUCT_NAME,
-        "name": CONSTANTS.KEYS.PRODUCT_ID,
-        "description": CONSTANTS.DESCRIPTION.PRODUCT_NAME,
+        "label": CONSTANTS.SCHEME.PRODUCT,
+        "name": CONSTANTS.KEYS.PRODUCT,
+        "description": CONSTANTS.DESCRIPTION.PRODUCT,
         "type": "select",
         "options": products
     },
@@ -24,13 +24,23 @@ const fields: (props: FieldsProps) => Fields = ({ products }) => [
         "label": CONSTANTS.SCHEME.UNIT_PRICE,
         "name": CONSTANTS.KEYS.UNIT_PRICE,
         "description": CONSTANTS.DESCRIPTION.UNIT_PRICE,
-        "type": "currency"
+        "type": "currency",
+        "readOnly": true,
+        "disabled": true,
+        "inheritFrom": {
+            "field": CONSTANTS.KEYS.PRODUCT,
+            "property": CONSTANTS.KEYS.UNIT_PRICE
+        }
     },
     {
         "label": CONSTANTS.SCHEME.COMBINATIONS,
         "name": CONSTANTS.KEYS.COMBINATIONS,
         "description": CONSTANTS.DESCRIPTION.COMBINATIONS,
-        "type": "group_variant_inventory"
+        "type": "group_variant_inventory",
+        "inheritFrom": {
+            "field": CONSTANTS.KEYS.PRODUCT,
+            "property": CONSTANTS.KEYS.COMBINATIONS
+        }
     }
 ]
 
