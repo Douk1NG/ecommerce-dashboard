@@ -32,28 +32,40 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
     const isDetail = !isNew && !isEdit
 
     const onConfirm = () => {
-        router.push(`/${base}`, { scroll: false })
+        router.push(`/${base}`, { scroll: true })
+    }
+
+    const onReturn = () => {
+        router.push(pathname, { scroll: false })
     }
 
     const onEdit = () => {
-        router.push(`?${CONSTANTS.LAYOUT.SIDEBAR.EDIT}=${CONSTANTS.LAYOUT.SIDEBAR.IS_EDITING}`)
+        router.push(`?${CONSTANTS.LAYOUT.SIDEBAR.EDIT}=${CONSTANTS.LAYOUT.SIDEBAR.IS_EDITING}`, { scroll: false })
     }
 
     const onDeleteInternal = async () => {
-        const response = await onDelete()
-        const { success, message } = response
+        try {
+            const response = await onDelete()
+            const { success, message } = response
 
-        const title = success ? '' : 'Ha ocurrido un error.'
-        const variant = success ? 'default' : 'destructive'
+            const title = success ? '' : 'Ha ocurrido un error.'
+            const variant = success ? 'default' : 'destructive'
 
-        toast({
-            title: title,
-            description: message,
-            variant: variant,
-        })
+            toast({
+                title: title,
+                description: message,
+                variant: variant,
+            })
 
-        if (response.success) {
-            router.push(`/${base}`)
+            if (response.success) {
+                router.push(`/${base}`)
+            }
+        } catch (error) {
+            toast({
+                title: 'Error',
+                description: 'An error occurred while deleting',
+                variant: 'destructive',
+            })
         }
     }
 
@@ -65,37 +77,42 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
     }, [])
 
     return (
-        <div>
+        <>
+            {/* Overlay */}
+            <div
+                className="fixed inset-0 bg-black/30 z-10"
+                onClick={onConfirm}
+                aria-hidden="true"
+            />
+
+            {/* Sidebar */}
             <aside
-                className="fixed right-0 top-0 z-20 h-screen w-full bg-white px-4 border-l-2 border-gray-100 shadow-2xs md:w-[70%] grid grid-rows-[50px_1fr] py-2 gap-2 overflow-y-auto"
+                className="fixed right-0 top-0 z-20 h-screen w-full bg-white border-l-2 border-gray-100 shadow-2xs md:w-[70%] grid grid-rows-[auto_1fr] overflow-hidden"
                 aria-label='sidebar'
             >
-                <div className='flex justify-between items-center'>
+                {/* Header - Fixed */}
+                <div className='flex justify-between items-center px-4 py-2 border-b'>
                     <h2 className='text-2xl font-medium leading-7 text-gray-900'>
                         {t(title)}
                     </h2>
                     <div className='flex items-center gap-2'>
-                        {isDetail &&
-                            (
+                        {isDetail && (
+                            <>
                                 <IntlButton
                                     variant='outline'
                                     title='layout.sidebar.edit'
                                     onClick={onEdit}
                                     tooltip
                                 >
-                                    <Icon name='pencil' className='h-5 w-5'/>
+                                    <Icon name='pencil' className='h-5 w-5' />
                                 </IntlButton>
-                            )
-                        }
-                        {isDetail &&
-                            (
                                 <Confirm
                                     translations={CONSTANTS.LAYOUT.CONFIRM.DELETE}
                                     icon='trash'
                                     onConfirm={onDeleteInternal}
                                 />
-                            )
-                        }
+                            </>
+                        )}
                         {isDetail ? (
                             <IntlButton
                                 variant='outline'
@@ -106,17 +123,36 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                                 <Icon name='close' className='h-5 w-5' />
                             </IntlButton>
                         ) : (
-                            <Confirm
-                                translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
-                                icon='close'
-                                onConfirm={onConfirm}
-                            />
+                            <>
+                                {
+                                    !isNew && (
+                                        <IntlButton
+                                    variant='outline'
+                                    title={CONSTANTS.LAYOUT.SIDEBAR.RETURN}
+                                    onClick={onReturn}
+                                    text
+                                >
+                                    <Icon name='arrow-left' className='h-5 w-5' />
+                                        </IntlButton>
+                                    )
+                                }
+                                <Confirm
+                                    translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
+                                    icon='close'
+                                    onConfirm={onConfirm}
+                                />
+                            </>
+
                         )}
                     </div>
                 </div>
-                {children}
+
+                {/* Content - Scrollable */}
+                <div className="overflow-y-auto px-4 py-4">
+                    {children}
+                </div>
             </aside>
-        </div>
+        </>
     );
 };
 

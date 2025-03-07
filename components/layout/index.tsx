@@ -20,8 +20,8 @@ const Index = ({
                         <Link
                             href={action.href}
                             className={buttonVariants({ variant: "default" })}
-                            scroll={false}
                             type="button"
+                            scroll={false}
                         >
                             {(action.title)}
                         </Link>

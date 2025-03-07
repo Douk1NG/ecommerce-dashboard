@@ -4,7 +4,8 @@
             "edit": "Edit",
             "close": "Close",
             "delete": "Delete",
-            "save": "Save"
+            "save": "Save",
+            "return": "Return"
         },
         "breadcrumb": {
             "default": "Click here to view navigation menu"

@@ -4,7 +4,8 @@
             "edit": "Editar",
             "close": "Cerrar",
             "delete": "Eliminar",
-            "save": "Guardar"
+            "save": "Guardar",
+            "return": "Volver"
         },
         "breadcrumb": {
             "default": "Clic aquí para ver el menú de navegación"

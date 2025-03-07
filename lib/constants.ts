@@ -21,7 +21,8 @@ const CONSTANTS = {
         SIDEBAR: {
             EDIT: 'MODE',
             IS_EDITING: 'EDIT',
-            CLOSE: 'layout.sidebar.close'
+            CLOSE: 'layout.sidebar.close',
+            RETURN: 'layout.sidebar.return'
         },
         BREADCRUMB: {
             NAMESPACE: 'layout.breadcrumb.default'

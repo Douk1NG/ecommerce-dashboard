@@ -54,10 +54,10 @@ const BaseButton = ({
             className={cn('cursor-pointer', className)}
             {...props}
         >
-            <>
-                {text && intlTitle}
+            <div className='flex items-center gap-2'>
                 {children}
-            </>
+                {text && intlTitle}
+            </div>
         </Button>
     )
 }
