@@ -9,7 +9,7 @@ import type { Option } from "@/types/select";
 import type { GroupField } from "@/types/form";
 
 type Group = {
-    id?: number;
+    combination_id?: number;
     filters?: string[];
     price?: number;
     index?: number;
@@ -50,7 +50,7 @@ export default function Component({
 
         updatedGroups[index] = {
             ...updatedGroups[index],
-            id: id as number,
+            combination_id: id as number,
             [field]: value
         };
 
@@ -88,7 +88,7 @@ export default function Component({
                             options={options}
                             type="multiselect"
                             value={group.filters}
-                            onChange={(value: unknown) => handleChange(value, index, group.id)}
+                            onChange={(value: unknown) => handleChange(value, index, group.combination_id)}
                             readOnly={readOnly}
                         />
                         <Field
@@ -96,7 +96,7 @@ export default function Component({
                             id={`${name}_price_${index}`}
                             type="currency"
                             value={group.price}
-                            onChange={(value: unknown) => handleChange(value, index, group.id)}
+                            onChange={(value: unknown) => handleChange(value, index, group.combination_id)}
                             readOnly={readOnly}
                         />
                     </div>

@@ -68,11 +68,11 @@ export default function DataTable<TData, TValue>({
                 return
             }
 
-            router.push(`/${base}/${rowId}`)
+            router.push(`/${base}/${rowId}`, { scroll: false })
             return
         }
 
-        router.push(`${pathname}/${rowId}`)
+        router.push(`${pathname}/${rowId}`, { scroll: false })
     }
 
     return (

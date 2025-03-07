@@ -23,7 +23,8 @@ export type ProductFormData = {
     active: boolean;
     images: File[];
     images_preferred: string;
+    images_removed: string[];
     filter_combinations: FilterCombination[];
-    main_image?: File;
+    main_image?: string;
     related_images?: File[];
 }

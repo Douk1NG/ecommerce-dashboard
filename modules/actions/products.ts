@@ -13,6 +13,7 @@ import type {
 
 import {
     getPropertyOfArray,
+    safeArray,
     safeParseBoolean,
     safeParseJSON,
     safeParseNumber
@@ -23,7 +24,6 @@ export default async function SaveProduct(
     prevState: ActionResponse | null,
     formData: FormData
 ): Promise<ActionResponse> {
-    console.log(formData, 'formData')
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),
@@ -44,8 +44,10 @@ export default async function SaveProduct(
 
     } as ProductFormData
 
-    rawData.main_image = rawData.images?.find((image: File) => image.name === rawData.images_preferred)
-    rawData.related_images = rawData.images?.filter((image: File) => image.name !== rawData.images_preferred)
+    rawData.main_image = rawData.images_preferred
+    rawData.related_images = rawData.images
+    rawData.images_removed = safeArray(formData.get('images_removed[]'))
+
 
     const validatedData = productSchema.safeParse(rawData)
 
@@ -61,12 +63,12 @@ export default async function SaveProduct(
     formData.set('categories', JSON.stringify(rawData.categories.map((it: string) => Number(it))))
     formData.set('filter_combinations', JSON.stringify(rawData.filter_combinations))
     formData.set('price', rawData.price.toString())
-    formData.set('main_image', rawData.main_image as File)
+    formData.set('main_image', rawData.images_preferred)
     formData.set('active', rawData.active ? '1' : '0')
     formData.set('featured_product', rawData.featured_product ? '1' : '0')
 
     rawData.related_images?.forEach((image: File) => {
-        formData.set('related_images[]', image)
+        formData.append('related_images[]', image)
     })
 
     formData.delete('images[]')
@@ -76,10 +78,8 @@ export default async function SaveProduct(
     if (id) {
         formData.set('id', id)
         formData.set('_method', 'PUT')
-        formData.set('delete_images', formData.get('images_removed[]') as string)
+        formData.set('delete_images', JSON.stringify(rawData.images_removed))
     }
-
-    console.log(formData)
 
     const {
         success,

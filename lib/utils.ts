@@ -131,3 +131,14 @@ export const buildGetQuery = (query?: Query) => {
 
   return build
 }
+
+/**
+ * @desc returns a parsed array of strings
+ */
+export const safeArray = (value: unknown) => {
+  if(Array.isArray(value)) {
+    return value
+  }
+
+  return []
+}

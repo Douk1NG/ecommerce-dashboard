@@ -9,7 +9,7 @@ const productSchema = z.object({
     [CONSTANTS.KEYS.CATEGORIES]: z.array(z.string()),
     [CONSTANTS.KEYS.ACTIVE]: z.boolean().default(true),
     [CONSTANTS.KEYS.FEATURED_PRODUCT]: z.boolean(),
-    [CONSTANTS.KEYS.MAIN_IMAGE]: z.instanceof(File).optional(),
+    [CONSTANTS.KEYS.MAIN_IMAGE]: z.string().optional(),
     [CONSTANTS.KEYS.RELATED_IMAGES]: z.array(z.instanceof(File)).optional(),
     [CONSTANTS.KEYS.FILTER_COMBINATIONS]: z.array(z.object({
         [CONSTANTS.KEYS.PRICE]: z.number(),
