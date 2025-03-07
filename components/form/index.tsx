@@ -17,11 +17,11 @@ const FormBuilder = ({
     fields,
     values,
     translations,
-    action
+    action,
+    readOnly = false
 }: FormProps) => {
     const t = useTranslations(translations)
     const pathname = usePathname()
-    const searchParams = useSearchParams()
 
     const {
         handleFieldChange,
@@ -34,42 +34,38 @@ const FormBuilder = ({
         isPending
     } = useFormState(action, values, pathname)
 
-    const {
-        showSaveButton,
-        readOnly
-    } = getDisplayMode(searchParams, values)
-
     const showFailMessage = state?.message && !state.success
+    const showSaveButton = !readOnly
 
     return (
         <InheritanceProvider getFieldValue={getFieldValue} onChange={handleFieldChange}>
             <form
                 action={formAction}
                 className='flex flex-col gap-4'
-                >
-                    {fields.map((item) => {
-                        if (!item.name) return
-                        return (
-                            <div
-                                className="space-y-2"
-                                key={item.name}
-                            >
-                                <Field
-                                    {...item}
-                                    label={t(item.label)}
-                                    description={t(item.description)}
-                                    value={state.data?.[item.name]}
-                                    readOnly={readOnly}
-                                />
-                                <FieldError
-                                    error={state?.errors?.[item.name]?.at(0)}
-                                />
-                            </div>
-                        )
-                    })}
-                    {showFailMessage && (<FormAlert message={state.message} />)}
-                    {showSaveButton && (<FormSubmitButton isPending={isPending} />)}
-                </form>
+            >
+                {fields.map((item) => {
+                    if (!item.name) return
+                    return (
+                        <div
+                            className="space-y-2"
+                            key={item.name}
+                        >
+                            <Field
+                                {...item}
+                                label={t(item.label)}
+                                description={t(item.description)}
+                                value={state.data?.[item.name]}
+                                readOnly={readOnly}
+                            />
+                            <FieldError
+                                error={state?.errors?.[item.name]?.at(0)}
+                            />
+                        </div>
+                    )
+                })}
+                {showFailMessage && (<FormAlert message={state.message} />)}
+                {showSaveButton && (<FormSubmitButton isPending={isPending} />)}
+            </form>
         </InheritanceProvider>
     )
 }

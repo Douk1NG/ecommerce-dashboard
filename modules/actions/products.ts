@@ -23,6 +23,7 @@ export default async function SaveProduct(
     prevState: ActionResponse | null,
     formData: FormData
 ): Promise<ActionResponse> {
+    console.log(formData, 'formData')
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),

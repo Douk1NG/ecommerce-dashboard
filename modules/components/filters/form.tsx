@@ -4,6 +4,7 @@ import SaveFilter, { DeleteFilter } from "@/modules/actions/filters";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/filters";
+import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Filter } from '@/modules/types/filters';
 
 type FormProps = {
@@ -12,11 +13,13 @@ type FormProps = {
 }
 
 export default function Form({ values, isNew }: FormProps) {
+    const { isEditing, handleEditModeChange } = useEditMode({ isNew })
+
     const onDelete = async () => {
         return await DeleteFilter(values.id as string)
     }
 
-    const title = isNew ? CONSTANTS.SIDEBAR.ADD : CONSTANTS.SIDEBAR.EDIT
+    const title = isNew ? CONSTANTS.SIDEBAR.ADD : isEditing ? CONSTANTS.SIDEBAR.EDIT : CONSTANTS.SIDEBAR.DETAIL
 
     return (
         <Sidebar
@@ -24,12 +27,15 @@ export default function Form({ values, isNew }: FormProps) {
             onDelete={onDelete}
             isNew={isNew}
             translations={CONSTANTS.NAMESPACE}
+            onEditModeChange={handleEditModeChange}
+            isEditing={isEditing}
         >
             <FormBuilder
                 action={SaveFilter}
                 fields={fields}
                 values={values}
                 translations={CONSTANTS.NAMESPACE}
+                readOnly={!isNew && !isEditing}
             />
         </Sidebar>
     )

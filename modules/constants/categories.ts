@@ -1,8 +1,9 @@
 const CONSTANTS = {
     NAMESPACE: 'categories',
-    SIDEBAR : {
+    SIDEBAR: {
         ADD: 'sidebar.add',
         EDIT: 'sidebar.edit',
+        DETAIL: 'sidebar.detail'
     },
     METADATA: {
         TITLE: 'metadata.title',

@@ -4,6 +4,7 @@ import SaveCategory, { DeleteCategory } from "@/modules/actions/categories";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/modules/constants/categories";
+import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Category } from '@/modules/types/categories';
 import type { Option } from '@/types/select';
 
@@ -17,11 +18,14 @@ type FormProps = {
 }
 
 export default function Form({ values, isNew, content }: FormProps) {
+    const { isEditing, handleEditModeChange } = useEditMode({ isNew })
+
     const onDelete = async () => {
         return await DeleteCategory(values.id as string)
     }
+
     const hidratatedFields = fields(content)
-    const title = isNew ? CONSTANTS.SIDEBAR.ADD : CONSTANTS.SIDEBAR.EDIT
+    const title = isNew ? CONSTANTS.SIDEBAR.ADD : isEditing ? CONSTANTS.SIDEBAR.EDIT : CONSTANTS.SIDEBAR.DETAIL
 
     return (
         <Sidebar
@@ -29,12 +33,15 @@ export default function Form({ values, isNew, content }: FormProps) {
             onDelete={onDelete}
             isNew={isNew}
             translations={CONSTANTS.NAMESPACE}
+            onEditModeChange={handleEditModeChange}
+            isEditing={isEditing}
         >
             <FormBuilder
                 action={SaveCategory}
                 fields={hidratatedFields}
                 values={values}
                 translations={CONSTANTS.NAMESPACE}
+                readOnly={!isNew && !isEditing}
             />
         </Sidebar>
     )

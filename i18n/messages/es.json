@@ -90,7 +90,8 @@
         },
         "sidebar": {
             "add": "Agregar producto",
-            "edit": "Editar producto"
+            "edit": "Editar producto",
+            "detail": "Detalle del producto"
         },
         "layout": {
             "title": "Productos",
@@ -137,7 +138,8 @@
         },
         "sidebar": {
             "add": "Agregar categoría",
-            "edit": "Editar categoría"
+            "edit": "Editar categoría",
+            "detail": "Detalle de la categoría"
         },
         "layout": {
             "title": "Categorías",
@@ -176,7 +178,8 @@
         },
         "sidebar": {
             "add": "Agregar filtro",
-            "edit": "Editar filtro"
+            "edit": "Editar filtro",
+            "detail": "Detalle del filtro"
         },
         "layout": {
             "title": "Filtros",
@@ -224,7 +227,8 @@
         },
         "sidebar": {
             "add": "Agregar entrada",
-            "edit": "Editar entrada"
+            "edit": "Editar entrada",
+            "detail": "Detalle de la entrada"
         },
         "layout": {
             "title": "Entradas",
@@ -262,7 +266,8 @@
         },
         "sidebar": {
             "add": "Agregar salida",
-            "edit": "Editar salida"
+            "edit": "Editar salida",
+            "detail": "Detalle de la salida"
         },
         "layout": {
             "title": "Salidas",

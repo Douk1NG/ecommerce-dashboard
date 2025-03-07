@@ -1,6 +1,15 @@
 import type { ImageUploaderProps } from "@/types/image-uploader";
 import type { Option } from "@/types/select";
 
+export type ActionResponse = {
+    success: boolean;
+    message: string;
+    errors?: {
+        [x: string]: string[] | undefined;
+    };
+    data: Record<string, unknown>;
+}
+
 export type FieldType = 'text' | 'select' | 'textarea' | 'currency' | 'multiselect' | 'switch' | 'tagbox' | 'image' | 'group_variant_inventory' | 'group_variant_product' | 'number';
 
 export interface BaseField {
@@ -77,22 +86,10 @@ export type Field =
 
 export type Fields = Field[];
 
-export type ActionResponse = {
-    success: boolean;
-    message: string;
-    errors?: {
-        [x: string]: string[] | undefined;
-    };
-    data: Record<string, unknown>;
-}
-
 export type FormProps = {
-    values?: Record<string, unknown>;
     fields: Fields;
-    action: (
-        id: string | undefined,
-        prevState: ActionResponse | null,
-        formData: FormData
-    ) => Promise<ActionResponse>;
+    values: Record<string, unknown>;
     translations: string;
+    action: (id: string | undefined, prevState: ActionResponse | null, formData: FormData) => Promise<ActionResponse>;
+    readOnly?: boolean;
 }

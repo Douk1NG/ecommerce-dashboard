@@ -90,7 +90,8 @@
         },
         "sidebar": {
             "add": "Add product",
-            "edit": "Edit product"
+            "edit": "Edit product",
+            "detail": "Product details"
         },
         "layout": {
             "title": "Products",
@@ -137,7 +138,8 @@
         },
         "sidebar": {
             "add": "Add category",
-            "edit": "Edit category"
+            "edit": "Edit category",
+            "detail": "Category details"
         },
         "layout": {
             "title": "Categories",
@@ -176,7 +178,8 @@
         },
         "sidebar": {
             "add": "Add filter",
-            "edit": "Edit filter"
+            "edit": "Edit filter",
+            "detail": "Filter details"
         },
         "layout": {
             "title": "Filters",
@@ -224,7 +227,8 @@
         },
         "sidebar": {
             "add": "Add inflow",
-            "edit": "Edit inflow"
+            "edit": "Edit inflow",
+            "detail": "Inflow details"
         },
         "layout": {
             "title": "Inflow",
@@ -262,7 +266,8 @@
         },
         "sidebar": {
             "add": "Add outflow",
-            "edit": "Edit outflow"
+            "edit": "Edit outflow",
+            "detail": "Outflow details"
         },
         "layout": {
             "title": "Outflow",

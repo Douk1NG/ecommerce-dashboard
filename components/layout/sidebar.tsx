@@ -5,9 +5,10 @@ import Icon from '@/components/icon';
 
 import { getBasePath } from "@/lib/utils";
 import { usePathname } from "@/i18n/routing";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
+import { useEditMode } from '@/hooks/use-edit-mode';
 
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
@@ -18,29 +19,38 @@ type PropTypes = {
     title: string;
     children: React.ReactNode
     onDelete: () => Promise<any>;
-    isNew: boolean
-    translations: string
+    isNew: boolean;
+    translations: string;
+    onEditModeChange?: (isEditing: boolean) => void;
+    isEditing?: boolean;
 };
 
-const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) => {
+const Index = ({
+    title,
+    children,
+    isNew,
+    onDelete,
+    translations,
+    onEditModeChange,
+    isEditing = false
+}: PropTypes) => {
     const t = useTranslations(translations)
     const pathname = usePathname();
-    const searchParams = useSearchParams();
     const router = useRouter();
     const base = getBasePath(pathname)
-    const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
-    const isDetail = !isNew && !isEdit
+    const isDetail = !isNew && !isEditing
+
 
     const onConfirm = () => {
         router.push(`/${base}`, { scroll: true })
     }
 
     const onReturn = () => {
-        router.push(pathname, { scroll: false })
+        onEditModeChange?.(false)
     }
 
     const onEdit = () => {
-        router.push(`?${CONSTANTS.LAYOUT.SIDEBAR.EDIT}=${CONSTANTS.LAYOUT.SIDEBAR.IS_EDITING}`, { scroll: false })
+        onEditModeChange?.(true)
     }
 
     const onDeleteInternal = async () => {
@@ -124,25 +134,22 @@ const Index = ({ title, children, isNew, onDelete, translations }: PropTypes) =>
                             </IntlButton>
                         ) : (
                             <>
-                                {
-                                    !isNew && (
-                                        <IntlButton
-                                    variant='outline'
-                                    title={CONSTANTS.LAYOUT.SIDEBAR.RETURN}
-                                    onClick={onReturn}
-                                    text
-                                >
-                                    <Icon name='arrow-left' className='h-5 w-5' />
-                                        </IntlButton>
-                                    )
-                                }
+                                {!isNew && (
+                                    <IntlButton
+                                        variant='outline'
+                                        title={CONSTANTS.LAYOUT.SIDEBAR.RETURN}
+                                        onClick={onReturn}
+                                        text
+                                    >
+                                        <Icon name='arrow-left' className='h-5 w-5' />
+                                    </IntlButton>
+                                )}
                                 <Confirm
                                     translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
                                     icon='close'
                                     onConfirm={onConfirm}
                                 />
                             </>
-
                         )}
                     </div>
                 </div>
