@@ -14,23 +14,23 @@ export type ImageUploaderHandlers = {
     change: (e: React.ChangeEvent<HTMLInputElement>) => void
     removeImage: (name: string, external?: boolean) => void
     setPreferred: (name: string) => void
-    openCarousel: () => void
+    openCarousel: (index: number) => void
     closeCarousel: () => void
 }
 
 export type ImageCardProps = {
     image: ImageFile | ExternalImage;
-    isExternal: boolean;
     preferred: {
         enabled: boolean;
     };
     preferredImageName?: string;
     readOnly?: boolean;
     handlers: {
-        openCarousel: () => void;
+        openCarousel: (index: number) => void;
         removeImage: (name: string, isExternal?: boolean) => void;
         setPreferred: (name: string) => void;
     };
+    index: number;
 }
 
 export type UseImageUploaderProps = {
@@ -54,8 +54,7 @@ export type ImageUploaderProps = {
 }
 
 export type ImageListProps = {
-    images: ImageFile[]
-    externalImages: ExternalImage[]
+    images: (ImageFile | ExternalImage)[]
     preferred: {
         enabled: boolean
     }
@@ -64,13 +63,12 @@ export type ImageListProps = {
     handlers: {
         removeImage: (name: string, external?: boolean) => void
         setPreferred: (name: string) => void
-        openCarousel: () => void
+        openCarousel: (index: number) => void
     }
 }
 
 export type HiddenInputsProps = {
-    images: ImageFile[]
-    externalImages: ExternalImage[]
+    images: (ImageFile | ExternalImage)[]
     removedExternalImages: string[]
     name?: string
     preferred: {
@@ -99,4 +97,5 @@ export type CarouselImage = ImageFile | ExternalImage
 export type CarouselProps = {
     images: CarouselImage[]
     onClose: () => void
+    initialIndex: number
 }

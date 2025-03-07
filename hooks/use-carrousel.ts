@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import type { CarouselImage } from "@/types/image-uploader"
 
-export function useCarousel(images: CarouselImage[], onClose: () => void) {
-    const [currentIndex, setCurrentIndex] = useState(0)
+export function useCarousel(images: CarouselImage[], onClose: () => void, initialIndex: number) {
+    const [currentIndex, setCurrentIndex] = useState(initialIndex)
 
     const isSingleImage = images.length === 1
 
@@ -38,7 +38,6 @@ export function useCarousel(images: CarouselImage[], onClose: () => void) {
     }, [isSingleImage, goToPrevious, goToNext, onClose])
 
     const currentImage = images[currentIndex]
-    // todo hardcoded
     const imageUrl = 'preview' in currentImage ? currentImage.preview : currentImage.url
     const imageName = currentImage.name
 

@@ -29,6 +29,7 @@ export default function ImageUploader({
         preferredImageName,
         dragActive,
         carouselOpen,
+        carouselIndex,
         isLimitReached,
         isSingleImage,
         handlers,
@@ -52,7 +53,6 @@ export default function ImageUploader({
     return (
         <div className="w-full">
             <HiddenInputs
-                externalImages={externalImages}
                 removedExternalImages={removedExternalImages}
                 images={images}
                 name={name}
@@ -77,8 +77,7 @@ export default function ImageUploader({
                 </DropZone>
             )}
             <ImageList
-                images={images}
-                externalImages={externalImages}
+                images={allImages}
                 preferred={preferred}
                 preferredImageName={preferredImageName}
                 readOnly={readOnly}
@@ -88,6 +87,7 @@ export default function ImageUploader({
                 <Carousel
                     images={allImages}
                     onClose={handlers.closeCarousel}
+                    initialIndex={carouselIndex}
                 />
             )}
         </div>

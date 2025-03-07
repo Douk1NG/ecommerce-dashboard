@@ -33,6 +33,7 @@ export const useImageUploader = ({
     const [preferredImageName, setPreferredImageName] = useState(value?.preferred)
     const [dragActive, setDragActive] = useState(false)
     const [carouselOpen, setCarouselOpen] = useState(false)
+    const [carouselIndex, setCarouselIndex] = useState(0)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     const isLimitReached = (images.length + externalImages.length) >= maxFiles
@@ -47,8 +48,7 @@ export const useImageUploader = ({
             )
 
             const newImages = validFiles.map((file) => {
-                const imageFile = new File([file], file.name, { type: file.type })
-                return Object.assign(imageFile, {
+                return Object.assign(file, {
                     preview: URL.createObjectURL(file),
                 })
             })
@@ -130,7 +130,8 @@ export const useImageUploader = ({
         setPreferred: useCallback((name: string) => {
             setPreferredImageName(name)
         }, []),
-        openCarousel: useCallback(() => {
+        openCarousel: useCallback((index: number) => {
+            setCarouselIndex(index)
             setCarouselOpen(true)
         }, []),
         closeCarousel: useCallback(() => {
@@ -145,6 +146,7 @@ export const useImageUploader = ({
         preferredImageName,
         dragActive,
         carouselOpen,
+        carouselIndex,
         isLimitReached,
         isSingleImage,
         readOnly,

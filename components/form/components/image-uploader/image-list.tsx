@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils"
 
 const ImageCard = ({
     image,
-    isExternal,
     preferred,
     preferredImageName,
     readOnly,
-    handlers
+    handlers,
+    index
 }: ImageCardProps) => {
     const {
         url,
@@ -20,13 +20,15 @@ const ImageCard = ({
         size
     } = image as ImageFile & ExternalImage
 
+    const isExternal = 'url' in image
+
     return (
         <div key={name} className="relative h-[30vh] w-full">
             <Image
-                src={isExternal ? url : preview }
-                alt={isExternal ? url : name}
+                src={url || preview}
+                alt={url || name}
                 className="object-cover rounded-md cursor-pointer"
-                onClick={handlers.openCarousel}
+                onClick={() => handlers.openCarousel(index)}
                 title="View image"
                 loading="lazy"
                 priority={false}
@@ -72,36 +74,24 @@ const ImageCard = ({
 
 export const ImageList = ({
     images,
-    externalImages,
     preferred,
     preferredImageName,
     readOnly,
     handlers
 }: ImageListProps) => {
-    if (images.length === 0 && externalImages.length === 0) return null
+    if (images.length === 0) return null
 
     return (
         <div className="mt-4 grid grid-cols-2 gap-4">
-            {externalImages.map((file) => (
+            {images.map((image, index) => (
                 <ImageCard
-                    key={file.name}
-                    image={file}
-                    isExternal={true}
+                    key={image.name}
+                    image={image}
                     preferred={preferred}
                     preferredImageName={preferredImageName}
                     readOnly={readOnly}
                     handlers={handlers}
-                />
-            ))}
-            {images.map((file) => (
-                <ImageCard
-                    key={file.name}
-                    image={file}
-                    isExternal={false}
-                    preferred={preferred}
-                    preferredImageName={preferredImageName}
-                    readOnly={readOnly}
-                    handlers={handlers}
+                    index={index}
                 />
             ))}
         </div>

@@ -1,8 +1,7 @@
-import type { HiddenInputsProps } from "@/types/image-uploader"
+import type { HiddenInputsProps, ImageFile } from "@/types/image-uploader"
 
 export const HiddenInputs = ({
     images,
-    externalImages,
     removedExternalImages,
     name,
     preferred,
@@ -10,6 +9,8 @@ export const HiddenInputs = ({
 }: HiddenInputsProps) => {
     const inputName = maxFiles > 1 ? `${name}[]` : name
     const externalInputName = maxFiles > 1 ? `${name}_external[]` : `${name}_external`
+    const externalImages = images.filter((image) => 'url' in image)
+    const uploadedImages = images.filter((image) => image instanceof File)
 
     return (
         <>
@@ -21,7 +22,7 @@ export const HiddenInputs = ({
                     value={file.name}
                 />
             ))}
-            {images.map((file) => (
+            {uploadedImages.map((file) => (
                 <input
                     key={file.name}
                     type="file"

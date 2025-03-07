@@ -3,7 +3,12 @@ import Image from "next/image"
 import { useCarousel } from "@/hooks/use-carrousel"
 import type { CarouselProps } from "@/types/image-uploader"
 
-export default function Carousel({ images, onClose }: CarouselProps) {
+export default function Carousel({
+    images,
+    onClose,
+    initialIndex
+}: CarouselProps) {
+
     const {
         currentIndex,
         isSingleImage,
@@ -11,7 +16,7 @@ export default function Carousel({ images, onClose }: CarouselProps) {
         goToNext,
         imageUrl,
         imageName
-    } = useCarousel(images, onClose)
+    } = useCarousel(images, onClose, initialIndex)
 
     return (
         <div
