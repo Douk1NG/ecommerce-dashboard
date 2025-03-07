@@ -21,10 +21,11 @@ export default function Form({ values, isNew, content }: FormProps) {
         return await DeleteCategory(values.id as string)
     }
     const hidratatedFields = fields(content)
+    const title = isNew ? CONSTANTS.SIDEBAR.ADD : CONSTANTS.SIDEBAR.EDIT
 
     return (
         <Sidebar
-            title={CONSTANTS.SIDEBAR_TITLE}
+            title={title}
             onDelete={onDelete}
             isNew={isNew}
             translations={CONSTANTS.NAMESPACE}

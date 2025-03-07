@@ -17,7 +17,10 @@ const form = {
 
 const CONSTANTS = {
     NAMESPACE: 'filters',
-    SIDEBAR_TITLE : 'layout.add',
+    SIDEBAR : {
+        ADD: 'sidebar.add',
+        EDIT: 'sidebar.edit',
+    },
     METADATA: {
         TITLE: 'metadata.title',
         DESCRIPTION: 'metadata.description'

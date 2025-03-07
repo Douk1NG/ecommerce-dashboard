@@ -88,6 +88,10 @@
             "title": "Products",
             "description": "Check the products available in the store"
         },
+        "sidebar": {
+            "add": "Add product",
+            "edit": "Edit product"
+        },
         "layout": {
             "title": "Products",
             "add": "Add product",
@@ -131,6 +135,10 @@
             "title": "Categories",
             "description": "Check the categories of products available in the store"
         },
+        "sidebar": {
+            "add": "Add category",
+            "edit": "Edit category"
+        },
         "layout": {
             "title": "Categories",
             "add": "Create",
@@ -165,6 +173,10 @@
         "metadata": {
             "title": "Filters",
             "description": "Check the filters available in the store"
+        },
+        "sidebar": {
+            "add": "Add filter",
+            "edit": "Edit filter"
         },
         "layout": {
             "title": "Filters",
@@ -210,6 +222,10 @@
             "title": "Inflow",
             "description": "Check the inflow available in the store"
         },
+        "sidebar": {
+            "add": "Add inflow",
+            "edit": "Edit inflow"
+        },
         "layout": {
             "title": "Inflow",
             "description": "",
@@ -243,6 +259,10 @@
         "metadata": {
             "title": "Outflow",
             "description": "Check the outflow available in the store"
+        },
+        "sidebar": {
+            "add": "Add outflow",
+            "edit": "Edit outflow"
         },
         "layout": {
             "title": "Outflow",

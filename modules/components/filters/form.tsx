@@ -16,9 +16,11 @@ export default function Form({ values, isNew }: FormProps) {
         return await DeleteFilter(values.id as string)
     }
 
+    const title = isNew ? CONSTANTS.SIDEBAR.ADD : CONSTANTS.SIDEBAR.EDIT
+
     return (
         <Sidebar
-            title={CONSTANTS.SIDEBAR_TITLE}
+            title={title}
             onDelete={onDelete}
             isNew={isNew}
             translations={CONSTANTS.NAMESPACE}

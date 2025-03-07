@@ -88,6 +88,10 @@
             "title": "Productos",
             "description": "Consulta los productos disponibles en la tienda"
         },
+        "sidebar": {
+            "add": "Agregar producto",
+            "edit": "Editar producto"
+        },
         "layout": {
             "title": "Productos",
             "add": "Agregar producto",
@@ -131,6 +135,10 @@
             "title": "Categorías",
             "description": "Consulta las categorías de productos disponibles en la tienda"
         },
+        "sidebar": {
+            "add": "Agregar categoría",
+            "edit": "Editar categoría"
+        },
         "layout": {
             "title": "Categorías",
             "add": "Crear",
@@ -165,6 +173,10 @@
         "metadata": {
             "title": "Filtros",
             "description": "Consulta los filtros disponibles en la tienda"
+        },
+        "sidebar": {
+            "add": "Agregar filtro",
+            "edit": "Editar filtro"
         },
         "layout": {
             "title": "Filtros",
@@ -210,6 +222,10 @@
             "title": "Entradas",
             "description": "Consulta las entradas registradas en la tienda"
         },
+        "sidebar": {
+            "add": "Agregar entrada",
+            "edit": "Editar entrada"
+        },
         "layout": {
             "title": "Entradas",
             "description": "",
@@ -243,6 +259,10 @@
         "metadata": {
             "title": "Salidas",
             "description": "Consulta las salidas registradas en la tienda"
+        },
+        "sidebar": {
+            "add": "Agregar salida",
+            "edit": "Editar salida"
         },
         "layout": {
             "title": "Salidas",
