@@ -53,7 +53,7 @@
 ```
 
 ---
-## GET `/api/products?selectable=true`
+## GET `/api/products?selectable=true&full=true`
 
 ### Response Body
 ```json

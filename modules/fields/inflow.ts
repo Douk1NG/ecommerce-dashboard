@@ -26,6 +26,7 @@ const fields: (props: FieldsProps) => Fields = ({ products }) => [
         "description": CONSTANTS.DESCRIPTION.UNIT_PRICE,
         "type": "currency",
         "readOnly": true,
+        "disabled": true,
         "inheritFrom": {
             "field": CONSTANTS.KEYS.PRODUCT,
             "property": CONSTANTS.KEYS.UNIT_PRICE

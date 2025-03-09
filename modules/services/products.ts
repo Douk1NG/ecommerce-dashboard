@@ -35,9 +35,13 @@ export const getProduct = async (id: string) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        const { body } = await request.json()
 
-        return body
+        if (request.ok) {
+            const { body } = await request.json()
+            return body
+        }
+
+        return null
     } catch (error) {
         return null
     }

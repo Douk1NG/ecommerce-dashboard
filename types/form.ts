@@ -26,6 +26,7 @@ export interface BaseField {
     readOnly?: boolean;
     onChange?: (value: unknown) => void;
     defaultValue?: unknown;
+    disabled?: boolean;
 }
 
 export interface WithOptions {

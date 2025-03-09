@@ -24,7 +24,7 @@ const FormBuilder = ({
     const {
         handleFieldChange,
         getFieldValue
-    } = useFormFields()
+    } = useFormFields(values)
 
     const {
         state,
