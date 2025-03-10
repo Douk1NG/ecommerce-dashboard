@@ -1,5 +1,5 @@
 'use client'
-import fields from '@/modules/fields/categories';
+import fields from '@/components/modules/categories/form/fields';
 import SaveCategory, { DeleteCategory } from "@/actions/categories";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";

@@ -1,5 +1,5 @@
 'use client'
-import fields from '@/modules/fields/filters';
+import fields from '@/components/modules/filters/form/fields';
 import SaveFilter, { DeleteFilter } from "@/actions/filters";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";

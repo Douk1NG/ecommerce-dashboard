@@ -1,5 +1,4 @@
 import CONSTANTS from "@/constants/inventory";
-import Currency from "@/components/datatable/components/currency";
 
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Inventory } from '@/types/inventory';

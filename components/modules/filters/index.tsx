@@ -1,7 +1,7 @@
 import Layout from "@/components/layout";
 
 import CONSTANTS from "@/constants/filters";
-import Table from "@/modules/tables/filters";
+import Table from "@/components/modules/filters/table";
 import { getFilters } from "@/services/filters";
 import { getTranslations } from "next-intl/server";
 import type { StaticPageProps } from "@/types/layout";

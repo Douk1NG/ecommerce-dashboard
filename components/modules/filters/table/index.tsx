@@ -1,7 +1,7 @@
 import CONSTANTS from "@/constants/filters"
 
 import DataTable from "@/components/datatable"
-import columns from "@/modules/columns/filters"
+import columns from "@/components/modules/filters/table/columns"
 
 import type { TableProps } from "@/types/filters"
 
