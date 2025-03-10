@@ -3,7 +3,7 @@ import CONSTANTS_LIB from "@/lib/constants";
 import {
     getFilter
 } from "@/services/filters";
-import Form from "@/components/modules/filters/filters/form";
+import Form from "@/components/modules/filters/form";
 
 import type { PageProps } from "@/types/layout";
 

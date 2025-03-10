@@ -34,7 +34,7 @@ export default function Component({
 
     }, []);
 
-    useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
+    useFieldInheritance(inheritFrom, inheritanceMethod)
 
     const addGroup = () => {
         setGroups(prevGroups => [...prevGroups, {}]);

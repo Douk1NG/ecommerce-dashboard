@@ -123,7 +123,7 @@ export default function DataTable<TData, TValue>({
                         <Card key={row.id}>
                             <CardContent className="p-4">
                                 {row.getVisibleCells().map((cell) => {
-                                    const header = headerGroups[0].headers.find((h) => h.id === cell.column.id)
+                                    const header = headerGroups[0]?.headers.find((h) => h.id === cell.column.id)
 
                                     return (
                                         <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">

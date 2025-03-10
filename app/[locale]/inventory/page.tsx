@@ -1,5 +1,5 @@
 import { PageProps } from "@/types/layout"
-import Layout from "@/modules/components/inventory"
+import Layout from "@/components/modules/inventory"
 
 export default async function Page(props: PageProps) {
     const { locale } = await props.params

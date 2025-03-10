@@ -1,5 +1,4 @@
 import Icon from "@/components/layout/icon"
-import { Input } from "@/components/ui/input"
 import { Row } from "@tanstack/react-table"
 
 type propsType = {

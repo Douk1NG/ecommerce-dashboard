@@ -5,7 +5,7 @@ export default function SidebarLoading() {
         <>
             {/* Overlay */}
             <div className="fixed inset-0 bg-black/30 z-10" aria-hidden="true" />
-            
+
             {/* Sidebar */}
             <div className="fixed right-0 top-0 z-20 h-screen w-full bg-white border-l-2 border-gray-100 shadow-2xs md:w-[70%] grid grid-rows-[auto_1fr] overflow-hidden">
                 {/* Header - Fixed */}
