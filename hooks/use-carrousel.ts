@@ -38,8 +38,8 @@ export function useCarousel(images: CarouselImage[], onClose: () => void, initia
     }, [isSingleImage, goToPrevious, goToNext, onClose])
 
     const currentImage = images[currentIndex]
-    const imageUrl = 'preview' in currentImage ? currentImage.preview : currentImage.url
-    const imageName = currentImage.name
+    const imageUrl = currentImage && 'preview' in currentImage ? currentImage.preview : currentImage?.url
+    const imageName = currentImage?.name
 
     return {
         currentIndex,

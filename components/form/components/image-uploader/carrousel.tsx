@@ -48,7 +48,7 @@ export default function Carousel({
                             <Image
                                 onClick={(e) => e.stopPropagation()}
                                 src={imageUrl}
-                                alt={imageName}
+                                alt={`${imageName}`}
                                 className="object-contain rounded-sm !w-fit !h-fit max-h-[90vh] m-auto"
                                 title={imageName}
                                 loading="lazy"

@@ -1,11 +1,12 @@
 import { Locale } from "@/i18n/routing"
 
 type Params = {
-    id: string
+    id?: string
     locale: Locale
 }
 
-export type GenerateMetadataProps = {
+export type BaseLayoutProps = {
+    children: React.ReactNode
     params: Promise<Params>
 }
 
@@ -13,10 +14,7 @@ export type LayoutProps = BaseLayoutProps & {
     sidebar: React.ReactNode
 }
 
-export type BaseLayoutProps = {
-    children: React.ReactNode
-    params: Promise<Params>
-}
+export type GenerateMetadataProps = LayoutProps
 
 export type PageProps = {
     params: Promise<{

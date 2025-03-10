@@ -68,7 +68,7 @@ export const useImageUploader = ({
             }
 
             if (!preferredImageName && newImages.length > 0) {
-                setPreferredImageName(newImages[0].name)
+                setPreferredImageName(newImages[0]?.name)
             }
         },
         [isLimitReached, maxFileSize, maxFiles, preferredImageName],
