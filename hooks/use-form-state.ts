@@ -1,17 +1,27 @@
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { toast } from '@/hooks/use-toast'
+import { usePathname } from '@/i18n/routing'
 import { getBasePath } from '@/lib/utils'
+import { toast } from '@/hooks/use-toast'
 import type { ActionResponse } from '@/types/form'
 
-export function useFormState(action: any, values: any, pathname: string) {
-    const router = useRouter()
-    const base = getBasePath(pathname)
-
+export function useFormState(
+    action: any,
+    values: Record<string, unknown>,
+    onEditModeChange?: (editing: boolean) => void,
+    isEditing?: boolean,
+    isCreating?: boolean
+) {
     const actionWithId = action.bind(null, values?.id as string)
-
-    // @ts-ignore overload
-    const [state, formAction, isPending] = useActionState(actionWithId, {
+    const router = useRouter()
+    const pathname = usePathname()
+    const base = getBasePath(pathname)
+    const isDetail = !isEditing && !isCreating
+    const [
+        state,
+        formAction,
+        isPending
+    ] = useActionState(actionWithId, {
         success: false,
         message: '',
         errors: {},
@@ -19,19 +29,36 @@ export function useFormState(action: any, values: any, pathname: string) {
     } as ActionResponse)
 
     useEffect(() => {
+        if (isDetail && state.success) {
+            // antipattern but somehow it works
+            state.success = false
+            state.message = ''
+            state.errors = {}
+        }
+    }, [isDetail])
+
+    useEffect(() => {
         if (state.success) {
             toast({
                 title: 'Success',
                 description: state.message,
-                variant: 'default'
+                variant: 'default',
+                duration: 2000
             })
-            router.push(`/${base}/${state.data?.id}`)
+
+            if (isCreating) {
+                router.push(`${state.data.id}`)
+                return
+            }
+
+            onEditModeChange?.(false)
         }
-    }, [state, base, router])
+    }, [state.success, state.message, onEditModeChange])
 
     return {
         state,
         formAction,
-        isPending
+        isPending,
+        isDetail
     }
 }

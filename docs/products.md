@@ -63,8 +63,10 @@ _method: 'PUT'
 ```json
 {
     "success": true,
-    "message": "Filter updated successfully",
-    "body": {}
+    "message": "Product updated successfully",
+    "body": {
+        "id": 1
+    }
 }
 ```
 
@@ -88,6 +90,35 @@ _method: 'PUT'
         "name": "Camiseta",
         "price": 100,
         "active": 1
+    }]
+}
+```
+
+## GET `/api/products?selectable=true&purpose=entries`
+
+### Response Body
+```json
+{
+    "success": true,
+    "message": "Products retrieved successfully",
+    "body": [{
+        "value": 1,
+        "label": "Product 1",
+        "unit_price": 100,
+        "combinations": [{
+            "combination_id": 1,
+            "quantity": 10,
+            "filters": ["Filter 1", "Filter 2"]
+        }]
+    }, {
+        "value": 2,
+        "label": "Product 2",
+        "unit_price": 200,
+        "combinations": [{
+            "combination_id": 2,
+            "quantity": 10,
+            "filters": ["Filter 3", "Filter 4"]
+        }]
     }]
 }
 ```

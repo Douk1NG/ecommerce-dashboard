@@ -31,6 +31,11 @@ const nextConfig = {
                 protocol: 'http',
                 hostname: 'tenant1.localhost',
                 pathname: '/storage/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.r2.cloudflarestorage.com',
+                pathname: '/tenant1-ecommerce-backend-loyaldevs/products/**',
             }
         ],
     },

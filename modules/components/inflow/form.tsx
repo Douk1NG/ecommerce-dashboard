@@ -35,13 +35,18 @@ export default function Form({ values, isNew, content }: FormProps) {
             translations={CONSTANTS.NAMESPACE}
             onEditModeChange={handleEditModeChange}
             isEditing={isEditing}
+            permissions={{
+                edit: false,
+                delete: false
+            }}
         >
             <FormBuilder
                 action={SaveInflow}
                 fields={hidratatedFields}
                 values={values}
                 translations={CONSTANTS.NAMESPACE}
-                readOnly={!isNew && !isEditing}
+                isCreating={isNew}
+                isEditing={isEditing}
             />
         </Sidebar>
     )

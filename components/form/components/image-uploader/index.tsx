@@ -55,12 +55,10 @@ export default function ImageUploader({
             <HiddenInputs
                 removedExternalImages={removedExternalImages}
                 images={images}
-                name={name}
                 preferred={{
                     enabled: preferred.enabled,
                     name: preferredImageName
                 }}
-                maxFiles={maxFiles}
             />
             {!readOnly && (
                 <DropZone

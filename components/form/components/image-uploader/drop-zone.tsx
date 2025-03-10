@@ -53,7 +53,7 @@ export const DropZone = ({
                     Drag and drop images here, or click to select files
                 </p>
                 <p className="mt-1 text-xs text-gray-500">
-                    {`PNG, JPG, GIF up to ${formatFileSize(maxFileSize)}`}
+                    {`PNG, JPG, AVIF, WEBP up to ${formatFileSize(maxFileSize)}`}
                 </p>
                 <Button
                     type="button"

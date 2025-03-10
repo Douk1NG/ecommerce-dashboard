@@ -41,7 +41,8 @@ export default function Form({ values, isNew, content }: FormProps) {
                 fields={hidratatedFields}
                 values={values}
                 translations={CONSTANTS.NAMESPACE}
-                readOnly={!isNew && !isEditing}
+                isCreating={isNew}
+                isEditing={isEditing}
             />
         </Sidebar>
     )

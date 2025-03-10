@@ -120,7 +120,7 @@ export const buildGetQuery = (query?: Query) => {
     return ''
   }
 
-  const [selectable, full] = Object.entries(query).flat()
+  const [selectable, full, purpose] = Object.entries(query).flat()
 
   const build = `?${selectable}=${Boolean(selectable)}`
 
@@ -129,16 +129,10 @@ export const buildGetQuery = (query?: Query) => {
     return `${build}&${key}=${value}`
   }
 
-  return build
-}
-
-/**
- * @desc returns a parsed array of strings
- */
-export const safeArray = (value: unknown) => {
-  if(Array.isArray(value)) {
-    return value
+  if (purpose) {
+    const [key, value] = Object.entries(purpose).flat()
+    return `${build}&${key}=${value}`
   }
 
-  return []
+  return build
 }

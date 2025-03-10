@@ -41,43 +41,12 @@
             "label": "Product 1",
             "unit_price": 100,
             "combinations": [{
-                "value": 1,
-                "label": "Combination 1",
-                "price": 100
+                "combination_id": 1,
+                "quantity": 10,
+                "filters": ["Filter 1", "Filter 2"]
             }]
             },
             "quantity": 10,
             "date": "2021-01-01"
         }
 }
-```
-
----
-## GET `/api/products?selectable=true&full=true`
-
-### Response Body
-```json
-{
-    "success": true,
-    "message": "Products retrieved successfully",
-    "body": [{
-        "value": 1,
-        "label": "Product 1",
-        "price": 100,
-        "combinations": [{
-            "value": 1,
-            "label": "Combination 1",
-            "price": 100
-        }]
-    }, {
-        "value": 2,
-        "label": "Product 2",
-        "price": 200,
-        "combinations": [{
-            "value": 1,
-            "label": "Combination 1",
-            "price": 100
-        }]
-    }]
-}
-```

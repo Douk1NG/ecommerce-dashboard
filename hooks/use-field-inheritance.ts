@@ -12,10 +12,9 @@ export const useFieldInheritance = (
 ) => {
     const { getFieldValue } = useInheritanceContext()
     const previousValue = useRef<unknown>(null)
-    const preventEvent = !inheritFrom
 
     useEffect(() => {
-        if (preventEvent) return
+        if (!inheritFrom) return
 
         const sourceValue = getFieldValue?.(inheritFrom.field)
         if (sourceValue === previousValue.current) return
@@ -40,5 +39,5 @@ export const useFieldInheritance = (
         previousValue.current = sourceValue
         onInherit(valueToInherit)
 
-    }, [inheritFrom?.field, getFieldValue, onInherit, preventEvent])
+    }, [inheritFrom?.field, getFieldValue, onInherit])
 }

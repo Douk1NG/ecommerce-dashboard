@@ -35,7 +35,8 @@ export default function Form({ values, isNew }: FormProps) {
                 fields={fields}
                 values={values}
                 translations={CONSTANTS.NAMESPACE}
-                readOnly={!isNew && !isEditing}
+                isCreating={isNew}
+                isEditing={isEditing}
             />
         </Sidebar>
     )

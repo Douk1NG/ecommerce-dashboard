@@ -1,5 +1,6 @@
 export type Query = {
     selectable?: {
-        full: boolean
+        full?: boolean
+        purpose?: string
     }
 }

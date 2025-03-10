@@ -13,7 +13,6 @@ import type {
 
 import {
     getPropertyOfArray,
-    safeArray,
     safeParseBoolean,
     safeParseJSON,
     safeParseNumber
@@ -36,18 +35,16 @@ export default async function SaveProduct(
                 price: safeParseNumber(it.price) as number,
                 filters: getPropertyOfArray(it.filters, 'value') as number[]
             }
-        }),
-        images: formData.getAll('images[]'),
+        }).filter((it: FilterCombination) => it.price !== undefined),
+        images: formData.getAll('images'),
         images_preferred: formData.get('images_preferred'),
-        images_removed: formData.getAll('images_removed[]'),
+        images_removed: formData.getAll('images_removed'),
         active: safeParseBoolean(formData.get('active')),
 
     } as ProductFormData
 
     rawData.main_image = rawData.images_preferred
     rawData.related_images = rawData.images
-    rawData.images_removed = safeArray(formData.get('images_removed[]'))
-
 
     const validatedData = productSchema.safeParse(rawData)
 
@@ -71,9 +68,9 @@ export default async function SaveProduct(
         formData.append('related_images[]', image)
     })
 
-    formData.delete('images[]')
+    formData.delete('images')
     formData.delete('images_preferred')
-    formData.delete('images_external[]')
+    formData.delete('images_removed')
 
     if (id) {
         formData.set('id', id)

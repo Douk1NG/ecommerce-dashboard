@@ -92,5 +92,7 @@ export type FormProps = {
     values: Record<string, unknown>;
     translations: string;
     action: (id: string | undefined, prevState: ActionResponse | null, formData: FormData) => Promise<ActionResponse>;
-    readOnly?: boolean;
+    onEditModeChange?: (editing: boolean) => void;
+    isEditing?: boolean;
+    isCreating?: boolean;
 }

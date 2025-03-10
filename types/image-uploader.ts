@@ -70,12 +70,10 @@ export type ImageListProps = {
 export type HiddenInputsProps = {
     images: (ImageFile | ExternalImage)[]
     removedExternalImages: string[]
-    name?: string
     preferred: {
         enabled: boolean
         name?: string
     }
-    maxFiles: number
 }
 
 export type DropZoneProps = {

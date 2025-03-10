@@ -12,6 +12,7 @@ import Layout from "@/modules/components/products/form";
 
 import type { PageProps } from "@/types/layout";
 import type { Product } from "@/modules/types/products";
+import type { Category } from "@/modules/types/categories";
 
 export default async function Page(
     { params }: PageProps
@@ -20,7 +21,7 @@ export default async function Page(
     const isNew = id === CONSTANTS_LIB.NEW
 
     const product = !isNew ? await getProduct(id) : undefined
-    const filterCombinations = product?.categories?.map(category => category.filters).flat() ?? []
+    const filterCombinations = product?.categories?.map((category: Category) => category.filters).flat() ?? []
 
     const content = {
         categories: await getCategories({

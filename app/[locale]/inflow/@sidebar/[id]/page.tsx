@@ -21,7 +21,12 @@ export default async function Page(
     const inflow = !isNew ? await getInflow(id) : undefined
 
     const content = {
-        products: await getProducts(),
+        products: await getProducts({
+            selectable: {
+                purpose: 'entries',
+                full: false
+            }
+        }),
     }
 
     return (

@@ -8,7 +8,6 @@ import { usePathname } from "@/i18n/routing";
 import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { useEditMode } from '@/hooks/use-edit-mode';
 
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
@@ -23,6 +22,10 @@ type PropTypes = {
     translations: string;
     onEditModeChange?: (isEditing: boolean) => void;
     isEditing?: boolean;
+    permissions?: {
+        edit?: boolean;
+        delete?: boolean;
+    };
 };
 
 const Index = ({
@@ -32,7 +35,11 @@ const Index = ({
     onDelete,
     translations,
     onEditModeChange,
-    isEditing = false
+    isEditing = false,
+    permissions = {
+        edit: true,
+        delete: true
+    }
 }: PropTypes) => {
     const t = useTranslations(translations)
     const pathname = usePathname();
@@ -108,19 +115,23 @@ const Index = ({
                     <div className='flex items-center gap-2'>
                         {isDetail && (
                             <>
-                                <IntlButton
-                                    variant='outline'
-                                    title='layout.sidebar.edit'
-                                    onClick={onEdit}
-                                    tooltip
+                                {permissions.edit && (
+                                    <IntlButton
+                                        variant='outline'
+                                        title='layout.sidebar.edit'
+                                        onClick={onEdit}
+                                        tooltip
                                 >
-                                    <Icon name='pencil' className='h-5 w-5' />
-                                </IntlButton>
-                                <Confirm
-                                    translations={CONSTANTS.LAYOUT.CONFIRM.DELETE}
-                                    icon='trash'
-                                    onConfirm={onDeleteInternal}
-                                />
+                                        <Icon name='pencil' className='h-5 w-5' />
+                                    </IntlButton>
+                                )}
+                                {permissions.delete && (
+                                    <Confirm
+                                        translations={CONSTANTS.LAYOUT.CONFIRM.DELETE}
+                                        icon='trash'
+                                        onConfirm={onDeleteInternal}
+                                    />
+                                )}
                             </>
                         )}
                         {isDetail ? (

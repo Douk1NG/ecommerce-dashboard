@@ -3,27 +3,43 @@ import { cn, safeParseFloat } from '@/lib/utils';
 import { CurrencyField } from '@/types/form';
 import { useLocale } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce'
+import { useCallback } from 'react';
+import { useFieldInheritance } from '@/hooks/use-field-inheritance';
+import { useState } from 'react';
 
-export default function Component(props: CurrencyField) {
+export default function Component({
+    inheritFrom,
+    value,
+    id,
+    name,
+    readOnly,
+    disabled,
+    onChange
+}: CurrencyField) {
     const locale = useLocale();
-    const { value, id, name, onChange } = props;
-    // TODO: improve the currency config
+    const [initialValue, setInitialValue] = useState(value)
+
     const intlConfig = {
         locale: 'es-CO',
         currency: 'COP',
         step: 1000
     }
 
-    if(locale === 'en') {
+    if (locale === 'en') {
         intlConfig.locale = 'en-US';
         intlConfig.currency = 'USD';
         intlConfig.step = 1;
     }
 
     const handleChange = useDebouncedCallback((_value?: string, _name?: string, values?: Record<string, unknown>) => {
-        // todo: fix behaviour : components call this function without fire events
         onChange?.(values?.float);
     }, 400)
+
+    const inheritanceMethod = useCallback((value: unknown) => {
+        setInitialValue(value)
+    }, [])
+
+    useFieldInheritance(inheritFrom, inheritanceMethod)
 
     return (
         <CurrencyInput
@@ -33,10 +49,12 @@ export default function Component(props: CurrencyField) {
             )}
             intlConfig={intlConfig}
             step={intlConfig.step}
-            defaultValue={safeParseFloat(value) as number}
             allowNegativeValue={false}
-            name={props.name}
+            name={name}
             onValueChange={handleChange}
+            value={safeParseFloat(initialValue) as number}
+            readOnly={readOnly}
+            disabled={disabled}
         />
     )
 }

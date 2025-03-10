@@ -15,22 +15,21 @@ const fields: (props: FieldsProps) => Fields = ({ products }) => [
         "options": products
     },
     {
-        "label": CONSTANTS.SCHEME.QUANTITY,
-        "name": CONSTANTS.KEYS.QUANTITY,
-        "description": CONSTANTS.DESCRIPTION.QUANTITY,
-        "type": "number"
-    },
-    {
         "label": CONSTANTS.SCHEME.UNIT_PRICE,
         "name": CONSTANTS.KEYS.UNIT_PRICE,
         "description": CONSTANTS.DESCRIPTION.UNIT_PRICE,
         "type": "currency",
         "readOnly": true,
-        "disabled": true,
         "inheritFrom": {
             "field": CONSTANTS.KEYS.PRODUCT,
             "property": CONSTANTS.KEYS.UNIT_PRICE
         }
+    },
+    {
+        "label": CONSTANTS.SCHEME.QUANTITY,
+        "name": CONSTANTS.KEYS.QUANTITY,
+        "description": CONSTANTS.DESCRIPTION.QUANTITY,
+        "type": "number"
     },
     {
         "label": CONSTANTS.SCHEME.COMBINATIONS,

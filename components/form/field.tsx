@@ -40,7 +40,9 @@ const Index = <T extends Field>(props: T) => {
         <div className="w-full">
             <Label htmlFor={props.name}>{props.label}</Label>
             <Component {...props} />
-            <p className='text-sm text-muted-foreground'>{props.description}</p>
+            {!props.readOnly && (
+                <p className='text-sm text-muted-foreground'>{props.description}</p>
+            )}
         </div>
     )
 
