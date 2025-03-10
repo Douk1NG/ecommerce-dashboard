@@ -4,7 +4,7 @@ import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import Icon from "@/components/icon"
+import Icon from "@/components/layout/icon"
 
 const ToastProvider = ToastPrimitives.Provider
 

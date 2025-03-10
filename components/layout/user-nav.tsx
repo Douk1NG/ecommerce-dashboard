@@ -8,8 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import IntlButton from "@/components/intl/ui/Button";
-import IntlText from "@/components/intl/ui/Text";
+import IntlButton from "@/components/intl/Button";
+import IntlText from "@/components/intl/Text";
 
 import {
     Avatar,

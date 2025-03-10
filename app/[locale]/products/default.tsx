@@ -1,5 +1,5 @@
 import { PageProps } from "@/types/layout"
-import Layout from "@/modules/components/products"
+import Layout from "@/components/modules/products"
 
 export default async function Default(
     props: PageProps

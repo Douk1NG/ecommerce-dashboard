@@ -1,8 +1,7 @@
 import Field from "@/components/form/field";
 import { useCallback, useRef, useState } from "react";
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
-import Icon from "@/components/icon";
-import { Button } from "@/components/ui/button";
+
 import { getUniqueByKey } from "@/lib/utils";
 
 import type { Option } from "@/types/select";
@@ -11,7 +10,7 @@ import type { GroupField } from "@/types/form";
 type Group = {
     id?: number;
     filters?: string[];
-    price?: number;
+    quantity?: number;
     index?: number;
 }
 
@@ -19,22 +18,17 @@ export default function Component({
     name,
     readOnly,
     inheritFrom,
-    value: defaultValue = [{}],
-    options: defaultOptions = []
+    value: defaultValue = [{}]
 }: GroupField) {
     const [groups, setGroups] = useState<Group[]>(defaultValue as Group[]);
-    const [options, setOptions] = useState<Option[]>(defaultOptions || []);
-    const inputRef = useRef<HTMLInputElement>(null);
 
     const inheritanceMethod = useCallback((value: unknown) => {
         if (!Array.isArray(value)) return;
-
-        const uniqueFilters = getUniqueByKey(value as Option[], 'value');
-        setOptions(uniqueFilters);
+        console.log(value)
 
     }, []);
 
-    useFieldInheritance(inheritFrom, inheritanceMethod, readOnly)
+    useFieldInheritance(inheritFrom, inheritanceMethod)
 
     const addGroup = () => {
         setGroups(prevGroups => [...prevGroups, {}]);
@@ -59,23 +53,6 @@ export default function Component({
 
     return (
         <div className="flex flex-col gap-4">
-            {!readOnly && (
-                <Button
-                    type="button"
-                    variant="secondary"
-                    size="default"
-                    onClick={addGroup}
-                    className="cursor-pointer hover:text-green-800 hover:bg-green-50 w-fit self-end"
-                >
-                    Agregar
-                </Button>
-            )}
-            <input
-                ref={inputRef}
-                type="hidden"
-                name={name}
-                value={JSON.stringify(groups)}
-            />
             {groups.map((group, index) => (
                 <div
                     key={index}
@@ -84,34 +61,19 @@ export default function Component({
                     <div className="flex flex-1 gap-2 flex-col md:flex-row">
                         <Field
                             label="Filtros"
-                            id={`${name}_filters_${index}`}
-                            options={options}
-                            type="multiselect"
+                            type="text"
                             value={group.filters}
-                            onChange={(value: unknown) => handleChange(value, index, group.id)}
                             readOnly={readOnly}
                         />
                         <Field
-                            label="Precio"
-                            id={`${name}_price_${index}`}
-                            type="currency"
-                            value={group.price}
+                            label="Cantidad"
+                            id={`${name}_quantity_${index}`}
+                            type="number"
+                            value={group.quantity}
                             onChange={(value: unknown) => handleChange(value, index, group.id)}
                             readOnly={readOnly}
                         />
                     </div>
-                    {(!readOnly && groups.length > 1) && (
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => removeGroup(index)}
-                            className="cursor-pointer absolute top-0 right-0 rounded-full hover:text-red-800 hover:bg-red-50"
-                            title="Eliminar grupo"
-                        >
-                            <Icon name="trash" />
-                        </Button>
-                    )}
                 </div>
             ))}
         </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import Confirm from '@/components/layout/confirm';
-import Icon from '@/components/icon';
+import Icon from '@/components/layout/icon';
 
 import { getBasePath } from "@/lib/utils";
 import { usePathname } from "@/i18n/routing";
@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import CONSTANTS from '@/lib/constants';
 import { toast } from '@/hooks/use-toast';
 
-import IntlButton from '@/components/intl/ui/Button';
+import IntlButton from '@/components/intl/Button';
 
 type PropTypes = {
     title: string;

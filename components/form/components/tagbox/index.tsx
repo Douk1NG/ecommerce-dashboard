@@ -2,7 +2,7 @@
 import CONSTANTS from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import Icon from '@/components/icon'
+import Icon from '@/components/layout/icon'
 import { useTranslations } from 'next-intl'
 import { useTagbox } from '@/hooks/use-tagbox'
 import type { TagboxField } from '@/types/form'

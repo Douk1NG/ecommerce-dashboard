@@ -1,4 +1,4 @@
-import Icon from "@/components/icon";
+import Icon from "@/components/layout/icon";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function FormAlert({ message }: { message: string }) {

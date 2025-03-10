@@ -1,4 +1,4 @@
-import Icon from '@/components/icon'
+import Icon from '@/components/layout/icon'
 import { cn } from '@/lib/utils'
 
 interface FieldErrorProps {

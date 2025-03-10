@@ -1,6 +1,6 @@
 import { formatFileSize } from "@/lib/file"
 import { Button } from "@/components/ui/button"
-import Icon from "@/components/icon"
+import Icon from "@/components/layout/icon"
 import type { DropZoneProps } from "@/types/image-uploader"
 
 export const DropZone = ({

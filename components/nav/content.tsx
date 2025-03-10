@@ -12,10 +12,10 @@ import {
 } from '@/components/ui/sidebar'
 
 import { usePathname } from "@/i18n/routing"
-import Icon from "@/components/icon"
+import Icon from "@/components/layout/icon"
 import CONSTANTS from "@/lib/constants";
 import navItems from "@/lib/navigation"
-import IntlText from '@/components/intl/ui/Text'
+import IntlText from '@/components/intl/Text'
 import type { Icons } from "@/types/icon"
 
 const isActive = (pathname: string, link: string) => {

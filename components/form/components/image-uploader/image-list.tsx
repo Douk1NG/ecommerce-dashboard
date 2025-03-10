@@ -1,6 +1,6 @@
 import { formatFileSize } from "@/lib/file"
 import { Button } from "@/components/ui/button"
-import Icon from "@/components/icon"
+import Icon from "@/components/layout/icon"
 import Image from "next/image"
 import type { ImageCardProps, ImageListProps, ImageFile, ExternalImage } from "@/types/image-uploader"
 import { cn } from "@/lib/utils"

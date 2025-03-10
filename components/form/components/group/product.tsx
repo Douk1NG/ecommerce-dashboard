@@ -1,7 +1,7 @@
 import Field from "@/components/form/field";
 import { useCallback, useRef, useState } from "react";
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
-import Icon from "@/components/icon";
+import Icon from "@/components/layout/icon";
 import { Button } from "@/components/ui/button";
 import { getUniqueByKey } from "@/lib/utils";
 

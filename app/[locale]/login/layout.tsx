@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/modules/constants/login";
+import CONSTANTS from "@/constants/login";
 import { default as LIB_CONSTANTS } from "@/lib/constants";
 
 import type { Metadata } from "next/types";

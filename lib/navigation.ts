@@ -1,9 +1,9 @@
 const navItems = [
-    {
-        "title": "orders",
-        "url": "/orders",
-        "icon": "shopping-cart"
-    },
+    // {
+    //     "title": "orders",
+    //     "url": "/orders",
+    //     "icon": "shopping-cart",
+    // },
     {
         "title": "products",
         "url": "/products",

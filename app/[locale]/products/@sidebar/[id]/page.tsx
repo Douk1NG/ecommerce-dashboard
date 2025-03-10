@@ -2,17 +2,16 @@ import CONSTANTS_LIB from "@/lib/constants";
 
 import {
     getProduct,
-} from "@/modules/services/products";
+} from "@/services/products";
 
 import {
     getCategories
-} from "@/modules/services/categories";
+} from "@/services/categories";
 
-import Layout from "@/modules/components/products/form";
+import Layout from "@/components/modules/products/form";
 
 import type { PageProps } from "@/types/layout";
-import type { Product } from "@/modules/types/products";
-import type { Category } from "@/modules/types/categories";
+import type { Category } from "@/types/categories";
 
 export default async function Page(
     { params }: PageProps
@@ -34,7 +33,7 @@ export default async function Page(
 
     return (
         <Layout
-            values={product as unknown as Product}
+            values={product}
             isNew={isNew}
             content={content}
         />

@@ -1,7 +1,7 @@
 "use client";
 import { Fragment } from 'react';
 import { Separator } from '@/components/ui/separator';
-import IntlText from '@/components/intl/ui/Text';
+import IntlText from '@/components/intl/Text';
 
 import {
     Breadcrumb,

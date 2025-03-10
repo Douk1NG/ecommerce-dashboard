@@ -1,0 +1,18 @@
+import CONSTANTS from "@/constants/inventory";
+import Currency from "@/components/datatable/components/currency";
+
+import type { ColumnDef } from "@tanstack/react-table"
+import type { Inventory } from '@/types/inventory';
+
+const columns: ColumnDef<Inventory>[] = [
+    {
+        accessorKey: CONSTANTS.KEYS.PRODUCT,
+        header: CONSTANTS.SCHEME.PRODUCT,
+    },
+    {
+        accessorKey: CONSTANTS.KEYS.QUANTITY,
+        header: CONSTANTS.SCHEME.QUANTITY,
+    }
+]
+
+export default columns;

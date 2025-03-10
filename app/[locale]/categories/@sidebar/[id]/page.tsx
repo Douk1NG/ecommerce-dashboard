@@ -3,11 +3,11 @@ import CONSTANTS_LIB from "@/lib/constants";
 import {
     getCategory,
     getCategories
-} from "@/modules/services/categories";
+} from "@/services/categories";
 
-import { getFilters } from "@/modules/services/filters";
+import { getFilters } from "@/services/filters";
 
-import Layout from "@/modules/components/categories/form";
+import Layout from "@/components/modules/categories/form";
 
 import type { PageProps } from "@/types/layout";
 

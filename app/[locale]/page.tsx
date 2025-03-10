@@ -7,7 +7,7 @@ import {
     CardContent
 } from "@/components/ui/card";
 import Link from "next/link";
-import Icon from "@/components/icon";
+import Icon from "@/components/layout/icon";
 
 export default function RootPage() {
     return (

@@ -1,4 +1,4 @@
-import Icon from "@/components/icon"
+import Icon from "@/components/layout/icon"
 import Image from "next/image"
 import { useCarousel } from "@/hooks/use-carrousel"
 import type { CarouselProps } from "@/types/image-uploader"

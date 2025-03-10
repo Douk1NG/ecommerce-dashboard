@@ -1,5 +1,5 @@
-import Icon from "@/components/icon";
-import IntlButton from "@/components/intl/ui/Button";
+import Icon from "@/components/layout/icon";
+import IntlButton from "@/components/intl/Button";
 
 export default function FormSubmitButton({ isPending }: { isPending: boolean }) {
     return (

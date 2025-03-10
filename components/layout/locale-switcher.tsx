@@ -8,9 +8,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import Icon from "@/components/icon"
-import IntlButton from "@/components/intl/ui/Button";
-import IntlText from '@/components/intl/ui/Text';
+import Icon from "@/components/layout/icon"
+import IntlButton from "@/components/intl/Button";
+import IntlText from '@/components/intl/Text';
 import CONSTANTS from "@/lib/constants";
 import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 import { type Locale, locales} from "@/i18n/routing"

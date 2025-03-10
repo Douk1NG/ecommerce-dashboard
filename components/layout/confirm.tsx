@@ -1,6 +1,6 @@
-import IntlButton from "@/components/intl/ui/Button";
-import IntlText from "@/components/intl/ui/Text";
-import Icon from '@/components/icon';
+import IntlButton from "@/components/intl/Button";
+import IntlText from "@/components/intl/Text";
+import Icon from '@/components/layout/icon';
 
 import {
     Dialog,
