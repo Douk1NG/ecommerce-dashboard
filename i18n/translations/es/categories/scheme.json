@@ -1,0 +1,9 @@
+{
+  "name": "Nombre",
+  "subcategories": "Subcategorías",
+  "filters": "Filtros",
+  "featured_category": "Categoría destacada",
+  "image": "Imagen",
+  "parent_id": "Categoría padre",
+  "description": "Descripción"
+} 

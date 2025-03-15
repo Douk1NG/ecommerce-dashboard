@@ -16,7 +16,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useBreadcrumbPath } from '@/hooks/use-breadcrumb-path';
 import { usePathname } from '@/i18n/routing';
 
-import CONSTANTS from '@/lib/constants';
+import CONSTANTS from '@/constants/layout';
 import type { NavItem } from '@/types/nav';
 
 const BreadcrumbContent = ({ breadcrumbPath }: {

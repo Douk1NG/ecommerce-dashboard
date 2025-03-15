@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
-import CONSTANTS from '@/lib/constants';
+import CONSTANTS from '@/constants/layout';
 import { toast } from '@/hooks/use-toast';
 
 import IntlButton from '@/components/intl/Button';

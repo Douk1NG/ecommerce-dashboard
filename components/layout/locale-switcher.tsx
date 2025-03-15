@@ -11,7 +11,7 @@ import {
 import Icon from "@/components/layout/icon"
 import IntlButton from "@/components/intl/Button";
 import IntlText from '@/components/intl/Text';
-import CONSTANTS from "@/lib/constants";
+import CONSTANTS from "@/constants/layout";
 import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 import { type Locale, locales} from "@/i18n/routing"
 

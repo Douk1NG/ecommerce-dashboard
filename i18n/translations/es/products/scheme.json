@@ -1,0 +1,13 @@
+{
+  "name": "Nombre",
+  "description": "Descripción",
+  "price": "Precio",
+  "categories": "Categorías",
+  "images": "Imágenes",
+  "active": "Activo",
+  "featured_product": "Producto destacado",
+  "main_image": "Imagen principal",
+  "related_images": "Imágenes relacionadas",
+  "filter_combinations": "Combinación de filtros",
+  "filters": "Filtros"
+} 

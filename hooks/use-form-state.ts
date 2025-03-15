@@ -1,7 +1,5 @@
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { usePathname } from '@/i18n/routing'
-import { getBasePath } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
 import type { ActionResponse } from '@/types/form'
 
@@ -14,8 +12,6 @@ export function useFormState(
 ) {
     const actionWithId = action.bind(null, values?.id as string)
     const router = useRouter()
-    const pathname = usePathname()
-    const base = getBasePath(pathname)
     const isDetail = !isEditing && !isCreating
     const [
         state,

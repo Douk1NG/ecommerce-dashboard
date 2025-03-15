@@ -1,0 +1,11 @@
+{
+  "dashboard": "Dashboard",
+  "orders": "Orders",
+  "products": "Products",
+  "categories": "Categories",
+  "filters": "Filters",
+  "inventory": "Inventory",
+  "outflow": "Outflow",
+  "inflow": "Inflow",
+  "settings": "Settings"
+} 

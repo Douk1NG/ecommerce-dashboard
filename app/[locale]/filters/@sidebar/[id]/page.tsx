@@ -1,4 +1,4 @@
-import CONSTANTS_LIB from "@/lib/constants";
+import CONSTANTS_LIB from "@/constants/layout";
 
 import {
     getFilter

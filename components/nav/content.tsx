@@ -13,7 +13,7 @@ import {
 
 import { usePathname } from "@/i18n/routing"
 import Icon from "@/components/layout/icon"
-import CONSTANTS from "@/lib/constants";
+import CONSTANTS from "@/constants/layout";
 import navItems from "@/lib/navigation"
 import IntlText from '@/components/intl/Text'
 import type { Icons } from "@/types/icon"

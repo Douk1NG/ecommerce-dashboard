@@ -1,5 +1,5 @@
 'use client'
-import CONSTANTS from '@/lib/constants'
+import CONSTANTS from '@/constants/layout'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Icon from '@/components/layout/icon'

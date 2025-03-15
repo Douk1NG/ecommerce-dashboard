@@ -1,0 +1,10 @@
+{
+  "add": "Add",
+  "remove": "Remove",
+  "validation": {
+    "unique": {
+      "title": "Tag already exists",
+      "description": "Please enter a unique tag"
+    }
+  }
+} 

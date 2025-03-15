@@ -1,0 +1,11 @@
+{
+  "dashboard": "Panel",
+  "orders": "Pedidos",
+  "products": "Productos",
+  "categories": "Categorías",
+  "filters": "Filtros",
+  "inventory": "Inventario",
+  "outflow": "Salidas",
+  "inflow": "Entradas",
+  "settings": "Ajustes"
+} 

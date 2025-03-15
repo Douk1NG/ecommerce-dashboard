@@ -17,7 +17,7 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import CONSTANTS from "@/lib/constants";
+import CONSTANTS from "@/constants/layout";
 
 import type { UserNavProps } from "@/types/nav";
 

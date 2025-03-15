@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import CONSTANTS from '@/lib/constants'
+import CONSTANTS from '@/constants/layout'
 import type { Query } from "@/types/services";
 
 export function cn(...inputs: ClassValue[]) {

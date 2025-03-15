@@ -1,0 +1,10 @@
+{
+  "add": "Agregar",
+  "remove": "Eliminar",
+  "validation": {
+    "unique": {
+      "title": "La etiqueta ya existe",
+      "description": "Por favor, ingresa una etiqueta única"
+    }
+  }
+} 
