@@ -1,10 +1,7 @@
 import Field from "@/components/form/field";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
 
-import { getUniqueByKey } from "@/lib/utils";
-
-import type { Option } from "@/types/select";
 import type { GroupField } from "@/types/form";
 
 type Group = {

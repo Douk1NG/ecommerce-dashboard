@@ -1,5 +1,6 @@
 import CurrencyInput from 'react-currency-input-field';
-import { cn, safeParseFloat } from '@/lib/utils';
+import { cn } from '@/lib/utils';
+import { safeParseFloat } from '@/utils/safeParse';
 import { CurrencyField } from '@/types/form';
 import { useLocale } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce'

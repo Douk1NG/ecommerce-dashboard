@@ -12,11 +12,14 @@ import type {
 } from '@/types/products'
 
 import {
-    getPropertyOfArray,
+    getPropertyOfArray
+} from '@/lib/utils'
+
+import {
     safeParseBoolean,
     safeParseJSON,
     safeParseNumber
-} from '@/lib/utils'
+} from '@/utils/safeParse'
 
 export default async function SaveProduct(
     id: string | undefined,

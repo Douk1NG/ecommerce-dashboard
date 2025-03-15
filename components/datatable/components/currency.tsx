@@ -1,5 +1,8 @@
-import { safeParseFloat } from "@/lib/utils"
 import { Row } from "@tanstack/react-table"
+
+import {
+    safeParseFloat
+} from "@/utils/safeParse"
 
 type propsType = {
     row: Row<any>,

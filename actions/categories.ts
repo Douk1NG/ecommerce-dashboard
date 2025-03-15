@@ -3,10 +3,8 @@ import { revalidatePath } from 'next/cache'
 import categorySchema from '@/schemas/categories'
 
 import {
-    getPropertyOfArray,
-    safeParseBoolean,
-    safeParseJSON
-} from '@/lib/utils'
+    safeParseBoolean
+} from '@/utils/safeParse'
 
 import {
     deleteCategory,

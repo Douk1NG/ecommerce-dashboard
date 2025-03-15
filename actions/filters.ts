@@ -3,7 +3,11 @@
 import filterSchema from '@/schemas/filters'
 import { deleteFilter, save as saveService } from '../services/filters'
 import { revalidatePath } from 'next/cache'
-import { getPropertyOfArray, safeParseJSON } from '@/lib/utils'
+import { getPropertyOfArray } from '@/lib/utils'
+
+import {
+    safeParseJSON
+} from '@/utils/safeParse'
 
 import type { FilterFormData } from '@/types/filters'
 import type { ActionResponse } from '@/types/form'

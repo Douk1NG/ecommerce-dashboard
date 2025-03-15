@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react"
-import { isValidFileType } from "@/lib/file"
+import { isValidFileType } from "@/utils/file"
 import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/types/image-uploader"
 
 const getExternalImages = (value: UseImageUploaderProps['value']) => {
