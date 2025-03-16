@@ -1,15 +1,10 @@
-import { Row } from "@tanstack/react-table"
-
 import {
     safeParseFloat
 } from "@/utils/safeParse"
 
-type propsType = {
-    row: Row<any>,
-    name:string
-}
+import type { CurrencyProps } from "@/types/table"
 
-const Currency = ({row, name}: propsType) => {
+const Currency = <TData,>({row, name}: CurrencyProps<TData>) => {
     const value = row.getValue(name)
     const price = safeParseFloat(value)
     const formatted = new Intl.NumberFormat("en-US", {

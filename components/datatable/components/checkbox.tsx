@@ -1,12 +1,8 @@
 import Icon from "@/components/layout/icon"
-import { Row } from "@tanstack/react-table"
 
-type propsType = {
-    row: Row<any>,
-    name: string
-}
+import type { CheckboxProps } from "@/types/table"
 
-const Checkbox = ({ row, name }: propsType) => {
+const Checkbox = <TData,>({ row, name }: CheckboxProps<TData>) => {
     const value = row.getValue(name)
     const active = Boolean(value)
     return (

@@ -41,5 +41,12 @@ export type DataTableProps<TData, TValue> = {
     }
 }
 
+export type CheckboxProps<TData> = {
+    row: Row<TData>
+    name: string
+}
 
-
+export type CurrencyProps<TData> = {
+    row: Row<TData>
+    name: string
+}
