@@ -1,4 +1,4 @@
-export const TAGBOX = {
+export const tagbox = {
     NAMESPACE: 'layout.tagbox',
     KEY_ADD: 'add',
     KEY_REMOVE: 'remove',

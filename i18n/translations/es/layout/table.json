@@ -1,0 +1,23 @@
+{
+    "search": "Buscar",
+    "empty": "No se encontraron datos",
+    "info": "Mostrando {{start}} a {{end}} de {{total}} entradas",
+    "detail": "Ver detalles",
+    "select": "Seleccionar",
+    "deselect": "Deseleccionar",
+    "sortAsc": "Ordenar ascendente",
+    "sortDesc": "Ordenar descendente",
+    "hide": "Ocultar",
+    "show": "Mostrar",
+    "rowsPerPage": "Filas por página",
+    "page": "Página",
+    "firstPage": "Primera página",
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente",
+    "lastPage": "Última página",
+    "of": "de",
+    "rowsSelected": "fila(s) seleccionada(s)",
+    "viewOptions": "Opciones de vista",
+    "toggleColumns": "Cambiar columnas",
+    "item": "Elemento"
+}

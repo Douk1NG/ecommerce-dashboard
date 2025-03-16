@@ -1,13 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import type { Column } from "@tanstack/react-table"
-// Comment out the intl import
-// import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -17,63 +14,67 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import Icon from "@/components/layout/icon"
+import IntlText from "@/components/intl/Text"
+import IntlButton from "@/components/intl/Button"
+
+import TableConstants from "@/constants/table"
 
 interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
     column: Column<TData, TValue>
     title: string
-    translations: string
 }
 
 export function DataTableColumnHeader<TData, TValue>({
     column,
     title,
-    translations,
-    className,
+    className
 }: DataTableColumnHeaderProps<TData, TValue>) {
-    // const t = useTranslations(translations)
-    // Helper function to replace t() calls
-    const t = (key: string) => {
-        // This function replaces the intl translations with hardcoded English strings
-        const translations: Record<string, string> = {
-            "table.sortAsc": "Asc",
-            "table.sortDesc": "Desc",
-            "table.hide": "Hide",
-        }
-        return translations[key] || key
-    }
 
     if (!column.getCanSort()) {
-        return <div className={cn(className)}>{t(title)}</div>
+        return (
+            <div className={cn(className)}>
+                <IntlText title={title} />
+            </div>
+        )
     }
+
+    const sortedIcon = column.getIsSorted() === "desc" ? "arrow-down" : column.getIsSorted() === "asc" ? "arrow-up" : "chevron-up-down"
 
     return (
         <div className={cn("flex items-center justify-center space-x-2", className)}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="-ml-3 h-8 data-[state=open]:bg-accent">
-                        <span>{t(title)}</span>
-                        {column.getIsSorted() === "desc" ? (
-                            <Icon name="arrow-down" className="ml-2 h-4 w-4" />
-                        ) : column.getIsSorted() === "asc" ? (
-                            <Icon name="arrow-up" className="ml-2 h-4 w-4" />
-                        ) : (
-                            <Icon name="chevron-up-down" className="ml-2 h-4 w-4" />
-                        )}
-                    </Button>
+                    <IntlButton
+                        variant="ghost"
+                        size="sm"
+                        className="-ml-3 h-8 data-[state=open]:bg-accent"
+                        title={title}
+                        text={true}
+                    >
+                        <Icon name={sortedIcon} className="ml-2 h-4 w-4" />
+                    </IntlButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
                     <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-                        <Icon name="arrow-up" className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-                        {t("table.sortAsc") || "Asc"}
+                        <Icon
+                            name="arrow-up"
+                            className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+                        />
+                        <IntlText title={TableConstants.sortAsc} />
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-                        <Icon name="arrow-down" className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-                        {t("table.sortDesc") || "Desc"}
+                        <Icon
+                            name="arrow-down"
+                            className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+                        />
+                        <IntlText title={TableConstants.sortDesc} />
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-                        <Icon name="eye-off" className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-                        {t("table.hide") || "Hide"}
+                        <Icon
+                            name="eye-off"
+                            className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+                        />
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

@@ -6,7 +6,6 @@ import { usePathname } from "@/i18n/routing"
 import { useTranslations } from "next-intl"
 
 import {
-    type ColumnDef,
     type Row,
     type ColumnFiltersState,
     type SortingState,
@@ -28,39 +27,23 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-
 import Icon from "@/components/layout/icon"
 
 import { cleanSplit } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTablePagination } from "@/components/datatable/pagination"
 import { DataTableViewOptions } from "@/components/datatable/view"
 
-type SelectionOption = "single" | "multiple" | "none"
+import type {
+    ClickableRowProps,
+    DataTableProps,
+    NonClickableRowProps
+} from "@/types/table"
 
-interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
-    data: TData[]
-    translations: string
-    searchKey?: string
-    options?: {
-        selection?: SelectionOption
-        enableSorting?: boolean
-        enableFiltering?: boolean
-        enableColumnVisibility?: boolean
-    }
-}
+import Responsive from "./responsive"
 
 const defaultOptions = {
-    selection: "single" as SelectionOption,
+    selection: "single",
     enableSorting: true,
     enableFiltering: true,
     enableColumnVisibility: true,
@@ -76,7 +59,13 @@ export default function DataTable<TData, TValue>({
     const t = useTranslations(translations)
 
     const mergedOptions = { ...defaultOptions, ...options }
-    const { selection, enableSorting, enableFiltering, enableColumnVisibility } = mergedOptions
+
+    const {
+        selection,
+        enableSorting = true,
+        enableFiltering = true,
+        enableColumnVisibility = true,
+    } = mergedOptions
 
     const isSelectable = selection !== "none"
     const isMultiSelect = selection === "multiple"
@@ -154,14 +143,14 @@ export default function DataTable<TData, TValue>({
                     <div className="flex items-center gap-2">
                         <Icon name="search" className="h-4 w-4 text-muted-foreground" />
                         <Input
-                            placeholder={t("table.search") || "Search..."}
+                            placeholder={t("table.search")}
                             value={globalFilter}
                             onChange={(e) => setGlobalFilter(e.target.value)}
                             className="h-9 w-[150px] lg:w-[250px]"
                         />
                     </div>
                 )}
-                {enableColumnVisibility && <DataTableViewOptions table={table} translations={translations} />}
+                {enableColumnVisibility && <DataTableViewOptions table={table} />}
             </div>
 
             <div className="hidden md:block rounded-md border">
@@ -182,10 +171,10 @@ export default function DataTable<TData, TValue>({
                                                     {enableSorting && header.column.getCanSort() && (
                                                         <Icon name="chevron-down"
                                                             className={`ml-1 h-4 w-4 transition-transform ${header.column.getIsSorted() === "asc"
-                                                                    ? "rotate-180"
-                                                                    : header.column.getIsSorted() === "desc"
-                                                                        ? "rotate-0"
-                                                                        : "rotate-0 opacity-0"
+                                                                ? "rotate-180"
+                                                                : header.column.getIsSorted() === "desc"
+                                                                    ? "rotate-0"
+                                                                    : "rotate-0 opacity-0"
                                                                 }`}
                                                         />
                                                     )}
@@ -200,21 +189,26 @@ export default function DataTable<TData, TValue>({
                     <TableBody>
                         {rowsModel.rows?.length ? (
                             rowsModel.rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
-                                    className={`${isSelectable ? "cursor-pointer" : ""} text-center`}
-                                    onClick={isSelectable ? () => onRowClick(row) : undefined}
-                                    title={isSelectable ? t("table.info") : undefined}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                                    ))}
-                                </TableRow>
+                                isSelectable ? (
+                                    <ClickableRow<TData>
+                                        row={row}
+                                        title={t("table.info")}
+                                        onRowClick={onRowClick}
+                                        key={row.id}
+                                    />
+                                ) : (
+                                    <NonClickableRow<TData>
+                                        row={row}
+                                        key={row.id}
+                                    />
+                                )
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                <TableCell
+                                    colSpan={columns.length}
+                                    className="h-24 text-center"
+                                >
                                     {t("table.empty")}
                                 </TableCell>
                             </TableRow>
@@ -223,56 +217,51 @@ export default function DataTable<TData, TValue>({
                 </Table>
             </div>
 
-            <div className="md:hidden space-y-4">
-                {rowsModel.rows?.length ? (
-                    rowsModel.rows.map((row) => (
-                        <Card key={row.id} className={row.getIsSelected() ? "border-primary" : ""}>
-                            <CardHeader className="p-4 pb-2">
-                                <CardTitle className="text-sm font-medium">
-                                    {t("table.item")} #{row.index + 1}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0">
-                                {row.getVisibleCells().map((cell) => {
-                                    const header = headerGroups[0]?.headers.find((h) => h.id === cell.column.id)
+            <Responsive
+                rowsModel={rowsModel}
+                headerGroups={headerGroups}
+                onRowClick={onRowClick}
+                isSelectable={isSelectable}
+                isMultiSelect={isMultiSelect}
+            />
 
-                                    return (
-                                        <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">
-                                            <div className="font-medium text-sm text-muted-foreground">
-                                                {header && !header.isPlaceholder ? t(header.column.columnDef.header) : null}
-                                            </div>
-                                            <div className="text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
-                                        </div>
-                                    )
-                                })}
-                            </CardContent>
-                            {isSelectable && (
-                                <CardFooter className="p-4 pt-0 flex justify-end">
-                                    <Button
-                                        variant={row.getIsSelected() ? "default" : "outline"}
-                                        size="sm"
-                                        className="cursor-pointer"
-                                        onClick={() => onRowClick(row)}
-                                    >
-                                        {isMultiSelect
-                                            ? row.getIsSelected()
-                                                ? t("table.deselect") || "Deselect"
-                                                : t("table.select") || "Select"
-                                            : t("table.detail") || "View Details"}
-                                    </Button>
-                                </CardFooter>
-                            )}
-                        </Card>
-                    ))
-                ) : (
-                    <Card>
-                        <CardContent className="p-4 text-center">{t("table.empty")}</CardContent>
-                    </Card>
-                )}
-            </div>
-
-            <DataTablePagination table={table} translations={translations} />
+            <DataTablePagination table={table}/>
         </div>
     )
 }
 
+const NonClickableRow = <TData,>({ row }: NonClickableRowProps<TData>) => {
+    return (
+        <TableRow>
+            {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                    {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                    )}
+                </TableCell>
+            ))}
+        </TableRow>
+    )
+}
+
+const ClickableRow = <TData,>({ row, title, onRowClick }: ClickableRowProps<TData>) => {
+    return (
+        <TableRow
+            key={row.id}
+            data-state={row.getIsSelected() && "selected"}
+            className="cursor-pointer text-center"
+            onClick={() => onRowClick(row)}
+            title={title}
+        >
+            {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                    {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                    )}
+                </TableCell>
+            ))}
+        </TableRow>
+    )
+}

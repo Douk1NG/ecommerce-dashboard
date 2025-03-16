@@ -1,0 +1,23 @@
+{
+    "search": "Search",
+    "empty": "No data found",
+    "info": "Showing {{start}} to {{end}} of {{total}} entries",
+    "detail": "View details",
+    "select": "Select",
+    "deselect": "Deselect",
+    "sortAsc": "Sort ascending",
+    "sortDesc": "Sort descending",
+    "hide": "Hide",
+    "show": "Show",
+    "rowsPerPage": "Rows per page",
+    "page": "Page",
+    "firstPage": "First page",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "lastPage": "Last page",
+    "of": "of",
+    "rowsSelected": "row(s) selected",
+    "viewOptions": "View options",
+    "toggleColumns": "Toggle columns",
+    "item": "Item"
+}
