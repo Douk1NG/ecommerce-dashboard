@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import type { Column } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
 
@@ -18,11 +17,7 @@ import IntlText from "@/components/intl/Text"
 import IntlButton from "@/components/intl/Button"
 
 import TableConstants from "@/constants/table"
-
-interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
-    column: Column<TData, TValue>
-    title: string
-}
+import { DataTableColumnHeaderProps } from "@/types/table"
 
 export function DataTableColumnHeader<TData, TValue>({
     column,

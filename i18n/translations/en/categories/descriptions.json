@@ -1,0 +1,9 @@
+{
+    "name": "Set the category name.",
+    "subcategories": "Set the category subcategories.",
+    "filters": "Set the category filters.",
+    "featured_category": "Set if the category is featured.",
+    "image": "Set the category image.",
+    "parent_id": "Set the category parent id.",
+    "description": "Set the category description."
+}

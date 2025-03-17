@@ -1,4 +1,11 @@
-import { ColumnDef, HeaderGroup, Row, RowModel, Table } from "@tanstack/react-table"
+import {
+    ColumnDef,
+    HeaderGroup,
+    Row,
+    RowModel,
+    Table,
+    Column
+} from "@tanstack/react-table"
 
 export type ClickableRowProps<TData> = {
     row: Row<TData>
@@ -49,4 +56,9 @@ export type CheckboxProps<TData> = {
 export type CurrencyProps<TData> = {
     row: Row<TData>
     name: string
+}
+
+export type DataTableColumnHeaderProps<TData, TValue> = {
+    column: Column<TData, TValue>
+    title: string
 }

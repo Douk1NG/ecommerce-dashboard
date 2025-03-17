@@ -33,6 +33,7 @@ import { cleanSplit } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { DataTablePagination } from "@/components/datatable/pagination"
 import { DataTableViewOptions } from "@/components/datatable/view"
+import { DataTableColumnHeader } from "@/components/datatable/header"
 
 import type {
     ClickableRowProps,

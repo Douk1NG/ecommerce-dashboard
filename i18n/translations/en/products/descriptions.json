@@ -1,0 +1,13 @@
+{
+    "name": "Set the product name.",
+    "description": "Set the product description.",
+    "price": "Set the product price.",
+    "categories": "Set the product categories.",
+    "images": "Set the product images.",
+    "active": "Set if the product is active.",
+    "featured_product": "Set if the product is featured.",
+    "main_image": "Set the product main image.",
+    "related_images": "Set the product related images.",
+    "filter_combinations": "Set the product filter combinations.",
+    "filters": "Set the product filters."
+}
