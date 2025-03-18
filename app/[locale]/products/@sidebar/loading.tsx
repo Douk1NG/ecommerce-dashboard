@@ -3,12 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 export default function SidebarLoading() {
     return (
         <>
-            {/* Overlay */}
             <div className="fixed inset-0 bg-black/30 z-10" aria-hidden="true" />
-
-            {/* Sidebar */}
             <div className="fixed right-0 top-0 z-20 h-screen w-full bg-white border-l-2 border-gray-100 shadow-2xs md:w-[70%] grid grid-rows-[auto_1fr] overflow-hidden">
-                {/* Header - Fixed */}
                 <div className='flex justify-between items-center px-4 py-2 border-b'>
                     <Skeleton className="h-8 w-48" />
                     <div className='flex items-center gap-2'>
@@ -17,69 +13,52 @@ export default function SidebarLoading() {
                         <Skeleton className="h-9 w-9" />
                     </div>
                 </div>
-
-                {/* Content - Scrollable */}
                 <div className="overflow-hidden px-4 py-4">
                     <div className="space-y-6">
-                        {/* Name Field */}
                         <div className="space-y-2">
-                            <Skeleton className="h-5 w-24" /> {/* Label */}
-                            <Skeleton className="h-10 w-full" /> {/* Input */}
-                            <Skeleton className="h-4 w-48" /> {/* Helper text */}
+                            <Skeleton className="h-5 w-24" />
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-4 w-48" />
                         </div>
-
-                        {/* Description Field */}
                         <div className="space-y-2">
-                            <Skeleton className="h-5 w-32" /> {/* Label */}
-                            <Skeleton className="h-32 w-full" /> {/* Textarea */}
-                            <Skeleton className="h-4 w-56" /> {/* Helper text */}
+                            <Skeleton className="h-5 w-32" />
+                            <Skeleton className="h-32 w-full" />
+                            <Skeleton className="h-4 w-56" />
                         </div>
-
-                        {/* Categories Field */}
                         <div className="space-y-2">
-                            <Skeleton className="h-5 w-28" /> {/* Label */}
-                            <Skeleton className="h-10 w-full" /> {/* Select */}
-                            <Skeleton className="h-4 w-52" /> {/* Helper text */}
+                            <Skeleton className="h-5 w-28" />
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-4 w-52" />
                         </div>
-
-                        {/* Price Field */}
                         <div className="space-y-2">
-                            <Skeleton className="h-5 w-20" /> {/* Label */}
-                            <Skeleton className="h-10 w-full" /> {/* Input */}
-                            <Skeleton className="h-4 w-44" /> {/* Helper text */}
+                            <Skeleton className="h-5 w-20" />
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-4 w-44" />
                         </div>
-
-                        {/* Featured Product Toggle */}
                         <div className="space-y-2">
-                            <Skeleton className="h-5 w-40" /> {/* Label */}
-                            <Skeleton className="h-6 w-12" /> {/* Toggle */}
+                            <Skeleton className="h-5 w-40" />
+                            <Skeleton className="h-6 w-12" />
                         </div>
-
-                        {/* Filter Combinations */}
                         <div className="space-y-4">
-                            <Skeleton className="h-5 w-48" /> {/* Section title */}
-                            {/* First Filter Group */}
+                            <Skeleton className="h-5 w-48" />
                             <div className="space-y-2">
                                 <div className="flex gap-4">
-                                    <Skeleton className="h-10 flex-1" /> {/* Filter select */}
-                                    <Skeleton className="h-10 flex-1" /> {/* Price input */}
+                                    <Skeleton className="h-10 flex-1" />
+                                    <Skeleton className="h-10 flex-1" />
                                 </div>
                             </div>
-                            {/* Second Filter Group */}
                             <div className="space-y-2">
                                 <div className="flex gap-4">
-                                    <Skeleton className="h-10 flex-1" /> {/* Filter select */}
-                                    <Skeleton className="h-10 flex-1" /> {/* Price input */}
+                                    <Skeleton className="h-10 flex-1" />
+                                    <Skeleton className="h-10 flex-1" />
                                 </div>
                             </div>
                         </div>
-
-                        {/* Images Section */}
                         <div className="space-y-4">
-                            <Skeleton className="h-5 w-24" /> {/* Section title */}
+                            <Skeleton className="h-5 w-24" />
                             <div className="grid grid-cols-2 gap-4">
-                                <Skeleton className="aspect-square w-full" /> {/* Image placeholder */}
-                                <Skeleton className="aspect-square w-full" /> {/* Image placeholder */}
+                                <Skeleton className="aspect-square w-full" />
+                                <Skeleton className="aspect-square w-full" />
                             </div>
                         </div>
                     </div>

@@ -93,27 +93,33 @@
         "title": "Subir"
       }
     },
-    "localeSwitcher": {
-      "switch": "Cambiar idioma",
-      "langs": {
-        "es": "Español",
-        "en": "Inglés"
-      }
-    },
     "metadata": {
       "title": "Inicio",
       "description": "Plataforma que te permite gestionar tu comercio electrónico"
     },
     "navbar": {
-      "dashboard": "Panel",
-      "orders": "Pedidos",
-      "products": "Productos",
-      "categories": "Categorías",
-      "filters": "Filtros",
-      "inventory": "Inventario",
-      "outflow": "Salidas",
-      "inflow": "Entradas",
-      "settings": "Ajustes"
+      "localeSwitcher": {
+        "switch": "Cambiar idioma",
+        "langs": {
+          "es": "Español",
+          "en": "Inglés"
+        }
+      },
+      "navigation": {
+        "dashboard": "Panel",
+        "orders": "Pedidos",
+        "products": "Productos",
+        "categories": "Categorías",
+        "filters": "Filtros",
+        "inventory": "Inventario",
+        "outflow": "Salidas",
+        "inflow": "Entradas",
+        "settings": "Ajustes"
+      },
+      "user": {
+        "profile": "Perfil",
+        "logout": "Cerrar sesión"
+      }
     },
     "sidebar": {
       "edit": "Editar",
@@ -144,10 +150,6 @@
       "viewOptions": "Opciones de vista",
       "toggleColumns": "Cambiar columnas",
       "item": "Elemento"
-    },
-    "user": {
-      "profile": "Perfil",
-      "logout": "Cerrar sesión"
     }
   },
   "orders": {
@@ -169,6 +171,11 @@
       "related_images": "Establece las imágenes relacionadas del producto.",
       "filter_combinations": "Establece las combinaciones de filtros del producto.",
       "filters": "Establece los filtros del producto."
+    },
+    "layout": {
+      "add": "Agregar producto",
+      "title": "Productos",
+      "description": "Descripción de productos"
     },
     "metadata": {
       "title": "Productos",

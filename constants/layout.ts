@@ -1,52 +1,29 @@
-const CONSTANTS = {
-    NEW: 'new',
-    METADATA: {
-        TITLE: 'metadata.title',
-        DESCRIPTION: 'metadata.description'
-    },
-    LAYOUT: {
+const layout = (namespace?: string) => {
+    return {
+        ADD: 'add',
+        DESCRIPTION: 'description',
+        LINK: `/${namespace}/new`,
         NAMESPACE: 'layout',
-        SIDEBAR: {
-            EDIT: 'MODE',
-            IS_EDITING: 'EDIT',
-            CLOSE: 'layout.sidebar.close',
-            RETURN: 'layout.sidebar.return'
-        },
-        BREADCRUMB: {
-            NAMESPACE: 'layout.breadcrumb.default'
-        },
-        CONFIRM: {
-            CLOSE: {
-                NAMESPACE: 'layout.confirm.close',
-                TITLE: 'layout.confirm.close.title',
-                DESCRIPTION: 'layout.confirm.close.description',
-                ACCEPT: 'layout.confirm.close.accept',
-                CANCEL: 'layout.confirm.close.cancel',
-                NAME: 'layout.confirm.close.name'
-            },
-            DELETE: {
-                NAMESPACE: 'layout.confirm.delete',
-                TITLE: 'layout.confirm.delete.title',
-                DESCRIPTION: 'layout.confirm.delete.description',
-                ACCEPT: 'layout.confirm.delete.accept',
-                CANCEL: 'layout.confirm.delete.cancel',
-                NAME: 'layout.confirm.delete.name'
-            }
-        },
-        NAVBAR: {
-            NAMESPACE: 'layout.navbar'
-        },
-        USERNAV: {
-            NAMESPACE: 'layout.user',
-            PROFILE: 'layout.user.profile',
-            LOGOUT: 'layout.user.logout'
-        },
-        LOCALE_SWITCHER: {
-            NAMESPACE: 'layout.locale',
-            SWITCH: 'layout.locale.switch',
-            LANGS: 'layout.locale.langs'
-        }
+        NEW: 'new',
+        TITLE: 'title'
     }
 }
 
-export default CONSTANTS
+const metadata = {
+    NAMESPACE: 'metadata',
+    TITLE: 'title',
+    DESCRIPTION: 'description'
+}
+
+const breadcrumb = {
+    NAMESPACE: 'breadcrumb',
+    DEFAULT: 'default'
+}
+
+const LAYOUT_CONSTANTS = {
+    LAYOUT: layout,
+    METADATA: metadata,
+    BREADCRUMB: breadcrumb,
+}
+
+export default LAYOUT_CONSTANTS

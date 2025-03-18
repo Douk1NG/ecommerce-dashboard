@@ -17,9 +17,8 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import CONSTANTS from "@/constants/layout";
-
-import type { UserNavProps } from "@/types/nav";
+import NAVBAR_CONSTANTS from "@/constants/navbar";
+import LAYOUT_CONSTANTS from "@/constants/layout";
 
 const user = {
     "username": "username",
@@ -27,13 +26,17 @@ const user = {
     "avatar": "/images/avatar.jpg"
 }
 
-const UserNav = (props: UserNavProps) => {
+const UserNav = () => {
+    const module = `${LAYOUT_CONSTANTS.LAYOUT().NAMESPACE}.${NAVBAR_CONSTANTS.NAMESPACE}`
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <div className="flex gap-2">
                     <IntlButton
-                        title={CONSTANTS.LAYOUT.USERNAV.PROFILE}
+                        module={module}
+                        namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
+                        title={NAVBAR_CONSTANTS.USER.PROFILE}
                         variant="ghost"
                         className="relative h-8 w-8 aspect-square"
                     >
@@ -56,13 +59,21 @@ const UserNav = (props: UserNavProps) => {
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        <IntlText title={CONSTANTS.LAYOUT.USERNAV.PROFILE} />
+                        <IntlText
+                            module={module}
+                            namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
+                            value={NAVBAR_CONSTANTS.USER.PROFILE}
+                        />
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <IntlText title={CONSTANTS.LAYOUT.USERNAV.LOGOUT} />
+                    <IntlText
+                        module={module}
+                        namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
+                        value={NAVBAR_CONSTANTS.USER.LOGOUT}
+                    />
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
             </DropdownMenuContent>

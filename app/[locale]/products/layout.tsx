@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/constants/products";
-
+import PRODUCTS_CONSTANTS from "@/constants/products";
+import LAYOUT_CONSTANTS from "@/constants/layout";
 import type { Metadata } from "next/types";
 import type { LayoutProps } from "@/types/layout";
 
@@ -8,6 +8,9 @@ export async function generateMetadata(
     props: LayoutProps
 ): Promise<Metadata> {
     const params = await props.params;
+    const namespace = LAYOUT_CONSTANTS.METADATA.NAMESPACE
+    const title = `${namespace}.${LAYOUT_CONSTANTS.METADATA.TITLE}`
+    const description = `${namespace}.${LAYOUT_CONSTANTS.METADATA.DESCRIPTION}`
 
     const {
         locale
@@ -15,12 +18,12 @@ export async function generateMetadata(
 
     const t = await getTranslations({
         locale,
-        namespace: CONSTANTS.NAMESPACE
+        namespace: PRODUCTS_CONSTANTS.NAMESPACE
     });
 
     return {
-        title: t(CONSTANTS.METADATA.TITLE),
-        description: t(CONSTANTS.METADATA.DESCRIPTION)
+        title: t(title),
+        description: t(description)
     };
 }
 

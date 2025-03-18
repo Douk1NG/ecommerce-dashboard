@@ -10,13 +10,14 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-import type { ButtonProps } from '@/components/ui/button'
+import type { IntlButtonProps } from '@/types/intl'
+import productSchema from '@/schemas/products'
 
 
 export default function IntlButton({
     tooltip = false,
     ...props
-}: ButtonProps & { tooltip?: boolean, text?: boolean }) {
+}: IntlButtonProps) {
 
     if (!tooltip) {
         return <BaseButton {...props} />
@@ -29,7 +30,11 @@ export default function IntlButton({
                     <BaseButton {...props} />
                 </TooltipTrigger>
                 <TooltipContent>
-                    <IntlText title={props.title} />
+                    <IntlText
+                        module={props.module}
+                        namespace={props.namespace}
+                        value={props.title}
+                    />
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
@@ -43,20 +48,20 @@ const BaseButton = ({
     text = false,
     className,
     ...props
-}: ButtonProps & { text?: boolean }) => {
+}: IntlButtonProps) => {
     const translations = useTranslations()
-    const intlTitle = translations(title)
+    // const intlTitle = translations(title)
 
     return (
         <Button
-            title={intlTitle}
+            // title={intlTitle}
             type={type}
             className={cn('cursor-pointer', className)}
             {...props}
         >
             <div className='flex items-center gap-2'>
                 {children}
-                {text && intlTitle}
+                {/* {text && intlTitle} */}
             </div>
         </Button>
     )

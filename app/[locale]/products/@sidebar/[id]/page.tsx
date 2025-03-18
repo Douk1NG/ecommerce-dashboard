@@ -17,7 +17,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === CONSTANTS_LIB.NEW
+    const isNew = id === CONSTANTS_LIB.LAYOUT().NEW
 
     const product = !isNew ? await getProduct(id) : undefined
     const filterCombinations = product?.categories?.map((category: Category) => category.filters).flat() ?? []

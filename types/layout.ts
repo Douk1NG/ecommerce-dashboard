@@ -28,11 +28,7 @@ export type StaticPageProps = {
 }
 
 export type LayoutContentProps = {
-    title?: string
-    description?: string
-    action?: {
-        title: string
-        href: string
-    }
+    module: string
+    action?: boolean
     children: React.ReactNode
 }

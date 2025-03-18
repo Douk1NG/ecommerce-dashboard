@@ -10,3 +10,5 @@ export const tagbox = {
     },
     KEY_ENTER: 'enter'
 }
+
+export default tagbox;

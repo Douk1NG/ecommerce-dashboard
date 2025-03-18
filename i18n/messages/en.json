@@ -93,27 +93,33 @@
         "title": "Upload"
       }
     },
-    "localeSwitcher": {
-      "switch": "Switch language",
-      "langs": {
-        "es": "Spanish",
-        "en": "English"
-      }
-    },
     "metadata": {
       "title": "Home",
       "description": "Platform that allows you to manage your e-commerce"
     },
     "navbar": {
-      "dashboard": "Dashboard",
-      "orders": "Orders",
-      "products": "Products",
-      "categories": "Categories",
-      "filters": "Filters",
-      "inventory": "Inventory",
-      "outflow": "Outflow",
-      "inflow": "Inflow",
-      "settings": "Settings"
+      "localeSwitcher": {
+        "switch": "Switch language",
+        "langs": {
+          "es": "Spanish",
+          "en": "English"
+        }
+      },
+      "navigation": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "products": "Products",
+        "categories": "Categories",
+        "filters": "Filters",
+        "inventory": "Inventory",
+        "outflow": "Outflow",
+        "inflow": "Inflow",
+        "settings": "Settings"
+      },
+      "user": {
+        "profile": "Profile",
+        "logout": "Log out"
+      }
     },
     "sidebar": {
       "edit": "Edit",
@@ -144,10 +150,6 @@
       "viewOptions": "View options",
       "toggleColumns": "Toggle columns",
       "item": "Item"
-    },
-    "user": {
-      "profile": "Profile",
-      "logout": "Log out"
     }
   },
   "orders": {
@@ -169,6 +171,11 @@
       "related_images": "Set the product related images.",
       "filter_combinations": "Set the product filter combinations.",
       "filters": "Set the product filters."
+    },
+    "layout": {
+      "add": "Add product",
+      "title": "Products",
+      "description": "Products description"
     },
     "metadata": {
       "title": "Products",

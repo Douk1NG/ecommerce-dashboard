@@ -1,0 +1,7 @@
+{
+    "cancel": "Cancel",
+    "accept": "Accept",
+    "title": "Are you sure you want to delete the record?",
+    "description": "You will not be able to recover the deleted data.",
+    "name": "Delete"
+}
