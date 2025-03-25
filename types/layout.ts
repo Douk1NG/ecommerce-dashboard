@@ -29,6 +29,11 @@ export type StaticPageProps = {
 
 export type LayoutContentProps = {
     module: string
+    translations: {
+        add?: string
+        title: string
+        description?: string
+    }
     action?: boolean
     children: React.ReactNode
 }

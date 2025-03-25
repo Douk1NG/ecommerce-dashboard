@@ -23,12 +23,12 @@ export function DataTableColumnHeader<TData, TValue>({
     column,
     title,
     className
-}: DataTableColumnHeaderProps<TData, TValue>) {
+}: DataTableColumnHeaderProps<TData, TValue> & { className?: string }) {
 
     if (!column.getCanSort()) {
         return (
             <div className={cn(className)}>
-                <IntlText title={title} />
+                <IntlText value={title} />
             </div>
         )
     }
@@ -43,7 +43,7 @@ export function DataTableColumnHeader<TData, TValue>({
                         variant="ghost"
                         size="sm"
                         className="-ml-3 h-8 data-[state=open]:bg-accent"
-                        title={title}
+                        value={title}
                         text={true}
                     >
                         <Icon name={sortedIcon} className="ml-2 h-4 w-4" />
@@ -55,14 +55,14 @@ export function DataTableColumnHeader<TData, TValue>({
                             name="arrow-up"
                             className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
                         />
-                        <IntlText title={TableConstants.sortAsc} />
+                        <IntlText value={TableConstants.sortAsc} />
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
                         <Icon
                             name="arrow-down"
                             className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
                         />
-                        <IntlText title={TableConstants.sortDesc} />
+                        <IntlText value={TableConstants.sortDesc} />
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>

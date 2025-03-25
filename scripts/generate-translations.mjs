@@ -107,4 +107,4 @@ async function generateTranslations() {
     }
 }
 
-generateTranslations() 
+generateTranslations()

@@ -1,13 +1,14 @@
-import CONSTANTS_LIB from "@/constants/layout";
+import LayoutConstants from "@/constants/layout";
+import Layout from "@/components/modules/categories/form";
 
 import {
     getCategory,
     getCategories
 } from "@/services/categories";
 
-import { getFilters } from "@/services/filters";
-
-import Layout from "@/components/modules/categories/form";
+import {
+    getFilters
+} from "@/services/filters";
 
 import type { PageProps } from "@/types/layout";
 
@@ -15,7 +16,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === CONSTANTS_LIB.NEW
+    const isNew = id === LayoutConstants.LAYOUT.NEW
 
     const category = !isNew ? await getCategory(id) : undefined
     const content = {

@@ -1,22 +1,20 @@
 import Layout from "@/components/layout";
-import CONSTANTS from "@/constants/inventory";
 import Table from "@/components/modules/inventory/table";
-import { getInventory } from "@/services/inventory";
-import { getTranslations } from "next-intl/server";
-import type { StaticPageProps } from "@/types/layout";
+import constants from "@/constants/inventory";
+import translations from "@/constants/translations/inventory";
 
-export default async function Page(
-    props: StaticPageProps
-) {
+import {
+    getInventory
+} from "@/services/inventory";
+
+export default async function Page() {
     const datasource = await getInventory()
 
-    const t = await getTranslations({
-        locale: props.locale,
-        namespace: CONSTANTS.NAMESPACE
-    });
-
     return (
-        <Layout title={t(CONSTANTS.LAYOUT.TITLE)}>
+        <Layout
+            module={constants.NAMESPACE}
+            translations={translations.layout}
+        >
             <Table
                 dataSource={datasource}
             />

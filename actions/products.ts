@@ -33,6 +33,7 @@ export default async function SaveProduct(
         categories: formData.getAll('categories'),
         price: safeParseNumber(formData.get('price')),
         featured_product: safeParseBoolean(formData.get('featured_product')),
+        // @ts-ignore
         filter_combinations: safeParseJSON(formData.get('filter_combinations')).map((it: FilterCombination) => {
             return {
                 price: safeParseNumber(it.price) as number,

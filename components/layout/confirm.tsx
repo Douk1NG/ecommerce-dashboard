@@ -18,13 +18,7 @@ import type { PropTypes } from "@/types/dialog";
 export default function Index({
     icon,
     onConfirm,
-    translations: {
-        TITLE,
-        DESCRIPTION,
-        NAME,
-        CANCEL,
-        ACCEPT
-    },
+    translations,
     variant = 'outline'
 }: PropTypes) {
     return (
@@ -32,7 +26,7 @@ export default function Index({
             <DialogTrigger asChild>
                 <IntlButton
                     variant={variant}
-                    title={NAME}
+                    title={translations.name}
                     tooltip
                 >
                     <Icon name={icon} className='h-5 w-5' />
@@ -41,17 +35,17 @@ export default function Index({
             <DialogContent className="w-[90vw] md:max-w-md">
                 <DialogHeader>
                     <DialogTitle>
-                        <IntlText title={TITLE} />
+                        <IntlText value={translations.title} />
                     </DialogTitle>
                     <DialogDescription>
-                        <IntlText title={DESCRIPTION} />
+                        <IntlText value={translations.description} />
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="flex-row justify-center gap-4 md:gap-1">
                     <DialogClose asChild>
                         <IntlButton
                             variant="secondary"
-                            title={CANCEL}
+                            title={translations.cancel}
                             className='w-fit'
                             text
                         />
@@ -60,7 +54,7 @@ export default function Index({
                         <IntlButton
                             variant="default"
                             onClick={onConfirm}
-                            title={ACCEPT}
+                            title={translations.accept}
                             className='w-fit'
                             text
                         />

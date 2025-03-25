@@ -17,8 +17,7 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import NAVBAR_CONSTANTS from "@/constants/navbar";
-import LAYOUT_CONSTANTS from "@/constants/layout";
+import LayoutTranslations from "@/constants/translations/layout";
 
 const user = {
     "username": "username",
@@ -27,16 +26,12 @@ const user = {
 }
 
 const UserNav = () => {
-    const module = `${LAYOUT_CONSTANTS.LAYOUT().NAMESPACE}.${NAVBAR_CONSTANTS.NAMESPACE}`
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <div className="flex gap-2">
                     <IntlButton
-                        module={module}
-                        namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
-                        title={NAVBAR_CONSTANTS.USER.PROFILE}
+                        title={LayoutTranslations.navbar.user.profile}
                         variant="ghost"
                         className="relative h-8 w-8 aspect-square"
                     >
@@ -60,9 +55,7 @@ const UserNav = () => {
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
                         <IntlText
-                            module={module}
-                            namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
-                            value={NAVBAR_CONSTANTS.USER.PROFILE}
+                            value={LayoutTranslations.navbar.user.profile}
                         />
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
@@ -70,9 +63,7 @@ const UserNav = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <IntlText
-                        module={module}
-                        namespace={NAVBAR_CONSTANTS.USER.NAMESPACE}
-                        value={NAVBAR_CONSTANTS.USER.LOGOUT}
+                        value={LayoutTranslations.navbar.user.logout}
                     />
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>

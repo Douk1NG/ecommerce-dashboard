@@ -1,17 +1,16 @@
 export const confirm = {
     NAMESPACE: 'confirm',
+    TITLE: 'title',
+    DESCRIPTION: 'description',
+    ACCEPT: 'accept',
+    CANCEL: 'cancel',
+    NAME: 'name',
     CLOSE: {
-        TITLE: 'close.title',
-        DESCRIPTION: 'close.description',
-        ACCEPT: 'close.accept',
-        CANCEL: 'close.cancel',
-        NAME: 'close.name'
+        NAMESPACE: 'close',
     },
     DELETE: {
-        TITLE: 'delete.title',
-        DESCRIPTION: 'delete.description',
-        ACCEPT: 'delete.accept',
-        CANCEL: 'delete.cancel',
-        NAME: 'delete.name'
+        NAMESPACE: 'delete',
     }
 }
+
+export default confirm;

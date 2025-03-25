@@ -1,29 +1,16 @@
-const layout = (namespace?: string) => {
-    return {
+const LAYOUT_CONSTANTS = {
+    LAYOUT: {
         ADD: 'add',
         DESCRIPTION: 'description',
-        LINK: `/${namespace}/new`,
         NAMESPACE: 'layout',
         NEW: 'new',
         TITLE: 'title'
+    },
+    METADATA: {
+        NAMESPACE: 'metadata',
+        TITLE: 'title',
+        DESCRIPTION: 'description'
     }
 }
 
-const metadata = {
-    NAMESPACE: 'metadata',
-    TITLE: 'title',
-    DESCRIPTION: 'description'
-}
-
-const breadcrumb = {
-    NAMESPACE: 'breadcrumb',
-    DEFAULT: 'default'
-}
-
-const LAYOUT_CONSTANTS = {
-    LAYOUT: layout,
-    METADATA: metadata,
-    BREADCRUMB: breadcrumb,
-}
-
-export default LAYOUT_CONSTANTS
+export default LAYOUT_CONSTANTS;

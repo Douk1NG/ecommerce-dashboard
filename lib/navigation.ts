@@ -1,4 +1,6 @@
-const navItems = [
+import { NavItem } from "@/types/nav"
+
+const navItems: NavItem[] = [
     // {
     //     "title": "orders",
     //     "url": "/orders",
@@ -25,18 +27,7 @@ const navItems = [
         "title": "inventory",
         "url": "/inventory",
         "icon": "book-open-text",
-        "items": [
-            {
-                "title": "inflow",
-                "url": "inflow",
-                "icon": "arrow-down-right"
-            },
-            {
-                "title": "outflow",
-                "url": "/outflow",
-                "icon": "arrow-up-left"
-            }
-        ]
+        "items": []
     },
     {
         "title": "settings",

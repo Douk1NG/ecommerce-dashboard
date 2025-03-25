@@ -13,10 +13,9 @@ import {
 
 import { usePathname } from "@/i18n/routing"
 import Icon from "@/components/layout/icon"
-import CONSTANTS from "@/constants/layout";
-import NAVBAR_CONSTANTS from "@/constants/navbar";
 import navItems from "@/lib/navigation"
 import IntlText from '@/components/intl/Text'
+import LayoutTranslations from "@/constants/translations/layout";
 import type { Icons } from "@/types/icon"
 
 const isActive = (pathname: string, link: string) => {
@@ -25,8 +24,6 @@ const isActive = (pathname: string, link: string) => {
 
 const Index = () => {
     const pathname = usePathname();
-    const module = `${CONSTANTS.LAYOUT().NAMESPACE}`
-    const namespace = `${NAVBAR_CONSTANTS.NAMESPACE}.${NAVBAR_CONSTANTS.NAVIGATION.NAMESPACE}`
 
     return (
         <SidebarContent>
@@ -46,11 +43,7 @@ const Index = () => {
                                     className="font-medium"
                                 >
                                     <Icon name={item.icon as Icons} className='h-6 w-6' />
-                                    <IntlText
-                                        module={module}
-                                        namespace={namespace}
-                                        value={item.title}
-                                    />
+                                    <IntlText value={LayoutTranslations.navbar.navigation[item.title]} />
                                 </a>
                             </SidebarMenuButton>
                             {item.items?.length ? (
@@ -66,11 +59,7 @@ const Index = () => {
                                             >
                                                 <a href={item.url}>
                                                     <Icon name={item.icon as Icons} className='h-6 w-6' />
-                                                    <IntlText
-                                                        module={module}
-                                                        namespace={namespace}
-                                                        value={item.title}
-                                                    />
+                                                    <IntlText value={LayoutTranslations.navbar.navigation[item.title]} />
                                                 </a>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>

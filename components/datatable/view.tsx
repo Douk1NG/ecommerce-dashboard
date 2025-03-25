@@ -32,7 +32,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px]">
                 <DropdownMenuLabel>
-                    <IntlText title={TableConstants.toggleColumns} />
+                    <IntlText value={TableConstants.toggleColumns} />
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {table
@@ -48,7 +48,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
                                 checked={column.getIsVisible()}
                                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
                             >
-                                <IntlText title={header as string} />
+                                <IntlText value={header as string} />
                             </DropdownMenuCheckboxItem>
                         )
                     })}

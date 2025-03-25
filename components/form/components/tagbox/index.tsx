@@ -1,10 +1,9 @@
 'use client'
-import CONSTANTS from '@/constants/layout'
-import { Button } from '@/components/ui/button'
+import CONSTANTS from '@/constants/translations/layout'
 import { Input } from '@/components/ui/input'
 import Icon from '@/components/layout/icon'
-import { useTranslations } from 'next-intl'
 import { useTagbox } from '@/hooks/use-tagbox'
+import IntlButton from '@/components/intl/Button'
 import type { TagboxField } from '@/types/form'
 import type { Tag } from '@/types/tagbox'
 
@@ -14,7 +13,7 @@ export default function Tagbox({
     placeholder = '',
     readOnly = false
 }: TagboxField) {
-    const t = useTranslations(CONSTANTS.TAGBOX.NAMESPACE)
+    const translations = CONSTANTS.form.tagbox
     const {
         tags,
         inputValue,
@@ -38,14 +37,13 @@ export default function Tagbox({
                     className="grow"
                     readOnly={readOnly}
                 />
-                <Button
+                <IntlButton
                     onClick={addTag}
                     type="button"
                     disabled={isInputEmpty}
-                    title={t(CONSTANTS.TAGBOX.KEY_ADD)}
-                >
-                    {t(CONSTANTS.TAGBOX.KEY_ADD)}
-                </Button>
+                    title={translations.add}
+                    text
+                />
             </div>
             <div className="flex flex-wrap gap-2 p-2 border rounded-md min-h-[100px]">
                 {tags.length > 0 && tags.map(tag => (
@@ -55,17 +53,18 @@ export default function Tagbox({
                     >
                         <span className="mr-1">{tag.label}</span>
 
-                        <Button
+                        <IntlButton
                             type="button"
                             size="icon"
                             variant="ghost"
                             className="h-4 w-4 p-0 hover:bg-primary-foreground hover:text-primary"
                             onClick={() => removeTag(tag.label)}
-                            title={t(CONSTANTS.TAGBOX.KEY_REMOVE)}
+                            title={translations.remove}
                             disabled={readOnly}
+                            text
                         >
                             <Icon name="circle-x" height={16} width={16} />
-                        </Button>
+                        </IntlButton>
                     </div>
                 ))}
             </div>

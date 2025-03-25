@@ -26,16 +26,16 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
                 {table.getFilteredSelectedRowModel().rows.length > 0 && (
                     <>
                         {table.getFilteredSelectedRowModel().rows.length}
-                        <IntlText title={TableConstants.of} />
+                        <IntlText value={TableConstants.of} />
                         {table.getFilteredRowModel().rows.length}
-                        <IntlText title={TableConstants.rowsSelected} />
+                        <IntlText value={TableConstants.rowsSelected} />
                     </>
                 )}
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 lg:gap-8">
                 <div className="flex items-center gap-2">
                     <p className="text-sm font-medium whitespace-nowrap">
-                        <IntlText title={TableConstants.rowsPerPage} />
+                        <IntlText value={TableConstants.rowsPerPage} />
                     </p>
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
@@ -59,35 +59,35 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
                     </Select>
                 </div>
                 <div className="flex items-center justify-center text-sm font-medium">
-                    <IntlText title={TableConstants.page} />
+                    <IntlText value={TableConstants.page} />
                     {table.getState().pagination.pageIndex + 1}
-                    <IntlText title={TableConstants.of} />
+                    <IntlText value={TableConstants.of} />
                     {table.getPageCount() || 1}
                 </div>
                 <div className="flex items-center gap-2">
                     <IntlButton
-                        title={TableConstants.firstPage}
+                        value={TableConstants.firstPage}
                         onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
                     >
                         <Icon name="chevron-left" className="h-4 w-4" />
                     </IntlButton>
                     <IntlButton
-                        title={TableConstants.previousPage}
+                        value={TableConstants.previousPage}
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                     >
                         <Icon name="chevron-left" className="h-4 w-4" />
                     </IntlButton>
                     <IntlButton
-                        title={TableConstants.nextPage}
+                        value={TableConstants.nextPage}
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                     >
                         <Icon name="chevron-right" className="h-4 w-4" />
                     </IntlButton>
                     <IntlButton
-                        title={TableConstants.lastPage}
+                        value={TableConstants.lastPage}
                         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                         disabled={!table.getCanNextPage()}
                     >

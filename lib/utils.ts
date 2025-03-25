@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import CONSTANTS from '@/constants/layout'
 import type { Query } from "@/types/services";
 
 export function cn(...inputs: ClassValue[]) {
@@ -26,20 +25,6 @@ export function getBasePath(pathname: string) {
     value: pathname,
     criteria: '/'
   }).slice(0, -1).join('/')
-}
-
-/**
- * @desc returns the form mode
-**/
-export function getDisplayMode(searchParams: URLSearchParams, values: unknown) {
-  const isEdit = searchParams.get(CONSTANTS.LAYOUT.SIDEBAR.EDIT)
-  const isDetail = Boolean(values && !isEdit)
-  const isNotDetail = !isDetail
-
-  return {
-    showSaveButton: isNotDetail,
-    readOnly: isDetail
-  }
 }
 
 /**

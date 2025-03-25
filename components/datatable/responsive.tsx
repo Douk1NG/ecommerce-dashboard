@@ -30,7 +30,7 @@ const Responsive = <TData,>({
                         className={row.getIsSelected() ? "border-primary" : ""}>
                         <CardHeader className="p-4 pb-2">
                             <CardTitle className="text-sm font-medium">
-                                <IntlText title={`${TableConstants.item} #${row.index + 1}`} />
+                                <IntlText value={`${TableConstants.item} #${row.index + 1}`} />
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="p-4 pt-0">
@@ -40,7 +40,7 @@ const Responsive = <TData,>({
                                 return (
                                     <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">
                                         <div className="font-medium text-sm text-muted-foreground">
-                                            <IntlText title={header?.column.columnDef.header as string} />
+                                            <IntlText value={header?.column.columnDef.header as string} />
                                         </div>
                                         <div className="text-sm">
                                             {flexRender(
@@ -62,9 +62,9 @@ const Responsive = <TData,>({
                                 >
                                     {isMultiSelect
                                         ? row.getIsSelected()
-                                            ? <IntlText title={TableConstants.deselect} />
-                                            : <IntlText title={TableConstants.select} />
-                                        : <IntlText title={TableConstants.detail} />}
+                                            ? <IntlText value={TableConstants.deselect} />
+                                            : <IntlText value={TableConstants.select} />
+                                        : <IntlText value={TableConstants.detail} />}
                                 </IntlButton>
                             </CardFooter>
                         )}
@@ -73,7 +73,7 @@ const Responsive = <TData,>({
             ) : (
                 <Card>
                     <CardContent className="p-4 text-center">
-                        <IntlText title={TableConstants.empty} />
+                        <IntlText value={TableConstants.empty} />
                     </CardContent>
                 </Card>
             )}

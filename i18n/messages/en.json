@@ -9,6 +9,11 @@
       "parent_id": "Set the category parent id.",
       "description": "Set the category description."
     },
+    "layout": {
+      "add": "Add category",
+      "title": "Categories",
+      "description": "Categories description"
+    },
     "metadata": {
       "title": "Categories",
       "description": "Check the categories of products available in the store"
@@ -33,6 +38,11 @@
       "name": "Set the filter name.",
       "filters": "Set the filters."
     },
+    "layout": {
+      "add": "Add filter",
+      "title": "Filters",
+      "description": "Filters description"
+    },
     "metadata": {
       "title": "Filters",
       "description": "Check the filters available in the store"
@@ -48,6 +58,10 @@
     }
   },
   "inventory": {
+    "layout": {
+      "title": "Inventory",
+      "description": "Inventory description"
+    },
     "metadata": {
       "title": "Inventory",
       "description": "Check the inventory available in the store"

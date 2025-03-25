@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "i18n": "node scripts/generate-translations.mjs",
+    "i18n": "node scripts/generate-translations.mjs && node scripts/generate-translation-constants.mjs",
     "icon": "node scripts/sync-icon-type.js"
   },
   "dependencies": {

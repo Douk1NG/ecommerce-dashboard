@@ -11,39 +11,39 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filter_combination
     {
         "label": CONSTANTS.SCHEME.NAME,
         "name": CONSTANTS.KEYS.NAME,
-        "description": CONSTANTS.DESCRIPTION.NAME,
+        "description": CONSTANTS.DESCRIPTIONS.NAME,
         "type": "text"
     },
     {
         "label": CONSTANTS.SCHEME.DESCRIPTION,
         "name": CONSTANTS.KEYS.DESCRIPTION,
-        "description": CONSTANTS.DESCRIPTION.DESCRIPTION,
+        "description": CONSTANTS.DESCRIPTIONS.DESCRIPTION,
         "type": "textarea"
     },
     {
         "label": CONSTANTS.SCHEME.CATEGORIES,
         "name": CONSTANTS.KEYS.CATEGORIES,
-        "description": CONSTANTS.DESCRIPTION.CATEGORIES,
+        "description": CONSTANTS.DESCRIPTIONS.CATEGORIES,
         "type": "multiselect",
         "options": categories
     },
     {
         "label": CONSTANTS.SCHEME.PRICE,
         "name": CONSTANTS.KEYS.PRICE,
-        "description": CONSTANTS.DESCRIPTION.PRICE,
+        "description": CONSTANTS.DESCRIPTIONS.PRICE,
         "type": "currency"
     },
 
     {
         "label": CONSTANTS.SCHEME.FEATURED_PRODUCT,
         "name": CONSTANTS.KEYS.FEATURED_PRODUCT,
-        "description": CONSTANTS.DESCRIPTION.FEATURED_PRODUCT,
+        "description": CONSTANTS.DESCRIPTIONS.FEATURED_PRODUCT,
         "type": "switch"
     },
     {
         "label": CONSTANTS.SCHEME.FILTER_COMBINATIONS,
         "name": CONSTANTS.KEYS.FILTER_COMBINATIONS,
-        "description": CONSTANTS.DESCRIPTION.FILTER_COMBINATIONS,
+        "description": CONSTANTS.DESCRIPTIONS.FILTER_COMBINATIONS,
         "type": "group_variant_product",
         "inheritFrom": {
             "field": CONSTANTS.KEYS.CATEGORIES,
@@ -54,7 +54,7 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filter_combination
     {
         "label": CONSTANTS.SCHEME.IMAGES,
         "name": CONSTANTS.KEYS.IMAGES,
-        "description": CONSTANTS.DESCRIPTION.IMAGES,
+        "description": CONSTANTS.DESCRIPTIONS.IMAGES,
         "type": "image",
         "options": {
             "maxFiles": 5,
@@ -67,7 +67,7 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filter_combination
     {
         "label": CONSTANTS.SCHEME.ACTIVE,
         "name": CONSTANTS.KEYS.ACTIVE,
-        "description": CONSTANTS.DESCRIPTION.ACTIVE,
+        "description": CONSTANTS.DESCRIPTIONS.ACTIVE,
         "type": "switch",
         "defaultValue": true
     }

@@ -1,9 +1,9 @@
-import CONSTANTS_LIB from "@/constants/layout";
+import LayoutConstants from "@/constants/layout";
+import Form from "@/components/modules/filters/form";
 
 import {
     getFilter
 } from "@/services/filters";
-import Form from "@/components/modules/filters/form";
 
 import type { PageProps } from "@/types/layout";
 
@@ -11,7 +11,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === CONSTANTS_LIB.NEW
+    const isNew = id === LayoutConstants.LAYOUT.NEW
 
     const filter = !isNew ? await getFilter(id) : undefined
 

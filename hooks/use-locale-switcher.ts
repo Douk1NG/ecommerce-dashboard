@@ -29,9 +29,14 @@ export function useLocaleSwitcher() {
         });
     };
 
+    const handleLocaleChange = (event: React.MouseEvent<HTMLDivElement>): void => {
+        switchLocale(event.currentTarget.id as Locale);
+    }
+
     return {
         locale,
         isPending,
-        switchLocale
+        switchLocale,
+        handleLocaleChange
     }
 }

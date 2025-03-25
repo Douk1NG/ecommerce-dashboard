@@ -8,7 +8,8 @@ export type UserNavProps = {
 }
 
 export type NavItem = {
-    title: string;
+    title: 'products' | 'categories' | 'filters' | 'inventory' | 'settings';
     url: string;
+    icon: string;
     items?: NavItem[];
 }

@@ -2,31 +2,11 @@
 
 import Confirm from '@/components/layout/confirm';
 import Icon from '@/components/layout/icon';
-
-import { getBasePath } from "@/lib/utils";
-import { usePathname } from "@/i18n/routing";
-import { useRouter } from "next/navigation";
-import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-
-import CONSTANTS from '@/constants/layout';
-import { toast } from '@/hooks/use-toast';
-
+import LayoutTranslations from '@/constants/translations/layout';
+import IntlText from '@/components/intl/Text';
 import IntlButton from '@/components/intl/Button';
-
-type PropTypes = {
-    title: string;
-    children: React.ReactNode
-    onDelete: () => Promise<any>;
-    isNew: boolean;
-    translations: string;
-    onEditModeChange?: (isEditing: boolean) => void;
-    isEditing?: boolean;
-    permissions?: {
-        edit?: boolean;
-        delete?: boolean;
-    };
-};
+import PropTypes from '@/types/sidebar';
+import { useSidebar } from '@/hooks/useSidebar';
 
 const Index = ({
     title,
@@ -41,76 +21,34 @@ const Index = ({
         delete: true
     }
 }: PropTypes) => {
-    const t = useTranslations(translations)
-    const pathname = usePathname();
-    const router = useRouter();
-    const base = getBasePath(pathname)
-    const isDetail = !isNew && !isEditing
-
-
-    const onConfirm = () => {
-        router.push(`/${base}`, { scroll: true })
-    }
-
-    const onReturn = () => {
-        onEditModeChange?.(false)
-    }
-
-    const onEdit = () => {
-        onEditModeChange?.(true)
-    }
-
-    const onDeleteInternal = async () => {
-        try {
-            const response = await onDelete()
-            const { success, message } = response
-
-            const title = success ? '' : 'Ha ocurrido un error.'
-            const variant = success ? 'default' : 'destructive'
-
-            toast({
-                title: title,
-                description: message,
-                variant: variant,
-            })
-
-            if (response.success) {
-                router.push(`/${base}`)
-            }
-        } catch (error) {
-            toast({
-                title: 'Error',
-                description: 'An error occurred while deleting',
-                variant: 'destructive',
-            })
-        }
-    }
-
-    useEffect(() => {
-        document.body.style.overflow = 'hidden'
-        return () => {
-            document.body.style.overflow = 'auto'
-        }
-    }, [])
+    const {
+        isDetail,
+        handleConfirm,
+        handleReturn,
+        handleEdit,
+        handleDelete
+    } = useSidebar({
+        isNew,
+        isEditing,
+        onDelete,
+        onEditModeChange
+    });
 
     return (
         <>
-            {/* Overlay */}
             <div
                 className="fixed inset-0 bg-black/30 z-10"
-                onClick={onConfirm}
+                onClick={handleConfirm}
                 aria-hidden="true"
             />
 
-            {/* Sidebar */}
             <aside
                 className="fixed right-0 top-0 z-20 h-screen w-full bg-white border-l-2 border-gray-100 shadow-2xs md:w-[70%] grid grid-rows-[auto_1fr] overflow-hidden"
                 aria-label='sidebar'
             >
-                {/* Header - Fixed */}
                 <div className='flex justify-between items-center px-4 py-2 border-b'>
                     <h2 className='text-2xl font-medium leading-7 text-gray-900'>
-                        {t(title)}
+                        <IntlText value={title} />
                     </h2>
                     <div className='flex items-center gap-2'>
                         {isDetail && (
@@ -118,18 +56,18 @@ const Index = ({
                                 {permissions.edit && (
                                     <IntlButton
                                         variant='outline'
-                                        title='layout.sidebar.edit'
-                                        onClick={onEdit}
+                                        title={LayoutTranslations.sidebar.edit}
+                                        onClick={handleEdit}
                                         tooltip
-                                >
+                                    >
                                         <Icon name='pencil' className='h-5 w-5' />
                                     </IntlButton>
                                 )}
                                 {permissions.delete && (
                                     <Confirm
-                                        translations={CONSTANTS.LAYOUT.CONFIRM.DELETE}
+                                        translations={LayoutTranslations.confirm.delete}
                                         icon='trash'
-                                        onConfirm={onDeleteInternal}
+                                        onConfirm={handleDelete}
                                     />
                                 )}
                             </>
@@ -137,8 +75,8 @@ const Index = ({
                         {isDetail ? (
                             <IntlButton
                                 variant='outline'
-                                title={CONSTANTS.LAYOUT.SIDEBAR.CLOSE}
-                                onClick={onConfirm}
+                                title={LayoutTranslations.sidebar.close}
+                                onClick={handleConfirm}
                                 tooltip
                             >
                                 <Icon name='close' className='h-5 w-5' />
@@ -148,24 +86,23 @@ const Index = ({
                                 {!isNew && (
                                     <IntlButton
                                         variant='outline'
-                                        title={CONSTANTS.LAYOUT.SIDEBAR.RETURN}
-                                        onClick={onReturn}
+                                        title={LayoutTranslations.sidebar.return}
+                                        onClick={handleReturn}
                                         text
                                     >
                                         <Icon name='arrow-left' className='h-5 w-5' />
                                     </IntlButton>
                                 )}
                                 <Confirm
-                                    translations={CONSTANTS.LAYOUT.CONFIRM.CLOSE}
+                                    translations={LayoutTranslations.confirm.close}
                                     icon='close'
-                                    onConfirm={onConfirm}
+                                    onConfirm={handleConfirm}
                                 />
                             </>
                         )}
                     </div>
                 </div>
 
-                {/* Content - Scrollable */}
                 <div className="overflow-y-auto px-4 py-4">
                     {children}
                 </div>

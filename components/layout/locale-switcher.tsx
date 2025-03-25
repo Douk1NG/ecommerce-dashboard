@@ -11,24 +11,17 @@ import {
 import Icon from "@/components/layout/icon"
 import IntlButton from "@/components/intl/Button";
 import IntlText from '@/components/intl/Text';
-import NAVBAR_CONSTANTS from "@/constants/navbar";
-import LAYOUT_CONSTANTS from "@/constants/layout";
 import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
-import { type Locale, locales } from "@/i18n/routing"
+import { locales } from "@/i18n/routing"
+
+import LayoutTranslations from "@/constants/translations/layout";
 
 const LocaleSwitcher = () => {
     const {
         locale,
         isPending,
-        switchLocale
+        handleLocaleChange
     } = useLocaleSwitcher();
-
-    const module = `${LAYOUT_CONSTANTS.LAYOUT().NAMESPACE}.${NAVBAR_CONSTANTS.NAMESPACE}`
-    const namespace = NAVBAR_CONSTANTS.LOCALESWITCHER.NAMESPACE
-
-    function handleLocaleChange(event: React.MouseEvent<HTMLDivElement>): void {
-        switchLocale(event.currentTarget.id as Locale);
-    }
 
     return (
         <DropdownMenu>
@@ -38,9 +31,7 @@ const LocaleSwitcher = () => {
                 <IntlButton
                     variant="ghost"
                     size="icon"
-                    module={module}
-                    namespace={namespace}
-                    value={NAVBAR_CONSTANTS.LOCALESWITCHER.SWITCH}
+                    value={LayoutTranslations.navbar.localeSwitcher.switch}
                     tooltip
                 >
                     <Icon name='globe' className='h-5 w-5' />
@@ -50,9 +41,7 @@ const LocaleSwitcher = () => {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
                     <IntlText
-                        module={module}
-                        namespace={namespace}
-                        value={NAVBAR_CONSTANTS.LOCALESWITCHER.SWITCH}
+                        value={LayoutTranslations.navbar.localeSwitcher.switch}
                     />
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
@@ -64,9 +53,7 @@ const LocaleSwitcher = () => {
                         checked={it === locale}
                     >
                         <IntlText
-                            module={module}
-                            namespace={namespace}
-                            value={`${NAVBAR_CONSTANTS.LOCALESWITCHER.LANGS}.${it}`}
+                            value={`${LayoutTranslations.navbar.localeSwitcher.langs}.${it}`}
                         />
                     </DropdownMenuCheckboxItem>
                 ))}

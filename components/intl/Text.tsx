@@ -1,10 +1,7 @@
 import { useTranslations } from "next-intl";
-import { getIntlText } from "@/utils/intl";
 import type { IntlTextProps } from "@/types/intl";
 
 export default function IntlText({
-    module = '',
-    namespace = '',
     value,
     params
 }: IntlTextProps) {
@@ -14,11 +11,5 @@ export default function IntlText({
         return null;
     }
 
-    const key = getIntlText({
-        module,
-        namespace,
-        value
-    })
-
-    return <>{t(key, { params })}</>;
+    return <>{t(value, { params })}</>;
 }

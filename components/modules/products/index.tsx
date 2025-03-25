@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import Table from "@/components/modules/products/table";
-import PRODUCTS_CONSTANTS from "@/constants/products";
+import translations from "@/constants/translations/products";
+import constants from "@/constants/products";
 
 import {
     getProducts
@@ -11,7 +12,8 @@ export default async function Page() {
 
     return (
         <Layout
-            module={PRODUCTS_CONSTANTS.NAMESPACE}
+            module={constants.NAMESPACE}
+            translations={translations.layout}
             action
         >
             <Table dataSource={datasource}/>

@@ -9,6 +9,11 @@
       "parent_id": "Establece el id del padre de la categoría.",
       "description": "Establece la descripción de la categoría."
     },
+    "layout": {
+      "add": "Agregar categoría",
+      "title": "Categorías",
+      "description": "Descripción de categorías"
+    },
     "metadata": {
       "title": "Categorías",
       "description": "Consulta las categorías de productos disponibles en la tienda"
@@ -33,6 +38,11 @@
       "name": "Establece el nombre del filtro.",
       "filters": "Establece los filtros."
     },
+    "layout": {
+      "add": "Agregar filtro",
+      "title": "Filtros",
+      "description": "Descripción de filtros"
+    },
     "metadata": {
       "title": "Filtros",
       "description": "Consulta los filtros disponibles en la tienda"
@@ -48,6 +58,10 @@
     }
   },
   "inventory": {
+    "layout": {
+      "title": "Inventario",
+      "description": "Inventario description"
+    },
     "metadata": {
       "title": "Inventario",
       "description": "Consulta el inventario disponible en la tienda"

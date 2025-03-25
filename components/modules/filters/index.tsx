@@ -1,28 +1,20 @@
 import Layout from "@/components/layout";
-
-import CONSTANTS from "@/constants/filters";
 import Table from "@/components/modules/filters/table";
-import { getFilters } from "@/services/filters";
-import { getTranslations } from "next-intl/server";
-import type { StaticPageProps } from "@/types/layout";
+import constants from "@/constants/filters";
+import translations from "@/constants/translations/filters";
 
-export default async function Page(
-    props: StaticPageProps
-) {
+import {
+    getFilters
+} from "@/services/filters";
+
+export default async function Page() {
     const datasource = await getFilters()
-
-    const t = await getTranslations({
-        locale: props.locale,
-        namespace: CONSTANTS.NAMESPACE
-    });
 
     return (
         <Layout
-            title={t(CONSTANTS.LAYOUT.TITLE)}
-            action={{
-                title: t(CONSTANTS.LAYOUT.ADD),
-                href: CONSTANTS.LAYOUT.LINK
-            }}
+            module={constants.NAMESPACE}
+            translations={translations.layout}
+            action
         >
             <Table
                 dataSource={datasource}
