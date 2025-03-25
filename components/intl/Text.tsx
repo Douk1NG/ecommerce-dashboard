@@ -11,5 +11,9 @@ export default function IntlText({
         return null;
     }
 
-    return <>{t(value, { params })}</>;
+    if (params) {
+        return <>{t(value, { params })}</>;
+    }
+    console.log(value)
+    return <>{t(value)}</>;
 }

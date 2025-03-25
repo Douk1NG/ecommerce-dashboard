@@ -42,7 +42,7 @@ const BreadcrumbContent = ({ breadcrumbPath }: {
                             <BreadcrumbItem>
                                 <BreadcrumbLink href={crumb.url}>
                                     <IntlText
-                                        value={crumb.title}
+                                        value={namespace[crumb.title]}
                                     />
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
