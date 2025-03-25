@@ -9,7 +9,7 @@ function InventoryTable({ dataSource }: TableProps) {
         <DataTable
             columns={columns}
             data={dataSource}
-            translations={CONSTANTS.NAMESPACE}
+            module={CONSTANTS.NAMESPACE}
             options={{
                 selection: 'none'
             }}

@@ -1,21 +1,12 @@
 "use client"
 
-import { useState } from "react"
-import { useParams, useRouter } from "next/navigation"
-import { usePathname } from "@/i18n/routing"
-import { useTranslations } from "next-intl"
-
 import {
+    type ColumnDef,
     type Row,
-    type ColumnFiltersState,
-    type SortingState,
-    type VisibilityState,
     flexRender,
     getCoreRowModel,
     getPaginationRowModel,
-    getSortedRowModel,
-    getFilteredRowModel,
-    useReactTable,
+    useReactTable
 } from "@tanstack/react-table"
 
 import {
@@ -24,82 +15,56 @@ import {
     TableCell,
     TableHead,
     TableHeader,
-    TableRow,
+    TableRow
 } from "@/components/ui/table"
 
-import Icon from "@/components/layout/icon"
+import LayoutTranslations from "@/constants/translations/layout"
 
+import IntlButton from "@/components/intl/Button"
+import IntlText from "@/components/intl/Text"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { useIntlText } from "@/hooks/use-intl-text"
+import { useParams, useRouter } from "next/navigation"
+import { usePathname } from "@/i18n/routing"
 import { cleanSplit } from "@/lib/utils"
-import { Input } from "@/components/ui/input"
-import { DataTablePagination } from "@/components/datatable/pagination"
-import { DataTableViewOptions } from "@/components/datatable/view"
-import { DataTableColumnHeader } from "@/components/datatable/header"
 
-import type {
-    ClickableRowProps,
-    DataTableProps,
-    NonClickableRowProps
-} from "@/types/table"
+type options = {
+    selection?: "single" | "none"
+}
 
-import Responsive from "./responsive"
+interface DataTableProps<TData, TValue> {
+    columns: ColumnDef<TData, TValue>[]
+    data: TData[]
+    module: string
+    options?: options
+}
 
 const defaultOptions = {
     selection: "single",
-    enableSorting: true,
-    enableFiltering: true,
-    enableColumnVisibility: true,
 }
 
 export default function DataTable<TData, TValue>({
     columns,
     data,
-    translations,
-    searchKey,
+    module,
     options,
 }: DataTableProps<TData, TValue>) {
-    const t = useTranslations(translations)
-
+    const tableTranslations = LayoutTranslations.table
     const mergedOptions = { ...defaultOptions, ...options }
 
     const {
         selection,
-        enableSorting = true,
-        enableFiltering = true,
-        enableColumnVisibility = true,
     } = mergedOptions
-
     const isSelectable = selection !== "none"
-    const isMultiSelect = selection === "multiple"
-
-    const [sorting, setSorting] = useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-    const [rowSelection, setRowSelection] = useState({})
-    const [globalFilter, setGlobalFilter] = useState("")
 
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-        onColumnFiltersChange: setColumnFilters,
-        getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-        onGlobalFilterChange: setGlobalFilter,
-        state: {
-            sorting,
-            columnFilters,
-            columnVisibility,
-            rowSelection,
-            globalFilter,
-        },
-        enableRowSelection: isSelectable,
-        enableMultiRowSelection: isMultiSelect,
     })
 
+    const detail = useIntlText(tableTranslations.detail) as string
     const router = useRouter()
     const pathname = usePathname()
     const params = useParams()
@@ -111,12 +76,6 @@ export default function DataTable<TData, TValue>({
         if (selection === "none") {
             return
         }
-
-        if (isMultiSelect) {
-            row.toggleSelected(!row.getIsSelected())
-            return
-        }
-
         const selectedRow = row.original as Record<string, unknown>
         const rowId = selectedRow.id
 
@@ -138,22 +97,7 @@ export default function DataTable<TData, TValue>({
     }
 
     return (
-        <div className="w-full space-y-4">
-            <div className="flex items-center justify-between">
-                {enableFiltering && searchKey && (
-                    <div className="flex items-center gap-2">
-                        <Icon name="search" className="h-4 w-4 text-muted-foreground" />
-                        <Input
-                            placeholder={t("table.search")}
-                            value={globalFilter}
-                            onChange={(e) => setGlobalFilter(e.target.value)}
-                            className="h-9 w-[150px] lg:w-[250px]"
-                        />
-                    </div>
-                )}
-                {enableColumnVisibility && <DataTableViewOptions table={table} />}
-            </div>
-
+        <div className="w-full">
             <div className="hidden md:block rounded-md border">
                 <Table>
                     <TableHeader>
@@ -161,25 +105,10 @@ export default function DataTable<TData, TValue>({
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead
-                                            key={header.id}
-                                            className={enableSorting && header.column.getCanSort() ? "cursor-pointer select-none" : ""}
-                                            onClick={enableSorting ? header.column.getToggleSortingHandler() : undefined}
-                                        >
-                                            {header.isPlaceholder ? null : (
-                                                <div className="flex items-center justify-center">
-                                                    {flexRender(t(header.column.columnDef.header), header.getContext())}
-                                                    {enableSorting && header.column.getCanSort() && (
-                                                        <Icon name="chevron-down"
-                                                            className={`ml-1 h-4 w-4 transition-transform ${header.column.getIsSorted() === "asc"
-                                                                ? "rotate-180"
-                                                                : header.column.getIsSorted() === "desc"
-                                                                    ? "rotate-0"
-                                                                    : "rotate-0 opacity-0"
-                                                                }`}
-                                                        />
-                                                    )}
-                                                </div>
+                                        <TableHead key={header.id} className="text-center">
+                                            {header.isPlaceholder ? null : flexRender(
+                                                <IntlText value={`${module}.${header.column.columnDef.header}`} />,
+                                                header.getContext()
                                             )}
                                         </TableHead>
                                     )
@@ -190,79 +119,69 @@ export default function DataTable<TData, TValue>({
                     <TableBody>
                         {rowsModel.rows?.length ? (
                             rowsModel.rows.map((row) => (
-                                isSelectable ? (
-                                    <ClickableRow<TData>
-                                        row={row}
-                                        title={t("table.info")}
-                                        onRowClick={onRowClick}
-                                        key={row.id}
-                                    />
-                                ) : (
-                                    <NonClickableRow<TData>
-                                        row={row}
-                                        key={row.id}
-                                    />
-                                )
+                                <TableRow
+                                    key={row.id}
+                                    data-state={row.getIsSelected() && "selected"}
+                                    className={`${isSelectable ? "cursor-pointer" : ""} text-center`}
+                                    onClick={isSelectable ? () => onRowClick(row) : undefined}
+                                    title={isSelectable ? detail : undefined}
+                                >
+                                    {row.getVisibleCells().map((cell) => (
+                                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                    ))}
+                                </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell
-                                    colSpan={columns.length}
-                                    className="h-24 text-center"
-                                >
-                                    {t("table.empty")}
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    <IntlText value={tableTranslations.empty} />
                                 </TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
             </div>
+            <div className="md:hidden space-y-4">
+                {rowsModel.rows?.length ? (
+                    rowsModel.rows.map((row) => (
+                        <Card key={row.id}>
+                            <CardContent className="p-4">
+                                {row.getVisibleCells().map((cell) => {
+                                    const header = headerGroups[0]?.headers.find((h) => h.id === cell.column.id)
 
-            <Responsive
-                rowsModel={rowsModel}
-                headerGroups={headerGroups}
-                onRowClick={onRowClick}
-                isSelectable={isSelectable}
-                isMultiSelect={isMultiSelect}
-            />
-
-            <DataTablePagination table={table}/>
+                                    return (
+                                        <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">
+                                            <div className="font-medium text-sm text-muted-foreground">
+                                                {header && !header.isPlaceholder ? <IntlText value={`${module}.${header.column.columnDef.header}`} /> : null}
+                                            </div>
+                                            <div className="text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+                                        </div>
+                                    )
+                                })}
+                            </CardContent>
+                            {isSelectable && (
+                                <CardFooter className="p-4 pt-0 flex justify-end">
+                                    <IntlButton
+                                        variant="outline"
+                                        size="sm"
+                                        className="cursor-pointer"
+                                        onClick={() => onRowClick(row)}
+                                        title={tableTranslations.detail}
+                                        text
+                                    />
+                                </CardFooter>
+                            )}
+                        </Card>
+                    ))
+                ) : (
+                    <Card>
+                        <CardContent className="p-4 text-center">
+                            <IntlText value={tableTranslations.empty} />
+                        </CardContent>
+                    </Card>
+                )}
+            </div>
         </div>
     )
 }
 
-const NonClickableRow = <TData,>({ row }: NonClickableRowProps<TData>) => {
-    return (
-        <TableRow>
-            {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                    {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                    )}
-                </TableCell>
-            ))}
-        </TableRow>
-    )
-}
-
-const ClickableRow = <TData,>({ row, title, onRowClick }: ClickableRowProps<TData>) => {
-    return (
-        <TableRow
-            key={row.id}
-            data-state={row.getIsSelected() && "selected"}
-            className="cursor-pointer text-center"
-            onClick={() => onRowClick(row)}
-            title={title}
-        >
-            {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                    {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                    )}
-                </TableCell>
-            ))}
-        </TableRow>
-    )
-}

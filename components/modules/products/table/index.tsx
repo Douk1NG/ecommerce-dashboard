@@ -7,9 +7,9 @@ import type { TableProps } from "@/types/products"
 function ProductTable({ dataSource }: TableProps) {
     return (
         <DataTable
+            module={CONSTANTS.NAMESPACE}
             columns={columns}
             data={dataSource}
-            translations={CONSTANTS.NAMESPACE}
         />
     )
 }

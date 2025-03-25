@@ -146,7 +146,7 @@
       "search": "Buscar",
       "empty": "No se encontraron datos",
       "info": "Mostrando {{start}} a {{end}} de {{total}} entradas",
-      "detail": "Ver detalles",
+      "detail": "Click para ver detalles",
       "select": "Seleccionar",
       "deselect": "Deseleccionar",
       "sortAsc": "Ordenar ascendente",
