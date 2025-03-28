@@ -1,15 +1,16 @@
 type PropTypes = {
-    title: string;
+    delete?: boolean;
+    edit?: boolean;
     children: React.ReactNode
-    onDelete: () => Promise<any>;
-    isNew: boolean;
-    translations: string;
-    onEditModeChange?: (isEditing: boolean) => void;
     isEditing?: boolean;
+    isNew: boolean;
+    title: string;
     permissions?: {
         edit?: boolean;
         delete?: boolean;
     };
+    onDelete: () => Promise<any>;
+    onEditModeChange?: (isEditing: boolean) => void;
 };
 
 export default PropTypes;

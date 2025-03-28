@@ -24,11 +24,11 @@ export const HiddenInputs = ({
                     }}
                 />
             ))}
-            {preferred.enabled && preferred.name && (
+            {preferred.enabled && preferred.id && (
                 <input
                     type="hidden"
                     name="images_preferred"
-                    value={preferred.name}
+                    value={preferred.id}
                 />
             )}
             {removedExternalImages.map((name) => (

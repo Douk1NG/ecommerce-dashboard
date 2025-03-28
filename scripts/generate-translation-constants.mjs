@@ -6,10 +6,10 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 function generateValues(json, section, prefix = '') {
   let output = '';
-  
+
   for (const [key, value] of Object.entries(json)) {
     const fullKey = prefix ? `${section}.${prefix}.${key}` : `${section}.${key}`;
-    
+
     if (typeof value === 'object') {
       output += `  ${key}: {\n`;
       output += generateValues(value, section, prefix ? `${prefix}.${key}` : key);
@@ -18,7 +18,7 @@ function generateValues(json, section, prefix = '') {
       output += `    ${key}: '${fullKey}',\n`;
     }
   }
-  
+
   return output;
 }
 

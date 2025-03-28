@@ -14,7 +14,8 @@ export const getCategories = async (query?: Query) => {
             path + queryString, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            cache: 'force-cache'
         })
 
         if (request.ok) {
@@ -35,7 +36,8 @@ export const getCategory = async (id: string) => {
             `${path}/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            cache: 'force-cache'
         })
         const { body } = await request.json()
         return body

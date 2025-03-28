@@ -16,13 +16,13 @@ import type { FormProps } from '@/types/form'
 const FormBuilder = ({
     fields,
     values,
-    translations,
+    module,
     action,
     onEditModeChange,
     isEditing,
     isCreating
 }: FormProps) => {
-    const t = useTranslations(translations)
+    const t = useTranslations(module)
 
     const {
         handleFieldChange,
@@ -60,7 +60,7 @@ const FormBuilder = ({
                             <Field
                                 {...item}
                                 label={t(item.label)}
-                                description={t(item.description)}
+                                description={item.description ? t(item.description) : undefined}
                                 value={state.data?.[item.name]}
                                 readOnly={isDetail}
                             />

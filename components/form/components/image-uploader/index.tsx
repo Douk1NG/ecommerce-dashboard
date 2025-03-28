@@ -57,7 +57,7 @@ export default function ImageUploader({
                 images={images}
                 preferred={{
                     enabled: preferred.enabled,
-                    name: preferredImageName
+                    id: preferredImageName
                 }}
             />
             {!readOnly && (

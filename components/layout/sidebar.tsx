@@ -9,13 +9,12 @@ import PropTypes from '@/types/sidebar';
 import { useSidebar } from '@/hooks/useSidebar';
 
 const Index = ({
-    title,
     children,
     isNew,
-    onDelete,
-    translations,
-    onEditModeChange,
     isEditing = false,
+    title,
+    onDelete,
+    onEditModeChange,
     permissions = {
         edit: true,
         delete: true

@@ -42,8 +42,8 @@ const CONSTANTS = {
         FILTERS: 'scheme.filters'
     },
     DESCRIPTION: {
-        NAME: 'description.name',
-        FILTERS: 'description.filters'
+        NAME: 'descriptions.name',
+        FILTERS: 'descriptions.filters'
     }
 }
 

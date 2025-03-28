@@ -90,7 +90,7 @@ export type Fields = Field[];
 export type FormProps = {
     fields: Fields;
     values: Record<string, unknown>;
-    translations: string;
+    module: string;
     action: (id: string | undefined, prevState: ActionResponse | null, formData: FormData) => Promise<ActionResponse>;
     onEditModeChange?: (editing: boolean) => void;
     isEditing?: boolean;

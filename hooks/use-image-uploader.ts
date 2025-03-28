@@ -2,19 +2,21 @@ import { useState, useCallback, useRef } from "react"
 import { isValidFileType } from "@/utils/file"
 import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/types/image-uploader"
 
-const getExternalImages = (value: UseImageUploaderProps['value']) => {
-    if(typeof value === 'string') {
+const getExternalImages = (images: UseImageUploaderProps['value']) => {
+    if(!images) return []
+
+    if(typeof images === 'string') {
         return [{
-            url: value,
-            name: value
+            url: images,
+            name: images
         }]
     }
 
-    if (value?.values.length) {
-        const urls = Array.isArray(value.values) ? value.values : [value.values]
-        return urls.map((url) => ({
-            url,
-            name: url
+    if (images?.values.length && Array.isArray(images?.values)) {
+        return images.values.map((item) => ({
+            url: item.path,
+            name: item.path,
+            id: item.id
         }))
     }
     return []

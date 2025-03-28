@@ -35,12 +35,12 @@ const CONSTANTS = {
         PARENT_ID: 'scheme.parent_id'
     },
     DESCRIPTION: {
-        DESCRIPTION: 'description.description',
-        FEATURED_CATEGORY: 'description.featured_category',
-        FILTERS: 'description.filters',
-        IMAGE: 'description.image',
-        NAME: 'description.name',
-        PARENT_ID: 'description.parent_id',
+        DESCRIPTION: 'descriptions.description',
+        FEATURED_CATEGORY: 'descriptions.featured_category',
+        FILTERS: 'descriptions.filters',
+        IMAGE: 'descriptions.image',
+        NAME: 'descriptions.name',
+        PARENT_ID: 'descriptions.parent_id',
     }
 }
 

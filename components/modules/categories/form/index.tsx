@@ -4,6 +4,7 @@ import SaveCategory, { DeleteCategory } from "@/actions/categories";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
 import CONSTANTS from "@/constants/categories";
+import translations from "@/constants/translations/categories";
 import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Category } from '@/types/categories';
 import type { Option } from '@/types/select';
@@ -25,14 +26,13 @@ export default function Form({ values, isNew, content }: FormProps) {
     }
 
     const hidratatedFields = fields(content)
-    const title = isNew ? CONSTANTS.SIDEBAR.ADD : isEditing ? CONSTANTS.SIDEBAR.EDIT : CONSTANTS.SIDEBAR.DETAIL
+    const title = isNew ? translations.sidebar.add : isEditing ? translations.sidebar.edit : translations.sidebar.detail
 
     return (
         <Sidebar
             title={title}
             onDelete={onDelete}
             isNew={isNew}
-            translations={CONSTANTS.NAMESPACE}
             onEditModeChange={handleEditModeChange}
             isEditing={isEditing}
         >
@@ -40,7 +40,7 @@ export default function Form({ values, isNew, content }: FormProps) {
                 action={SaveCategory}
                 fields={hidratatedFields}
                 values={values}
-                translations={CONSTANTS.NAMESPACE}
+                module={CONSTANTS.NAMESPACE}
                 isCreating={isNew}
                 isEditing={isEditing}
             />

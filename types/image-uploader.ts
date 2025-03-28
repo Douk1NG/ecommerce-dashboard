@@ -7,6 +7,11 @@ export type ExternalImage = {
     name: string
 }
 
+type preferred = {
+    enabled: boolean
+    id?: string
+}
+
 export type ImageUploaderHandlers = {
     files: (files: FileList) => void
     drag: (e: React.DragEvent<HTMLDivElement>) => void
@@ -20,9 +25,7 @@ export type ImageUploaderHandlers = {
 
 export type ImageCardProps = {
     image: ImageFile | ExternalImage;
-    preferred: {
-        enabled: boolean;
-    };
+    preferred: preferred;
     preferredImageName?: string;
     readOnly?: boolean;
     handlers: {
@@ -37,7 +40,10 @@ export type UseImageUploaderProps = {
     maxFiles: number
     maxFileSize: number
     value?: {
-        values: string[] | string
+        values: {
+            path: string
+            id: number
+        }[] | string
         preferred: string
     }
     readOnly?: boolean
@@ -47,17 +53,13 @@ export type ImageUploaderProps = {
     options?: {
         maxFiles?: number
         maxFileSize?: number
-        preferred?: {
-            enabled: boolean
-        }
+        preferred?: preferred
     }
 }
 
 export type ImageListProps = {
     images: (ImageFile | ExternalImage)[]
-    preferred: {
-        enabled: boolean
-    }
+    preferred: preferred
     preferredImageName?: string
     readOnly?: boolean
     handlers: {
@@ -70,10 +72,7 @@ export type ImageListProps = {
 export type HiddenInputsProps = {
     images: (ImageFile | ExternalImage)[]
     removedExternalImages: string[]
-    preferred: {
-        enabled: boolean
-        name?: string
-    }
+    preferred: preferred
 }
 
 export type DropZoneProps = {

@@ -16,7 +16,8 @@ export const getProducts = async (query?: Query) => {
 
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            cache: 'force-cache'
         })
 
         if (request.ok) {
@@ -76,7 +77,7 @@ export const getProduct = async (id: string) => {
             `${path}/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
         })
 
         if (request.ok) {
