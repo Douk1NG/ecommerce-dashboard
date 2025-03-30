@@ -7,7 +7,11 @@ type Params = {
 
 export type BaseLayoutProps = {
     children: React.ReactNode
-    params: Promise<Params>
+    params: Promise<{
+        locale: string
+        id?: string
+        searchParams?: { [key: string]: string | string[] | undefined }
+    }>
 }
 
 export type LayoutProps = BaseLayoutProps & {
@@ -16,11 +20,14 @@ export type LayoutProps = BaseLayoutProps & {
 
 export type GenerateMetadataProps = LayoutProps
 
-export type PageProps = {
-    params: Promise<{
-        id: string
+export type PageProps = BaseLayoutProps
+
+export type PagePropsClient = BaseLayoutProps & {
+    params: {
         locale: string
-    }>
+        id?: string
+        searchParams?: { [key: string]: string | string[] | undefined }
+    }
 }
 
 export type StaticPageProps = {

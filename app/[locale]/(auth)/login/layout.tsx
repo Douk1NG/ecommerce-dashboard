@@ -1,7 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/constants/login";
-import { default as LIB_CONSTANTS } from "@/constants/layout";
-
+import translations from "@/constants/translations/login";
 import type { Metadata } from "next/types";
 import type { BaseLayoutProps } from "@/types/layout";
 
@@ -15,13 +13,12 @@ export async function generateMetadata(
     } = params;
 
     const t = await getTranslations({
-        locale,
-        namespace: CONSTANTS.NAMESPACE
+        locale
     });
 
     return {
-        title: t(LIB_CONSTANTS.METADATA.TITLE),
-        description: t(LIB_CONSTANTS.METADATA.DESCRIPTION)
+        title: t(translations.metadata.title),
+        description: t(translations.metadata.description)
     };
 }
 

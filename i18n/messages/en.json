@@ -166,6 +166,12 @@
       "item": "Item"
     }
   },
+  "login": {
+    "metadata": {
+      "title": "Login",
+      "description": "Login to your account"
+    }
+  },
   "orders": {
     "metadata": {
       "title": "Orders",

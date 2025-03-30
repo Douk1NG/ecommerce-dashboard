@@ -166,6 +166,12 @@
       "item": "Elemento"
     }
   },
+  "login": {
+    "metadata": {
+      "title": "Iniciar sesión",
+      "description": "Inicia sesión en tu cuenta"
+    }
+  },
   "orders": {
     "metadata": {
       "title": "Pedidos",

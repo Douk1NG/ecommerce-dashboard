@@ -1,13 +1,17 @@
 import { PageProps } from "@/types/layout"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { handleLogin } from "./actions"
+import SubmitButton from "@/components/modules/login/SubmitButton"
 
 export default async function Page(props: PageProps) {
-    const { locale } = await props.params
+    const { locale, searchParams } = await props.params
+    const error = searchParams?.error
 
-    const submitUser = async (formData: FormData) => {
-        'use server'
-    }
+    const errorMessage = error === 'missing_credentials'
+        ? 'Email and password are required'
+        : error === 'invalid_credentials'
+            ? 'Invalid email or password'
+            : null
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -15,7 +19,12 @@ export default async function Page(props: PageProps) {
                 <div className="text-center">
                     <h2 className="text-2xl font-semibold text-gray-900">Login</h2>
                 </div>
-                <form className="space-y-4" action={submitUser}>
+                {errorMessage && (
+                    <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
+                        {errorMessage}
+                    </div>
+                )}
+                <form className="space-y-4" action={handleLogin}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email
@@ -42,12 +51,7 @@ export default async function Page(props: PageProps) {
                             className="mt-1"
                         />
                     </div>
-                    <Button
-                        type="submit"
-                        className="w-full bg-black text-white hover:bg-gray-800 transition-colors"
-                    >
-                        Sign in
-                    </Button>
+                    <SubmitButton />
                 </form>
                 <div className="text-center text-sm">
                     <a href="#" className="text-gray-600 hover:text-gray-900">
@@ -57,4 +61,4 @@ export default async function Page(props: PageProps) {
             </div>
         </div>
     )
-}
+} 
