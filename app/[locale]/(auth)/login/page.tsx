@@ -1,17 +1,21 @@
+'use client'
 import { PageProps } from "@/types/layout"
 import { Input } from "@/components/ui/input"
 import { handleLogin } from "./actions"
 import SubmitButton from "@/components/modules/login/SubmitButton"
 
-export default async function Page(props: PageProps) {
-    const { locale, searchParams } = await props.params
-    const error = searchParams?.error
+export default function Page(props: PageProps) {
+    console.log(props)
+
+    const error = ''
 
     const errorMessage = error === 'missing_credentials'
         ? 'Email and password are required'
         : error === 'invalid_credentials'
             ? 'Invalid email or password'
             : null
+
+    console.log(errorMessage)
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">

@@ -27,6 +27,7 @@ import { useIntlText } from "@/hooks/use-intl-text"
 import { useParams, useRouter } from "next/navigation"
 import { usePathname } from "@/i18n/routing"
 import { cleanSplit } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 type options = {
     selection?: "single" | "none"
@@ -57,11 +58,28 @@ export default function DataTable<TData, TValue>({
     } = mergedOptions
     const isSelectable = selection !== "none"
 
+    // Add row selection state management
+    // BUG: This state is NOT cleared when data prop changes
+    const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({})
+
+    // Clear selections when data changes (e.g., category filter changes)
+    useEffect(() => {
+        setRowSelection({})
+    }, [data])
+
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        // Enable row selection
+        enableRowSelection: true,
+        state: {
+            rowSelection,
+        },
+        onRowSelectionChange: setRowSelection,
+        // Configure row ID for stable identity
+        getRowId: (row) => String((row as Record<string, unknown>).id),
     })
 
     const detail = useIntlText(tableTranslations.detail) as string

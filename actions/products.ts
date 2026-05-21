@@ -1,7 +1,7 @@
 'use server'
 
 import productSchema from '@/schemas/products'
-import { deleteProduct, save as saveService } from '@/services/products'
+import { deleteProduct, save as saveService, getProduct } from '@/services/products'
 import { revalidatePath } from 'next/cache'
 
 import type { ActionResponse } from '@/types/form'
@@ -26,6 +26,9 @@ export default async function SaveProduct(
     prevState: ActionResponse | null,
     formData: FormData
 ): Promise<ActionResponse> {
+    // Retrieve existing product data when editing to preserve main image
+    const existingProduct = id ? await getProduct(id) : null
+
     const rawData = {
         id: id ? Number(id) : undefined,
         name: formData.get('name'),
@@ -41,7 +44,7 @@ export default async function SaveProduct(
             }
         }).filter((it: FilterCombination) => it.price !== undefined),
         images: formData.getAll('images'),
-        images_preferred: formData.get('images_preferred'),
+        images_preferred: formData.get('images_preferred') ?? (existingProduct?.images_preferred || null),
         images_removed: formData.getAll('images_removed'),
         active: safeParseBoolean(formData.get('active')),
 
@@ -64,7 +67,12 @@ export default async function SaveProduct(
     formData.set('categories', JSON.stringify(rawData.categories.map((it: string) => Number(it))))
     formData.set('filter_combinations', JSON.stringify(rawData.filter_combinations))
     formData.set('price', rawData.price.toString())
-    formData.set('main_image', rawData.images_preferred)
+    
+    // Only set main_image if images_preferred has a value
+    if (rawData.images_preferred) {
+        formData.set('main_image', rawData.images_preferred)
+    }
+    
     formData.set('active', rawData.active ? '1' : '0')
     formData.set('featured_product', rawData.featured_product ? '1' : '0')
 

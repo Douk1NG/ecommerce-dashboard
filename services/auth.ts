@@ -14,22 +14,30 @@ export type AuthResponse = {
 
 export const login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
     try {
-        const response = await fetch(`${API_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
+        // const response = await fetch(`${API_URL}/auth/login`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json',
+        //     },
+        //     body: JSON.stringify(credentials),
+        // })
+
+        // if (!response.ok) {
+        //     throw new Error('Invalid credentials')
+        // }
+
+        // const data = await response.json()
+        // return data
+        return {
+            user: {
+                username: 'John Doe',
+                email: 'john.doe@example.com',
             },
-            body: JSON.stringify(credentials),
-        })
-
-        if (!response.ok) {
-            throw new Error('Invalid credentials')
+            token: '1234567890',
         }
-
-        const data = await response.json()
-        return data
     } catch (error) {
+        console.log(error)
         throw error
     }
 }
