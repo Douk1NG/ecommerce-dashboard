@@ -1,4 +1,4 @@
-import { PageProps } from "@/types/layout"
+import { PageProps } from "@/src/shared/types/layout"
 
 export default async function Page(props: PageProps) {
     return (

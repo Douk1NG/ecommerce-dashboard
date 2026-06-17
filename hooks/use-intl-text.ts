@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { IntlTextProps } from "@/types/intl";
+import type { IntlTextProps } from "@/src/shared/types/intl";
 
 type TranslationKeys = Record<string, string>;
 type TranslationParams = Record<string, IntlTextProps['params']>;
@@ -14,7 +14,8 @@ export function useIntlText(
 
     // Handle single translation (backward compatibility)
     if (typeof valueOrKeys === 'string') {
-        return t(valueOrKeys, { params: params as IntlTextProps['params'] });
+        const translationParams = params as IntlTextProps['params'];
+        return translationParams ? t(valueOrKeys, { params: translationParams }) : t(valueOrKeys);
     }
 
     // Handle multiple translations
@@ -24,9 +25,8 @@ export function useIntlText(
         if (!translationKey) {
             translations[key] = '';
         } else {
-            translations[key] = t(translationKey, {
-                params: (params as TranslationParams)?.[key]
-            });
+            const keyParams = (params as TranslationParams)?.[key];
+            translations[key] = keyParams ? t(translationKey, { params: keyParams }) : t(translationKey);
         }
     });
 

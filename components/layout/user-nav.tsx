@@ -17,8 +17,6 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import LayoutTranslations from "@/constants/translations/layout";
-
 const user = {
     "username": "username",
     "email": "example@email.com",
@@ -31,7 +29,7 @@ const UserNav = () => {
             <DropdownMenuTrigger asChild>
                 <div className="flex gap-2">
                     <IntlButton
-                        title={LayoutTranslations.navbar.user.profile}
+                        title="layout.navbar.user.profile"
                         variant="ghost"
                         className="relative h-8 w-8 aspect-square"
                     >
@@ -55,7 +53,7 @@ const UserNav = () => {
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
                         <IntlText
-                            value={LayoutTranslations.navbar.user.profile}
+                            value="layout.navbar.user.profile"
                         />
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
@@ -63,7 +61,7 @@ const UserNav = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <IntlText
-                        value={LayoutTranslations.navbar.user.logout}
+                        value="layout.navbar.user.logout"
                     />
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>

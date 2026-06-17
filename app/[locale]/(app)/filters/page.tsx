@@ -1,4 +1,4 @@
-import Layout from "@/components/modules/filters"
+import Layout from "@/src/features/filters/components/FilterLayout"
 
 export default async function Page() {
     return <Layout />

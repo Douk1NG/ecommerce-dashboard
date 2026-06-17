@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import translations from "@/constants/translations/products";
 import type { Metadata } from "next/types";
-import type { LayoutProps } from "@/types/layout";
+import type { LayoutProps } from "@/src/shared/types/layout";
 
 export async function generateMetadata(
     props: LayoutProps
@@ -17,8 +16,8 @@ export async function generateMetadata(
     });
 
     return {
-        title: t(translations.layout.title),
-        description: t(translations.layout.description)
+        title: t('products.layout.title'),
+        description: t('products.layout.description')
     };
 }
 

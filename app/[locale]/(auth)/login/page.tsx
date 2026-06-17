@@ -1,5 +1,5 @@
 'use client'
-import { PageProps } from "@/types/layout"
+import { PageProps } from "@/src/shared/types/layout"
 import { Input } from "@/components/ui/input"
 import { handleLogin } from "./actions"
 import SubmitButton from "@/components/modules/login/SubmitButton"
@@ -7,7 +7,7 @@ import SubmitButton from "@/components/modules/login/SubmitButton"
 export default function Page(props: PageProps) {
     console.log(props)
 
-    const error = ''
+    const error: string = ''
 
     const errorMessage = error === 'missing_credentials'
         ? 'Email and password are required'

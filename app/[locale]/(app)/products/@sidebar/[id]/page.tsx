@@ -1,16 +1,16 @@
-import LayoutConstants from "@/constants/layout";
-import Layout from "@/components/modules/products/form";
+import LayoutConstants from "@/src/shared/constants/layout";
+import Layout from "@/src/features/products/components/ProductForm";
 
 import {
     getProduct,
-} from "@/services/products";
+} from "@/src/features/products/productServices";
 
 import {
     getCategories
-} from "@/services/categories";
+} from "@/src/features/categories/categoryServices";
 
-import type { PageProps } from "@/types/layout";
-import type { Category } from "@/types/categories";
+import type { PageProps } from "@/src/shared/types/layout";
+import type { Category } from "@/src/shared/types/categories";
 
 export default async function Page(
     { params }: PageProps
@@ -18,8 +18,8 @@ export default async function Page(
     const { id } = await params
     const isNew = id === LayoutConstants.LAYOUT.NEW
 
-    const product = !isNew ? await getProduct(id) : undefined
-    const filterCombinations = product?.categories?.map((category: Category) => category.filters).flat() ?? []
+    const product = !isNew && id ? await getProduct(id) : undefined
+    const filterCombinations = product?.categories?.map((category: Category) => (category as Record<string, unknown>)['filters']).flat() ?? []
 
     const content = {
         categories: await getCategories({

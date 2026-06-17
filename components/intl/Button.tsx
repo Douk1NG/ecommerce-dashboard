@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import IntlText from '@/components/intl/Text'
 import { useIntlText } from '@/hooks/use-intl-text'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/src/shared/lib/utils'
 import {
     Tooltip,
     TooltipContent,
@@ -10,7 +10,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-import type { IntlButtonProps } from '@/types/intl'
+import type { IntlButtonProps } from '@/src/shared/types/intl'
 
 export default function IntlButton({
     tooltip = false,
@@ -28,7 +28,7 @@ export default function IntlButton({
                     <BaseButton {...props} />
                 </TooltipTrigger>
                 <TooltipContent>
-                    <IntlText value={props.title} />
+                    {props.title && <IntlText value={props.title} />}
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
@@ -52,7 +52,7 @@ const BaseButton = ({
         >
             <div className='flex items-center gap-2'>
                 {children}
-                {text && <IntlText value={title} />}
+                {text && title && <IntlText value={title} />}
             </div>
         </Button>
     )

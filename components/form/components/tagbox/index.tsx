@@ -1,11 +1,10 @@
 'use client'
-import CONSTANTS from '@/constants/translations/layout'
 import { Input } from '@/components/ui/input'
 import Icon from '@/components/layout/icon'
 import { useTagbox } from '@/hooks/use-tagbox'
 import IntlButton from '@/components/intl/Button'
-import type { TagboxField } from '@/types/form'
-import type { Tag } from '@/types/tagbox'
+import type { TagboxField } from '@/src/shared/types/form'
+import type { Tag } from '@/src/shared/types/tagbox'
 
 export default function Tagbox({
     name,
@@ -13,7 +12,6 @@ export default function Tagbox({
     placeholder = '',
     readOnly = false
 }: TagboxField) {
-    const translations = CONSTANTS.form.tagbox
     const {
         tags,
         inputValue,
@@ -23,6 +21,11 @@ export default function Tagbox({
         addTag,
         removeTag
     } = useTagbox(value as Tag[])
+
+    const translations = {
+        add: 'Add',
+        remove: 'Remove'
+    }
 
     return (
         <div className="space-y-4">

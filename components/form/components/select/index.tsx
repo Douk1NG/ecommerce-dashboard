@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
-import { useInheritanceContext } from '@/context/InheritanceProvider'
-import type { SelectField } from "@/types/form"
-import type { Option } from '@/types/select'
+import { useInheritanceContext } from '@/src/shared/context/InheritanceProvider'
+import type { SelectField } from "@/src/shared/types/form"
+import type { Option } from '@/src/shared/types/select'
 
 const Select = dynamic(() => import('react-select'), { ssr: false })
 
@@ -22,10 +22,10 @@ const Component = ({
 
     return (
         <Select
-            id={name}
+            {...(name ? { id: name } : {})}
             options={options}
-            defaultValue={defaultValue}
-            name={name}
+            {...(defaultValue !== undefined ? { defaultValue } : {})}
+            {...(name ? { name } : {})}
             placeholder={placeholder}
             className='select-tw-fix'
             isClearable={true}

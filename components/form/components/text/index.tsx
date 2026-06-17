@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input"
-import { TextField } from "@/types/form"
+import { TextField } from "@/src/shared/types/form"
 
 const Component = (props: TextField) => {
     return (

@@ -10,7 +10,7 @@ import GroupInventory from "./components/group/inventory";
 import GroupProduct from "./components/group/product";
 import Number from "./components/number";
 import { Label } from "@/components/ui/label";
-import type { Field } from "@/types/form";
+import type { Field } from "@/src/shared/types/form";
 import type { JSX } from "react";
 
 const Components = {

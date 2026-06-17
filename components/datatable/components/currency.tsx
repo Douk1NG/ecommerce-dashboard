@@ -1,8 +1,8 @@
 import {
     safeParseFloat
-} from "@/utils/safeParse"
+} from "@/src/shared/utils/safeParse"
 
-import type { CurrencyProps } from "@/types/table"
+import type { CurrencyProps } from "@/src/shared/types/table"
 
 const Currency = <TData,>({row, name}: CurrencyProps<TData>) => {
     const value = row.getValue(name)

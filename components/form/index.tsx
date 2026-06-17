@@ -4,14 +4,14 @@ import { useFormState } from '@/hooks/use-form-state'
 import { useFormFields } from '@/hooks/use-form-fields'
 import { useTranslations } from 'next-intl'
 
-import { InheritanceProvider } from '@/context/InheritanceProvider'
+import { InheritanceProvider } from '@/src/shared/context/InheritanceProvider'
 
 import Field from '@/components/form/field'
 import FormAlert from './alert'
 import FormSubmitButton from './submit'
 import FieldError from './field-error'
 
-import type { FormProps } from '@/types/form'
+import type { FormProps } from '@/src/shared/types/form'
 
 const FormBuilder = ({
     fields,
@@ -60,12 +60,12 @@ const FormBuilder = ({
                             <Field
                                 {...item}
                                 label={t(item.label)}
-                                description={item.description ? t(item.description) : undefined}
+                                {...(item.description ? { description: t(item.description) } : {})}
                                 value={state.data?.[item.name]}
                                 readOnly={isDetail}
                             />
                             <FieldError
-                                error={state?.errors?.[item.name]?.at(0)}
+                                {...(state?.errors?.[item.name]?.at(0) ? { error: state.errors[item.name]?.[0] ?? '' } : {})}
                             />
                         </div>
                     )

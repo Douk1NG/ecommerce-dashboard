@@ -1,5 +1,5 @@
 import { Switch } from '@/components/ui/switch';
-import type { SwitchField } from '@/types/form';
+import type { SwitchField } from '@/src/shared/types/form';
 
 export default function Component(props: SwitchField) {
     const value = props.defaultValue ?? props.value;

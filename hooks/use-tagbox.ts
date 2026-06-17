@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react'
 import { useToast } from '@/hooks/use-toast'
-import { useIntlText } from '@/hooks/use-intl-text'
-import CONSTANTS from '@/constants/translations/layout'
-import type { Tag } from '@/types/tagbox'
+import { useTranslations } from 'next-intl'
+import type { Tag } from '@/src/shared/types/tagbox'
 
 export const useTagbox = (initialTags: Tag[] = []) => {
     const { toast } = useToast()
+    const t = useTranslations()
     const [tags, setTags] = useState<Tag[]>(initialTags)
     const [inputValue, setInputValue] = useState('')
 
@@ -19,17 +19,12 @@ export const useTagbox = (initialTags: Tag[] = []) => {
     }), [])
 
     const showDuplicateError = useCallback(() => {
-        const translations = useIntlText({
-            title: CONSTANTS.form.tagbox.validation.unique.title,
-            description: CONSTANTS.form.tagbox.validation.unique.description
-        }) as Record<string, string>;
-
         toast({
-            title: translations.title,
-            description: translations.description,
+            title: t('layout.form.tagbox.validation.unique.title'),
+            description: t('layout.form.tagbox.validation.unique.description'),
             variant: 'destructive',
         })
-    }, [toast])
+    }, [toast, t])
 
     const addTag = useCallback(() => {
         const trimmedValue = inputValue.trim()

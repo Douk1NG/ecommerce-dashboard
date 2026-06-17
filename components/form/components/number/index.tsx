@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input"
-import { NumberField } from "@/types/form"
+import { NumberField } from "@/src/shared/types/form"
 
 const Component = (props: NumberField) => {
     return (

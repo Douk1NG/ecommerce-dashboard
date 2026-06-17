@@ -1,4 +1,4 @@
-import { Icons } from "@/types/icon";
+import { Icons } from "@/src/shared/types/icon";
 import { ComponentProps, Suspense } from "react";
 import { useIcon } from "@/hooks/use-icon";
 

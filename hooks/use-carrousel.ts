@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import type { CarouselImage } from "@/types/image-uploader"
+import type { CarouselImage } from "@/src/shared/types/image-uploader"
 
 export function useCarousel(images: CarouselImage[], onClose: () => void, initialIndex: number) {
     const [currentIndex, setCurrentIndex] = useState(initialIndex)

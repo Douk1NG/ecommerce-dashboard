@@ -125,7 +125,7 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
     expect(desktopTable).toBeInTheDocument()
 
     // Verify initial render
-    const initialRows = within(desktopTable!).getAllByRole('row')
+    const initialRows = within(desktopTable! as HTMLElement).getAllByRole('row')
     expect(initialRows.length).toBe(6) // 1 header + 5 data rows
 
     // BUG SCENARIO:
@@ -166,12 +166,12 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
     
     // The remaining products should be visible
     const updatedDesktopTable = container.querySelector('.md\\:block')
-    const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+    const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
     expect(updatedRows.length).toBe(4) // 1 header + 3 data rows
     
-    expect(within(updatedDesktopTable!).getByText(/Product 1/)).toBeInTheDocument()
-    expect(within(updatedDesktopTable!).getByText(/Product 3/)).toBeInTheDocument()
-    expect(within(updatedDesktopTable!).getByText(/Product 4/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 1/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 3/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 4/)).toBeInTheDocument()
     
     // This test passes because it only verifies the visible products.
     // The actual bug (orphaned selection state) is internal to the DataTable component.
@@ -217,7 +217,7 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
 
           // Filter products by active categories
           const filteredProducts = initialProducts.filter((p) =>
-            p.categories.some((cat) => activeCategories.includes(cat))
+            p.categories.some((cat) => activeCategories.includes(cat as any))
           )
 
           // Only test when we actually filter out some products (bug condition)
@@ -237,7 +237,7 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
           )
 
           const desktopTable = container.querySelector('.md\\:block')
-          const initialRows = within(desktopTable!).getAllByRole('row')
+          const initialRows = within(desktopTable! as HTMLElement).getAllByRole('row')
           const initialRowCount = initialRows.length
 
           // Re-render with filtered data (simulating category filter change)
@@ -254,7 +254,7 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
           // Bug: Selection state is not cleared when data changes
           
           const updatedDesktopTable = container.querySelector('.md\\:block')
-          const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+          const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
           const updatedRowCount = updatedRows.length
           
           // Verify that the row count changed (some products were filtered out)
@@ -300,13 +300,13 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
 
     // Get the desktop table view
     const desktopTable = container.querySelector('.md\\:block')
-    const initialRows = within(desktopTable!).getAllByRole('row')
+    const initialRows = within(desktopTable! as HTMLElement).getAllByRole('row')
 
     // All products should be visible initially
     expect(initialRows.length).toBe(4) // 1 header + 3 data rows
-    expect(within(desktopTable!).getByText(/Product 101/)).toBeInTheDocument()
-    expect(within(desktopTable!).getByText(/Product 102/)).toBeInTheDocument()
-    expect(within(desktopTable!).getByText(/Product 103/)).toBeInTheDocument()
+    expect(within(desktopTable! as HTMLElement).getByText(/Product 101/)).toBeInTheDocument()
+    expect(within(desktopTable! as HTMLElement).getByText(/Product 102/)).toBeInTheDocument()
+    expect(within(desktopTable! as HTMLElement).getByText(/Product 103/)).toBeInTheDocument()
 
     // Simulate user selecting Product 102 (from Clothing category)
     const product102Row = initialRows.find(row => row.textContent?.includes('Product 102'))
@@ -335,11 +335,11 @@ describe('Bug Condition Exploration: Category Deselection Issue', () => {
     
     // Products 101 and 103 should still be visible
     const updatedDesktopTable = container.querySelector('.md\\:block')
-    const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+    const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
     expect(updatedRows.length).toBe(3) // 1 header + 2 data rows
     
-    expect(within(updatedDesktopTable!).getByText(/Product 101/)).toBeInTheDocument()
-    expect(within(updatedDesktopTable!).getByText(/Product 103/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 101/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 103/)).toBeInTheDocument()
 
     // BUG DEMONSTRATION:
     // Once row selection is implemented in the DataTable component:
@@ -400,7 +400,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Get the desktop table view
     const desktopTable = container.querySelector('.md\\:block')
-    const rows = within(desktopTable!).getAllByRole('row')
+    const rows = within(desktopTable! as HTMLElement).getAllByRole('row')
 
     // Click on Product 1
     const product1Row = rows.find(row => row.textContent?.includes('Product 1'))
@@ -453,7 +453,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Verify initial render
     const desktopTable = container.querySelector('.md\\:block')
-    const initialRows = within(desktopTable!).getAllByRole('row')
+    const initialRows = within(desktopTable! as HTMLElement).getAllByRole('row')
     expect(initialRows.length).toBe(4) // 1 header + 3 data rows
 
     // Change filters (no products selected)
@@ -472,11 +472,11 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Verify filtered render
     const updatedDesktopTable = container.querySelector('.md\\:block')
-    const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+    const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
     expect(updatedRows.length).toBe(2) // 1 header + 1 data row
     
     // Verify the correct product is displayed
-    expect(within(updatedDesktopTable!).getByText(/Product 1/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 1/)).toBeInTheDocument()
     expect(screen.queryByText(/Product 2/)).not.toBeInTheDocument()
     expect(screen.queryByText(/Product 3/)).not.toBeInTheDocument()
   })
@@ -530,7 +530,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
           expect(desktopTable).toBeInTheDocument()
 
           // Verify correct number of rows (header + data rows, limited by pagination)
-          const rows = within(desktopTable!).getAllByRole('row')
+          const rows = within(desktopTable! as HTMLElement).getAllByRole('row')
           const expectedRows = Math.min(products.length, 10) + 1 // +1 for header, max 10 data rows
           expect(rows.length).toBe(expectedRows)
 
@@ -568,12 +568,12 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
     // Verify desktop table shows empty message
     const desktopTable = container.querySelector('.md\\:block')
     expect(desktopTable).toBeInTheDocument()
-    expect(within(desktopTable!).getByText(/table.empty/)).toBeInTheDocument()
+    expect(within(desktopTable! as HTMLElement).getByText(/table.empty/)).toBeInTheDocument()
 
     // Verify mobile view shows empty message
     const mobileView = container.querySelector('.md\\:hidden')
     expect(mobileView).toBeInTheDocument()
-    expect(within(mobileView!).getByText(/table.empty/)).toBeInTheDocument()
+    expect(within(mobileView! as HTMLElement).getByText(/table.empty/)).toBeInTheDocument()
   })
 
   /**
@@ -607,7 +607,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Get the desktop table view
     const desktopTableWithSelection = containerWithSelection.querySelector('.md\\:block')
-    const rowsWithSelection = within(desktopTableWithSelection!).getAllByRole('row')
+    const rowsWithSelection = within(desktopTableWithSelection! as HTMLElement).getAllByRole('row')
 
     // Click on Product 1 - should trigger navigation
     const product1RowWithSelection = rowsWithSelection.find(row => row.textContent?.includes('Product 1'))
@@ -629,7 +629,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Verify that rows don't have cursor-pointer class when selection is disabled
     const desktopTableNoSelection = containerNoSelection.querySelector('.md\\:block')
-    const rowsNoSelection = within(desktopTableNoSelection!).getAllByRole('row')
+    const rowsNoSelection = within(desktopTableNoSelection! as HTMLElement).getAllByRole('row')
     
     // Data rows should not have cursor-pointer class
     const dataRows = rowsNoSelection.slice(1) // Skip header row
@@ -678,7 +678,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
           // Get initial row count
           const desktopTable = container.querySelector('.md\\:block')
-          const initialRows = within(desktopTable!).getAllByRole('row')
+          const initialRows = within(desktopTable! as HTMLElement).getAllByRole('row')
           const initialRowCount = initialRows.length
 
           // Re-render with the SAME data
@@ -693,12 +693,12 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
           // Verify row count is unchanged
           const updatedDesktopTable = container.querySelector('.md\\:block')
-          const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+          const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
           expect(updatedRows.length).toBe(initialRowCount)
 
           // Verify all products are still visible
           products.forEach((product) => {
-            expect(within(updatedDesktopTable!).getByText(`Product ${product.id}`)).toBeInTheDocument()
+            expect(within(updatedDesktopTable! as HTMLElement).getByText(`Product ${product.id}`)).toBeInTheDocument()
           })
 
           return true
@@ -737,7 +737,7 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Get the desktop table view
     const desktopTable = container.querySelector('.md\\:block')
-    const rows = within(desktopTable!).getAllByRole('row')
+    const rows = within(desktopTable! as HTMLElement).getAllByRole('row')
 
     // Click on Product 1
     const product1Row = rows.find(row => row.textContent?.includes('Product 1'))
@@ -759,12 +759,12 @@ describe('Preservation Property: Selection Behavior Without Filter Changes', () 
 
     // Verify all products are still visible
     const updatedDesktopTable = container.querySelector('.md\\:block')
-    expect(within(updatedDesktopTable!).getByText(/Product 1/)).toBeInTheDocument()
-    expect(within(updatedDesktopTable!).getByText(/Product 2/)).toBeInTheDocument()
-    expect(within(updatedDesktopTable!).getByText(/Product 3/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 1/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 2/)).toBeInTheDocument()
+    expect(within(updatedDesktopTable! as HTMLElement).getByText(/Product 3/)).toBeInTheDocument()
 
     // Verify navigation still works
-    const updatedRows = within(updatedDesktopTable!).getAllByRole('row')
+    const updatedRows = within(updatedDesktopTable! as HTMLElement).getAllByRole('row')
     const product2Row = updatedRows.find(row => row.textContent?.includes('Product 2'))
     await user.click(product2Row!)
     

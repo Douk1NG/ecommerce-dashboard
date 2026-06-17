@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react"
-import { isValidFileType } from "@/utils/file"
-import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/types/image-uploader"
+import { isValidFileType } from "@/src/shared/utils/file"
+import { UseImageUploaderProps, ImageFile, ExternalImage } from "@/src/shared/types/image-uploader"
 
 const getExternalImages = (images: UseImageUploaderProps['value']) => {
     if(!images) return []

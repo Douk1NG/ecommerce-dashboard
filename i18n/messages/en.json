@@ -19,6 +19,7 @@
       "description": "Check the categories of products available in the store"
     },
     "scheme": {
+      "id": "ID",
       "name": "Name",
       "subcategories": "Subcategories",
       "filters": "Filters",
@@ -48,6 +49,7 @@
       "description": "Check the filters available in the store"
     },
     "scheme": {
+      "id": "ID",
       "name": "Name",
       "filters": "Filters"
     },
@@ -67,6 +69,7 @@
       "description": "Check the inventory available in the store"
     },
     "scheme": {
+      "id": "ID",
       "product": "Product",
       "quantity": "Quantity",
       "price": "Price"
@@ -178,6 +181,42 @@
       "description": "Check the orders placed in the store"
     }
   },
+  "outflow": {
+    "descriptions": {
+      "id": "Set the outflow ID.",
+      "product": "Set the product for the outflow.",
+      "quantity": "Set the quantity for the outflow.",
+      "unit_price": "Set the unit price for the outflow.",
+      "total_price": "Set the total price for the outflow.",
+      "reason": "Set the reason for the outflow.",
+      "date": "Set the date for the outflow.",
+      "combinations": "Set the combinations for the outflow."
+    },
+    "layout": {
+      "add": "Add outflow",
+      "title": "Outflow",
+      "description": "Outflow description"
+    },
+    "metadata": {
+      "title": "Outflow",
+      "description": "Check the outflow records in the store"
+    },
+    "scheme": {
+      "id": "ID",
+      "product": "Product",
+      "quantity": "Quantity",
+      "unit_price": "Unit price",
+      "total_price": "Total price",
+      "reason": "Reason",
+      "date": "Date",
+      "combinations": "Combinations"
+    },
+    "sidebar": {
+      "add": "Add outflow",
+      "edit": "Edit outflow",
+      "detail": "Outflow details"
+    }
+  },
   "products": {
     "descriptions": {
       "name": "Set the product name.",
@@ -202,6 +241,7 @@
       "description": "Check the products available in the store"
     },
     "scheme": {
+      "id": "ID",
       "name": "Name",
       "description": "Description",
       "price": "Price",

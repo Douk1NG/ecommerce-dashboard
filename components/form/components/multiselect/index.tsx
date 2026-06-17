@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic'
 import { useRef, useCallback } from 'react'
-import { useInheritanceContext } from '@/context/InheritanceProvider'
+import { useInheritanceContext } from '@/src/shared/context/InheritanceProvider'
 import { useDebouncedCallback } from 'use-debounce'
 import { useFieldInheritance } from '@/hooks/use-field-inheritance'
 
-import type { MultiselectField } from '@/types/form'
+import type { MultiselectField } from '@/src/shared/types/form'
 
 const Multiselect = dynamic(() => import('react-select'), { ssr: false })
 
@@ -38,7 +38,7 @@ export default function Component({
 
     return (
         <Multiselect
-            id={id}
+            {...(id ? { id } : {})}
             ref={selectRef}
             placeholder={placeholder}
             defaultValue={value}
@@ -49,7 +49,7 @@ export default function Component({
             closeMenuOnSelect={true}
             onChange={handleChange}
             isDisabled={readOnly}
-            name={name}
+            {...(name ? { name } : {})}
         />
     )
 }

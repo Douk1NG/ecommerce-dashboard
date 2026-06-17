@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import translations from "@/constants/translations/login";
 import type { Metadata } from "next/types";
-import type { BaseLayoutProps } from "@/types/layout";
+import type { BaseLayoutProps } from "@/src/shared/types/layout";
 
 export async function generateMetadata(
     props: BaseLayoutProps
@@ -17,8 +16,8 @@ export async function generateMetadata(
     });
 
     return {
-        title: t(translations.metadata.title),
-        description: t(translations.metadata.description)
+        title: t('login.metadata.title'),
+        description: t('login.metadata.description')
     };
 }
 

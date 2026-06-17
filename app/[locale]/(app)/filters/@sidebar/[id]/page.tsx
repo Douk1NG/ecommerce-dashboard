@@ -1,11 +1,11 @@
-import LayoutConstants from "@/constants/layout";
-import Form from "@/components/modules/filters/form";
+import LayoutConstants from "@/src/shared/constants/layout";
+import Form from "@/src/features/filters/components/FilterForm";
 
 import {
     getFilter
-} from "@/services/filters";
+} from "@/src/features/filters/filterServices";
 
-import type { PageProps } from "@/types/layout";
+import type { PageProps } from "@/src/shared/types/layout";
 
 export default async function Page(
     { params }: PageProps
@@ -13,7 +13,7 @@ export default async function Page(
     const { id } = await params
     const isNew = id === LayoutConstants.LAYOUT.NEW
 
-    const filter = !isNew ? await getFilter(id) : undefined
+    const filter = !isNew && id ? await getFilter(id) : undefined
 
     return (
         <Form

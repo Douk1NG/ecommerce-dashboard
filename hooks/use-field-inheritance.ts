@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useInheritanceContext } from '@/context/InheritanceProvider'
+import { useInheritanceContext } from '@/src/shared/context/InheritanceProvider'
 
 type InheritanceConfig = {
     field: string

@@ -1,4 +1,4 @@
-import { Icons } from "@/types/icon";
+import { Icons } from "@/src/shared/types/icon";
 import { lazy } from "react";
 
 const cachedIcons = {} as Record<Icons, React.LazyExoticComponent<any>>;

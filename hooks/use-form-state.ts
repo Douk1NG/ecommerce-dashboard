@@ -1,7 +1,7 @@
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from '@/hooks/use-toast'
-import type { ActionResponse } from '@/types/form'
+import type { ActionResponse } from '@/src/shared/types/form'
 
 export function useFormState(
     action: any,
@@ -10,7 +10,7 @@ export function useFormState(
     isEditing?: boolean,
     isCreating?: boolean
 ) {
-    const actionWithId = action.bind(null, values?.id as string)
+    const actionWithId = action.bind(null, values?.['id'] as string)
     const router = useRouter()
     const isDetail = !isEditing && !isCreating
     const [
@@ -43,7 +43,7 @@ export function useFormState(
             })
 
             if (isCreating) {
-                router.push(`${state.data.id}`)
+                router.push(`${state.data['id']}`)
                 return
             }
 

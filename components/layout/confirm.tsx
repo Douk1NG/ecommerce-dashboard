@@ -13,7 +13,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-import type { PropTypes } from "@/types/dialog";
+import type { PropTypes } from "@/src/shared/types/dialog";
 
 export default function Index({
     icon,

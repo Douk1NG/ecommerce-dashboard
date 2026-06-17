@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import links from '@/lib/navigation';
-import type { NavItem } from '@/types/nav';
+import links from '@/src/shared/lib/navigation';
+import type { NavItem } from '@/src/shared/types/nav';
 
 const findBreadcrumbPath = (
     items: NavItem[],

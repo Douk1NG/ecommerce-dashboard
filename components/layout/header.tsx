@@ -16,15 +16,11 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useBreadcrumbPath } from '@/hooks/use-breadcrumb-path';
 import { usePathname } from '@/i18n/routing';
 
-import LayoutTranslations from '@/constants/translations/layout';
-
-import type { NavItem } from '@/types/nav';
+import type { NavItem } from '@/src/shared/types/nav';
 
 const BreadcrumbContent = ({ breadcrumbPath }: {
     breadcrumbPath: NavItem[] | null
 }) => {
-    const namespace = LayoutTranslations.navbar.navigation;
-
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -33,7 +29,7 @@ const BreadcrumbContent = ({ breadcrumbPath }: {
                         <BreadcrumbItem key={crumb.url}>
                             <BreadcrumbPage>
                                 <IntlText
-                                    value={namespace[crumb.title]}
+                                    value={`layout.navbar.navigation.${crumb.title}`}
                                 />
                             </BreadcrumbPage>
                         </BreadcrumbItem>
@@ -42,7 +38,7 @@ const BreadcrumbContent = ({ breadcrumbPath }: {
                             <BreadcrumbItem>
                                 <BreadcrumbLink href={crumb.url}>
                                     <IntlText
-                                        value={namespace[crumb.title]}
+                                        value={`layout.navbar.navigation.${crumb.title}`}
                                     />
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
@@ -64,7 +60,7 @@ const Header = () => {
             <SidebarTrigger className="-ml-1">
                 {!breadcrumbPath && (
                     <IntlText
-                        value={LayoutTranslations.breadcrumb.default}
+                        value='layout.breadcrumb.default'
                     />
                 )}
             </SidebarTrigger>

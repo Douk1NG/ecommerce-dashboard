@@ -1,8 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import CONSTANTS from "@/constants/filters";
 
 import type { Metadata } from "next/types";
-import type { LayoutProps, GenerateMetadataProps } from "@/types/layout";
+import type { LayoutProps, GenerateMetadataProps } from "@/src/shared/types/layout";
 
 export async function generateMetadata(
     props: GenerateMetadataProps
@@ -14,13 +13,12 @@ export async function generateMetadata(
     } = params;
 
     const t = await getTranslations({
-        locale,
-        namespace: CONSTANTS.NAMESPACE
+        locale
     });
 
     return {
-        title: t(CONSTANTS.METADATA.TITLE),
-        description: t(CONSTANTS.METADATA.DESCRIPTION)
+        title: t('filters.metadata.title'),
+        description: t('filters.metadata.description')
     };
 }
 

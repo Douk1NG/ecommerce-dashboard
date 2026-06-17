@@ -8,10 +8,10 @@ import {
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
 import Icon from "@/components/layout/icon";
 import { Button } from "@/components/ui/button";
-import { getUniqueByKey } from "@/lib/utils";
+import { getUniqueByKey } from "@/src/shared/lib/utils";
 
-import type { Option } from "@/types/select";
-import type { GroupField } from "@/types/form";
+import type { Option } from "@/src/shared/types/select";
+import type { GroupField } from "@/src/shared/types/form";
 
 type Group = {
     combination_id?: number;
@@ -94,7 +94,7 @@ export default function Component({
                             type="multiselect"
                             value={group.filters}
                             onChange={(value: unknown) => handleChange(value, index, group.combination_id)}
-                            readOnly={readOnly}
+                            {...(readOnly !== undefined ? { readOnly } : {})}
                         />
                         <Field
                             label="Precio"
@@ -102,7 +102,7 @@ export default function Component({
                             type="currency"
                             value={group.price}
                             onChange={(value: unknown) => handleChange(value, index, group.combination_id)}
-                            readOnly={readOnly}
+                            {...(readOnly !== undefined ? { readOnly } : {})}
                         />
                     </div>
                     {(!readOnly && groups.length > 1) && (

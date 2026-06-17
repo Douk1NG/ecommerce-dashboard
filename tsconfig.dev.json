@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Development-specific options
+    "noEmit": true,
+    "incremental": true,
+    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    
+    // More lenient settings for development
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    
+    // Additional development-only checks
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "build"
+  ]
+}

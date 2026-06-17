@@ -1,5 +1,5 @@
 import Icon from '@/components/layout/icon'
-import { cn } from '@/lib/utils'
+import { cn } from '@/src/shared/lib/utils'
 
 interface FieldErrorProps {
     error?: string

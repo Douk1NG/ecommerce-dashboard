@@ -1,6 +1,6 @@
 'use server'
 
-import { login } from '@/services/auth'
+import { login } from '@/src/features/auth/authServices'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 

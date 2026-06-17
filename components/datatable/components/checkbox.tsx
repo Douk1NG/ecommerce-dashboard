@@ -1,6 +1,6 @@
 import Icon from "@/components/layout/icon"
 
-import type { CheckboxProps } from "@/types/table"
+import type { CheckboxProps } from "@/src/shared/types/table"
 
 const Checkbox = <TData,>({ row, name }: CheckboxProps<TData>) => {
     const value = row.getValue(name)

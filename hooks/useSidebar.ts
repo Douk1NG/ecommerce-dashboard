@@ -1,7 +1,7 @@
 import { usePathname } from "@/i18n/routing";
 import { useRouter } from "next/navigation";
 import { useEffect } from 'react';
-import { getBasePath } from "@/lib/utils";
+import { getBasePath } from "@/src/shared/lib/utils";
 import { toast } from '@/hooks/use-toast';
 
 interface UseSidebarProps {

@@ -1,16 +1,16 @@
-import LayoutConstants from "@/constants/layout";
-import Layout from "@/components/modules/categories/form";
+import LayoutConstants from "@/src/shared/constants/layout";
+import Layout from "@/src/features/categories/components/CategoryForm";
 
 import {
     getCategory,
     getCategories
-} from "@/services/categories";
+} from "@/src/features/categories/categoryServices";
 
 import {
     getFilters
-} from "@/services/filters";
+} from "@/src/features/filters/filterServices";
 
-import type { PageProps } from "@/types/layout";
+import type { PageProps } from "@/src/shared/types/layout";
 
 export default async function Page(
     { params }: PageProps
@@ -18,7 +18,7 @@ export default async function Page(
     const { id } = await params
     const isNew = id === LayoutConstants.LAYOUT.NEW
 
-    const category = !isNew ? await getCategory(id) : undefined
+    const category = !isNew && id ? await getCategory(id) : undefined
     const content = {
         filters: await getFilters({
             selectable: {

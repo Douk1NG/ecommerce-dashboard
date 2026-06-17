@@ -1,5 +1,5 @@
 import { Textarea } from '@/components/ui/textarea';
-import type { TextAreaField } from '@/types/form';
+import type { TextAreaField } from '@/src/shared/types/form';
 
 export default function Component(props: TextAreaField) {
     return (

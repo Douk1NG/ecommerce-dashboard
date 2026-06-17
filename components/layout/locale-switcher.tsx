@@ -14,8 +14,6 @@ import IntlText from '@/components/intl/Text';
 import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 import { locales } from "@/i18n/routing"
 
-import LayoutTranslations from "@/constants/translations/layout";
-
 const LocaleSwitcher = () => {
     const {
         locale,
@@ -31,7 +29,7 @@ const LocaleSwitcher = () => {
                 <IntlButton
                     variant="ghost"
                     size="icon"
-                    value={LayoutTranslations.navbar.localeSwitcher.switch}
+                    value="layout.navbar.localeSwitcher.switch"
                     tooltip
                 >
                     <Icon name='globe' className='h-5 w-5' />
@@ -41,7 +39,7 @@ const LocaleSwitcher = () => {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
                     <IntlText
-                        value={LayoutTranslations.navbar.localeSwitcher.switch}
+                        value="layout.navbar.localeSwitcher.switch"
                     />
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
@@ -53,7 +51,7 @@ const LocaleSwitcher = () => {
                         checked={it === locale}
                     >
                         <IntlText
-                            value={`${LayoutTranslations.navbar.localeSwitcher.langs}.${it}`}
+                            value={`layout.navbar.localeSwitcher.langs.${it}`}
                         />
                     </DropdownMenuCheckboxItem>
                 ))}

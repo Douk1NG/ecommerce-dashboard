@@ -1,4 +1,4 @@
-import { formatFileSize } from "@/utils/file"
+import { formatFileSize } from "@/src/shared/utils/file"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/layout/icon"
 import Image from "next/image"
@@ -8,9 +8,9 @@ import type {
     ImageListProps,
     ImageFile,
     ExternalImage
-} from "@/types/image-uploader"
+} from "@/src/shared/types/image-uploader"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/src/shared/lib/utils"
 
 const ImageCard = ({
     image,
@@ -95,8 +95,8 @@ export const ImageList = ({
                     key={image.name}
                     image={image}
                     preferred={preferred}
-                    preferredImageName={preferredImageName}
-                    readOnly={readOnly}
+                    {...(preferredImageName ? { preferredImageName } : {})}
+                    {...(readOnly !== undefined ? { readOnly } : {})}
                     handlers={handlers}
                     index={index}
                 />

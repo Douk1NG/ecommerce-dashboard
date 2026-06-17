@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { IntlTextProps } from "@/types/intl";
+import type { IntlTextProps } from "@/src/shared/types/intl";
 
 export default function IntlText({
     value,

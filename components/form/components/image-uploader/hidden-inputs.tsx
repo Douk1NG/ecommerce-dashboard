@@ -1,4 +1,4 @@
-import type { HiddenInputsProps } from "@/types/image-uploader"
+import type { HiddenInputsProps } from "@/src/shared/types/image-uploader"
 
 export const HiddenInputs = ({
     images,

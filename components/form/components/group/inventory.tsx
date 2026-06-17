@@ -2,7 +2,7 @@ import Field from "@/components/form/field";
 import { useCallback, useState } from "react";
 import { useFieldInheritance } from "@/hooks/use-field-inheritance";
 
-import type { GroupField } from "@/types/form";
+import type { GroupField } from "@/src/shared/types/form";
 
 type Group = {
     id?: number;
@@ -60,7 +60,7 @@ export default function Component({
                             label="Filtros"
                             type="text"
                             value={group.filters}
-                            readOnly={readOnly}
+                            {...(readOnly !== undefined ? { readOnly } : {})}
                         />
                         <Field
                             label="Cantidad"
@@ -68,7 +68,7 @@ export default function Component({
                             type="number"
                             value={group.quantity}
                             onChange={(value: unknown) => handleChange(value, index, group.id)}
-                            readOnly={readOnly}
+                            {...(readOnly !== undefined ? { readOnly } : {})}
                         />
                     </div>
                 </div>

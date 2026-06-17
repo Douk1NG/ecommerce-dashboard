@@ -1,8 +1,8 @@
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import IntlText from "@/components/intl/Text"
-import LayoutConstants from '@/constants/layout';
-import type { LayoutContentProps } from "@/types/layout"
+import LayoutConstants from '@/src/shared/constants/layout';
+import type { LayoutContentProps } from "@/src/shared/types/layout"
 
 const Index = ({
     module,
@@ -15,10 +15,10 @@ const Index = ({
             <div className="flex items-center justify-between space-y-2 mb-4 px-4 py-6 lg:px-8">
                 <div>
                     <h2 className="text-3xl font-bold tracking-tight">
-                        <IntlText value={translations.title}/>
+                        {translations.title && <IntlText value={translations.title}/>}
                     </h2>
                     <small>
-                        <IntlText value={translations.description} />
+                        {translations.description && <IntlText value={translations.description} />}
                     </small>
                 </div>
                 {action && (
@@ -29,7 +29,7 @@ const Index = ({
                             type="button"
                             scroll={false}
                         >
-                            <IntlText value={translations.add} />
+                            {translations.add && <IntlText value={translations.add} />}
                         </Link>
                     </div>
                 )}

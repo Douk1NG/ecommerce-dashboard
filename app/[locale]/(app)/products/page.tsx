@@ -1,5 +1,5 @@
-import Layout from "@/components/modules/products"
+import ProductLayout from "@/src/features/products/components/ProductLayout"
 
 export default async function Page() {
-    return <Layout />
+    return <ProductLayout />
 }

@@ -4,9 +4,9 @@ import { HiddenInputs } from './hidden-inputs'
 import { useImageUploader } from '@/hooks/use-image-uploader'
 import Carousel from './carrousel'
 
-import type { ImageField } from "@/types/form"
+import type { ImageField } from "@/src/shared/types/form"
 import type { RefObject } from 'react'
-import type { UseImageUploaderProps } from "@/types/image-uploader"
+import type { UseImageUploaderProps } from "@/src/shared/types/image-uploader"
 
 export default function ImageUploader({
     name,
@@ -23,6 +23,8 @@ export default function ImageUploader({
         }
     } = options || {}
 
+    const defaultValue: { values: string | { path: string; id: number; }[]; preferred: string } = { values: [] as { path: string; id: number; }[], preferred: '' };
+    
     const {
         images,
         externalImages,
@@ -38,7 +40,7 @@ export default function ImageUploader({
     } = useImageUploader({
         maxFiles,
         maxFileSize,
-        value: value as UseImageUploaderProps['value'],
+        value: (value as { values: string | { path: string; id: number; }[]; preferred: string } | undefined) ?? defaultValue,
         readOnly
     })
 
@@ -57,7 +59,7 @@ export default function ImageUploader({
                 images={images}
                 preferred={{
                     enabled: preferred.enabled,
-                    id: preferredImageName
+                    ...(preferredImageName ? { id: preferredImageName } : {})
                 }}
             />
             {!readOnly && (
@@ -77,8 +79,8 @@ export default function ImageUploader({
             <ImageList
                 images={allImages}
                 preferred={preferred}
-                preferredImageName={preferredImageName}
-                readOnly={readOnly}
+                {...(preferredImageName ? { preferredImageName } : {})}
+                {...(readOnly !== undefined ? { readOnly } : {})}
                 handlers={handlers}
             />
             {carouselOpen && (

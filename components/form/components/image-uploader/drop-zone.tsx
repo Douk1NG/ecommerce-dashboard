@@ -1,7 +1,7 @@
-import { formatFileSize } from "@/utils/file"
+import { formatFileSize } from "@/src/shared/utils/file"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/layout/icon"
-import type { DropZoneProps } from "@/types/image-uploader"
+import type { DropZoneProps } from "@/src/shared/types/image-uploader"
 
 export const DropZone = ({
     isLimitReached,

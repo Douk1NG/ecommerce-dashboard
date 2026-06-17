@@ -1,8 +1,8 @@
 import '../globals.css'
 import { getMessages } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
-import { AuthProvider } from "@/context/auth"
-import type { BaseLayoutProps } from "@/types/layout"
+import { AuthProvider } from "@/src/features/auth/authContext"
+import type { BaseLayoutProps } from "@/src/shared/types/layout"
 
 const RootLayout: React.FC<BaseLayoutProps> = async (props: BaseLayoutProps) => {
     const params = await props.params

@@ -1,7 +1,7 @@
 import CurrencyInput from 'react-currency-input-field';
-import { cn } from '@/lib/utils';
-import { safeParseFloat } from '@/utils/safeParse';
-import { CurrencyField } from '@/types/form';
+import { cn } from '@/src/shared/lib/utils';
+import { safeParseFloat } from '@/src/shared/utils/safeParse';
+import { CurrencyField } from '@/src/shared/types/form';
 import { useLocale } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce'
 import { useCallback } from 'react';
@@ -33,7 +33,7 @@ export default function Component({
     }
 
     const handleChange = useDebouncedCallback((_value?: string, _name?: string, values?: Record<string, unknown>) => {
-        onChange?.(values?.float);
+        onChange?.(values?.['float']);
     }, 400)
 
     const inheritanceMethod = useCallback((value: unknown) => {
@@ -44,14 +44,14 @@ export default function Component({
 
     return (
         <CurrencyInput
-            id={id ?? name}
+            {...(id ?? name ? { id: id ?? name } : {})}
             className={cn(
                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             )}
             intlConfig={intlConfig}
             step={intlConfig.step}
             allowNegativeValue={false}
-            name={name}
+            {...(name ? { name } : {})}
             onValueChange={handleChange}
             value={safeParseFloat(initialValue) as number}
             readOnly={readOnly}

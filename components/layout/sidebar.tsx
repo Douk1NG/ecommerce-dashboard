@@ -2,10 +2,9 @@
 
 import Confirm from '@/components/layout/confirm';
 import Icon from '@/components/layout/icon';
-import LayoutTranslations from '@/constants/translations/layout';
 import IntlText from '@/components/intl/Text';
 import IntlButton from '@/components/intl/Button';
-import PropTypes from '@/types/sidebar';
+import PropTypes from '@/src/shared/types/sidebar';
 import { useSidebar } from '@/hooks/useSidebar';
 
 const Index = ({
@@ -30,7 +29,7 @@ const Index = ({
         isNew,
         isEditing,
         onDelete,
-        onEditModeChange
+        ...(onEditModeChange !== undefined ? { onEditModeChange } : {})
     });
 
     return (
@@ -55,7 +54,7 @@ const Index = ({
                                 {permissions.edit && (
                                     <IntlButton
                                         variant='outline'
-                                        title={LayoutTranslations.sidebar.edit}
+                                        title='layout.sidebar.edit'
                                         onClick={handleEdit}
                                         tooltip
                                     >
@@ -64,7 +63,13 @@ const Index = ({
                                 )}
                                 {permissions.delete && (
                                     <Confirm
-                                        translations={LayoutTranslations.confirm.delete}
+                                        translations={{
+                                            cancel: 'layout.confirm.delete.cancel',
+                                            accept: 'layout.confirm.delete.accept',
+                                            title: 'layout.confirm.delete.title',
+                                            description: 'layout.confirm.delete.description',
+                                            name: 'layout.confirm.delete.name'
+                                        }}
                                         icon='trash'
                                         onConfirm={handleDelete}
                                     />
@@ -74,7 +79,7 @@ const Index = ({
                         {isDetail ? (
                             <IntlButton
                                 variant='outline'
-                                title={LayoutTranslations.sidebar.close}
+                                title='layout.sidebar.close'
                                 onClick={handleConfirm}
                                 tooltip
                             >
@@ -85,7 +90,7 @@ const Index = ({
                                 {!isNew && (
                                     <IntlButton
                                         variant='outline'
-                                        title={LayoutTranslations.sidebar.return}
+                                        title='layout.sidebar.return'
                                         onClick={handleReturn}
                                         text
                                     >
@@ -93,7 +98,13 @@ const Index = ({
                                     </IntlButton>
                                 )}
                                 <Confirm
-                                    translations={LayoutTranslations.confirm.close}
+                                    translations={{
+                                        cancel: 'layout.confirm.close.cancel',
+                                        accept: 'layout.confirm.close.accept',
+                                        title: 'layout.confirm.close.title',
+                                        description: 'layout.confirm.close.description',
+                                        name: 'layout.confirm.close.name'
+                                    }}
                                     icon='close'
                                     onConfirm={handleConfirm}
                                 />

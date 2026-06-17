@@ -18,15 +18,13 @@ import {
     TableRow
 } from "@/components/ui/table"
 
-import LayoutTranslations from "@/constants/translations/layout"
-
 import IntlButton from "@/components/intl/Button"
 import IntlText from "@/components/intl/Text"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { useIntlText } from "@/hooks/use-intl-text"
+import { useTranslations } from "next-intl"
 import { useParams, useRouter } from "next/navigation"
 import { usePathname } from "@/i18n/routing"
-import { cleanSplit } from "@/lib/utils"
+import { cleanSplit } from "@/src/shared/lib/utils"
 import { useEffect, useState } from "react"
 
 type options = {
@@ -50,7 +48,7 @@ export default function DataTable<TData, TValue>({
     module,
     options,
 }: DataTableProps<TData, TValue>) {
-    const tableTranslations = LayoutTranslations.table
+    const t = useTranslations()
     const mergedOptions = { ...defaultOptions, ...options }
 
     const {
@@ -79,10 +77,10 @@ export default function DataTable<TData, TValue>({
         },
         onRowSelectionChange: setRowSelection,
         // Configure row ID for stable identity
-        getRowId: (row) => String((row as Record<string, unknown>).id),
+        getRowId: (row) => String((row as Record<string, unknown>)['id']),
     })
 
-    const detail = useIntlText(tableTranslations.detail) as string
+    const detail = t('layout.table.detail')
     const router = useRouter()
     const pathname = usePathname()
     const params = useParams()
@@ -95,9 +93,9 @@ export default function DataTable<TData, TValue>({
             return
         }
         const selectedRow = row.original as Record<string, unknown>
-        const rowId = selectedRow.id
+        const rowId = selectedRow['id']
 
-        if (params.id) {
+        if (params['id']) {
             const [base, id] = cleanSplit({
                 value: pathname,
                 criteria: "/",
@@ -152,7 +150,7 @@ export default function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    <IntlText value={tableTranslations.empty} />
+                                    <IntlText value={'layout.table.empty'} />
                                 </TableCell>
                             </TableRow>
                         )}
@@ -184,7 +182,7 @@ export default function DataTable<TData, TValue>({
                                         size="sm"
                                         className="cursor-pointer"
                                         onClick={() => onRowClick(row)}
-                                        title={tableTranslations.detail}
+                                        title={'layout.table.detail'}
                                         text
                                     />
                                 </CardFooter>
@@ -194,7 +192,7 @@ export default function DataTable<TData, TValue>({
                 ) : (
                     <Card>
                         <CardContent className="p-4 text-center">
-                            <IntlText value={tableTranslations.empty} />
+                            <IntlText value={'layout.table.empty'} />
                         </CardContent>
                     </Card>
                 )}
