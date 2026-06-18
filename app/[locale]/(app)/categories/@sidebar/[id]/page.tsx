@@ -1,4 +1,3 @@
-import LayoutConstants from "@/src/shared/constants/layout";
 import Layout from "@/src/features/categories/components/CategoryForm";
 
 import {
@@ -16,7 +15,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === LayoutConstants.LAYOUT.NEW
+    const isNew = id === 'new'
 
     const category = !isNew && id ? await getCategory(id) : undefined
     const content = {

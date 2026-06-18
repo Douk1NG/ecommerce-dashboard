@@ -1,4 +1,3 @@
-import LayoutConstants from "@/src/shared/constants/layout";
 import Layout from "@/src/features/products/components/ProductForm";
 
 import {
@@ -16,7 +15,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === LayoutConstants.LAYOUT.NEW
+    const isNew = id === 'new'
 
     const product = !isNew && id ? await getProduct(id) : undefined
     const filterCombinations = product?.categories?.map((category: Category) => (category as Record<string, unknown>)['filters']).flat() ?? []

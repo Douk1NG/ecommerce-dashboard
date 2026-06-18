@@ -1,6 +1,5 @@
 import Layout from "@/components/layout";
 import Table from "@/src/features/filters/components/FilterTable";
-import constants from "@/src/shared/constants/filters";
 
 import {
     getFilters
@@ -11,7 +10,7 @@ export default async function Page() {
 
     return (
         <Layout
-            module={constants.NAMESPACE}
+            module="filters"
             translations={{
                 title: 'filters.layout.title',
                 description: 'filters.layout.description',

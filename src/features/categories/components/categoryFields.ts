@@ -1,5 +1,4 @@
 import { Fields } from '@/src/shared/types/form';
-import CONSTANTS from "@/src/shared/constants/categories";
 import type { Option } from "@/src/shared/types/select";
 
 type FieldsProps = {
@@ -9,45 +8,45 @@ type FieldsProps = {
 
 const fields: (props: FieldsProps) => Fields = ({ categories, filters }) => [
     {
-        "label": CONSTANTS.SCHEME.NAME,
-        "name": CONSTANTS.KEYS.NAME,
-        "description": CONSTANTS.DESCRIPTION.NAME,
+        "label": "scheme.name",
+        "name": "name",
+        "description": "descriptions.name",
         "type": "text"
     },
     {
-        "label": CONSTANTS.SCHEME.DESCRIPTION,
-        "name": CONSTANTS.KEYS.DESCRIPTION,
-        "description": CONSTANTS.DESCRIPTION.DESCRIPTION,
+        "label": "scheme.description",
+        "name": "description",
+        "description": "descriptions.description",
         "type": "textarea"
     },
     {
-        "label": CONSTANTS.SCHEME.PARENT_ID,
-        "name": CONSTANTS.KEYS.PARENT_ID,
-        "description": CONSTANTS.DESCRIPTION.PARENT_ID,
+        "label": "scheme.parent_id",
+        "name": "parent_id",
+        "description": "descriptions.parent_id",
         "type": "select",
         "options": categories
     },
     {
-        "label": CONSTANTS.SCHEME.FILTERS,
-        "name": CONSTANTS.KEYS.FILTERS,
-        "description": CONSTANTS.DESCRIPTION.FILTERS,
+        "label": "scheme.filters",
+        "name": "filters",
+        "description": "descriptions.filters",
         "type": "multiselect",
         "options": filters,
         "inheritFrom": {
-            "field": CONSTANTS.KEYS.PARENT_ID,
-            "property": CONSTANTS.KEYS.FILTERS
+            "field": "parent_id",
+            "property": "filters"
         }
     },
     {
-        "label": CONSTANTS.SCHEME.FEATURED_CATEGORY,
-        "name": CONSTANTS.KEYS.FEATURED_CATEGORY,
-        "description": CONSTANTS.DESCRIPTION.FEATURED_CATEGORY,
+        "label": "scheme.featured_category",
+        "name": "featured_category",
+        "description": "descriptions.featured_category",
         "type": "switch"
     },
     {
-        "label": CONSTANTS.SCHEME.IMAGE,
-        "name": CONSTANTS.KEYS.IMAGE,
-        "description": CONSTANTS.DESCRIPTION.IMAGE,
+        "label": "scheme.image",
+        "name": "image",
+        "description": "descriptions.image",
         "type": "image",
         "options": {
             "maxFiles": 1

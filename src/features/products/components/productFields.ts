@@ -1,5 +1,4 @@
 import { Fields } from '@/src/shared/types/form';
-import CONSTANTS from '@/src/shared/constants/products';
 import type { Option } from "@/src/shared/types/select";
 
 type FieldsProps = {
@@ -9,52 +8,52 @@ type FieldsProps = {
 
 const fields: (props: FieldsProps) => Fields = ({ categories, filter_combinations }) => [
     {
-        "label": CONSTANTS.SCHEME.NAME,
-        "name": CONSTANTS.KEYS.NAME,
-        "description": CONSTANTS.DESCRIPTIONS.NAME,
+        "label": "scheme.name",
+        "name": "name",
+        "description": "descriptions.name",
         "type": "text"
     },
     {
-        "label": CONSTANTS.SCHEME.DESCRIPTION,
-        "name": CONSTANTS.KEYS.DESCRIPTION,
-        "description": CONSTANTS.DESCRIPTIONS.DESCRIPTION,
+        "label": "scheme.description",
+        "name": "description",
+        "description": "descriptions.description",
         "type": "textarea"
     },
     {
-        "label": CONSTANTS.SCHEME.CATEGORIES,
-        "name": CONSTANTS.KEYS.CATEGORIES,
-        "description": CONSTANTS.DESCRIPTIONS.CATEGORIES,
+        "label": "scheme.categories",
+        "name": "categories",
+        "description": "descriptions.categories",
         "type": "multiselect",
         ...(categories ? { options: categories } : {})
     },
     {
-        "label": CONSTANTS.SCHEME.PRICE,
-        "name": CONSTANTS.KEYS.PRICE,
-        "description": CONSTANTS.DESCRIPTIONS.PRICE,
+        "label": "scheme.price",
+        "name": "price",
+        "description": "descriptions.price",
         "type": "currency"
     },
 
     {
-        "label": CONSTANTS.SCHEME.FEATURED_PRODUCT,
-        "name": CONSTANTS.KEYS.FEATURED_PRODUCT,
-        "description": CONSTANTS.DESCRIPTIONS.FEATURED_PRODUCT,
+        "label": "scheme.featured_product",
+        "name": "featured_product",
+        "description": "descriptions.featured_product",
         "type": "switch"
     },
     {
-        "label": CONSTANTS.SCHEME.FILTER_COMBINATIONS,
-        "name": CONSTANTS.KEYS.FILTER_COMBINATIONS,
-        "description": CONSTANTS.DESCRIPTIONS.FILTER_COMBINATIONS,
+        "label": "scheme.filter_combinations",
+        "name": "filter_combinations",
+        "description": "descriptions.filter_combinations",
         "type": "group_variant_product",
         "inheritFrom": {
-            "field": CONSTANTS.KEYS.CATEGORIES,
+            "field": "categories",
             "property": "filters"
         },
         ...(filter_combinations ? { options: filter_combinations } : {})
     },
     {
-        "label": CONSTANTS.SCHEME.IMAGES,
-        "name": CONSTANTS.KEYS.IMAGES,
-        "description": CONSTANTS.DESCRIPTIONS.IMAGES,
+        "label": "scheme.images",
+        "name": "images",
+        "description": "descriptions.images",
         "type": "image",
         "options": {
             "maxFiles": 5,
@@ -65,9 +64,9 @@ const fields: (props: FieldsProps) => Fields = ({ categories, filter_combination
         }
     },
     {
-        "label": CONSTANTS.SCHEME.ACTIVE,
-        "name": CONSTANTS.KEYS.ACTIVE,
-        "description": CONSTANTS.DESCRIPTIONS.ACTIVE,
+        "label": "scheme.active",
+        "name": "active",
+        "description": "descriptions.active",
         "type": "switch",
         "defaultValue": true
     }

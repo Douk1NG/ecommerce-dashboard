@@ -12,7 +12,7 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import * as fc from 'fast-check'
-import SaveProduct from '../../actions/products'
+import SaveProduct from '../productActions'
 import type { ActionResponse } from '@/src/shared/types/form'
 
 // Mock the services

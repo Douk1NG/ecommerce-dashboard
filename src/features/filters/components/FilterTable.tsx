@@ -1,5 +1,3 @@
-import CONSTANTS from "@/src/shared/constants/filters"
-
 import DataTable from "@/components/datatable"
 import columns from "@/src/features/filters/components/filterColumns"
 
@@ -10,9 +8,9 @@ function Table({ dataSource }: TableProps) {
         <DataTable
             columns={columns}
             data={dataSource}
-            module={CONSTANTS.NAMESPACE}
+            module="filters"
         />
     )
 }
 
-export default Table
+export default Table;

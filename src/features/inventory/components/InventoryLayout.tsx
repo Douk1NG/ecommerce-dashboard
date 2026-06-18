@@ -1,6 +1,5 @@
 import Layout from "@/components/layout";
 import Table from "@/src/features/inventory/components/InventoryTable";
-import constants from "@/src/shared/constants/inventory";
 
 import {
     getInventory
@@ -11,7 +10,7 @@ export default async function Page() {
 
     return (
         <Layout
-            module={constants.NAMESPACE}
+            module="inventory"
             translations={{
                 title: 'inventory.layout.title',
                 description: 'inventory.layout.description'

@@ -1,4 +1,3 @@
-import LayoutConstants from "@/src/shared/constants/layout";
 import Form from "@/src/features/filters/components/FilterForm";
 
 import {
@@ -11,7 +10,7 @@ export default async function Page(
     { params }: PageProps
 ) {
     const { id } = await params
-    const isNew = id === LayoutConstants.LAYOUT.NEW
+    const isNew = id === 'new'
 
     const filter = !isNew && id ? await getFilter(id) : undefined
 

@@ -1,19 +1,18 @@
 import { z } from "zod";
-import CONSTANTS from '@/src/shared/constants/outflow';
 
 const outflowSchema = z.object({
-    [CONSTANTS.KEYS.ID]: z.number().optional(),
-    [CONSTANTS.KEYS.QUANTITY]: z.number().min(1),
-    [CONSTANTS.KEYS.UNIT_PRICE]: z.number().min(1),
-    [CONSTANTS.KEYS.TOTAL_PRICE]: z.number().min(1),
-    [CONSTANTS.KEYS.REASON]: z.string().min(1),
-    [CONSTANTS.KEYS.DATE]: z.string().min(1),
-    [CONSTANTS.KEYS.COMBINATIONS]: z.array(z.object({
-        [CONSTANTS.KEYS.COMBINATION_ID]: z.number().optional(),
-        [CONSTANTS.KEYS.QUANTITY]: z.number().min(1),
-        [CONSTANTS.KEYS.UNIT_PRICE]: z.number().min(1),
-        [CONSTANTS.KEYS.TOTAL_PRICE]: z.number().min(1),
+    id: z.number().optional(),
+    quantity: z.number().min(1),
+    unit_price: z.number().min(1),
+    total_price: z.number().min(1),
+    reason: z.string().min(1),
+    date: z.string().min(1),
+    combinations: z.array(z.object({
+        combination_id: z.number().optional(),
+        quantity: z.number().min(1),
+        unit_price: z.number().min(1),
+        total_price: z.number().min(1),
     }))
 });
 
-export default outflowSchema
+export default outflowSchema;

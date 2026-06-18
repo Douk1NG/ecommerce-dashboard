@@ -3,7 +3,6 @@ import fields from '@/src/features/categories/components/categoryFields';
 import SaveCategory, { DeleteCategory } from "@/src/features/categories/categoryActions";
 import FormBuilder from '@/components/form';
 import Sidebar from "@/components/layout/sidebar";
-import CONSTANTS from "@/src/shared/constants/categories";
 import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Category } from '@/src/shared/types/categories';
 import type { Option } from '@/src/shared/types/select';
@@ -21,7 +20,7 @@ export default function Form({ values, isNew, content }: FormProps) {
     const { isEditing, handleEditModeChange } = useEditMode({ isNew })
 
     const onDelete = async () => {
-        return await DeleteCategory(values['id'] as string)
+        return await DeleteCategory(String(values['id']))
     }
 
     const hidratatedFields = fields(content)
@@ -39,7 +38,7 @@ export default function Form({ values, isNew, content }: FormProps) {
                 action={SaveCategory}
                 fields={hidratatedFields}
                 values={values}
-                module={CONSTANTS.NAMESPACE}
+                module="categories"
                 isCreating={isNew}
                 isEditing={isEditing}
             />

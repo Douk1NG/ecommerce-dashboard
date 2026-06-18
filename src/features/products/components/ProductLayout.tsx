@@ -1,7 +1,5 @@
 import Layout from "@/components/layout";
 import ProductTable from "@/src/features/products/components/ProductTable";
-import translations from "@/src/shared/constants/translations/products";
-import constants from "@/src/shared/constants/products";
 
 import {
     getProducts
@@ -12,8 +10,12 @@ export default async function ProductLayout() {
 
     return (
         <Layout
-            module={constants.NAMESPACE}
-            translations={translations.layout}
+            module="products"
+            translations={{
+                title: 'products.layout.title',
+                description: 'products.layout.description',
+                add: 'products.layout.add'
+            }}
             action
         >
             <ProductTable dataSource={datasource}/>

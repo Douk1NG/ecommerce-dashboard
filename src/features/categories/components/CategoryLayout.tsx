@@ -1,6 +1,5 @@
 import Layout from "@/components/layout";
 import Table from "@/src/features/categories/components/CategoryTable";
-import constants from "@/src/shared/constants/categories";
 
 import {
     getCategories
@@ -11,7 +10,7 @@ export default async function Page() {
 
     return (
         <Layout
-            module={constants.NAMESPACE}
+            module="categories"
             translations={{
                 title: 'categories.layout.title',
                 description: 'categories.layout.description',

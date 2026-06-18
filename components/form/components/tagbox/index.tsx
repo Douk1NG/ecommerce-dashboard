@@ -2,7 +2,7 @@
 import { Input } from '@/components/ui/input'
 import Icon from '@/components/layout/icon'
 import { useTagbox } from '@/hooks/use-tagbox'
-import IntlButton from '@/components/intl/Button'
+import { Button } from '@/components/ui/button'
 import type { TagboxField } from '@/src/shared/types/form'
 import type { Tag } from '@/src/shared/types/tagbox'
 
@@ -40,13 +40,14 @@ export default function Tagbox({
                     className="grow"
                     readOnly={readOnly}
                 />
-                <IntlButton
+                <Button
                     onClick={addTag}
                     type="button"
                     disabled={isInputEmpty}
-                    title={translations.add}
-                    text
-                />
+                    className="cursor-pointer"
+                >
+                    {translations.add}
+                </Button>
             </div>
             <div className="flex flex-wrap gap-2 p-2 border rounded-md min-h-[100px]">
                 {tags.length > 0 && tags.map(tag => (
@@ -56,18 +57,17 @@ export default function Tagbox({
                     >
                         <span className="mr-1">{tag.label}</span>
 
-                        <IntlButton
+                        <Button
                             type="button"
                             size="icon"
                             variant="ghost"
-                            className="h-4 w-4 p-0 hover:bg-primary-foreground hover:text-primary"
+                            className="h-4 w-4 p-0 hover:bg-primary-foreground hover:text-primary cursor-pointer"
                             onClick={() => removeTag(tag.label)}
                             title={translations.remove}
                             disabled={readOnly}
-                            text
                         >
                             <Icon name="circle-x" height={16} width={16} />
-                        </IntlButton>
+                        </Button>
                     </div>
                 ))}
             </div>

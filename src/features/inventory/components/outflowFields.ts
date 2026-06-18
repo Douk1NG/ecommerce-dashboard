@@ -1,5 +1,4 @@
 import { Fields } from '@/src/shared/types/form';
-import CONSTANTS from '@/src/shared/constants/inflow';
 import type { Option } from "@/src/shared/types/select";
 
 type FieldsProps = {
@@ -8,38 +7,38 @@ type FieldsProps = {
 
 const fields: (props: FieldsProps) => Fields = ({ products }) => [
     {
-        "label": CONSTANTS.SCHEME.PRODUCT,
-        "name": CONSTANTS.KEYS.PRODUCT,
-        "description": CONSTANTS.DESCRIPTION.PRODUCT,
+        "label": "scheme.product",
+        "name": "product",
+        "description": "description.product",
         "type": "select",
         ...(products ? { options: products } : {})
     },
     {
-        "label": CONSTANTS.SCHEME.QUANTITY,
-        "name": CONSTANTS.KEYS.QUANTITY,
-        "description": CONSTANTS.DESCRIPTION.QUANTITY,
+        "label": "scheme.quantity",
+        "name": "quantity",
+        "description": "description.quantity",
         "type": "number"
     },
     {
-        "label": CONSTANTS.SCHEME.UNIT_PRICE,
-        "name": CONSTANTS.KEYS.UNIT_PRICE,
-        "description": CONSTANTS.DESCRIPTION.UNIT_PRICE,
+        "label": "scheme.unit_price",
+        "name": "unit_price",
+        "description": "description.unit_price",
         "type": "currency",
         "readOnly": true,
         "disabled": true,
         "inheritFrom": {
-            "field": CONSTANTS.KEYS.PRODUCT,
-            "property": CONSTANTS.KEYS.UNIT_PRICE
+            "field": "product",
+            "property": "unit_price"
         }
     },
     {
-        "label": CONSTANTS.SCHEME.COMBINATIONS,
-        "name": CONSTANTS.KEYS.COMBINATIONS,
-        "description": CONSTANTS.DESCRIPTION.COMBINATIONS,
+        "label": "scheme.combinations",
+        "name": "combinations",
+        "description": "description.combinations",
         "type": "group_variant_inventory",
         "inheritFrom": {
-            "field": CONSTANTS.KEYS.PRODUCT,
-            "property": CONSTANTS.KEYS.COMBINATIONS
+            "field": "product",
+            "property": "combinations"
         }
     }
 ]

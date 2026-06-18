@@ -1,4 +1,3 @@
-import CONSTANTS from "@/src/shared/constants/products";
 import Currency from "@/components/datatable/components/currency";
 import Checkbox from "@/components/datatable/components/checkbox";
 
@@ -7,26 +6,26 @@ import type { Product } from '@/src/shared/types/products';
 
 const columns: ColumnDef<Product>[] = [
     {
-        accessorKey: CONSTANTS.KEYS.NAME,
-        header: CONSTANTS.SCHEME.NAME,
+        accessorKey: 'name',
+        header: 'scheme.name',
     },
     {
-        accessorKey: CONSTANTS.KEYS.PRICE,
-        header: CONSTANTS.SCHEME.PRICE,
+        accessorKey: 'price',
+        header: 'scheme.price',
         cell: ({ row }) => (
             <Currency
                 row={row}
-                name={CONSTANTS.KEYS.PRICE}
+                name="price"
             />
         )
     },
     {
-        accessorKey: CONSTANTS.KEYS.ACTIVE,
-        header: CONSTANTS.SCHEME.ACTIVE,
+        accessorKey: 'active',
+        header: 'scheme.active',
         cell: ({ row }) => (
             <Checkbox
                 row={row}
-                name={CONSTANTS.KEYS.ACTIVE}
+                name="active"
             />
         )
     }

@@ -33,18 +33,8 @@ vi.mock('@/i18n/routing', () => ({
   usePathname: () => '/products',
 }))
 
-vi.mock('@/hooks/use-intl-text', () => ({
-  useIntlText: (key: string) => key,
-}))
-
-vi.mock('@/components/intl/Text', () => ({
-  default: ({ value }: { value: string }) => <span>{value}</span>,
-}))
-
-vi.mock('@/components/intl/Button', () => ({
-  default: ({ title, onClick }: { title: string; onClick: () => void }) => (
-    <button onClick={onClick}>{title}</button>
-  ),
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
 }))
 
 // Type definitions

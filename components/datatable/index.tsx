@@ -18,8 +18,7 @@ import {
     TableRow
 } from "@/components/ui/table"
 
-import IntlButton from "@/components/intl/Button"
-import IntlText from "@/components/intl/Text"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { useTranslations } from "next-intl"
 import { useParams, useRouter } from "next/navigation"
@@ -123,7 +122,7 @@ export default function DataTable<TData, TValue>({
                                     return (
                                         <TableHead key={header.id} className="text-center">
                                             {header.isPlaceholder ? null : flexRender(
-                                                <IntlText value={`${module}.${header.column.columnDef.header}`} />,
+                                                t(`${module}.${header.column.columnDef.header}`),
                                                 header.getContext()
                                             )}
                                         </TableHead>
@@ -150,7 +149,7 @@ export default function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    <IntlText value={'layout.table.empty'} />
+                                    {t('layout.table.empty')}
                                 </TableCell>
                             </TableRow>
                         )}
@@ -168,7 +167,7 @@ export default function DataTable<TData, TValue>({
                                     return (
                                         <div key={cell.id} className="grid grid-cols-2 gap-2 py-2 border-b last:border-b-0">
                                             <div className="font-medium text-sm text-muted-foreground">
-                                                {header && !header.isPlaceholder ? <IntlText value={`${module}.${header.column.columnDef.header}`} /> : null}
+                                                {header && !header.isPlaceholder ? t(`${module}.${header.column.columnDef.header}`) : null}
                                             </div>
                                             <div className="text-sm">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
                                         </div>
@@ -177,14 +176,14 @@ export default function DataTable<TData, TValue>({
                             </CardContent>
                             {isSelectable && (
                                 <CardFooter className="p-4 pt-0 flex justify-end">
-                                    <IntlButton
+                                    <Button
                                         variant="outline"
                                         size="sm"
                                         className="cursor-pointer"
                                         onClick={() => onRowClick(row)}
-                                        title={'layout.table.detail'}
-                                        text
-                                    />
+                                    >
+                                        {t('layout.table.detail')}
+                                    </Button>
                                 </CardFooter>
                             )}
                         </Card>
@@ -192,7 +191,7 @@ export default function DataTable<TData, TValue>({
                 ) : (
                     <Card>
                         <CardContent className="p-4 text-center">
-                            <IntlText value={'layout.table.empty'} />
+                            {t('layout.table.empty')}
                         </CardContent>
                     </Card>
                 )}

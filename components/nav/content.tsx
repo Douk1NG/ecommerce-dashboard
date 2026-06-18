@@ -14,7 +14,7 @@ import {
 import { usePathname } from "@/i18n/routing"
 import Icon from "@/components/layout/icon"
 import navItems from "@/src/shared/lib/navigation"
-import IntlText from '@/components/intl/Text'
+import { useTranslations } from "next-intl"
 import type { Icons } from "@/src/shared/types/icon"
 
 const isActive = (pathname: string, link: string) => {
@@ -23,6 +23,7 @@ const isActive = (pathname: string, link: string) => {
 
 const Index = () => {
     const pathname = usePathname();
+    const t = useTranslations();
 
     return (
         <SidebarContent>
@@ -42,7 +43,7 @@ const Index = () => {
                                     className="font-medium"
                                 >
                                     <Icon name={item.icon as Icons} className='h-6 w-6' />
-                                    <IntlText value={`layout.navbar.navigation.${item.title}`} />
+                                    {t(`layout.navbar.navigation.${item.title}`)}
                                 </a>
                             </SidebarMenuButton>
                             {item.items?.length ? (
@@ -58,7 +59,7 @@ const Index = () => {
                                             >
                                                 <a href={item.url}>
                                                     <Icon name={item.icon as Icons} className='h-6 w-6' />
-                                                    <IntlText value={`layout.navbar.navigation.${item.title}`} />
+                                                    {t(`layout.navbar.navigation.${item.title}`)}
                                                 </a>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>

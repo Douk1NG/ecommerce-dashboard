@@ -1,5 +1,4 @@
 'use client'
-import CONSTANTS from "@/src/shared/constants/inventory"
 import DataTable from "@/components/datatable"
 import columns from "@/src/features/inventory/components/inventoryColumns"
 import type { TableProps } from "@/src/shared/types/inventory"
@@ -9,7 +8,7 @@ function InventoryTable({ dataSource }: TableProps) {
         <DataTable
             columns={columns}
             data={dataSource}
-            module={CONSTANTS.NAMESPACE}
+            module="inventory"
             options={{
                 selection: 'none'
             }}
@@ -17,4 +16,4 @@ function InventoryTable({ dataSource }: TableProps) {
     )
 }
 
-export default InventoryTable
+export default InventoryTable;

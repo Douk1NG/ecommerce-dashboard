@@ -2,10 +2,10 @@
 
 import Confirm from '@/components/layout/confirm';
 import Icon from '@/components/layout/icon';
-import IntlText from '@/components/intl/Text';
-import IntlButton from '@/components/intl/Button';
+import { Button } from '@/components/ui/button';
 import PropTypes from '@/src/shared/types/sidebar';
 import { useSidebar } from '@/hooks/useSidebar';
+import { useTranslations } from 'next-intl';
 
 const Index = ({
     children,
@@ -31,6 +31,7 @@ const Index = ({
         onDelete,
         ...(onEditModeChange !== undefined ? { onEditModeChange } : {})
     });
+    const t = useTranslations();
 
     return (
         <>
@@ -46,20 +47,20 @@ const Index = ({
             >
                 <div className='flex justify-between items-center px-4 py-2 border-b'>
                     <h2 className='text-2xl font-medium leading-7 text-gray-900'>
-                        <IntlText value={title} />
+                        {t(title)}
                     </h2>
                     <div className='flex items-center gap-2'>
                         {isDetail && (
                             <>
                                 {permissions.edit && (
-                                    <IntlButton
+                                    <Button
                                         variant='outline'
-                                        title='layout.sidebar.edit'
+                                        title={t('layout.sidebar.edit')}
                                         onClick={handleEdit}
-                                        tooltip
+                                        className='cursor-pointer'
                                     >
                                         <Icon name='pencil' className='h-5 w-5' />
-                                    </IntlButton>
+                                    </Button>
                                 )}
                                 {permissions.delete && (
                                     <Confirm
@@ -77,25 +78,28 @@ const Index = ({
                             </>
                         )}
                         {isDetail ? (
-                            <IntlButton
+                            <Button
                                 variant='outline'
-                                title='layout.sidebar.close'
+                                title={t('layout.sidebar.close')}
                                 onClick={handleConfirm}
-                                tooltip
+                                className='cursor-pointer'
                             >
                                 <Icon name='close' className='h-5 w-5' />
-                            </IntlButton>
+                            </Button>
                         ) : (
                             <>
                                 {!isNew && (
-                                    <IntlButton
+                                    <Button
                                         variant='outline'
-                                        title='layout.sidebar.return'
+                                        title={t('layout.sidebar.return')}
                                         onClick={handleReturn}
-                                        text
+                                        className='cursor-pointer'
                                     >
-                                        <Icon name='arrow-left' className='h-5 w-5' />
-                                    </IntlButton>
+                                        <div className='flex items-center gap-2'>
+                                            <Icon name='arrow-left' className='h-5 w-5' />
+                                            {t('layout.sidebar.return')}
+                                        </div>
+                                    </Button>
                                 )}
                                 <Confirm
                                     translations={{

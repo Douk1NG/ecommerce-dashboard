@@ -1,17 +1,16 @@
-import CONSTANTS from '@/src/shared/constants/filters';
 import { Fields } from '@/src/shared/types/form';
 
 const fields: Fields = [
     {
-        "label": CONSTANTS.SCHEME.NAME,
-        "name": CONSTANTS.KEYS.NAME,
-        "description": CONSTANTS.DESCRIPTION.NAME,
+        "label": "scheme.name",
+        "name": "name",
+        "description": "descriptions.name",
         "type": "text"
     },
     {
-        "label": CONSTANTS.SCHEME.FILTERS,
-        "name": CONSTANTS.KEYS.FILTERS,
-        "description": CONSTANTS.DESCRIPTION.FILTERS,
+        "label": "scheme.filters",
+        "name": "filters",
+        "description": "descriptions.filters",
         "type": "tagbox"
     }
 ]

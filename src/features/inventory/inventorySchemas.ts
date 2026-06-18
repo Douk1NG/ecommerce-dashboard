@@ -1,11 +1,10 @@
 import { z } from "zod";
-import CONSTANTS from '@/src/shared/constants/inventory';
 
 const inventorySchema = z.object({
-    [CONSTANTS.KEYS.ID]: z.number().optional(),
-    [CONSTANTS.KEYS.PRODUCT]: z.string(),
-    [CONSTANTS.KEYS.QUANTITY]: z.number(),
-    [CONSTANTS.KEYS.PRICE]: z.number()
+    id: z.number().optional(),
+    product: z.string(),
+    quantity: z.number(),
+    price: z.number()
 });
 
-export default inventorySchema
+export default inventorySchema;

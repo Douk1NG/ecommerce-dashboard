@@ -8,8 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import IntlButton from "@/components/intl/Button";
-import IntlText from "@/components/intl/Text";
+import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 import {
     Avatar,
@@ -24,14 +24,15 @@ const user = {
 }
 
 const UserNav = () => {
+    const t = useTranslations()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <div className="flex gap-2">
-                    <IntlButton
-                        title="layout.navbar.user.profile"
+                    <Button
+                        title={t("layout.navbar.user.profile")}
                         variant="ghost"
-                        className="relative h-8 w-8 aspect-square"
+                        className="relative h-8 w-8 aspect-square cursor-pointer"
                     >
                         <Avatar className="h-8 w-8">
                             <AvatarImage
@@ -40,7 +41,7 @@ const UserNav = () => {
                             />
                             <AvatarFallback>AI</AvatarFallback>
                         </Avatar>
-                    </IntlButton>
+                    </Button>
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">{user.username}</p>
                         <p className="text-xs leading-none text-muted-foreground">
@@ -52,17 +53,13 @@ const UserNav = () => {
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        <IntlText
-                            value="layout.navbar.user.profile"
-                        />
+                        {t("layout.navbar.user.profile")}
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <IntlText
-                        value="layout.navbar.user.logout"
-                    />
+                    {t("layout.navbar.user.logout")}
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
             </DropdownMenuContent>

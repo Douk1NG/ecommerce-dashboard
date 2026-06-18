@@ -1,20 +1,19 @@
 import { z } from "zod";
-import CONSTANTS from '@/src/shared/constants/products';
 
 const productSchema = z.object({
-    [CONSTANTS.KEYS.ID]: z.number().optional(),
-    [CONSTANTS.KEYS.NAME]: z.string(),
-    [CONSTANTS.KEYS.DESCRIPTION]: z.string(),
-    [CONSTANTS.KEYS.PRICE]: z.number(),
-    [CONSTANTS.KEYS.CATEGORIES]: z.array(z.string()),
-    [CONSTANTS.KEYS.ACTIVE]: z.boolean().default(true),
-    [CONSTANTS.KEYS.FEATURED_PRODUCT]: z.boolean(),
-    [CONSTANTS.KEYS.MAIN_IMAGE]: z.string().optional().nullable(),
-    [CONSTANTS.KEYS.RELATED_IMAGES]: z.array(z.instanceof(File)).optional(),
-    [CONSTANTS.KEYS.FILTER_COMBINATIONS]: z.array(z.object({
-        [CONSTANTS.KEYS.PRICE]: z.number(),
-        [CONSTANTS.KEYS.FILTERS]: z.array(z.number())
+    id: z.number().optional(),
+    name: z.string(),
+    description: z.string(),
+    price: z.number(),
+    categories: z.array(z.string()),
+    active: z.boolean().default(true),
+    featured_product: z.boolean(),
+    main_image: z.string().optional().nullable(),
+    related_images: z.array(z.instanceof(File)).optional(),
+    filter_combinations: z.array(z.object({
+        price: z.number(),
+        filters: z.array(z.number())
     })).optional()
 });
 
-export default productSchema
+export default productSchema;

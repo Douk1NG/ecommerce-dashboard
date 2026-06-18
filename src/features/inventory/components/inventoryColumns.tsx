@@ -1,16 +1,14 @@
-import CONSTANTS from "@/src/shared/constants/inventory";
-
 import type { ColumnDef } from "@tanstack/react-table"
 import type { Inventory } from '@/src/shared/types/inventory';
 
 const columns: ColumnDef<Inventory>[] = [
     {
-        accessorKey: CONSTANTS.KEYS.PRODUCT,
-        header: CONSTANTS.SCHEME.PRODUCT,
+        accessorKey: 'product',
+        header: 'scheme.product',
     },
     {
-        accessorKey: CONSTANTS.KEYS.QUANTITY,
-        header: CONSTANTS.SCHEME.QUANTITY,
+        accessorKey: 'quantity',
+        header: 'scheme.quantity',
     }
 ]
 

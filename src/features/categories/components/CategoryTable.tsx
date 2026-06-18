@@ -1,5 +1,4 @@
 'use client'
-import CONSTANTS from "@/src/shared/constants/categories"
 import DataTable from "@/components/datatable"
 import columns from "@/src/features/categories/components/categoryColumns"
 import type { TableProps } from "@/src/shared/types/categories"
@@ -9,9 +8,9 @@ function Table({ dataSource }: TableProps) {
         <DataTable
             columns={columns}
             data={dataSource}
-            module={CONSTANTS.NAMESPACE}
+            module="categories"
         />
     )
 }
 
-export default Table
+export default Table;

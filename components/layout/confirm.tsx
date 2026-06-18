@@ -1,5 +1,5 @@
-import IntlButton from "@/components/intl/Button";
-import IntlText from "@/components/intl/Text";
+import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Icon from '@/components/layout/icon';
 
 import {
@@ -21,43 +21,45 @@ export default function Index({
     translations,
     variant = 'outline'
 }: PropTypes) {
+    const t = useTranslations();
+
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <IntlButton
+                <Button
                     variant={variant}
-                    title={translations.name}
-                    tooltip
+                    title={t(translations.name)}
+                    className="cursor-pointer"
                 >
                     <Icon name={icon} className='h-5 w-5' />
-                </IntlButton>
+                </Button>
             </DialogTrigger>
             <DialogContent className="w-[90vw] md:max-w-md">
                 <DialogHeader>
                     <DialogTitle>
-                        <IntlText value={translations.title} />
+                        {t(translations.title)}
                     </DialogTitle>
                     <DialogDescription>
-                        <IntlText value={translations.description} />
+                        {t(translations.description)}
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="flex-row justify-center gap-4 md:gap-1">
                     <DialogClose asChild>
-                        <IntlButton
+                        <Button
                             variant="secondary"
-                            title={translations.cancel}
-                            className='w-fit'
-                            text
-                        />
+                            className='w-fit cursor-pointer'
+                        >
+                            {t(translations.cancel)}
+                        </Button>
                     </DialogClose>
                     <DialogClose asChild>
-                        <IntlButton
+                        <Button
                             variant="default"
                             onClick={onConfirm}
-                            title={translations.accept}
-                            className='w-fit'
-                            text
-                        />
+                            className='w-fit cursor-pointer'
+                        >
+                            {t(translations.accept)}
+                        </Button>
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>

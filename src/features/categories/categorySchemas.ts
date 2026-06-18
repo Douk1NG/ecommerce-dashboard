@@ -1,14 +1,13 @@
 import { z } from "zod";
-import CONSTANTS from '@/src/shared/constants/categories';
 
 const categorySchema = z.object({
-    [CONSTANTS.KEYS.ID]: z.number().optional(),
-    [CONSTANTS.KEYS.NAME] : z.string().min(1),
-    [CONSTANTS.KEYS.DESCRIPTION]: z.string().optional(),
-    [CONSTANTS.KEYS.FEATURED_CATEGORY]: z.boolean().optional(),
-    [CONSTANTS.KEYS.PARENT_ID]: z.string().optional(),
-    [CONSTANTS.KEYS.FILTERS]: z.array(z.string()).optional(),
-    [CONSTANTS.KEYS.IMAGE]: z.instanceof(File).or(z.null()).optional(),
+    id: z.number().optional(),
+    name : z.string().min(1),
+    description: z.string().optional(),
+    featured_category: z.boolean().optional(),
+    parent_id: z.string().optional(),
+    filters: z.array(z.string()).optional(),
+    image: z.instanceof(File).or(z.null()).optional(),
 });
 
-export default categorySchema
+export default categorySchema;

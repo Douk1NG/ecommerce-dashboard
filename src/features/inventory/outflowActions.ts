@@ -13,7 +13,12 @@ export default async function SaveOutflow(
 ): Promise<ActionResponse> {
     const rawData = {
         id: id ? Number(id) : undefined,
-
+        quantity: Number(formData.get('quantity')),
+        unit_price: Number(formData.get('unit_price')),
+        total_price: Number(formData.get('total_price')),
+        reason: String(formData.get('reason') || ''),
+        date: String(formData.get('date') || ''),
+        combinations: JSON.parse(String(formData.get('combinations') || '[]')),
     }
 
     const validatedData = outflowSchema.safeParse(rawData)

@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import Icon from "@/components/layout/icon"
-import IntlButton from "@/components/intl/Button";
-import IntlText from '@/components/intl/Text';
+import { Button } from "@/components/ui/button"
 import { useLocaleSwitcher } from '@/hooks/use-locale-switcher'
 import { locales } from "@/i18n/routing"
+import { useTranslations } from "next-intl"
 
 const LocaleSwitcher = () => {
     const {
@@ -20,27 +20,24 @@ const LocaleSwitcher = () => {
         isPending,
         handleLocaleChange
     } = useLocaleSwitcher();
+    const t = useTranslations()
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-            </DropdownMenuTrigger>
             <DropdownMenuTrigger asChild disabled={isPending}>
-                <IntlButton
+                <Button
                     variant="ghost"
                     size="icon"
-                    value="layout.navbar.localeSwitcher.switch"
-                    tooltip
+                    className="cursor-pointer"
+                    title={t("layout.navbar.localeSwitcher.switch")}
                 >
                     <Icon name='globe' className='h-5 w-5' />
                     <small className='uppercase'>{locale}</small>
-                </IntlButton>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>
-                    <IntlText
-                        value="layout.navbar.localeSwitcher.switch"
-                    />
+                    {t("layout.navbar.localeSwitcher.switch")}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {locales.map((it) => (
@@ -50,9 +47,7 @@ const LocaleSwitcher = () => {
                         id={it}
                         checked={it === locale}
                     >
-                        <IntlText
-                            value={`layout.navbar.localeSwitcher.langs.${it}`}
-                        />
+                        {t(`layout.navbar.localeSwitcher.langs.${it}`)}
                     </DropdownMenuCheckboxItem>
                 ))}
             </DropdownMenuContent>
