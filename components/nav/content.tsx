@@ -15,7 +15,6 @@ import { usePathname } from "@/i18n/routing"
 import Icon from "@/components/layout/icon"
 import navItems from "@/src/shared/lib/navigation"
 import { useTranslations } from "next-intl"
-import type { Icons } from "@/src/shared/types/icon"
 
 const isActive = (pathname: string, link: string) => {
     return pathname.includes(link);
@@ -42,7 +41,7 @@ const Index = () => {
                                     href={item.url}
                                     className="font-medium"
                                 >
-                                    <Icon name={item.icon as Icons} className='h-6 w-6' />
+                                    <Icon name={item.icon} className='h-6 w-6' />
                                     {t(`layout.navbar.navigation.${item.title}`)}
                                 </a>
                             </SidebarMenuButton>
@@ -58,7 +57,7 @@ const Index = () => {
                                                 isActive={isActive(pathname, item.url)}
                                             >
                                                 <a href={item.url}>
-                                                    <Icon name={item.icon as Icons} className='h-6 w-6' />
+                                                    <Icon name={item.icon} className='h-6 w-6' />
                                                     {t(`layout.navbar.navigation.${item.title}`)}
                                                 </a>
                                             </SidebarMenuSubButton>

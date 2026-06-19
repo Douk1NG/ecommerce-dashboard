@@ -4,13 +4,15 @@ import { routing } from '@/i18n/routing';
 
 export default getRequestConfig(async ({ requestLocale }) => {
     let locale = await requestLocale;
-    if (!locale || !routing.locales.includes(locale as any)) {
-        locale = routing.defaultLocale;
-    }
+    // Ensure the locale is one of the supported locales, otherwise fall back to default
+    const resolvedLocale = typeof locale === "string" && routing.locales.includes(locale)
+        ? locale
+        : routing.defaultLocale;
     return {
-        locale,
-        messages: (await import(`./messages/${locale}.json`)).default,
+        locale: resolvedLocale,
+        messages: (await import(`./messages/${resolvedLocale}.json`)).default,
     };
+
 });
 
 export function localize(key: string, locale: string) {

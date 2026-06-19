@@ -49,11 +49,11 @@ export default function Tagbox({
                     {translations.add}
                 </Button>
             </div>
-            <div className="flex flex-wrap gap-2 p-2 border rounded-md min-h-[100px]">
+            <div className="flex flex-wrap gap-2 p-2 border rounded-md min-h-25">
                 {tags.length > 0 && tags.map(tag => (
                     <div
                         key={tag.label}
-                        className="flex items-center bg-primary text-primary-foreground px-2 py-1 rounded-md max-h-[30px]"
+                        className="flex items-center bg-primary text-primary-foreground px-2 py-1 rounded-md max-h-7.5"
                     >
                         <span className="mr-1">{tag.label}</span>
 

@@ -1,3 +1,5 @@
+import type { Icons } from "@/components/layout/icon";
+
 export type User = {
     username: string;
     email: string;
@@ -10,6 +12,6 @@ export type UserNavProps = {
 export type NavItem = {
     title: 'products' | 'categories' | 'filters' | 'inventory' | 'settings';
     url: string;
-    icon: string;
+    icon: Icons;
     items?: NavItem[];
 }

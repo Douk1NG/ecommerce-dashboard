@@ -1,19 +1,12 @@
-import { Icons } from "@/src/shared/types/icon";
-import { ComponentProps, Suspense } from "react";
-import { useIcon } from "@/hooks/use-icon";
+import { ComponentProps } from "react";
+import { DynamicIcon, type IconName } from 'lucide-react/dynamic';
 
-interface LazySvgProps extends ComponentProps<"svg"> {
-    name: Icons;
-}
+export type Icons = IconName;
 
-const Icon = ({ name, ...props }: LazySvgProps) => {
-    const SVG = useIcon(name);
-
+const Icon = ({ name }: ComponentProps<typeof DynamicIcon>) => {
     return (
-        <Suspense fallback={<span className="icon-loading" />}>
-            <span><SVG {...props} /></span>
-        </Suspense>
-    );
+        <DynamicIcon name={name} />
+    )
 };
 
 export default Icon;
