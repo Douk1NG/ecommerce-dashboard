@@ -1,5 +1,5 @@
 import type { ButtonProps } from "@/components/ui/button";
-import type { Icons } from "@/src/shared/types/icon";
+import type { Icons } from "@/components/layout/icon";
 
 export type PropTypes = {
     icon: Icons;

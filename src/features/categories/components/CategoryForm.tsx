@@ -1,7 +1,10 @@
 'use client'
 import fields from '@/src/features/categories/components/categoryFields';
+import { useTranslations } from 'next-intl';
 import SaveCategory, { DeleteCategory } from "@/src/features/categories/categoryActions";
-import FormBuilder from '@/components/form';
+import { FormBuilder, type ActionResponse } from 'form-builder'
+import { useToast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation';
 import Sidebar from "@/components/layout/sidebar";
 import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Category } from '@/src/shared/types/categories';
@@ -18,6 +21,8 @@ type FormProps = {
 
 export default function Form({ values, isNew, content }: FormProps) {
     const { isEditing, handleEditModeChange } = useEditMode({ isNew })
+    const { toast } = useToast()
+    const router = useRouter()
 
     const onDelete = async () => {
         return await DeleteCategory(String(values['id']))
@@ -38,9 +43,18 @@ export default function Form({ values, isNew, content }: FormProps) {
                 action={SaveCategory}
                 fields={hidratatedFields}
                 values={values}
-                module="categories"
+                translate={useTranslations('categories')}
                 isCreating={isNew}
                 isEditing={isEditing}
+                onSuccess={(state: ActionResponse) => {
+                    toast({ title: 'Success', description: state.message, variant: 'default', duration: 2000 })
+                    if (isNew) {
+                        router.push(`${state.data['id']}`)
+                    }
+                }}
+                onError={(state: ActionResponse) => {
+                    toast({ title: 'Error', description: state.message, variant: 'destructive', duration: 2000 })
+                }}
             />
         </Sidebar>
     )

@@ -1,10 +1,13 @@
 'use client'
 import fields from '@/src/features/products/components/productFields';
 import SaveProduct, { DeleteProduct } from "@/src/features/products/productActions";
-import FormBuilder from '@/components/form';
+import { FormBuilder, type ActionResponse } from 'form-builder'
+import { useToast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation';
 import Sidebar from "@/components/layout/sidebar";
 import { useEditMode } from '@/hooks/use-edit-mode';
 import type { Product } from '@/src/shared/types/products';
+import { useTranslations } from 'next-intl';
 
 import type { Option } from '@/src/shared/types/select';
 
@@ -18,6 +21,8 @@ type FormProps = {
 
 export default function Form({ values, isNew, content }: FormProps) {
     const { isEditing, handleEditModeChange } = useEditMode({ isNew })
+    const { toast } = useToast()
+    const router = useRouter()
     const title = isNew ? 'products.sidebar.add' : isEditing ? 'products.sidebar.edit' : 'products.sidebar.detail'
 
     const onDelete = async () => {
@@ -38,10 +43,19 @@ export default function Form({ values, isNew, content }: FormProps) {
                 action={SaveProduct}
                 fields={hidratatedFields}
                 values={values}
-                module="products"
+                translate={useTranslations('products')}
                 onEditModeChange={handleEditModeChange}
                 isEditing={isEditing}
                 isCreating={isNew}
+                onSuccess={(state: ActionResponse) => {
+                    toast({ title: 'Success', description: state.message, variant: 'default', duration: 2000 })
+                    if (isNew) {
+                        router.push(`${state.data['id']}`)
+                    }
+                }}
+                onError={(state: ActionResponse) => {
+                    toast({ title: 'Error', description: state.message, variant: 'destructive', duration: 2000 })
+                }}
             />
         </Sidebar>
     )

@@ -84,7 +84,7 @@ const Index = ({
                                 onClick={handleConfirm}
                                 className='cursor-pointer'
                             >
-                                <Icon name='close' className='h-5 w-5' />
+                                <Icon name='x' className='h-5 w-5' />
                             </Button>
                         ) : (
                             <>
@@ -109,7 +109,7 @@ const Index = ({
                                         description: 'layout.confirm.close.description',
                                         name: 'layout.confirm.close.name'
                                     }}
-                                    icon='close'
+                                    icon='x'
                                     onConfirm={handleConfirm}
                                 />
                             </>
