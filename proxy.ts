@@ -1,62 +1,56 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import createIntlMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import createIntlMiddleware from 'next-intl/middleware'
 
-// Add paths that should be protected
+import { auth } from '@/auth'
+import { routing } from './i18n/routing'
+
 const protectedPaths = [
-    '/dashboard',
-    '/products',
-    '/categories',
-    '/orders',
-    '/settings'
-];
+  '/dashboard',
+  '/products',
+  '/categories',
+  '/filters',
+  '/inventory',
+  '/inflow',
+  '/outflow',
+]
 
-const intlMiddleware = createIntlMiddleware(routing);
+const intlMiddleware = createIntlMiddleware(routing)
 
-export function proxy(request: NextRequest) {
-    // console.log('Middleware triggered for path:', request.nextUrl.pathname);
-    // const token = request.cookies.get('auth_token');
-    // const { pathname } = request.nextUrl;
+function getPathWithoutLocale(pathname: string) {
+  return pathname.replace(/^\/(en|es)(?=\/|$)/, '') || '/'
+}
 
-    // // Remove locale prefix for path checking
-    // const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
-    // console.log('Path without locale:', pathWithoutLocale);
+function getLocaleFromPath(pathname: string) {
+  const match = pathname.match(/^\/(en|es)(?=\/|$)/)
+  return match?.[1] ?? routing.defaultLocale
+}
 
-    // // Check if the path is protected
-    // const isProtectedPath = protectedPaths.some(path => pathWithoutLocale.startsWith(path));
-    // console.log('Is protected path:', isProtectedPath);
-    // console.log('Token exists:', !!token);
+export async function proxy(request: NextRequest) {
+  const session = await auth()
+  const { pathname } = request.nextUrl
+  const pathWithoutLocale = getPathWithoutLocale(pathname)
+  const locale = getLocaleFromPath(pathname)
 
-    // // If there's no token and it's not the login page, redirect to login
-    // if (!token && pathWithoutLocale !== '/login') {
-    //     console.log('No token found, redirecting to login');
-    //     const loginUrl = new URL('/login', request.url);
-    //     loginUrl.searchParams.set('from', pathname);
-    //     return NextResponse.redirect(loginUrl);
-    // }
+  const isLoginPage = pathWithoutLocale === '/login' || pathWithoutLocale.startsWith('/login/')
+  const isProtectedPath = protectedPaths.some((path) => pathWithoutLocale.startsWith(path))
 
-    // // If there's a token and it's the login page, redirect to dashboard
-    // if (token && pathWithoutLocale === '/login') {
-    //     console.log('Token found, redirecting to dashboard');
-    //     return NextResponse.redirect(new URL('/dashboard', request.url));
-    // }
+  if (isProtectedPath && !session?.user) {
+    const loginUrl = new URL(`/${locale}/login`, request.url)
+    loginUrl.searchParams.set('from', pathname)
+    return NextResponse.redirect(loginUrl)
+  }
 
-    // // Handle internationalization
-    // console.log('Proceeding with intl middleware');
-    return intlMiddleware(request);
+  if (isLoginPage && session?.user) {
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url))
+  }
+
+  return intlMiddleware(request)
 }
 
 export const config = {
-    matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - api (API routes)
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         */
-        '/((?!api|_next/static|_next/image|favicon.ico).*)',
-        '/(es|en)/:path*'
-    ]
-};
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|uploads).*)',
+    '/(es|en)/:path*',
+  ],
+}

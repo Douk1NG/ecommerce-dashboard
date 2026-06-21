@@ -1,21 +1,19 @@
 'use client'
-import { PageProps } from "@/src/shared/types/layout"
-import { Input } from "@/components/ui/input"
-import { handleLogin } from "./actions"
-import SubmitButton from "@/components/modules/login/SubmitButton"
 
-export default function Page(props: PageProps) {
-    console.log(props)
+import { useSearchParams } from 'next/navigation'
+import { Input } from '@/components/ui/input'
+import SubmitButton from '@/components/modules/login/SubmitButton'
+import { handleLogin } from './actions'
 
-    const error: string = ''
+export default function Page() {
+    const searchParams = useSearchParams()
+    const error = searchParams.get('error') ?? ''
 
     const errorMessage = error === 'missing_credentials'
         ? 'Email and password are required'
         : error === 'invalid_credentials'
             ? 'Invalid email or password'
             : null
-
-    console.log(errorMessage)
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -65,4 +63,4 @@ export default function Page(props: PageProps) {
             </div>
         </div>
     )
-} 
+}

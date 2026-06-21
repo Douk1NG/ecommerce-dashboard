@@ -1,0 +1,9 @@
+{
+  "product": "Establece el producto para la entrada.",
+  "quantity": "Establece la cantidad para la entrada.",
+  "unit_price": "Establece el precio unitario para la entrada.",
+  "total_price": "Establece el precio total para la entrada.",
+  "reason": "Establece el motivo para la entrada.",
+  "date": "Establece la fecha para la entrada.",
+  "combinations": "Establece las combinaciones para la entrada."
+}

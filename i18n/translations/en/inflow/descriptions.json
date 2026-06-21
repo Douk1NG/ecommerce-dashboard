@@ -1,0 +1,9 @@
+{
+  "product": "Set the product for the inflow.",
+  "quantity": "Set the quantity for the inflow.",
+  "unit_price": "Set the unit price for the inflow.",
+  "total_price": "Set the total price for the inflow.",
+  "reason": "Set the reason for the inflow.",
+  "date": "Set the date for the inflow.",
+  "combinations": "Set the combinations for the inflow."
+}

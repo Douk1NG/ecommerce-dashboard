@@ -6,13 +6,13 @@ import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation';
 import Sidebar from "@/components/layout/sidebar";
 import { useEditMode } from '@/hooks/use-edit-mode';
-import type { Product } from '@/src/shared/types/products';
+import type { ProductDetail } from '@/src/shared/types/products';
 import { useTranslations } from 'next-intl';
 
 import type { Option } from '@/src/shared/types/select';
 
 type FormProps = {
-    values: Product
+    values: ProductDetail
     isNew: boolean,
     content: {
         categories?: Option[]

@@ -39,7 +39,8 @@ import { ROUTES, PAGINATION, VALIDATION, env } from '@/src/config';
 
 **Evidence:**
 - `/src/config/env.ts` provides typed access to environment variables
-- API URL and token loaded from `NEXT_PUBLIC_API_URL` and `NEXT_PUBLIC_API_TOKEN`
+- Database URL loaded from `DATABASE_URL`
+- Auth secret loaded from `AUTH_SECRET`
 - Environment flags: `isDevelopment`, `isProduction`, `isTest`
 - Runtime validation ensures required environment variables exist
 - No hardcoded sensitive values in constants
@@ -49,8 +50,7 @@ import { ROUTES, PAGINATION, VALIDATION, env } from '@/src/config';
 // env.ts implementation
 export const env = {
   api: {
-    url: validateApiUrl(getRequiredEnv('NEXT_PUBLIC_API_URL')),
-    token: getRequiredEnv('NEXT_PUBLIC_API_TOKEN'),
+    url: getRequiredEnv('DATABASE_URL'),
   },
   nodeEnv: (process.env.NODE_ENV || 'development'),
   isDevelopment: process.env.NODE_ENV === 'development',

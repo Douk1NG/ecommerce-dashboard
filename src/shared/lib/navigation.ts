@@ -27,7 +27,18 @@ const navItems: NavItem[] = [
         "title": "inventory",
         "url": "/inventory",
         "icon": "book-open-text",
-        "items": []
+        "items": [
+            {
+                "title": "inflow",
+                "url": "/inflow",
+                "icon": "book-open-text"
+            },
+            {
+                "title": "outflow",
+                "url": "/outflow",
+                "icon": "book-open-text"
+            }
+        ]
     },
     {
         "title": "settings",

@@ -6,6 +6,12 @@ import { revalidatePath } from 'next/cache'
 
 import type { ActionResponse } from '@/src/shared/types/form'
 
+function parseProductId(value: FormDataEntryValue | null) {
+    const productId = Number(value)
+
+    return Number.isNaN(productId) ? undefined : productId
+}
+
 export default async function SaveInflow(
     id: string | undefined,
     prevState: ActionResponse | null,
@@ -28,53 +34,52 @@ export default async function SaveInflow(
             success: false,
             message: 'Please fix the errors in the form',
             errors: validatedData.error.flatten().fieldErrors,
-            data: rawData
+            data: rawData,
         }
     }
 
     const {
         success,
         message,
-        id: response_id
-    } = await saveService(rawData)
+        id: response_id,
+    } = await saveService(validatedData.data, parseProductId(formData.get('product')))
+
     if (success) {
-        revalidatePath(`/[locale]/inflow`, 'page')
+        revalidatePath('/[locale]/inflow', 'page')
+        revalidatePath('/[locale]/inventory', 'page')
 
         return {
             success,
             message,
             data: {
                 ...rawData,
-                id: response_id
-            }
+                id: response_id,
+            },
         }
     }
 
     return {
         success: false,
         message,
-        data: rawData
+        data: rawData,
     }
 }
 
-export async function DeleteInflow(
-    id: string
-) {
-    const request = await deleteInflow(id)
+export async function DeleteInflow(id: string) {
+    const response = await deleteInflow(id)
 
-    const response = await request.json()
-
-    if (request.ok) {
-        revalidatePath(`/[locale]/inflow`, 'page')
+    if (response.success) {
+        revalidatePath('/[locale]/inflow', 'page')
+        revalidatePath('/[locale]/inventory', 'page')
 
         return {
             success: true,
-            message: response.message
+            message: response.message,
         }
     }
 
     return {
         success: false,
-        message: response.message
+        message: response.message,
     }
 }

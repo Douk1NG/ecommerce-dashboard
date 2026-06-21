@@ -118,11 +118,9 @@ export default async function SaveProduct(
 export async function DeleteProduct(
     id: string
 ) {
-    const request = await deleteProduct(id)
+    const response = await deleteProduct(id)
 
-    const response = await request.json()
-
-    if (request.ok) {
+    if (response.success) {
         revalidatePath(`/[locale]/products`, 'page')
 
         return {

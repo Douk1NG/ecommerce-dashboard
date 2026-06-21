@@ -1,26 +1,26 @@
-import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next/types";
-import type { BaseLayoutProps } from "@/src/shared/types/layout";
+import { Suspense } from 'react'
+import { getTranslations } from 'next-intl/server'
+import type { Metadata } from 'next/types'
+import type { BaseLayoutProps } from '@/src/shared/types/layout'
 
 export async function generateMetadata(
-    props: BaseLayoutProps
+  props: BaseLayoutProps
 ): Promise<Metadata> {
-    const params = await props.params;
+  const params = await props.params
+  const { locale } = params
 
-    const {
-        locale
-    } = params;
+  const t = await getTranslations({ locale })
 
-    const t = await getTranslations({
-        locale
-    });
-
-    return {
-        title: t('login.metadata.title'),
-        description: t('login.metadata.description')
-    };
+  return {
+    title: t('login.metadata.title'),
+    description: t('login.metadata.description'),
+  }
 }
 
-export default async function Layout({ children }: BaseLayoutProps) {
-    return children
+export default function Layout({ children }: BaseLayoutProps) {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      {children}
+    </Suspense>
+  )
 }

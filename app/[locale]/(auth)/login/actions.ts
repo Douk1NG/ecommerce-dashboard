@@ -1,32 +1,33 @@
 'use server'
 
-import { login } from '@/src/features/auth/authServices'
-import { cookies } from 'next/headers'
+import { AuthError } from 'next-auth'
+import { getLocale } from 'next-intl/server'
 import { redirect } from 'next/navigation'
 
+import { signIn } from '@/auth'
+
 export async function handleLogin(formData: FormData) {
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+  const locale = await getLocale()
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
 
-    if (!email || !password) {
-        redirect('/login?error=missing_credentials')
+  if (!email || !password) {
+    redirect(`/${locale}/login?error=missing_credentials`)
+  }
+
+  try {
+    await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    })
+  } catch (error) {
+    if (error instanceof AuthError) {
+      redirect(`/${locale}/login?error=invalid_credentials`)
     }
 
-    try {
-        const response = await login({ email, password })
+    throw error
+  }
 
-        // Store the token in an HTTP-only cookie
-        const cookieStore = await cookies()
-        cookieStore.set('auth_token', response.token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7 // 1 week
-        })
-
-        redirect('/')
-    } catch (error) {
-        redirect('/login?error=invalid_credentials')
-    }
-} 
+  redirect(`/${locale}/dashboard`)
+}

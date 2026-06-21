@@ -24,7 +24,6 @@ export type TranslationKey =
   | 'categories.layout.description'
   | 'categories.metadata.title'
   | 'categories.metadata.description'
-  | 'categories.scheme.id'
   | 'categories.scheme.name'
   | 'categories.scheme.subcategories'
   | 'categories.scheme.filters'
@@ -42,17 +41,37 @@ export type TranslationKey =
   | 'filters.layout.description'
   | 'filters.metadata.title'
   | 'filters.metadata.description'
-  | 'filters.scheme.id'
   | 'filters.scheme.name'
   | 'filters.scheme.filters'
   | 'filters.sidebar.add'
   | 'filters.sidebar.edit'
   | 'filters.sidebar.detail'
+  | 'inflow.descriptions.product'
+  | 'inflow.descriptions.quantity'
+  | 'inflow.descriptions.unit_price'
+  | 'inflow.descriptions.total_price'
+  | 'inflow.descriptions.reason'
+  | 'inflow.descriptions.date'
+  | 'inflow.descriptions.combinations'
+  | 'inflow.layout.add'
+  | 'inflow.layout.title'
+  | 'inflow.layout.description'
+  | 'inflow.metadata.title'
+  | 'inflow.metadata.description'
+  | 'inflow.scheme.product'
+  | 'inflow.scheme.quantity'
+  | 'inflow.scheme.unit_price'
+  | 'inflow.scheme.total_price'
+  | 'inflow.scheme.reason'
+  | 'inflow.scheme.date'
+  | 'inflow.scheme.combinations'
+  | 'inflow.sidebar.add'
+  | 'inflow.sidebar.edit'
+  | 'inflow.sidebar.detail'
   | 'inventory.layout.title'
   | 'inventory.layout.description'
   | 'inventory.metadata.title'
   | 'inventory.metadata.description'
-  | 'inventory.scheme.id'
   | 'inventory.scheme.product'
   | 'inventory.scheme.quantity'
   | 'inventory.scheme.price'
@@ -118,30 +137,6 @@ export type TranslationKey =
   | 'login.metadata.description'
   | 'orders.metadata.title'
   | 'orders.metadata.description'
-  | 'outflow.descriptions.id'
-  | 'outflow.descriptions.product'
-  | 'outflow.descriptions.quantity'
-  | 'outflow.descriptions.unit_price'
-  | 'outflow.descriptions.total_price'
-  | 'outflow.descriptions.reason'
-  | 'outflow.descriptions.date'
-  | 'outflow.descriptions.combinations'
-  | 'outflow.layout.add'
-  | 'outflow.layout.title'
-  | 'outflow.layout.description'
-  | 'outflow.metadata.title'
-  | 'outflow.metadata.description'
-  | 'outflow.scheme.id'
-  | 'outflow.scheme.product'
-  | 'outflow.scheme.quantity'
-  | 'outflow.scheme.unit_price'
-  | 'outflow.scheme.total_price'
-  | 'outflow.scheme.reason'
-  | 'outflow.scheme.date'
-  | 'outflow.scheme.combinations'
-  | 'outflow.sidebar.add'
-  | 'outflow.sidebar.edit'
-  | 'outflow.sidebar.detail'
   | 'products.descriptions.name'
   | 'products.descriptions.description'
   | 'products.descriptions.price'
@@ -158,7 +153,6 @@ export type TranslationKey =
   | 'products.layout.description'
   | 'products.metadata.title'
   | 'products.metadata.description'
-  | 'products.scheme.id'
   | 'products.scheme.name'
   | 'products.scheme.description'
   | 'products.scheme.price'
@@ -198,7 +192,7 @@ export type NestedKeyOf<T> = T extends object
 /**
  * Total number of translation keys
  */
-export const TRANSLATION_KEY_COUNT = 161;
+export const TRANSLATION_KEY_COUNT = 155;
 
 /**
  * All translation keys as a readonly array
@@ -216,7 +210,6 @@ export const ALL_TRANSLATION_KEYS: readonly TranslationKey[] = [
   'categories.layout.description',
   'categories.metadata.title',
   'categories.metadata.description',
-  'categories.scheme.id',
   'categories.scheme.name',
   'categories.scheme.subcategories',
   'categories.scheme.filters',
@@ -234,17 +227,37 @@ export const ALL_TRANSLATION_KEYS: readonly TranslationKey[] = [
   'filters.layout.description',
   'filters.metadata.title',
   'filters.metadata.description',
-  'filters.scheme.id',
   'filters.scheme.name',
   'filters.scheme.filters',
   'filters.sidebar.add',
   'filters.sidebar.edit',
   'filters.sidebar.detail',
+  'inflow.descriptions.product',
+  'inflow.descriptions.quantity',
+  'inflow.descriptions.unit_price',
+  'inflow.descriptions.total_price',
+  'inflow.descriptions.reason',
+  'inflow.descriptions.date',
+  'inflow.descriptions.combinations',
+  'inflow.layout.add',
+  'inflow.layout.title',
+  'inflow.layout.description',
+  'inflow.metadata.title',
+  'inflow.metadata.description',
+  'inflow.scheme.product',
+  'inflow.scheme.quantity',
+  'inflow.scheme.unit_price',
+  'inflow.scheme.total_price',
+  'inflow.scheme.reason',
+  'inflow.scheme.date',
+  'inflow.scheme.combinations',
+  'inflow.sidebar.add',
+  'inflow.sidebar.edit',
+  'inflow.sidebar.detail',
   'inventory.layout.title',
   'inventory.layout.description',
   'inventory.metadata.title',
   'inventory.metadata.description',
-  'inventory.scheme.id',
   'inventory.scheme.product',
   'inventory.scheme.quantity',
   'inventory.scheme.price',
@@ -310,30 +323,6 @@ export const ALL_TRANSLATION_KEYS: readonly TranslationKey[] = [
   'login.metadata.description',
   'orders.metadata.title',
   'orders.metadata.description',
-  'outflow.descriptions.id',
-  'outflow.descriptions.product',
-  'outflow.descriptions.quantity',
-  'outflow.descriptions.unit_price',
-  'outflow.descriptions.total_price',
-  'outflow.descriptions.reason',
-  'outflow.descriptions.date',
-  'outflow.descriptions.combinations',
-  'outflow.layout.add',
-  'outflow.layout.title',
-  'outflow.layout.description',
-  'outflow.metadata.title',
-  'outflow.metadata.description',
-  'outflow.scheme.id',
-  'outflow.scheme.product',
-  'outflow.scheme.quantity',
-  'outflow.scheme.unit_price',
-  'outflow.scheme.total_price',
-  'outflow.scheme.reason',
-  'outflow.scheme.date',
-  'outflow.scheme.combinations',
-  'outflow.sidebar.add',
-  'outflow.sidebar.edit',
-  'outflow.sidebar.detail',
   'products.descriptions.name',
   'products.descriptions.description',
   'products.descriptions.price',
@@ -350,7 +339,6 @@ export const ALL_TRANSLATION_KEYS: readonly TranslationKey[] = [
   'products.layout.description',
   'products.metadata.title',
   'products.metadata.description',
-  'products.scheme.id',
   'products.scheme.name',
   'products.scheme.description',
   'products.scheme.price',

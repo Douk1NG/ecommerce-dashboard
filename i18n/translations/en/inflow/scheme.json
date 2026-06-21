@@ -1,0 +1,9 @@
+{
+  "product": "Product",
+  "quantity": "Quantity",
+  "unit_price": "Unit price",
+  "total_price": "Total price",
+  "reason": "Reason",
+  "date": "Date",
+  "combinations": "Combinations"
+}

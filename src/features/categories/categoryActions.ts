@@ -83,10 +83,9 @@ export default async function SaveCategory(
 export async function DeleteCategory(
     id: string
 ) {
-    const request = await deleteCategory(id)
-    const response = await request.json()
+    const response = await deleteCategory(id)
 
-    if (request.ok) {
+    if (response.success) {
         revalidatePath(`/[locale]/categories`, 'page')
 
         return {

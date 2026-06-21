@@ -14,7 +14,7 @@ To get started with the eCommerce Dashboard, follow these steps:
 2. Install the necessary dependencies by running `npm install`.
 3. Start the server by running `npm start`.
 4. Open your web browser and navigate to `http://localhost:3001`.
-5. Configure the .env.local file with the correct API URL and token.
+5. Copy `.env.local.example` to `.env.local` and set `DATABASE_URL` and `AUTH_SECRET`.
 
 ## License
 

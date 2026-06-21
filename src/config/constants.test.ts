@@ -45,6 +45,7 @@ describe('Application Constants', () => {
       expect(TRANSLATION_NAMESPACES.table).toBe('table');
       expect(TRANSLATION_NAMESPACES.login).toBe('login');
       expect(TRANSLATION_NAMESPACES.outflow).toBe('outflow');
+      expect(TRANSLATION_NAMESPACES.inflow).toBe('inflow');
     });
   });
 

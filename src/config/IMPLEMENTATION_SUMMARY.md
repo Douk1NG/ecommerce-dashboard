@@ -160,8 +160,8 @@ The legacy `/constants` directory contains duplicate translation keys that shoul
 ```typescript
 import { env } from '@/src/config';
 
-const apiUrl = env.api.url;
-const apiToken = env.api.token;
+const databaseUrl = env.database.url;
+const authSecret = env.auth.secret;
 
 if (env.isDevelopment) {
   console.log('Running in development mode');

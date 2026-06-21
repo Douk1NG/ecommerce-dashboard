@@ -2,9 +2,9 @@ import Currency from "@/components/datatable/components/currency";
 import Checkbox from "@/components/datatable/components/checkbox";
 
 import type { ColumnDef } from "@tanstack/react-table"
-import type { Product } from '@/src/shared/types/products';
+import type { ProductTableRow } from '@/src/shared/types/products';
 
-const columns: ColumnDef<Product>[] = [
+const columns: ColumnDef<ProductTableRow>[] = [
     {
         accessorKey: 'name',
         header: 'scheme.name',

@@ -26,6 +26,8 @@ export const ROUTES = {
     categories: '/categories',
     filters: '/filters',
     inventory: '/inventory',
+    inflow: '/inflow',
+    outflow: '/outflow',
   },
   
   /** API routes for creating new entities */
@@ -33,6 +35,8 @@ export const ROUTES = {
     product: '/products/new',
     category: '/categories/new',
     filter: '/filters/new',
+    inflow: '/inflow/new',
+    outflow: '/outflow/new',
   },
 } as const;
 
@@ -46,6 +50,7 @@ export const TRANSLATION_NAMESPACES = {
   categories: 'categories',
   filters: 'filters',
   inventory: 'inventory',
+  inflow: 'inflow',
   layout: 'layout',
   navbar: 'navbar',
   sidebar: 'sidebar',

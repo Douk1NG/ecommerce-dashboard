@@ -10,7 +10,7 @@ export type UserNavProps = {
 }
 
 export type NavItem = {
-    title: 'products' | 'categories' | 'filters' | 'inventory' | 'settings';
+    title: 'products' | 'categories' | 'filters' | 'inventory' | 'inflow' | 'outflow' | 'settings';
     url: string;
     icon: Icons;
     items?: NavItem[];

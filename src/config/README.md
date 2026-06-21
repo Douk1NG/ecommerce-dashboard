@@ -11,9 +11,9 @@ Provides typed and validated access to environment variables.
 ```typescript
 import { env } from '@/src/config';
 
-// Access API configuration
-const apiUrl = env.api.url;
-const apiToken = env.api.token;
+// Access environment configuration
+const databaseUrl = env.database.url;
+const authSecret = env.auth.secret;
 
 // Check environment
 if (env.isDevelopment) {
@@ -115,11 +115,11 @@ const fieldName = ENTITY_FIELDS.product.name; // 'name'
 4. **Environment Variables**: Replace `process.env` access with `env`:
    ```typescript
    // Before
-   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+   const databaseUrl = process.env.DATABASE_URL;
    
    // After
    import { env } from '@/src/config';
-   const apiUrl = env.api.url;
+   const databaseUrl = env.database.url;
    ```
 
 ## Adding New Constants

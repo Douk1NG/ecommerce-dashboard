@@ -1,96 +1,248 @@
 "use server"
-import type { Outflow } from "@/src/shared/types/outflow"
-import type { Query } from "@/src/shared/types/services"
 
-import { buildGetQuery } from "@/src/shared/lib/utils"
+import { db } from '@/src/lib/db'
+import type { Outflow } from '@/src/shared/types/outflow'
+import { getProductsSelectable } from '@/src/features/products/productServices'
 
-// temp
-const token = process.env.NEXT_PUBLIC_API_TOKEN
-const path = `${process.env.NEXT_PUBLIC_API_URL}/filters`
+type MovementLineInput = {
+  combination_id?: number
+  quantity: number
+  unit_price: number
+  total_price: number
+}
 
-export const getOutflows = async (query?: Query) => {
-    try {
-        const queryString = buildGetQuery(query)
-        const request = await fetch(
-            path + queryString, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            cache: 'force-cache'
-        })
-
-        if (request.ok) {
-            const { body } = await request.json()
-            return body
-        }
-
-        return []
-
-    } catch (error) {
-        return []
+async function applyStockChanges(
+  lines: MovementLineInput[],
+  direction: 'INFLOW' | 'OUTFLOW'
+) {
+  for (const line of lines) {
+    if (!line.combination_id) {
+      continue
     }
+
+    const delta = direction === 'INFLOW' ? line.quantity : -line.quantity
+
+    await db.combinationStock.upsert({
+      where: { combinationId: line.combination_id },
+      update: {
+        quantity: {
+          increment: delta,
+        },
+      },
+      create: {
+        combinationId: line.combination_id,
+        quantity: Math.max(delta, 0),
+      },
+    })
+  }
+}
+
+async function resolveProductId(data: Outflow, productId?: number) {
+  if (productId) {
+    return productId
+  }
+
+  const firstCombinationId = data.combinations[0]?.combination_id
+
+  if (!firstCombinationId) {
+    return null
+  }
+
+  const combination = await db.productCombination.findUnique({
+    where: { id: firstCombinationId },
+    select: { productId: true },
+  })
+
+  return combination?.productId ?? null
+}
+
+import type { OutflowTableRow } from '@/src/shared/types/outflow'
+
+export const getOutflows = async (): Promise<OutflowTableRow[]> => {
+  try {
+    const movements = await db.stockMovement.findMany({
+      where: { type: 'OUTFLOW' },
+      include: { product: true },
+      orderBy: { date: 'desc' },
+    })
+
+    return movements.map((movement) => ({
+      id: movement.id,
+      product: movement.product.name,
+      quantity: movement.quantity,
+      date: movement.date.toISOString().slice(0, 10),
+    }))
+  } catch {
+    return []
+  }
 }
 
 export const getOutflow = async (id: string) => {
-    try {
-        const request = await fetch(
-            `${path}/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            cache: 'force-cache'
-        })
-        const { body } = await request.json()
-        return body
-    } catch (error) {
-        return null
+  try {
+    const movement = await db.stockMovement.findUnique({
+      where: { id: Number(id) },
+      include: {
+        product: true,
+        lines: true,
+      },
+    })
+
+    if (!movement) {
+      return null
     }
+
+    const products = await getProductsSelectable()
+    const product = products.find((entry) => entry.value === movement.productId)
+
+    return {
+      id: movement.id,
+      product: product ?? {
+        value: movement.productId,
+        label: movement.product.name,
+        unit_price: movement.unitPrice,
+        combinations: [],
+      },
+      quantity: movement.quantity,
+      unit_price: movement.unitPrice,
+      total_price: movement.totalPrice,
+      reason: movement.reason,
+      date: movement.date.toISOString().slice(0, 10),
+      combinations: movement.lines.map((line) => ({
+        combination_id: line.combinationId,
+        quantity: line.quantity,
+        unit_price: line.unitPrice,
+        total_price: line.totalPrice,
+      })),
+    }
+  } catch {
+    return null
+  }
 }
 
-export const save = async (data: Outflow) => {
-    try {
-        const response = data.id ? await update(data) : await create(data)
-        const { message, body } = await response.json()
+export const save = async (data: Outflow, productId?: number) => {
+  try {
+    const resolvedProductId = await resolveProductId(data, productId)
 
-        return {
-            id: body?.id,
-            success: response.ok,
-            message
-        }
-    } catch (error) {
-        return {
-            success: false,
-            message: error instanceof Error ? error.message : 'An unexpected error occurred'
-        }
+    if (!resolvedProductId) {
+      return {
+        success: false,
+        message: 'Product is required for stock entries',
+      }
     }
+
+    if (data.id) {
+      const existing = await db.stockMovement.findUnique({
+        where: { id: data.id },
+        include: { lines: true },
+      })
+
+      if (existing) {
+        await applyStockChanges(
+          existing.lines.map((line) => ({
+            combination_id: line.combinationId,
+            quantity: line.quantity,
+            unit_price: line.unitPrice,
+            total_price: line.totalPrice,
+          })),
+          'INFLOW'
+        )
+      }
+
+      await db.stockMovementLine.deleteMany({ where: { movementId: data.id } })
+
+      await db.stockMovement.update({
+        where: { id: data.id },
+        data: {
+          productId: resolvedProductId,
+          quantity: data.quantity,
+          unitPrice: data.unit_price,
+          totalPrice: data.total_price,
+          reason: data.reason,
+          date: new Date(data.date),
+          lines: {
+            create: data.combinations.map((line) => ({
+              combinationId: line.combination_id!,
+              quantity: line.quantity,
+              unitPrice: line.unit_price,
+              totalPrice: line.total_price,
+            })),
+          },
+        },
+      })
+
+      await applyStockChanges(data.combinations, 'OUTFLOW')
+
+      return {
+        id: data.id,
+        success: true,
+        message: 'Outflow updated successfully',
+      }
+    }
+
+    const created = await db.stockMovement.create({
+      data: {
+        type: 'OUTFLOW',
+        productId: resolvedProductId,
+        quantity: data.quantity,
+        unitPrice: data.unit_price,
+        totalPrice: data.total_price,
+        reason: data.reason,
+        date: new Date(data.date),
+        lines: {
+          create: data.combinations.map((line) => ({
+            combinationId: line.combination_id!,
+            quantity: line.quantity,
+            unitPrice: line.unit_price,
+            totalPrice: line.total_price,
+          })),
+        },
+      },
+    })
+
+    await applyStockChanges(data.combinations, 'OUTFLOW')
+
+    return {
+      id: created.id,
+      success: true,
+      message: 'Outflow created successfully',
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'An unexpected error occurred',
+    }
+  }
 }
 
-export const create = async (data: Outflow) => await fetch(
-    path, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-})
+export const deleteOutflow = async (id: string) => {
+  try {
+    const movement = await db.stockMovement.findUnique({
+      where: { id: Number(id) },
+      include: { lines: true },
+    })
 
-export const update = async (data: Outflow) => await fetch(
-    `${path}/${data.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    if (movement) {
+      await applyStockChanges(
+        movement.lines.map((line) => ({
+          combination_id: line.combinationId,
+          quantity: line.quantity,
+          unit_price: line.unitPrice,
+          total_price: line.totalPrice,
+        })),
+        'INFLOW'
+      )
     }
-})
 
-export const deleteOutflow = async (id: string) => await fetch(
-    `${path}/${id}`, {
-    method: 'DELETE',
-    headers: {
-        'Authorization': `Bearer ${token}`
+    await db.stockMovement.delete({ where: { id: Number(id) } })
+
+    return {
+      success: true,
+      message: 'Outflow deleted successfully',
     }
-})
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Failed to delete outflow',
+    }
+  }
+}

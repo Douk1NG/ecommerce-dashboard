@@ -1,128 +1,248 @@
 "use server"
-import type { Inflow } from "@/src/shared/types/inflow"
-import type { Query } from "@/src/shared/types/services"
 
-import { buildGetQuery } from "@/src/shared/lib/utils"
-import { randomInt } from "crypto"
+import { db } from '@/src/lib/db'
+import type { Inflow } from '@/src/shared/types/inflow'
+import { getProductsSelectable } from '@/src/features/products/productServices'
 
-// temp
-const token = process.env.NEXT_PUBLIC_API_TOKEN
-const path = `${process.env.NEXT_PUBLIC_API_URL}/entries`
+type MovementLineInput = {
+  combination_id?: number
+  quantity: number
+  unit_price: number
+  total_price: number
+}
 
-export const getInflows = async (query?: Query) => {
-    try {
-        const queryString = buildGetQuery(query)
-        const request = await fetch(
-            path + queryString, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-
-        if (request.ok) {
-            const { body } = await request.json()
-            return body
-        }
-
-        return [{
-            id: 1,
-            product: 'Product 1',
-            quantity: 10,
-            date: '2021-01-01'
-        }, {
-            id: 2,
-            product: 'Product 2',
-            quantity: 20,
-            date: '2021-01-02'
-        }, {
-            id: 3,
-            product: 'Product 3',
-            quantity: 30,
-            date: '2021-01-03'
-        }]
-
-    } catch (error) {
-        return []
+async function applyStockChanges(
+  lines: MovementLineInput[],
+  direction: 'INFLOW' | 'OUTFLOW'
+) {
+  for (const line of lines) {
+    if (!line.combination_id) {
+      continue
     }
+
+    const delta = direction === 'INFLOW' ? line.quantity : -line.quantity
+
+    await db.combinationStock.upsert({
+      where: { combinationId: line.combination_id },
+      update: {
+        quantity: {
+          increment: delta,
+        },
+      },
+      create: {
+        combinationId: line.combination_id,
+        quantity: Math.max(delta, 0),
+      },
+    })
+  }
+}
+
+async function resolveProductId(data: Inflow, productId?: number) {
+  if (productId) {
+    return productId
+  }
+
+  const firstCombinationId = data.combinations[0]?.combination_id
+
+  if (!firstCombinationId) {
+    return null
+  }
+
+  const combination = await db.productCombination.findUnique({
+    where: { id: firstCombinationId },
+    select: { productId: true },
+  })
+
+  return combination?.productId ?? null
+}
+
+import type { InflowTableRow } from '@/src/shared/types/inflow'
+
+export const getInflows = async (): Promise<InflowTableRow[]> => {
+  try {
+    const movements = await db.stockMovement.findMany({
+      where: { type: 'INFLOW' },
+      include: { product: true },
+      orderBy: { date: 'desc' },
+    })
+
+    return movements.map((movement) => ({
+      id: movement.id,
+      product: movement.product.name,
+      quantity: movement.quantity,
+      date: movement.date.toISOString().slice(0, 10),
+    }))
+  } catch {
+    return []
+  }
 }
 
 export const getInflow = async (id: string) => {
-    try {
-        const request = await fetch(
-            `${path}/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const { body } = await request.json()
-        return body
-    } catch (error) {
-        return {
-            id: 1,
-            product: {
-                value: 1,
-                label: 'Product 1',
-                unit_price: randomInt(100, 1000),
-                combinations: [{
-                    combination_id: 1,
-                    quantity: randomInt(10, 100),
-                    filters: ['Filter 1', 'Filter 2']
-                }, {
-                    combination_id: 2,
-                    quantity: randomInt(10, 100),
-                    filters: ['Filter 3', 'Filter 4']
-                }]
-            },
-            quantity: randomInt(10, 100),
-            date: '2021-01-01'
-        }
+  try {
+    const movement = await db.stockMovement.findUnique({
+      where: { id: Number(id) },
+      include: {
+        product: true,
+        lines: true,
+      },
+    })
+
+    if (!movement) {
+      return null
     }
+
+    const products = await getProductsSelectable()
+    const product = products.find((entry) => entry.value === movement.productId)
+
+    return {
+      id: movement.id,
+      product: product ?? {
+        value: movement.productId,
+        label: movement.product.name,
+        unit_price: movement.unitPrice,
+        combinations: [],
+      },
+      quantity: movement.quantity,
+      unit_price: movement.unitPrice,
+      total_price: movement.totalPrice,
+      reason: movement.reason,
+      date: movement.date.toISOString().slice(0, 10),
+      combinations: movement.lines.map((line) => ({
+        combination_id: line.combinationId,
+        quantity: line.quantity,
+        unit_price: line.unitPrice,
+        total_price: line.totalPrice,
+      })),
+    }
+  } catch {
+    return null
+  }
 }
 
-export const save = async (data: Inflow) => {
-    try {
-        const response = data.id ? await update(data) : await create(data)
-        const { message, body } = await response.json()
+export const save = async (data: Inflow, productId?: number) => {
+  try {
+    const resolvedProductId = await resolveProductId(data, productId)
 
-        return {
-            id: body?.id,
-            success: response.ok,
-            message
-        }
-    } catch (error) {
-        return {
-            success: false,
-            message: error instanceof Error ? error.message : 'An unexpected error occurred'
-        }
+    if (!resolvedProductId) {
+      return {
+        success: false,
+        message: 'Product is required for stock entries',
+      }
     }
+
+    if (data.id) {
+      const existing = await db.stockMovement.findUnique({
+        where: { id: data.id },
+        include: { lines: true },
+      })
+
+      if (existing) {
+        await applyStockChanges(
+          existing.lines.map((line) => ({
+            combination_id: line.combinationId,
+            quantity: line.quantity,
+            unit_price: line.unitPrice,
+            total_price: line.totalPrice,
+          })),
+          'OUTFLOW'
+        )
+      }
+
+      await db.stockMovementLine.deleteMany({ where: { movementId: data.id } })
+
+      await db.stockMovement.update({
+        where: { id: data.id },
+        data: {
+          productId: resolvedProductId,
+          quantity: data.quantity,
+          unitPrice: data.unit_price,
+          totalPrice: data.total_price,
+          reason: data.reason,
+          date: new Date(data.date),
+          lines: {
+            create: data.combinations.map((line) => ({
+              combinationId: line.combination_id!,
+              quantity: line.quantity,
+              unitPrice: line.unit_price,
+              totalPrice: line.total_price,
+            })),
+          },
+        },
+      })
+
+      await applyStockChanges(data.combinations, 'INFLOW')
+
+      return {
+        id: data.id,
+        success: true,
+        message: 'Inflow updated successfully',
+      }
+    }
+
+    const created = await db.stockMovement.create({
+      data: {
+        type: 'INFLOW',
+        productId: resolvedProductId,
+        quantity: data.quantity,
+        unitPrice: data.unit_price,
+        totalPrice: data.total_price,
+        reason: data.reason,
+        date: new Date(data.date),
+        lines: {
+          create: data.combinations.map((line) => ({
+            combinationId: line.combination_id!,
+            quantity: line.quantity,
+            unitPrice: line.unit_price,
+            totalPrice: line.total_price,
+          })),
+        },
+      },
+    })
+
+    await applyStockChanges(data.combinations, 'INFLOW')
+
+    return {
+      id: created.id,
+      success: true,
+      message: 'Inflow created successfully',
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'An unexpected error occurred',
+    }
+  }
 }
 
-export const create = async (data: Inflow) => await fetch(
-    path, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-})
+export const deleteInflow = async (id: string) => {
+  try {
+    const movement = await db.stockMovement.findUnique({
+      where: { id: Number(id) },
+      include: { lines: true },
+    })
 
-export const update = async (data: Inflow) => await fetch(
-    `${path}/${data.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    if (movement) {
+      await applyStockChanges(
+        movement.lines.map((line) => ({
+          combination_id: line.combinationId,
+          quantity: line.quantity,
+          unit_price: line.unitPrice,
+          total_price: line.totalPrice,
+        })),
+        'OUTFLOW'
+      )
     }
-})
 
-export const deleteInflow = async (id: string) => await fetch(
-    `${path}/${id}`, {
-    method: 'DELETE',
-    headers: {
-        'Authorization': `Bearer ${token}`
+    await db.stockMovement.delete({ where: { id: Number(id) } })
+
+    return {
+      success: true,
+      message: 'Inflow deleted successfully',
     }
-})
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Failed to delete inflow',
+    }
+  }
+}

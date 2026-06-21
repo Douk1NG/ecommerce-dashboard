@@ -10,7 +10,7 @@
  * import { env, ROUTES, PAGINATION } from '@/config';
  * 
  * // Access environment variables
- * const apiUrl = env.api.url;
+ * const databaseUrl = env.database.url;
  * 
  * // Use application constants
  * const loginRoute = ROUTES.auth.login;

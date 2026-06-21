@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Filter {
+  id              Int              @id @default(autoincrement())
+  name            String
+  options         FilterOption[]
+  categoryFilters CategoryFilter[]
+}
+
+model FilterOption {
+  id       Int                            @id @default(autoincrement())
+  label    String
+  filterId Int                            @map("filter_id")
+  filter   Filter                         @relation(fields: [filterId], references: [id], onDelete: Cascade)
+  combinationOptions ProductCombinationOption[]
+}
+
+model Category {
+  id               Int              @id @default(autoincrement())
+  name             String
+  description      String           @default("")
+  featuredCategory Boolean          @default(false) @map("featured_category")
+  parentId         Int?             @map("parent_id")
+  image            String?
+  parent           Category?        @relation("CategoryTree", fields: [parentId], references: [id])
+  subcategories    Category[]       @relation("CategoryTree")
+  categoryFilters  CategoryFilter[]
+  productCategories ProductCategory[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
+model CategoryFilter {
+  categoryId Int
+  filterId   Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  filter     Filter   @relation(fields: [filterId], references: [id], onDelete: Cascade)
+
+  @@id([categoryId, filterId])
+}
+
+model Product {
+  id              Int                  @id @default(autoincrement())
+  name            String
+  description     String               @default("")
+  price           Float
+  featuredProduct Boolean              @default(false) @map("featured_product")
+  active          Boolean              @default(true)
+  mainImage       String?              @map("main_image")
+  images          ProductImage[]
+  categories      ProductCategory[]
+  combinations    ProductCombination[]
+  stockMovements  StockMovement[]
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+}
+
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  url       String
+  productId Int     @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ProductCategory {
+  productId  Int
+  categoryId Int
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
+}
+
+model ProductCombination {
+  id        Int                        @id @default(autoincrement())
+  productId Int                        @map("product_id")
+  price     Float
+  product   Product                    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  options   ProductCombinationOption[]
+  stock     CombinationStock?
+  movementLines StockMovementLine[]
+}
+
+model CombinationStock {
+  combinationId Int                @id @map("combination_id")
+  quantity      Int                @default(0)
+  combination   ProductCombination @relation(fields: [combinationId], references: [id], onDelete: Cascade)
+}
+
+enum StockMovementType {
+  INFLOW
+  OUTFLOW
+}
+
+model StockMovement {
+  id         Int                 @id @default(autoincrement())
+  type       StockMovementType
+  productId  Int                 @map("product_id")
+  quantity   Int
+  unitPrice  Float               @map("unit_price")
+  totalPrice Float               @map("total_price")
+  reason     String              @default("")
+  date       DateTime
+  product    Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lines      StockMovementLine[]
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+}
+
+model StockMovementLine {
+  id            Int                @id @default(autoincrement())
+  movementId    Int                @map("movement_id")
+  combinationId Int                @map("combination_id")
+  quantity      Int
+  unitPrice     Float              @map("unit_price")
+  totalPrice    Float              @map("total_price")
+  movement      StockMovement      @relation(fields: [movementId], references: [id], onDelete: Cascade)
+  combination   ProductCombination @relation(fields: [combinationId], references: [id], onDelete: Cascade)
+}
+
+model ProductCombinationOption {
+  combinationId  Int                @map("combination_id")
+  filterOptionId Int                @map("filter_option_id")
+  combination    ProductCombination @relation(fields: [combinationId], references: [id], onDelete: Cascade)
+  filterOption   FilterOption       @relation(fields: [filterOptionId], references: [id], onDelete: Cascade)
+
+  @@id([combinationId, filterOptionId])
+}

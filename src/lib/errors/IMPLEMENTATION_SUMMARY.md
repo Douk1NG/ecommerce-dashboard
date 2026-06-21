@@ -143,10 +143,10 @@ Created comprehensive test suites with 66 passing tests:
 
 ## Integration Points
 
-### With API Client
+### With Server Services
 ```typescript
 try {
-  const response = await apiClient.get('/products');
+  const products = await getProducts();
 } catch (error) {
   const message = await errorHandler.handleAsync(error, {
     component: 'ProductService',

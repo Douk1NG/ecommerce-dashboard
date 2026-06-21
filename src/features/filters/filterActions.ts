@@ -59,10 +59,9 @@ export default async function SaveFilter(
 export async function DeleteFilter(
     id: string
 ) {
-    const request = await deleteFilter(id)
-    const response = await request.json()
+    const response = await deleteFilter(id)
 
-    if (request.ok) {
+    if (response.success) {
         revalidatePath(`/[locale]/filters`, 'page')
 
         return {

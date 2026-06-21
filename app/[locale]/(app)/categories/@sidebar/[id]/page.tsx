@@ -1,14 +1,17 @@
+import { notFound } from 'next/navigation'
+
 import Layout from "@/src/features/categories/components/CategoryForm";
 
 import {
     getCategory,
-    getCategories
+    getCategoriesSelectable
 } from "@/src/features/categories/categoryServices";
 
 import {
-    getFilters
+    getFiltersSelectable
 } from "@/src/features/filters/filterServices";
 
+import type { CategoryDetail } from '@/src/shared/types/categories';
 import type { PageProps } from "@/src/shared/types/layout";
 
 export default async function Page(
@@ -17,14 +20,25 @@ export default async function Page(
     const { id } = await params
     const isNew = id === 'new'
 
-    const category = !isNew && id ? await getCategory(id) : undefined
+    let values: CategoryDetail = { name: '' }
+
+    if (!isNew && id) {
+        const category = await getCategory(id)
+
+        if (!category) {
+            notFound()
+        }
+
+        values = category
+    }
+
     const content = {
-        filters: await getFilters({
+        filters: await getFiltersSelectable({
             selectable: {
                 full: false
             }
         }),
-        categories: await getCategories({
+        categories: await getCategoriesSelectable({
             selectable: {
                 full : false
             }
@@ -33,7 +47,7 @@ export default async function Page(
 
     return (
         <Layout
-            values={category}
+            values={values}
             isNew={isNew}
             content={content}
         />

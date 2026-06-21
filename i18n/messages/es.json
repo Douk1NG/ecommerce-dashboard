@@ -19,7 +19,6 @@
       "description": "Consulta las categorías de productos disponibles en la tienda"
     },
     "scheme": {
-      "id": "ID",
       "name": "Nombre",
       "subcategories": "Subcategorías",
       "filters": "Filtros",
@@ -49,7 +48,6 @@
       "description": "Consulta los filtros disponibles en la tienda"
     },
     "scheme": {
-      "id": "ID",
       "name": "Nombre",
       "filters": "Filtros"
     },
@@ -57,6 +55,40 @@
       "add": "Agregar filtro",
       "edit": "Editar filtro",
       "detail": "Detalles del filtro"
+    }
+  },
+  "inflow": {
+    "descriptions": {
+      "product": "Establece el producto para la entrada.",
+      "quantity": "Establece la cantidad para la entrada.",
+      "unit_price": "Establece el precio unitario para la entrada.",
+      "total_price": "Establece el precio total para la entrada.",
+      "reason": "Establece el motivo para la entrada.",
+      "date": "Establece la fecha para la entrada.",
+      "combinations": "Establece las combinaciones para la entrada."
+    },
+    "layout": {
+      "add": "Agregar entrada",
+      "title": "Entradas",
+      "description": "Registra stock recibido en el inventario"
+    },
+    "metadata": {
+      "title": "Entradas",
+      "description": "Consulta los registros de entradas en la tienda"
+    },
+    "scheme": {
+      "product": "Producto",
+      "quantity": "Cantidad",
+      "unit_price": "Precio unitario",
+      "total_price": "Precio total",
+      "reason": "Motivo",
+      "date": "Fecha",
+      "combinations": "Combinaciones"
+    },
+    "sidebar": {
+      "add": "Agregar entrada",
+      "edit": "Editar entrada",
+      "detail": "Detalle de entrada"
     }
   },
   "inventory": {
@@ -69,7 +101,6 @@
       "description": "Consulta el inventario disponible en la tienda"
     },
     "scheme": {
-      "id": "ID",
       "product": "Producto",
       "quantity": "Cantidad",
       "price": "Precio"
@@ -181,42 +212,6 @@
       "description": "Consulta los pedidos realizados en la tienda"
     }
   },
-  "outflow": {
-    "descriptions": {
-      "id": "Establece el ID de la salida.",
-      "product": "Establece el producto para la salida.",
-      "quantity": "Establece la cantidad para la salida.",
-      "unit_price": "Establece el precio unitario para la salida.",
-      "total_price": "Establece el precio total para la salida.",
-      "reason": "Establece la razón de la salida.",
-      "date": "Establece la fecha de la salida.",
-      "combinations": "Establece las combinaciones para la salida."
-    },
-    "layout": {
-      "add": "Agregar salida",
-      "title": "Salidas",
-      "description": "Descripción de salidas"
-    },
-    "metadata": {
-      "title": "Salidas",
-      "description": "Consulta los registros de salidas en la tienda"
-    },
-    "scheme": {
-      "id": "ID",
-      "product": "Producto",
-      "quantity": "Cantidad",
-      "unit_price": "Precio unitario",
-      "total_price": "Precio total",
-      "reason": "Razón",
-      "date": "Fecha",
-      "combinations": "Combinaciones"
-    },
-    "sidebar": {
-      "add": "Agregar salida",
-      "edit": "Editar salida",
-      "detail": "Detalles de la salida"
-    }
-  },
   "products": {
     "descriptions": {
       "name": "Establece el nombre del producto.",
@@ -241,7 +236,6 @@
       "description": "Consulta los productos disponibles en la tienda"
     },
     "scheme": {
-      "id": "ID",
       "name": "Nombre",
       "description": "Descripción",
       "price": "Precio",

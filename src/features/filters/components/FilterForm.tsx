@@ -7,10 +7,10 @@ import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation';
 import Sidebar from "@/components/layout/sidebar";
 import { useEditMode } from '@/hooks/use-edit-mode';
-import type { Filter } from '@/src/shared/types/filters';
+import type { FilterDetail } from '@/src/shared/types/filters';
 
 type FormProps = {
-    values: Filter
+    values: FilterDetail
     isNew: boolean
 }
 
